@@ -29,26 +29,6 @@ struct Pet {
     let size: String
     let status: String
     
-//    // MARK: - Initializer
-//    init(age: String, animal: String, breeds: [String], contactInfo: [String], description: String, id: String, lastUpdate: String, media: [String], mix: String, name: String, options: [String], sex: String, shelterId: String, size: String, status: String) {
-//
-//        self.age = age
-//        self.animal = animal
-//        self.breeds = breeds
-//        self.contactInfo = contactInfo
-//        self.description = description
-//        self.id = id
-//        self.lastUpdate = lastUpdate
-//        self.media = media
-//        self.mix = mix
-//        self.name = name
-//        self.options = options
-//        self.sex = sex
-//        self.shelterId = shelterId
-//        self.size = size
-//        self.status = status
-//    }
-    
     // MARK: - Failable init
     init?(dictionary: [String: Any]) {
         guard let age = dictionary[apiKeys.ageKey] as? String,
@@ -65,9 +45,23 @@ struct Pet {
             let sex = dictionary[apiKeys.sexKey] as? String,
             let shelterId = dictionary[apiKeys.shelterIdKey] as? String,
             let size = dictionary[apiKeys.sizeKey] as? String,
-            let status = dictionary[apiKeys.statusKey] as? String else { return }
+            let status = dictionary[apiKeys.statusKey] as? String else { return nil }
         
-        self.init(age: age, animal: animal, breeds: breeds, contactInfo: contactInfo, description: description, id: id, lastUpdate: lastUpdate, media: media, mix: mix, name: name, options: options, sex: sex, shelterId: shelterId, size: size, status: status)
+        self.age = age
+        self.animal = animal
+        self.breeds = breeds
+        self.contactInfo = contactInfo
+        self.description = description
+        self.id = id
+        self.lastUpdate = lastUpdate
+        self.media = media
+        self.mix = mix
+        self.name = name
+        self.options = options
+        self.sex = sex
+        self.shelterId = shelterId
+        self.size = size
+        self.status = status
     }
     
 }
