@@ -77,6 +77,5 @@ extension CKRecord {
         self.setValue(pet.shelterId, forKey: apiKeys.shelterIdKey)
         self.setValue(pet.size, forKey: apiKeys.sizeKey)
         self.setValue(pet.status, forKey: apiKeys.statusKey)
-        
     }
 }
