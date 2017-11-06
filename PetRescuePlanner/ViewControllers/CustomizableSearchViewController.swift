@@ -8,7 +8,9 @@
 
 import UIKit
 
-class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate {
+class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+
+    
     
     // MARK: - Data
     
@@ -31,30 +33,65 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setUpPickerViews()
+        
         animalTypePicker.delegate = self
         animalSizePicker.delegate = self
         animalAgePicker.delegate = self
+        
+        animalTypePicker.dataSource = self
+        animalSizePicker.dataSource = self
+        animalAgePicker.dataSource = self
         
         animalTypeTextField.inputView = animalTypePicker
         animalSizeTextField.inputView = animalSizePicker
         animalAgeTextField.inputView = animalAgePicker
     }
     
-    // MARK: - UIPickerView Delegate
+    // MARK: - UIPickerView Data Source
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == animalTypePicker {
+            return animal.count
+        }
+        if pickerView == animalSizePicker {
+            return size.count
+        }
+        if pickerView == animalAgePicker {
+            return age.count
+        }
+        return 0
+    }
+    
+    // MARK: - UIPickerView Delegate
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if pickerView == animalTypePicker {
-            return animal[component]
+            return animal[row]
         }
         if pickerView == animalSizePicker {
-            return size[component]
+            return size[row]
         }
         if pickerView == animalAgePicker {
-            return age[component]
+            return age[row]
         }
         return ""
+    }
+    
+    
+    // MARK: - Private Functions
+    
+    func setUpPickerViews() {
+        
+        animalTypePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        
     }
     
    
