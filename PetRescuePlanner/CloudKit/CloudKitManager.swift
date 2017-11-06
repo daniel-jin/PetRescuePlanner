@@ -94,4 +94,3 @@ class CloudKitManager {
         publicDatabase.add(operation)
     }
 }
-
