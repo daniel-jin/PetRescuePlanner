@@ -23,12 +23,12 @@ class PetController {
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
     
-    func fetchPetsFor(location: String, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?) {
+    func fetchPetsFor(location: String, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
         
-        let output = responseFormat
-        let baseUrl = URL(string: parameters.baseUrl)!
-        let apiKey = parameters.apiKey
         let method = methods.pets
+        let output = responseFormat
+        let apiKey = parameters.apiKey
+        let baseUrl = URL(string: parameters.baseUrl)!
         
         var queryItems: [URLQueryItem] = []
         
@@ -67,7 +67,6 @@ class PetController {
         guard let searchUrl = components?.url else { return }
         
         NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get)
-        
+        completion(true)
     }
-    
 }
