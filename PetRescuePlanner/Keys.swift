@@ -39,6 +39,7 @@ class API {
         
         // MARK: - Item Key
         let itemKey = "$t"
+        let apiKey = "key"
         
         // MARK: - Top Level Keys
         var ageKey = "age"
@@ -70,6 +71,8 @@ class API {
         
         // MARK: - Options Keys
         let optionKey = "option"
+        let offsetKey = "offset"
+        let formatKey = "format"
         
         // MARK: - Photo Keys
         let photoKey = "photo"
