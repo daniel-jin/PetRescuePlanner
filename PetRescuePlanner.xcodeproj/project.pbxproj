@@ -14,6 +14,8 @@
 		5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */; };
 		5F7C78001FB0D57500BCDBE5 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */; };
 		5F7C78041FB1002600BCDBE5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C78031FB1002600BCDBE5 /* CloudKit.framework */; };
+		5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */; };
+		5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		5F7C78011FB1002000BCDBE5 /* PetRescuePlanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetRescuePlanner.entitlements; sourceTree = "<group>"; };
 		5F7C78031FB1002600BCDBE5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizableSearch.storyboard; sourceTree = "<group>"; };
+		5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 		5F7C77FB1FB0C12300BCDBE5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			children = (
 				5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */,
 				5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */,
+				5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -204,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */,
 				5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */,
 				5F7C77EE1FB0C04A00BCDBE5 /* Assets.xcassets in Resources */,
 				5F7C77EC1FB0C04A00BCDBE5 /* Main.storyboard in Resources */,
@@ -217,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
 				3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */,
 				5F7C78001FB0D57500BCDBE5 /* Pet.swift in Sources */,
