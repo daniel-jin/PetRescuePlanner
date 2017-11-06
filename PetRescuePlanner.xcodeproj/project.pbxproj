@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C77E61FB0C04A00BCDBE5 /* AppDelegate.swift */; };
-		5F7C77E91FB0C04A00BCDBE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C77E81FB0C04A00BCDBE5 /* ViewController.swift */; };
 		5F7C77EC1FB0C04A00BCDBE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */; };
 		5F7C77EE1FB0C04A00BCDBE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */; };
 		5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */; };
@@ -17,7 +16,6 @@
 /* Begin PBXFileReference section */
 		5F7C77E31FB0C04A00BCDBE5 /* PetRescuePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetRescuePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F7C77E61FB0C04A00BCDBE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5F7C77E81FB0C04A00BCDBE5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5F7C77EB1FB0C04A00BCDBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F7C77F01FB0C04A00BCDBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,14 +52,69 @@
 		5F7C77E51FB0C04A00BCDBE5 /* PetRescuePlanner */ = {
 			isa = PBXGroup;
 			children = (
-				5F7C77E61FB0C04A00BCDBE5 /* AppDelegate.swift */,
-				5F7C77E81FB0C04A00BCDBE5 /* ViewController.swift */,
-				5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */,
+				5F7C77FB1FB0C12300BCDBE5 /* ViewControllers */,
+				5F7C77FA1FB0C11900BCDBE5 /* Views */,
+				5F7C77F91FB0C11100BCDBE5 /* ModelControllers */,
+				5F7C77F81FB0C10800BCDBE5 /* Models */,
+				5F7C77FE1FB0C15000BCDBE5 /* Helpers */,
+				5F7C77FC1FB0C12D00BCDBE5 /* Storyboards */,
+				5F7C77FD1FB0C14400BCDBE5 /* Sources */,
 				5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */,
-				5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */,
 				5F7C77F21FB0C04A00BCDBE5 /* Info.plist */,
 			);
 			path = PetRescuePlanner;
+			sourceTree = "<group>";
+		};
+		5F7C77F81FB0C10800BCDBE5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5F7C77F91FB0C11100BCDBE5 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelControllers;
+			sourceTree = "<group>";
+		};
+		5F7C77FA1FB0C11900BCDBE5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F7C77FB1FB0C12300BCDBE5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5F7C77FC1FB0C12D00BCDBE5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */,
+				5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		5F7C77FD1FB0C14400BCDBE5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5F7C77E61FB0C04A00BCDBE5 /* AppDelegate.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5F7C77FE1FB0C15000BCDBE5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +189,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F7C77E91FB0C04A00BCDBE5 /* ViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
