@@ -13,6 +13,7 @@
 		5F7C77EE1FB0C04A00BCDBE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */; };
 		5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */; };
 		5F7C78001FB0D57500BCDBE5 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */; };
+		5F7C78041FB1002600BCDBE5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C78031FB1002600BCDBE5 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		5F7C77F01FB0C04A00BCDBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F7C77F21FB0C04A00BCDBE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		5F7C78011FB1002000BCDBE5 /* PetRescuePlanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetRescuePlanner.entitlements; sourceTree = "<group>"; };
+		5F7C78031FB1002600BCDBE5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7C78041FB1002600BCDBE5 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +54,7 @@
 			children = (
 				5F7C77E51FB0C04A00BCDBE5 /* PetRescuePlanner */,
 				5F7C77E41FB0C04A00BCDBE5 /* Products */,
+				5F7C78021FB1002600BCDBE5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +69,7 @@
 		5F7C77E51FB0C04A00BCDBE5 /* PetRescuePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				5F7C78011FB1002000BCDBE5 /* PetRescuePlanner.entitlements */,
 				5F7C77FB1FB0C12300BCDBE5 /* ViewControllers */,
 				5F7C77FA1FB0C11900BCDBE5 /* Views */,
 				5F7C77F91FB0C11100BCDBE5 /* ModelControllers */,
@@ -123,6 +129,14 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		5F7C78021FB1002600BCDBE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F7C78031FB1002600BCDBE5 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,6 +170,14 @@
 					5F7C77E21FB0C04A00BCDBE5 = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -334,6 +356,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PetRescuePlanner/PetRescuePlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S5AA4WL9KW;
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
@@ -349,6 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PetRescuePlanner/PetRescuePlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S5AA4WL9KW;
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
