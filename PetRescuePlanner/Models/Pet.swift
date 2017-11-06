@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Pet {
+struct Pet {
     
     let apiKeys = API.Keys()
     
@@ -29,28 +29,28 @@ class Pet {
     let size: String
     let status: String
     
-    // MARK: - Initializer
-    init(age: String, animal: String, breeds: [String], contactInfo: [String], description: String, id: String, lastUpdate: String, media: [String], mix: String, name: String, options: [String], sex: String, shelterId: String, size: String, status: String) {
-        
-        self.age = age
-        self.animal = animal
-        self.breeds = breeds
-        self.contactInfo = contactInfo
-        self.description = description
-        self.id = id
-        self.lastUpdate = lastUpdate
-        self.media = media
-        self.mix = mix
-        self.name = name
-        self.options = options
-        self.sex = sex
-        self.shelterId = shelterId
-        self.size = size
-        self.status = status
-    }
+//    // MARK: - Initializer
+//    init(age: String, animal: String, breeds: [String], contactInfo: [String], description: String, id: String, lastUpdate: String, media: [String], mix: String, name: String, options: [String], sex: String, shelterId: String, size: String, status: String) {
+//
+//        self.age = age
+//        self.animal = animal
+//        self.breeds = breeds
+//        self.contactInfo = contactInfo
+//        self.description = description
+//        self.id = id
+//        self.lastUpdate = lastUpdate
+//        self.media = media
+//        self.mix = mix
+//        self.name = name
+//        self.options = options
+//        self.sex = sex
+//        self.shelterId = shelterId
+//        self.size = size
+//        self.status = status
+//    }
     
     // MARK: - Failable init
-    init?(dictionary: NSDictionary) {
+    init?(dictionary: [String: Any]) {
         guard let age = dictionary[apiKeys.ageKey] as? String,
             let animal = dictionary[apiKeys.animalKey] as? String,
             let breeds = dictionary[apiKeys.breedKey] as? [String],
@@ -67,21 +67,7 @@ class Pet {
             let size = dictionary[apiKeys.sizeKey] as? String,
             let status = dictionary[apiKeys.statusKey] as? String else { return }
         
-        self.age = age
-        self.animal = animal
-        self.breeds = breeds
-        self.contactInfo = contactInfo
-        self.description = description
-        self.id = id
-        self.lastUpdate = lastUpdate
-        self.media = media
-        self.mix = mix
-        self.name = name
-        self.options = options
-        self.sex = sex
-        self.shelterId = shelterId
-        self.size = size
-        self.status = status
+        self.init(age: age, animal: animal, breeds: breeds, contactInfo: contactInfo, description: description, id: id, lastUpdate: lastUpdate, media: media, mix: mix, name: name, options: options, sex: sex, shelterId: shelterId, size: size, status: status)
     }
     
 }
