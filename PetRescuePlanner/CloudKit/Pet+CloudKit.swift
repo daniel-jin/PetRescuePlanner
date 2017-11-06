@@ -30,8 +30,22 @@ extension Pet {
             let size = cloudKitRecord[apiKeys.sizeKey] as? String,
             let status = cloudKitRecord[apiKeys.statusKey] as? String else { return nil }
         
-        
-        
+        self.age = age
+        self.animal = animal
+        self.breeds = breeds
+        self.contactInfo = contactInfo
+        self.description = description
+        self.id = id
+        self.lastUpdate = lastUpdate
+        self.media = media
+        self.mix = mix
+        self.name = name
+        self.options = options
+        self.sex = sex
+        self.shelterId = shelterId
+        self.size = size
+        self.status = status
+
         cloudKitRecordID = cloudKitRecord.recordID
     }
 }
@@ -40,20 +54,28 @@ extension Pet {
 extension CKRecord {
     convenience init(pet: Pet) {
         
+        let apiKeys = API.Keys()
+        
         let recordID = pet.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
         
         // Init CKRecord
         self.init(recordType: CloudKit.petRecordType, recordID: recordID)
         
         // Set values for the initialized CKRecord
-        self.setValue(pet.age, forKey: API.Keys.)
-        self.setValue(user.appleUserRef, forKey: Keys.appleUserRefKey)
-        
-        if user.chatGroupsRef.count > 0 {
-            self.setValue(user.chatGroupsRef, forKey: Keys.chatGroupsRefKey)
-        }
-        
-        let asset = CKAsset(fileURL: user.temporaryPhotoURL)
-        self.setValue(asset, forKey: Keys.userPhotoKey)
+        self.setValue(pet.age, forKey: apiKeys.ageKey)
+        self.setValue(pet.animal, forKey: apiKeys.animalKey)
+        self.setValue(pet.breeds, forKey: apiKeys.breedsKey)
+        self.setValue(pet.contactInfo, forKey: apiKeys.contactInfoKey)
+        self.setValue(pet.description, forKey: apiKeys.descriptionKey)
+        self.setValue(pet.id, forKey: apiKeys.idKey)
+        self.setValue(pet.lastUpdate, forKey: apiKeys.lastUpdatKey)
+        self.setValue(pet.media, forKey: apiKeys.mediaKey)
+        self.setValue(pet.mix, forKey: apiKeys.mixKey)
+        self.setValue(pet.name, forKey: apiKeys.nameKey)
+        self.setValue(pet.options, forKey: apiKeys.optionsKey)
+        self.setValue(pet.sex, forKey: apiKeys.sexKey)
+        self.setValue(pet.shelterId, forKey: apiKeys.shelterIdKey)
+        self.setValue(pet.size, forKey: apiKeys.sizeKey)
+        self.setValue(pet.status, forKey: apiKeys.statusKey)
     }
 }
