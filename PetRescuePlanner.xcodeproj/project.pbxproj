@@ -23,6 +23,8 @@
 		6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */; };
 		6A8E01AC1FB2158F00AEEE09 /* PetController+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01AB1FB2158F00AEEE09 /* PetController+CloudKit.swift */; };
 		6A8E01AF1FB22A4000AEEE09 /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01AE1FB22A4000AEEE09 /* CloudKitSyncable.swift */; };
+		6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */; };
+		6A8E01B41FB25FFA00AEEE09 /* Pet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */; };
 		D30B58A01FB10A0E006C59FE /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B589F1FB10A0E006C59FE /* Shelter.swift */; };
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,8 @@
 		6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6A8E01AB1FB2158F00AEEE09 /* PetController+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PetController+CloudKit.swift"; path = "PetRescuePlanner/Models/PetController+CloudKit.swift"; sourceTree = SOURCE_ROOT; };
 		6A8E01AE1FB22A4000AEEE09 /* CloudKitSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
+		6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetRescuePlanner.xcdatamodel; sourceTree = "<group>"; };
+		6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+Convenience.swift"; sourceTree = "<group>"; };
 		D30B589F1FB10A0E006C59FE /* Shelter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -111,8 +115,10 @@
 		5F7C77F81FB0C10800BCDBE5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */,
+				6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */,
 				6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */,
+				5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */,
+				6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */,
 				D30B589F1FB10A0E006C59FE /* Shelter.swift */,
 			);
 			path = Models;
@@ -268,11 +274,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */,
+				6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */,
 				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
 				3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */,
 				6A8E01AF1FB22A4000AEEE09 /* CloudKitSyncable.swift in Sources */,
 				6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */,
+				6A8E01B41FB25FFA00AEEE09 /* Pet+Convenience.swift in Sources */,
 				6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */,
 				6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */,
 				D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */,
@@ -466,6 +474,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */,
+			);
+			currentVersion = 6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */;
+			path = PetRescuePlanner.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5F7C77DB1FB0C04A00BCDBE5 /* Project object */;
 }

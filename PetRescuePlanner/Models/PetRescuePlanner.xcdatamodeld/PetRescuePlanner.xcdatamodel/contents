@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Pet" representedClassName="Pet" syncable="YES" codeGenerationType="class">
+        <attribute name="age" attributeType="String" syncable="YES"/>
+        <attribute name="animal" attributeType="String" syncable="YES"/>
+        <attribute name="breeds" attributeType="String" syncable="YES"/>
+        <attribute name="contactInfo" attributeType="Binary" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="lastUpdate" attributeType="String" syncable="YES"/>
+        <attribute name="media" attributeType="Binary" syncable="YES"/>
+        <attribute name="mix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="options" attributeType="Binary" syncable="YES"/>
+        <attribute name="petDescription" attributeType="String" syncable="YES"/>
+        <attribute name="sex" attributeType="String" syncable="YES"/>
+        <attribute name="shelterID" attributeType="String" syncable="YES"/>
+        <attribute name="size" attributeType="String" syncable="YES"/>
+        <attribute name="status" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Pet" positionX="-63" positionY="-18" width="128" height="268"/>
+    </elements>
+</model>

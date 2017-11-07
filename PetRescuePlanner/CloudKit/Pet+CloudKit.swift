@@ -16,8 +16,8 @@ extension Pet {
         // Check for CKRecord's values and record type
         guard let age = cloudKitRecord[apiKeys.ageKey] as? String,
             let animal = cloudKitRecord[apiKeys.animalKey] as? String,
-            let breeds = cloudKitRecord[apiKeys.breedKey] as? [String],
-            let contactInfo = cloudKitRecord[apiKeys.contactInfoKey] as? [String],
+            let breeds = cloudKitRecord[apiKeys.breedsKey] as? String,
+            let contactInfo = cloudKitRecord[apiKeys.contactInfoKey] as? [String:String],
             let description = cloudKitRecord[apiKeys.descriptionKey] as? String,
             let id = cloudKitRecord[apiKeys.idKey] as? String,
             let lastUpdate = cloudKitRecord[apiKeys.lastUpdatKey] as? String,
