@@ -39,6 +39,7 @@ class API {
         
         // MARK: - Item Key
         let itemKey = "$t"
+        let apiKey = "key"
         
         // MARK: - Top Level Keys
         var ageKey = "age"
@@ -70,13 +71,26 @@ class API {
         
         // MARK: - Options Keys
         let optionKey = "option"
+        let offsetKey = "offset"
+        let formatKey = "format"
         
         // MARK: - Photo Keys
         let photoKey = "photo"
     }
 }
 
+struct CloudKit {
+    
+    // MARK: - Keys for CloudKit
+    static let appleUserRefKey = "appleUserRef"
+    
+    static let petRecordType = "Pet"
+    
+    
+}
 <<<<<<< HEAD
+=======
+
 class ShelterKeys {
     
         
@@ -131,14 +145,4 @@ class ShelterKeys {
 
 
 
-=======
-struct CloudKit {
-    
-    // MARK: - Keys for CloudKit
-    static let appleUserRefKey = "appleUserRef"
-    
-    static let petRecordType = "Pet"
-    
-    
-}
->>>>>>> develop
+>>>>>>> c1123b2e887eb4756c9fc9fca85f607d4b839e5f
