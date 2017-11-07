@@ -11,6 +11,9 @@ import CloudKit
 
 extension PetController {
     
+    // MARK: - Properties
+    var isSyncing: Bool = false
+    
     // CloudKit Manager instance
     private var cloudKitManager: CloudKitManager {
         get {
@@ -73,5 +76,42 @@ extension PetController {
     func unsyncedRecords() -> [CloudKitSyncable] {
         return petRecords().filter { !$0.isSynced }
     }
+    
+    // MARK: - Sync
+    func performFullSync(completion: @escaping (() -> Void) = { }) {
+        
+        guard !isSyncing else {
+            completion()
+            return
+        }
+        
+        isSyncing = true
+        
+        pushChangesToCloudKit { (success, error) in
+            
+            self.fetchNewPetRecords() {
+                self.isSyncing = false
+                completion()
+            }
+        }
+    }
+    
+    func fetchNewPetRecords(completion: @escaping (() -> Void) = { }) {
+        
+        var referencesToExclude = [CKReference]()
+        var predicate: NSPredicate!
+        referencesToExclude = self.syncedRecords().flatMap { $0.cloudKitReference }
+        predicate = NSPredicate(format: "NOT(recordID IN $@)", argumentArray: [referencesToExclude])
+        
+        if referencesToExclude.isEmpty {
+            predicate = NSPredicate(value: true)
+        }
+        
+        let sortDescriptors: [NSSortDescriptor]?
+        
+        
+        
+    }
+    
     
 }
