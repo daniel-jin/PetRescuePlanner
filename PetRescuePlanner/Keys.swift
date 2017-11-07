@@ -91,25 +91,27 @@ struct CloudKit {
 
 class ShelterKeys {
     
-        
-        // Mark: - Shelter URL
-        static let shelterURL = "http://api.petfinder.com/shelter.get"
-        
-        // Mark: - Top level
-        let petfinderKey = "petfinder"
-        
-        // Mark: - in petfinder dictionary
-        let shelterKey = "shelter"
-        
-        // Mark: - in shelter dictionary
-        let addressKey = "address1"
-        let nameKey = "name"
-        let stateKey = "state"
-        let cityKey = "city"
-        let emailKey = "email"
-        let phoneKey = "phone"
-        let zipKey = "zip"
+    
+    // Mark: - Shelter URL
+    static let shelterURL = "http://api.petfinder.com/shelter.get"
+    
+    // Mark: - Top level
+    static let petfinderKey = "petfinder"
+    
+    // Mark: - in petfinder dictionary
+    static let shelterKey = "shelter"
+    
+    // Mark: - in shelter dictionary
+    static let addressKey = "address1"
+    static let id = "id"
+    static let nameKey = "name"
+    static let stateKey = "state"
+    static let cityKey = "city"
+    static let emailKey = "email"
+    static let phoneKey = "phone"
+    static let zipKey = "zip"
 }
+
 
 
 
