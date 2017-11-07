@@ -10,7 +10,21 @@ import Foundation
 import UIKit
 
 class ShelterController {
-    let baseURL = ShelterAPI.ShelterKeys.shelterURL
     
+    let baseURL = URL(string: ShelterKeys.shelterURL)
+    
+    func fetchShelter(by name: String, address: String?, state: String?, city: String?, phone: String?, completion: @escaping (Shelter?) -> Void) {
+        
+        guard let unwrappedURL = baseURL else {
+            print("Broken URL")
+            completion(nil); return
+        }
+        
+        var urlComponets = URLComponents(url: unwrappedURL, resolvingAgainstBaseURL: true)
+        
+        let queryItem = URLQueryItem(name: <#T##String#>, value: <#T##String?#>)
+        
+      
+    }
     
 }

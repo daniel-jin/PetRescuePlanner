@@ -9,7 +9,7 @@
 import Foundation
 
 struct Shelter {
-    let apiKey = ShelterAPI.ShelterKeys()
+    let apiKey = ShelterKeys()
     
     // Mark: - Properties
     let address: String

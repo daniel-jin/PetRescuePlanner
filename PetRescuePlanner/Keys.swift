@@ -76,10 +76,8 @@ class API {
     }
 }
 
-class ShelterAPI {
+class ShelterKeys {
     
-    
-    struct ShelterKeys {
         
         // Mark: - Shelter URL
         static let shelterURL = "http://api.petfinder.com/shelter.get"
@@ -98,7 +96,6 @@ class ShelterAPI {
         let emailKey = "email"
         let phoneKey = "phone"
         let zipKey = "zip"
-    }
 }
 
 
