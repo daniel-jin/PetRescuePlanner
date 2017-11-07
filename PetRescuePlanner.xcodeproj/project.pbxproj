@@ -17,6 +17,8 @@
 		6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */; };
 		6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */; };
 		6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */; };
+		5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */; };
+		5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */; };
 		D30B58A01FB10A0E006C59FE /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B589F1FB10A0E006C59FE /* Shelter.swift */; };
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +37,8 @@
 		6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+CloudKit.swift"; sourceTree = "<group>"; };
 		6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizableSearch.storyboard; sourceTree = "<group>"; };
+		5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableSearchViewController.swift; sourceTree = "<group>"; };
 		D30B589F1FB10A0E006C59FE /* Shelter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -122,6 +126,7 @@
 		5F7C77FB1FB0C12300BCDBE5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			children = (
 				5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */,
 				5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */,
+				5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -227,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */,
 				5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */,
 				5F7C77EE1FB0C04A00BCDBE5 /* Assets.xcassets in Resources */,
 				5F7C77EC1FB0C04A00BCDBE5 /* Main.storyboard in Resources */,
@@ -240,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
 				3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */,
 				6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */,
