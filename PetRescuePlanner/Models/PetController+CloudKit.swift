@@ -61,6 +61,17 @@ extension PetController {
         }
     }
     
+    // MARK: - Helper Fetches
+    private func petRecords() -> [CloudKitSyncable] {
+        return pets.flatMap { $0 as CloudKitSyncable }
+    }
     
+    func syncedRecords() -> [CloudKitSyncable] {
+        return petRecords().filter { $0.isSynced }
+    }
+    
+    func unsyncedRecords() -> [CloudKitSyncable] {
+        return petRecords().filter { !$0.isSynced }
+    }
     
 }

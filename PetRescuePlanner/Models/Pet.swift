@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-struct Pet {
+struct Pet: CloudKitSyncable {
     
     let apiKeys = API.Keys()
     
