@@ -15,6 +15,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     var animal: String? = nil
     var size: String? = nil
     var age: String? = nil
+    var sex: String? = nil
     
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
     let sizes = ["", "Small", "Medium", "large", "Extra-Large"]
@@ -25,10 +26,13 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     @IBOutlet weak var animalTypeTextField: UITextField!
     @IBOutlet weak var animalSizeTextField: UITextField!
     @IBOutlet weak var animalAgeTextField: UITextField!
+    @IBOutlet weak var zipCodeTextField: UITextField!
     
     @IBOutlet var animalTypePicker: UIPickerView!
     @IBOutlet var animalSizePicker: UIPickerView!
     @IBOutlet var animalAgePicker: UIPickerView!
+    
+    @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
     
     // MARK: - Actions
     
@@ -37,6 +41,17 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         self.view.endEditing(true)
     }
     
+    @IBAction func sexSegmentedControlChanged(_ sender: Any) {
+        if sexSegmentedControl.selectedSegmentIndex == 0 {
+            sex = nil
+        }
+        if sexSegmentedControl.selectedSegmentIndex == 1 {
+            sex = "male"
+        }
+        if sexSegmentedControl.selectedSegmentIndex == 2 {
+            sex = "female"
+        }
+    }
     
     // MARK: - View Controller Life Cycle
     
