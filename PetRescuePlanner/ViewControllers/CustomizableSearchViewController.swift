@@ -100,15 +100,15 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
         if pickerView == animalTypePicker {
             animalTypeTextField.text = animals[row]
-            animal = animals[row]
+            animal = animals[row].lowercased()
         }
         if pickerView == animalSizePicker {
             animalSizeTextField.text = sizes[row]
-            size = sizes[row]
+            size = sizes[row].lowercased()
         }
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
-            age = ages[row]
+            age = ages[row].lowercased()
         }
         
     }
