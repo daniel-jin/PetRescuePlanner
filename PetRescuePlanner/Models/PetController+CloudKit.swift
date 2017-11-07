@@ -128,7 +128,26 @@ extension PetController {
         }
     }
     
-    
+    func pushChangesToCloudKit(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void) = { _,_ in }) {
+        
+        let unsavedPets = unsyncedRecords() as? [Pet] ?? []
+        var unsavedObjectsByRecord = [CKRecord: CloudKitSyncable]()
+        for pet in unsavedPets {
+            let record = CKRecord(pet: pet)
+            unsavedObjectsByRecord[record] = pet
+        }
+        let unsavedRecords = Array(unsavedObjectsByRecord.keys)
+        
+        cloudKitManager.saveRecords(unsavedRecords, perRecordCompletion: { (record, error) in
+            guard let record = record else { return }
+            unsavedObjectsByRecord[record]?.cloudKitRecordID = record.recordID
+            
+        }) { (records, error) in
+            
+            let success = records != nil
+            completion(success, error)
+        }
+    }
     
     
 }

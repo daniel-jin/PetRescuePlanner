@@ -100,7 +100,12 @@ class CloudKitManager {
         self.publicDatabase.add(queryOperation)
     }
     
-    // MARK: - Save method
+    // MARK: - Save methods
+    func saveRecords(_ records: [CKRecord], perRecordCompletion: ((_ record: CKRecord?, _ error: Error?) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
+        
+        modifyRecords(records, perRecordCompletion: perRecordCompletion, completion: completion)
+    }
+    
     func save(_ record: CKRecord, completion: @escaping ((Error?) -> Void) = { _ in }) {
         
         // Call save on the database
