@@ -39,6 +39,7 @@ class API {
         
         // MARK: - Item Key
         let itemKey = "$t"
+        let apiKey = "key"
         
         // MARK: - Top Level Keys
         var ageKey = "age"
@@ -70,6 +71,8 @@ class API {
         
         // MARK: - Options Keys
         let optionKey = "option"
+        let offsetKey = "offset"
+        let formatKey = "format"
         
         // MARK: - Photo Keys
         let photoKey = "photo"
@@ -85,3 +88,57 @@ struct CloudKit {
     
     
 }
+
+class ShelterKeys {
+    
+        
+        // Mark: - Shelter URL
+        static let shelterURL = "http://api.petfinder.com/shelter.get"
+        
+        // Mark: - Top level
+        let petfinderKey = "petfinder"
+        
+        // Mark: - in petfinder dictionary
+        let shelterKey = "shelter"
+        
+        // Mark: - in shelter dictionary
+        let addressKey = "address1"
+        let nameKey = "name"
+        let stateKey = "state"
+        let cityKey = "city"
+        let emailKey = "email"
+        let phoneKey = "phone"
+        let zipKey = "zip"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
