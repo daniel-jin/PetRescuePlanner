@@ -33,7 +33,6 @@ extension PetController {
                 completion(false)
                 return
             }
-            
             // If no errors, complete with success as true
             completion(true)
         }
