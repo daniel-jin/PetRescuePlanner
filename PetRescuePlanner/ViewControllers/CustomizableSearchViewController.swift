@@ -9,14 +9,16 @@
 import UIKit
 
 class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
-    
     
     // MARK: - Data
     
-    let animal = ["Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
-    let size = ["Small", "Medium", "large", "Extra-Large"]
-    let age = ["Baby", "Young", "Adult", "Senior"]
+    var animal: String? = nil
+    var size: String? = nil
+    var age: String? = nil
+    
+    let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
+    let sizes = ["", "Small", "Medium", "large", "Extra-Large"]
+    let ages = ["", "Baby", "Young", "Adult", "Senior"]
     
     // MARK: - Outlets
     
@@ -28,12 +30,81 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     @IBOutlet var animalSizePicker: UIPickerView!
     @IBOutlet var animalAgePicker: UIPickerView!
     
+    // MARK: - Actions
+    
+    @IBAction func userTappedView(_ sender: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setUpPickerViews()
+        self.setUpViews()
+    }
+    
+    // MARK: - UIPickerView Data Source
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == animalTypePicker {
+            return animals.count
+        }
+        if pickerView == animalSizePicker {
+            return sizes.count
+        }
+        if pickerView == animalAgePicker {
+            return ages.count
+        }
+        return 0
+    }
+    
+    // MARK: - UIPickerView Delegate
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if pickerView == animalTypePicker {
+            return animals[row]
+        }
+        if pickerView == animalSizePicker {
+            return sizes[row]
+        }
+        if pickerView == animalAgePicker {
+            return ages[row]
+        }
+        return ""
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if pickerView == animalTypePicker {
+            animalTypeTextField.text = animals[row]
+            animal = animals[row]
+        }
+        if pickerView == animalSizePicker {
+            animalSizeTextField.text = sizes[row]
+            size = sizes[row]
+        }
+        if pickerView == animalAgePicker {
+            animalAgeTextField.text = ages[row]
+            age = ages[row]
+        }
+        
+    }
+    
+    // MARK: - Private Functions
+    
+    func setUpViews() {
+        
+        animalTypePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         
         animalTypePicker.delegate = self
         animalSizePicker.delegate = self
@@ -46,51 +117,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalTypeTextField.inputView = animalTypePicker
         animalSizeTextField.inputView = animalSizePicker
         animalAgeTextField.inputView = animalAgePicker
-    }
-    
-    // MARK: - UIPickerView Data Source
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == animalTypePicker {
-            return animal.count
-        }
-        if pickerView == animalSizePicker {
-            return size.count
-        }
-        if pickerView == animalAgePicker {
-            return age.count
-        }
-        return 0
-    }
-    
-    // MARK: - UIPickerView Delegate
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        if pickerView == animalTypePicker {
-            return animal[row]
-        }
-        if pickerView == animalSizePicker {
-            return size[row]
-        }
-        if pickerView == animalAgePicker {
-            return age[row]
-        }
-        return ""
-    }
-    
-    
-    // MARK: - Private Functions
-    
-    func setUpPickerViews() {
-        
-        animalTypePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         
     }
     
