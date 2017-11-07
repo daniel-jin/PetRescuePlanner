@@ -11,6 +11,12 @@ import CoreData
 
 extension Pet {
     
+    private var apiKeys: API.Keys {
+        get {
+            return API.Keys()
+        }
+    }
+    
     @discardableResult convenience init(dictionary: [String: Any],
                                         context: NSManagedObjectContext = CoreDataStack.context) {
         
@@ -55,17 +61,17 @@ extension Pet {
             let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any],
             let size = sizeDictionary[apiKeys.itemKey] as? String,
             let statusDictionary = dictionary[apiKeys.statusKey] as? [String:Any],
-            let status = statusDictionary[apiKeys.itemKey] as? String else { return nil }
+            let status = statusDictionary[apiKeys.itemKey] as? String else { return }
         
         var photoEndpoints: [String] = []
         for photoDictionary in photosArray {
-            guard let imageEndPoint = photoDictionary[apiKeys.itemKey] as? String else { return nil }
+            guard let imageEndPoint = photoDictionary[apiKeys.itemKey] as? String else { return }
             photoEndpoints.append(imageEndPoint)
         }
         
         var optionsArray: [String] = []
         for optionsDictionary in optionArray {
-            guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return nil }
+            guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
             optionsArray.append(option)
         }
         
@@ -86,7 +92,7 @@ extension Pet {
         self.animal = animal
         self.breeds = breed
         self.contactInfo = contactDictionaryTemp
-        self.description = description
+        self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
         self.media = photoEndpoints
@@ -94,7 +100,7 @@ extension Pet {
         self.name = name
         self.options = optionsArray
         self.sex = sex
-        self.shelterId = shelterId
+        self.shelterID = shelterId
         self.size = size
         self.status = status
         
