@@ -82,6 +82,31 @@ class PetController {
             completion(true)
         }
     }
+    
+    func fetchImagesFor(pet: Pet, completion: @escaping () -> Void) {
+        let photos = pet.media
+        let dispatchGroup = DispatchGroup()
+        
+        for urlString in photos {
+            
+            dispatchGroup.enter()
+            guard let searchUrl = URL(string: urlString) else { dispatchGroup.leave(); return }
+            
+            NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+                if let error = error {
+                    NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+                }
+                guard let data = data,
+                    let image = UIImage(data: data) else { dispatchGroup.leave(); return }
+                self.imageArray.append(image)
+                
+                dispatchGroup.leave()
+            })
+        }
+        dispatchGroup.notify(queue: .main) {
+            completion()
+        }
+    }
 }
 
 

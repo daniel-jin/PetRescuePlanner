@@ -14,17 +14,16 @@ class PetDetailTableViewController: UITableViewController {
     @IBOutlet weak var petImageScrollView: UIScrollView!
     var pet: Pet?
     var images = [UIImageView]()
+    var imageArray: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let pet = pet else { return }
-        let photos = pet.media
         
-        for index in photos {
-            
+        PetController.shared.fetchImagesFor(pet: pet) {
+            self.tableView.reloadData()
         }
-        
     }
 
     // MARK: - Table view data source
