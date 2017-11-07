@@ -92,10 +92,6 @@ struct CloudKit {
 
 class ShelterKeys {
     
-    
-    // Mark: - Shelter URL
-    static let shelterURL = "http://api.petfinder.com/shelter.get"
-    
     // Mark: - Top level
     static let petfinderKey = "petfinder"
     

@@ -10,7 +10,7 @@ import Foundation
 
 class ShelterController {
     
-    static let shelterShared = ShelterController()
+    
     
     init() {
         
@@ -19,7 +19,7 @@ class ShelterController {
     let methods = API.Methods().specificShelter
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
-    let baseURL = URL(string: ShelterKeys.shelterURL)
+    let baseURL = URL(string: ShelterKeys.shelterKey)
     
     // you might want to put Shelter? in the ()
     func fetchShelter(by id: String, name: String?, address: String?, state: String?, city: String?, phone: String?, completion: @escaping () -> Void) {
