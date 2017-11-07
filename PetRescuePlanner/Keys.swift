@@ -40,6 +40,10 @@ class API {
         // MARK: - Item Key
         let itemKey = "$t"
         let apiKey = "key"
+        let petFinderKey = "petfinder"
+        let lastOffsetKey = "lastOffset"
+        let petsKey = "pets"
+        let petKey = "pet"
         
         // MARK: - Top Level Keys
         var ageKey = "age"

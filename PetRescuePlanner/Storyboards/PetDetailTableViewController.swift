@@ -18,9 +18,12 @@ class PetDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let count = pet?.media.count
+        guard let pet = pet else { return }
+        let photos = pet.media
         
-        
+        for index in photos {
+            
+        }
         
     }
 
