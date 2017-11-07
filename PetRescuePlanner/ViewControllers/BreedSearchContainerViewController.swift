@@ -8,11 +8,11 @@
 
 import UIKit
 
-class BreedSearchContainerViewController: UIViewController {
+class BreedSearchContainerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Properties 
     
-    var breeds: [String]? {
+    var breeds: [String] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.breedsTableView.reloadData()
@@ -29,14 +29,28 @@ class BreedSearchContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        breedsTableView.delegate = self
+        breedsTableView.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        
+    // MARK: - TableView funcs
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return breeds.count
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "amimalBreedCell", for: indexPath)
+        
+        let breed = breeds[indexPath.row]
+        
+        cell.textLabel?.text = breed
+        
+        return cell
+    }
+    
+  
+    
 
     /*
     // MARK: - Navigation

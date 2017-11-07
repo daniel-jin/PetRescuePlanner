@@ -42,7 +42,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     // MARK: - Actions
     
     @IBAction func userTappedView(_ sender: UITapGestureRecognizer) {
-        
+        breedSearchContainerView.isHidden = true 
         self.view.endEditing(true)
     }
     
@@ -61,8 +61,14 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
         if animal == "dog" || animal == "cat" || animal == "bird" || animal == "reptile" || animal == "horse" || animal == "barnyard" || animal == "smallfurry" {
             if breedSearchContainerView.isHidden == true {
-                
-                
+                guard let animal = animal else { return }
+                BreedAPI.shared.fetchBreedsFor(animalType: animal, completion: { (success) in
+                    if !success {
+                        // presetn alert here
+                        return
+                    }
+                    self.breedSearchViewController?.breeds = BreedAPI.shared.breeds
+                })
                 
                 breedSearchContainerView.isHidden = false
                 return
@@ -72,6 +78,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
         } else {
+            breedSearchContainerView.isHidden = true
             presentAlertWith(title: "No Animal Type Selected", message: "Choose an animal to search for a certain breed, or leave blank to look for all breeds!")
         }
     }

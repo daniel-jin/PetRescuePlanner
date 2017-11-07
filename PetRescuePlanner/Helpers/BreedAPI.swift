@@ -29,7 +29,7 @@ class BreedAPI {
         
         let method = methods.breed
         let output = responseFormat
-        let apiKey = keys.apiKey
+        let apiKey = parameters.apiKey
         let baseURL = URL(string: parameters.baseUrl)!
         
         var queryItems:[URLQueryItem] = []
@@ -48,8 +48,39 @@ class BreedAPI {
         
         guard let searchURL = components?.url else { return }
         
-        NetworkController.performRequest(for: searchURL, httpMethod: NetworkController.HTTPMethod.get)
-        completion(true)
+        NetworkController.performRequest(for: searchURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            
+            if let error = error {
+                NSLog("error \(error.localizedDescription)")
+            }
+            
+            guard let data = data else { return }
+            
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let petfinderDictionary = jsonDictionary["petfinder"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let breedsDictionary = petfinderDictionary["breeds"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let breedsArray = breedsDictionary["breed"] as? [[String: Any]] else {
+                return completion(false)
+            }
+            
+            var breedList: [String] = []
+            
+            for index in 0..<breedsArray.count {
+                breedList.append(breedsArray[index]["$t"] as! String)
+            }
+            self.breeds = breedList
+            
+            completion(true)
+        }
         
     }
     

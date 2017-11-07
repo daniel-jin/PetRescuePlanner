@@ -18,7 +18,7 @@ class API {
     }
     
     struct Methods {
-        let breed = "breeds.list" // Returns a list of breeds for a particular animal.
+        let breed = "breed.list" // Returns a list of breeds for a particular animal.
         let specificPet = "pet.get" // Returns a record for a single pet.
         let randomPet = "pet.getRandom" /* Returns a record for a randomly selected pet. You can choose the characteristics of the pet you want returned using the various arguments to this method.
          This method can return pet records in three formats:
