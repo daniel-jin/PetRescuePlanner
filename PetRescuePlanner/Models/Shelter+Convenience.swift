@@ -11,14 +11,17 @@ import CoreData
 
 extension Shelter {
     
-    @discardableResult convenience init(address: String,
-                                        name: String,
-                                        state: String,
-                                        city: String,
-                                        email: String,
-                                        phone: String,
-                                        zip: String,
+    @discardableResult convenience init(dictionary: [String: Any],
                                         context: NSManagedObjectContext = CoreDataStack.context) {
+        
+        // Check for dictionary keys and values
+        guard let address = dictionary[Shelter] as? String,
+            let name = dictionary[apiKey.nameKey] as? String,
+            let state = dictionary[apiKey.stateKey] as? String,
+            let city = dictionary[apiKey.cityKey] as? String,
+            let email = dictionary[apiKey.emailKey] as? String,
+            let phone = dictionary[apiKey.phoneKey] as? String,
+            let zip = dictionary[apiKey.phoneKey] as? String else { return nil }
         
         // Init with context first
         self.init(context: context)
