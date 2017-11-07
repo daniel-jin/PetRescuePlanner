@@ -18,7 +18,7 @@ class API {
     }
     
     struct Methods {
-        let breed = "breed.list" // Returns a list of breeds for a particular animal.
+        let breed = "breeds.list" // Returns a list of breeds for a particular animal.
         let specificPet = "pet.get" // Returns a record for a single pet.
         let randomPet = "pet.getRandom" /* Returns a record for a randomly selected pet. You can choose the characteristics of the pet you want returned using the various arguments to this method.
          This method can return pet records in three formats:
@@ -39,7 +39,10 @@ class API {
         
         // MARK: - Item Key
         let itemKey = "$t"
+<<<<<<< HEAD
+=======
         let apiKey = "key"
+>>>>>>> develop
         
         // MARK: - Top Level Keys
         var ageKey = "age"
@@ -71,15 +74,20 @@ class API {
         
         // MARK: - Options Keys
         let optionKey = "option"
+<<<<<<< HEAD
+=======
         let offsetKey = "offset"
         let formatKey = "format"
+>>>>>>> develop
         
         // MARK: - Photo Keys
         let photoKey = "photo"
-        let photosKey = "photos"
     }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 struct CloudKit {
     
     // MARK: - Keys for CloudKit
@@ -89,28 +97,30 @@ struct CloudKit {
     
     
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> develop
 class ShelterKeys {
     
-    
-    // Mark: - Shelter URL
-    static let shelterURL = "http://api.petfinder.com/shelter.get"
-    
-    // Mark: - Top level
-    static let petfinderKey = "petfinder"
-    
-    // Mark: - in petfinder dictionary
-    static let shelterKey = "shelter"
-    
-    // Mark: - in shelter dictionary
-    static let addressKey = "address1"
-    static let id = "id"
-    static let nameKey = "name"
-    static let stateKey = "state"
-    static let cityKey = "city"
-    static let emailKey = "email"
-    static let phoneKey = "phone"
-    static let zipKey = "zip"
+        
+        // Mark: - Shelter URL
+        static let shelterURL = "http://api.petfinder.com/shelter.get"
+        
+        // Mark: - Top level
+        let petfinderKey = "petfinder"
+        
+        // Mark: - in petfinder dictionary
+        let shelterKey = "shelter"
+        
+        // Mark: - in shelter dictionary
+        let addressKey = "address1"
+        let nameKey = "name"
+        let stateKey = "state"
+        let cityKey = "city"
+        let emailKey = "email"
+        let phoneKey = "phone"
+        let zipKey = "zip"
 }
 
 
@@ -145,3 +155,18 @@ class ShelterKeys {
 
 
 
+<<<<<<< HEAD
+=======
+struct CloudKit {
+    
+    // MARK: - Keys for CloudKit
+    static let appleUserRefKey = "appleUserRef"
+    
+    static let petRecordType = "Pet"
+    
+    
+}
+>>>>>>> develop
+=======
+>>>>>>> c1123b2e887eb4756c9fc9fca85f607d4b839e5f
+>>>>>>> develop
