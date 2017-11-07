@@ -1,5 +1,5 @@
 //
-//  Pet.swift
+//  Pett.swift
 //  PetRescuePlanner
 //
 //  Created by Daniel Rodosky on 11/6/17.
@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-struct Pet: CloudKitSyncable {
+struct Pett: CloudKitSyncable {
     
     let apiKeys = API.Keys()
     

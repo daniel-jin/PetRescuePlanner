@@ -1,5 +1,5 @@
 //
-//  Shelter.swift
+//  Shelterr.swift
 //  PetRescuePlanner
 //
 //  Created by Brian Licea on 11/6/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Shelter {
+struct Shelterr {
     let apiKey = ShelterKeys()
     
     // Mark: - Properties
