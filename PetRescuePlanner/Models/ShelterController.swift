@@ -22,7 +22,6 @@ class ShelterController {
         
         var urlComponets = URLComponents(url: unwrappedURL, resolvingAgainstBaseURL: true)
         
-        let queryItem = URLQueryItem(name: <#T##String#>, value: <#T##String?#>)
         
       
     }
