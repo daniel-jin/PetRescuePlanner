@@ -18,7 +18,7 @@ extension PetController {
         }
     }
     
-    // MARK: - Save function
+    // MARK: - Save
     func saveToCK(pet: Pet, completion: @escaping (_ success: Bool) -> Void) {
         
         // Get CK record of the pet to save to CK
@@ -34,6 +34,29 @@ extension PetController {
                 return
             }
             // If no errors, complete with success as true
+            completion(true)
+        }
+    }
+    
+    // MARK: - Delete
+    func deleteFromCK(pet: Pet, completion: @escaping (_ success: Bool) -> Void) {
+        
+        // Get CKRecordID of the pet
+        guard let petCKRecordID = pet.cloudKitRecordID else {
+            NSLog("Error deleting pet from CloudKit - no CK Record ID")
+            completion(false)
+            return
+        }
+        
+        // Delete from CloudKit
+        self.cloudKitManager.deleteRecordWithID(petCKRecordID) { (recordID, error) in
+            
+            // Handle error
+            if error != nil {
+                NSLog("Error deleting pet record from CloudKit")
+                completion(false)
+                return
+            }
             completion(true)
         }
     }
