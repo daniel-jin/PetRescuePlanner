@@ -42,11 +42,11 @@ struct Shelter {
             let zipDictionary = shelterDictionary[ShelterKeys.phoneKey] as? [String: Any],
             let zip = zipDictionary[apiKey.itemKey] as? String else { return nil }
         
-        self.address = address
+        self.address = address//
         self.id = id 
-        self.name = name
-        self.state = state
-        self.city = city
+        self.name = name//
+        self.state = state//
+        self.city = city//
         self.email = email
         self.phone = phone
         self.zip = zip
