@@ -76,7 +76,6 @@ class API {
         
         // MARK: - Photo Keys
         let photoKey = "photo"
-        let photosKey = "photos"
     }
 }
 
@@ -89,6 +88,8 @@ struct CloudKit {
     
     
 }
+<<<<<<< HEAD
+=======
 
 class ShelterKeys {
     
@@ -143,3 +144,5 @@ class ShelterKeys {
 
 
 
+
+>>>>>>> c1123b2e887eb4756c9fc9fca85f607d4b839e5f
