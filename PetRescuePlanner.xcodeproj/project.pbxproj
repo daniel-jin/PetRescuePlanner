@@ -10,6 +10,7 @@
 		3C484A891FB10BA20024F947 /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A881FB10BA20024F947 /* PetController.swift */; };
 		3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A8A1FB10BD30024F947 /* NetworkController.swift */; };
 		3C5FF8F51FB237C90011CEFD /* petDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */; };
+		3C5FF8F71FB25D1A0011CEFD /* PetDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FF8F61FB25D1A0011CEFD /* PetDetailTableViewController.swift */; };
 		3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC915AA1FB0EC55008C5448 /* Keys.swift */; };
 		5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C77E61FB0C04A00BCDBE5 /* AppDelegate.swift */; };
 		5F7C77EC1FB0C04A00BCDBE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		3C484A881FB10BA20024F947 /* PetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetController.swift; path = PetRescuePlanner/PetController.swift; sourceTree = SOURCE_ROOT; };
 		3C484A8A1FB10BD30024F947 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = PetRescuePlanner/NetworkController.swift; sourceTree = SOURCE_ROOT; };
 		3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = petDetailView.storyboard; sourceTree = "<group>"; };
+		3C5FF8F61FB25D1A0011CEFD /* PetDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetDetailTableViewController.swift; path = PetRescuePlanner/Storyboards/PetDetailTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		3CC915AA1FB0EC55008C5448 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = PetRescuePlanner/Keys.swift; sourceTree = SOURCE_ROOT; };
 		5F7C77E31FB0C04A00BCDBE5 /* PetRescuePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetRescuePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F7C77E61FB0C04A00BCDBE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		5F7C77FA1FB0C11900BCDBE5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3C5FF8F61FB25D1A0011CEFD /* PetDetailTableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5FF8F71FB25D1A0011CEFD /* PetDetailTableViewController.swift in Sources */,
 				3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */,
 				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
