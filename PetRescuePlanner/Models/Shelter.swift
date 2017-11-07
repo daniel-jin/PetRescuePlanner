@@ -24,10 +24,10 @@ struct Shelter {
     init?(dictionary: [String: Any]) {
         guard let address = dictionary[apiKey.addressKey] as? String,
             let name = dictionary[apiKey.nameKey] as? String,
-        let state = dictionary[apiKey.stateKey] as? String,
-        let city = dictionary[apiKey.cityKey] as? String,
-        let email = dictionary[apiKey.emailKey] as? String,
-        let phone = dictionary[apiKey.phoneKey] as? String,
+            let state = dictionary[apiKey.stateKey] as? String,
+            let city = dictionary[apiKey.cityKey] as? String,
+            let email = dictionary[apiKey.emailKey] as? String,
+            let phone = dictionary[apiKey.phoneKey] as? String,
             let zip = dictionary[apiKey.phoneKey] as? String else { return nil }
         
         self.address = address
@@ -37,9 +37,6 @@ struct Shelter {
         self.email = email
         self.phone = phone
         self.zip = zip
-        
-        
-        
         
     }
 }
