@@ -76,6 +76,16 @@ class API {
     }
 }
 
+struct CloudKit {
+    
+    // MARK: - Keys for CloudKit
+    static let appleUserRefKey = "appleUserRef"
+    
+    static let petRecordType = "Pet"
+    
+    
+}
+
 class ShelterKeys {
     
         

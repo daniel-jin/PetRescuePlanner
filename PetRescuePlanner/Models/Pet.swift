@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 
 struct Pet {
     
@@ -28,6 +29,8 @@ struct Pet {
     let shelterId: String
     let size: String
     let status: String
+    
+    var cloudKitRecordID: CKRecordID?
     
     // MARK: - Failable init
     init?(dictionary: [String: Any]) {
