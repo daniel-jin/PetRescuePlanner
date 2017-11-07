@@ -12,10 +12,13 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     // MARK: - Data
     
+    weak var breedSearchViewController: BreedSearchContainerViewController?
+    
     var animal: String? = nil
     var size: String? = nil
     var age: String? = nil
     var sex: String? = nil
+    var breed: String? = nil
     
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
     let sizes = ["", "Small", "Medium", "large", "Extra-Large"]
@@ -34,6 +37,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var breedSearchContainerView: UIView!
+    
     // MARK: - Actions
     
     @IBAction func userTappedView(_ sender: UITapGestureRecognizer) {
@@ -50,6 +55,24 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
         if sexSegmentedControl.selectedSegmentIndex == 2 {
             sex = "female"
+        }
+    }
+    @IBAction func selectBreedButtonTapped(_ sender: Any) {
+        
+        if animal == "dog" || animal == "cat" || animal == "bird" || animal == "reptile" || animal == "horse" || animal == "barnyard" || animal == "smallfurry" {
+            if breedSearchContainerView.isHidden == true {
+                
+                
+                
+                breedSearchContainerView.isHidden = false
+                return
+            }
+            if breedSearchContainerView.isHidden == false {
+                breedSearchContainerView.isHidden = true
+                return
+            }
+        } else {
+            presentAlertWith(title: "No Animal Type Selected", message: "Choose an animal to search for a certain breed, or leave blank to look for all breeds!")
         }
     }
     
@@ -133,15 +156,30 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalSizeTextField.inputView = animalSizePicker
         animalAgeTextField.inputView = animalAgePicker
         
+        breedSearchContainerView.isHidden = true
+        
     }
     
-   
+    func presentAlertWith(title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
     
     // MARK: - Navigation
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
+        if segue.identifier == "breedContainerSegue" {
+            breedSearchViewController = segue.destination as? BreedSearchContainerViewController
+        }
+        
     }
  
     
