@@ -12,40 +12,44 @@ class PetDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     @IBOutlet weak var petImageScrollView: UIScrollView!
+    @IBOutlet weak var petNameLabel: UILabel!
     var pet: Pet?
-    var images = [UIImageView]()
     var imageArray: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let pet = pet else { return }
-        
         PetController.shared.fetchImagesFor(pet: pet) {
+            self.setUpUI()
             self.tableView.reloadData()
         }
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    func setUpUI() {
+        
+        guard let pet = pet else { return }
+        
+        petNameLabel.text = pet.name
+        
+        var images = [UIImageView]()
+        var contentWidth: CGFloat = 0.0
+        
+        for image in imageArray {
+            
+            let newImage = image
+            let imageView = UIImageView(image: newImage)
+            images.append(imageView)
+            
+            var newX: CGFloat = 0.0
+            newX = view.frame.midX + view.frame.size.width * CGFloat(images.count)
+            contentWidth += newX
+            
+            petImageScrollView.addSubview(imageView)
+            imageView.frame = CGRect(x: newX, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+            
+        }
+        petImageScrollView.contentSize = CGSize(width: contentWidth, height: view.frame.size.height)
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-
-
 
 }
