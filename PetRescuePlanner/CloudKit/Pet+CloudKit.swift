@@ -11,8 +11,14 @@ import CloudKit
 
 extension Pet {
     
+    private var apiKeys: API.Keys {
+        get {
+            return API.Keys()
+        }
+    }
+    
     // MARK: - Failable initializer (convert a Pet CKRecord into a Pet object)
-    init?(cloudKitRecord: CKRecord) {
+    convenience init?(cloudKitRecord: CKRecord) {
         // Check for CKRecord's values and record type
         guard let age = cloudKitRecord[apiKeys.ageKey] as? String,
             let animal = cloudKitRecord[apiKeys.animalKey] as? String,
@@ -33,19 +39,20 @@ extension Pet {
         self.age = age
         self.animal = animal
         self.breeds = breeds
-        self.contactInfo = contactInfo
-        self.description = description
+        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactInfo, options: .prettyPrinted)
+        self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = media
+        self.media = try? JSONSerialization.data(withJSONObject: media, options: .prettyPrinted)
         self.mix = mix
         self.name = name
-        self.options = options
+        self.options = try? JSONSerialization.data(withJSONObject: options, options: .prettyPrinted)
         self.sex = sex
-        self.shelterId = shelterId
+        self.shelterID = shelterId
         self.size = size
         self.status = status
 
+        self.recordIDString = cloudKitRecord.recordID
         cloudKitRecordID = cloudKitRecord.recordID
     }
 }
@@ -56,9 +63,8 @@ extension CKRecord {
         
         let apiKeys = API.Keys()
         
-        let recordID = pet.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
-        
         // Init CKRecord
+        let recordID = user.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
         self.init(recordType: CloudKit.petRecordType, recordID: recordID)
         
         // Set values for the initialized CKRecord
@@ -66,7 +72,7 @@ extension CKRecord {
         self.setValue(pet.animal, forKey: apiKeys.animalKey)
         self.setValue(pet.breeds, forKey: apiKeys.breedsKey)
         self.setValue(pet.contactInfo, forKey: apiKeys.contactInfoKey)
-        self.setValue(pet.description, forKey: apiKeys.descriptionKey)
+        self.setValue(pet.petDescription, forKey: apiKeys.descriptionKey)
         self.setValue(pet.id, forKey: apiKeys.idKey)
         self.setValue(pet.lastUpdate, forKey: apiKeys.lastUpdatKey)
         self.setValue(pet.media, forKey: apiKeys.mediaKey)
@@ -74,8 +80,9 @@ extension CKRecord {
         self.setValue(pet.name, forKey: apiKeys.nameKey)
         self.setValue(pet.options, forKey: apiKeys.optionsKey)
         self.setValue(pet.sex, forKey: apiKeys.sexKey)
-        self.setValue(pet.shelterId, forKey: apiKeys.shelterIdKey)
+        self.setValue(pet.shelterID, forKey: apiKeys.shelterIdKey)
         self.setValue(pet.size, forKey: apiKeys.sizeKey)
         self.setValue(pet.status, forKey: apiKeys.statusKey)
+        self.setValue(pet.recordIDString, forKey: "recordIDString")
     }
 }

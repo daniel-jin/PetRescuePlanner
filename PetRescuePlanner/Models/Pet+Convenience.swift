@@ -18,7 +18,14 @@ extension Pet {
     }
     
     @discardableResult convenience init(dictionary: [String: Any],
-                                        context: NSManagedObjectContext = CoreDataStack.context) {
+                                        context: NSManagedObjectContext? = CoreDataStack.context) {
+        // Init with context first
+        
+        if let context = context {
+            self.init(context: context)
+        } else {
+            self.init(entity: Pet.entity(), insertInto: nil)
+        }
         
         guard let age = dictionary[apiKeys.ageKey] as? String,
             let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
@@ -83,27 +90,22 @@ extension Pet {
         contactDictionaryTemp[apiKeys.zipKey] = zip
         contactDictionaryTemp[apiKeys.addressKey] = address
         
-        
-        // Init with context first
-        self.init(context: context)
-        
         // Initialize rest of properties
         self.age = age
         self.animal = animal
         self.breeds = breed
-        self.contactInfo = contactDictionaryTemp
+        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted)
         self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = photoEndpoints
+        self.media = try? JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted)
         self.mix = mix
         self.name = name
-        self.options = optionsArray
+        self.options = try? JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted)
         self.sex = sex
         self.shelterID = shelterId
         self.size = size
         self.status = status
-        
+        self.recordIDString = UUID().uuidString
     }
-    
 }

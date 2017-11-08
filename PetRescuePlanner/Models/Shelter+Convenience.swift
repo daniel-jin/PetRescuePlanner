@@ -18,10 +18,13 @@ extension Shelter {
     }
     
     @discardableResult convenience init(dictionary: [String: Any],
-                                        context: NSManagedObjectContext = CoreDataStack.context) {
-        
+                                        context: NSManagedObjectContext? = CoreDataStack.context) {
         // Init with context first
-        self.init(context: context)
+        if let context = context {
+            self.init(context: context)
+        } else {
+            self.init(entity: Shelter.entity(), insertInto: nil)
+        }
         
         // Check for dictionary keys and values
         guard let address = dictionary[shelterKeys.addressKey] as? String,
@@ -40,5 +43,6 @@ extension Shelter {
         self.email = email
         self.phone = phone
         self.zip = zip
+        self.recordIDString = UUID().uuidString
     }
 }

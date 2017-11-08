@@ -25,6 +25,7 @@
 		6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */; };
 		6A8E01B41FB25FFA00AEEE09 /* Pet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */; };
 		6A8E01B61FB26EDA00AEEE09 /* Shelter+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B51FB26EDA00AEEE09 /* Shelter+Convenience.swift */; };
+		6A8E01B81FB2803E00AEEE09 /* Shelter+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B71FB2803E00AEEE09 /* Shelter+CloudKit.swift */; };
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetRescuePlanner.xcdatamodel; sourceTree = "<group>"; };
 		6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+Convenience.swift"; sourceTree = "<group>"; };
 		6A8E01B51FB26EDA00AEEE09 /* Shelter+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shelter+Convenience.swift"; sourceTree = "<group>"; };
+		6A8E01B71FB2803E00AEEE09 /* Shelter+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shelter+CloudKit.swift"; sourceTree = "<group>"; };
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,7 @@
 			children = (
 				6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */,
 				6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */,
+				6A8E01B71FB2803E00AEEE09 /* Shelter+CloudKit.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				6A8E01B41FB25FFA00AEEE09 /* Pet+Convenience.swift in Sources */,
 				6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */,
 				6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */,
+				6A8E01B81FB2803E00AEEE09 /* Shelter+CloudKit.swift in Sources */,
 				D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */,
 				3C484A891FB10BA20024F947 /* PetController.swift in Sources */,
 				6A8E01AC1FB2158F00AEEE09 /* PetController+CloudKit.swift in Sources */,
