@@ -87,7 +87,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "toPetListTest", sender: self)
+        self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
         
     }
     
@@ -225,8 +225,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             breedSearchViewController = segue.destination as? BreedSearchContainerViewController
         }
         
-        if segue.identifier == "toPetListTest" {
-            guard let destinationVC = segue.destination as? TestPetSearchTableViewController else {
+        if segue.identifier == "toPetTinderPage" {
+            guard let destinationVC = segue.destination as? PetSwipeViewController else {
                 return
             }
             

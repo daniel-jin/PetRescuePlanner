@@ -12,12 +12,25 @@ class PetSwipeViewController: UIViewController {
     
     var divisor: CGFloat!
     
+    var pets: [Pet] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.createCard()
+                self.viewDidLoad()
+            }
+        }
+    }
+    
+    var indexIntoPets = 0
+    
     // MARK: - Outlets
     
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var faceImageView: UIImageView!
     
-
+    @IBOutlet weak var petNameLabel: UILabel!
+    @IBOutlet weak var petDescriptionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         divisor = (view.frame.width / 2) / 0.61
@@ -52,8 +65,7 @@ class PetSwipeViewController: UIViewController {
         
         if xFromCenter > 0 {
             faceImageView.image = #imageLiteral(resourceName: "doge")
-            faceImageView.tintColor = UIColor.black
-            // Save
+            faceImageView.tintColor = UIColor.lightGray
             
         } else {
             faceImageView.image = #imageLiteral(resourceName: "sadFace")
@@ -70,6 +82,9 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 })
+                
+//                UIView.animate(withDuration: <#T##TimeInterval#>, animations: <#T##() -> Void#>, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
+                createCard()
                 return
             } else if card.center.x > (view.frame.width - 75) {
                 // move off to right of screen
@@ -77,6 +92,7 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 })
+                createCard()
                 return
             } else {
                 resetCard()
@@ -85,6 +101,27 @@ class PetSwipeViewController: UIViewController {
     }
     
     // MARK: - Private Functions
+    
+    func createCard() {
+        
+        
+        if indexIntoPets < pets.count {
+            
+            let pet = pets[indexIntoPets]
+            
+            self.card.center = self.view.center
+            self.faceImageView.alpha = 0
+            self.card.alpha = 1
+            self.card.transform = CGAffineTransform.identity
+            
+            self.petNameLabel.text = pet.name
+            self.petDescriptionLabel.text = pet.breeds
+            
+            indexIntoPets += 1
+            
+        }
+        
+    }
     
     func resetCard() {
         UIView.animate(withDuration: 0.2) {

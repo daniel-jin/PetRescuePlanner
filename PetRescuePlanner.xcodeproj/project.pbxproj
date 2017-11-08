@@ -446,7 +446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PetRescuePlanner/PetRescuePlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z5JSCXFFAA;
+				DEVELOPMENT_TEAM = S5AA4WL9KW;
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielrodosky.PetRescuePlanner;
@@ -462,7 +462,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PetRescuePlanner/PetRescuePlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z5JSCXFFAA;
+				DEVELOPMENT_TEAM = S5AA4WL9KW;
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielrodosky.PetRescuePlanner;
