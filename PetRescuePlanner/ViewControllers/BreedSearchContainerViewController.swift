@@ -68,7 +68,6 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
             resultsController.tableView.reloadData()
             
         }
-        print("shit")
     }
     
     // MARK: - Private funcs
@@ -83,6 +82,7 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         searchController?.searchResultsUpdater = self
         
         searchController?.searchBar.sizeToFit()
+        searchController?.searchBar.searchBarStyle = .minimal
         searchController?.hidesNavigationBarDuringPresentation = true
         
         breedsTableView.tableHeaderView = searchController?.searchBar

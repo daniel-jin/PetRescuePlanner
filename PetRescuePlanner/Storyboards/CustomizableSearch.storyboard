@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tpd-qM-bBm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="odD-Uw-ZzO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,31 +18,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a pet that fits you!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ed-vf-48M">
-                                <rect key="frame" x="16" y="60" width="343" height="26.5"/>
+                                <rect key="frame" x="16" y="104" width="343" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.28181922435760498" green="0.2747204601764679" blue="0.43220216035842896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select animal type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d1z-2D-pzZ">
-                                <rect key="frame" x="16" y="102.5" width="167.5" height="30"/>
+                                <rect key="frame" x="16" y="146.5" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select size of animal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vrB-xE-cO6">
-                                <rect key="frame" x="191.5" y="102.5" width="167.5" height="30"/>
+                                <rect key="frame" x="191.5" y="146.5" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select age " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-4f-wXP">
-                                <rect key="frame" x="16" y="148.5" width="167.5" height="30"/>
+                                <rect key="frame" x="16" y="192.5" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMR-dU-cMt">
-                                <rect key="frame" x="191.5" y="195" width="167.5" height="32"/>
+                                <rect key="frame" x="191.5" y="239" width="167.5" height="32"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                                 <state key="normal" title="Select breed">
                                     <color key="titleColor" red="0.87251204252243042" green="0.0" blue="0.3664262592792511" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UFO-dk-fgs">
-                                <rect key="frame" x="191.5" y="149" width="167.5" height="29"/>
+                                <rect key="frame" x="191.5" y="193" width="167.5" height="29"/>
                                 <segments>
                                     <segment title="Any"/>
                                     <segment title="Male"/>
@@ -64,13 +64,13 @@
                                 </connections>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fta-bK-v9F">
-                                <rect key="frame" x="16" y="195" width="167.5" height="30"/>
+                                <rect key="frame" x="16" y="239" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hA-bN-RyL">
-                                <rect key="frame" x="149" y="235" width="226" height="314"/>
+                                <rect key="frame" x="149" y="279" width="226" height="314"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="226" id="L5I-77-FQz"/>
                                     <constraint firstAttribute="height" constant="314" id="wwo-z2-dEk"/>
@@ -79,6 +79,14 @@
                                     <segue destination="pmx-fd-Gbv" kind="embed" identifier="breedContainerSegue" id="ztU-Yo-r4d"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F24-BU-Wz7">
+                                <rect key="frame" x="16" y="318" width="114" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Test outputs"/>
+                                <connections>
+                                    <action selector="testOutputsButtonTapped:" destination="tpd-qM-bBm" eventType="touchUpInside" id="Qhc-Ik-2U5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98812824487686157" green="0.98829704523086548" blue="0.988117516040802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -108,6 +116,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2n6-9o-eZH"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2oA-Bd-EhI">
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="dSb-2K-rwk">
+                            <connections>
+                                <action selector="searchButtonTapped:" destination="tpd-qM-bBm" id="YAo-Nq-nG6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="animalAgePicker" destination="iUb-2L-qcm" id="60I-YP-O0e"/>
                         <outlet property="animalAgeTextField" destination="1Nr-4f-wXP" id="vPY-Mp-hSM"/>
@@ -118,6 +133,7 @@
                         <outlet property="breedSearchContainerView" destination="9hA-bN-RyL" id="zUQ-ae-Bt9"/>
                         <outlet property="sexSegmentedControl" destination="UFO-dk-fgs" id="jNQ-xD-uJv"/>
                         <outlet property="zipCodeTextField" destination="fta-bK-v9F" id="27y-gY-aAM"/>
+                        <segue destination="bxC-94-vOc" kind="show" identifier="toPetListTest" id="vxf-vu-499"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAR-z7-4oP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -139,7 +155,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                 </pickerView>
             </objects>
-            <point key="canvasLocation" x="-101.59999999999999" y="97.601199400299862"/>
+            <point key="canvasLocation" x="237.59999999999999" y="97.601199400299862"/>
         </scene>
         <!--Breed Search Container View Controller-->
         <scene sceneID="CKW-rl-0oS">
@@ -189,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lja-7m-kgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="670.39999999999998" y="97.151424287856074"/>
+            <point key="canvasLocation" x="1009.6" y="97.151424287856074"/>
         </scene>
         <!--Search Results Table View Controller-->
         <scene sceneID="mBh-W0-x7R">
@@ -217,7 +233,53 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9H-hQ-sIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634" y="123"/>
+            <point key="canvasLocation" x="1972" y="122.78860569715144"/>
+        </scene>
+        <!--Test Pet Search Table View Controller-->
+        <scene sceneID="SjN-zL-nx9">
+            <objects>
+                <tableViewController id="bxC-94-vOc" customClass="TestPetSearchTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WhB-EU-5JO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="petListCell" id="9J9-zy-40b">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9J9-zy-40b" id="aV1-eg-84d">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bxC-94-vOc" id="8ZT-YA-THb"/>
+                            <outlet property="delegate" destination="bxC-94-vOc" id="XhR-ew-UIA"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F61-dk-48L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1633" y="-606"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1Ws-gr-xO2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="odD-Uw-ZzO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6lC-wu-BIv">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tpd-qM-bBm" kind="relationship" relationship="rootViewController" id="Q0y-pP-DUg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l0J-rq-QbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-886" y="98"/>
         </scene>
     </scenes>
 </document>

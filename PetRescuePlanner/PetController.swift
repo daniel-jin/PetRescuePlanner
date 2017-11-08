@@ -58,6 +58,10 @@ class PetController {
         }
         
         var components = URLComponents(url: baseUrl.appendingPathComponent(method), resolvingAgainstBaseURL: true)
+        
+        let locationItem = URLQueryItem(name: "location", value: location)
+        queryItems.append(locationItem)
+        
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
         queryItems.append(apiKeyItem)
