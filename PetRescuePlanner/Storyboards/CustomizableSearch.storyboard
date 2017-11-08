@@ -150,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kwD-bt-gpJ">
-                                <rect key="frame" x="0.0" y="56" width="226" height="258"/>
+                                <rect key="frame" x="0.0" y="0.0" width="226" height="314"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -173,31 +173,51 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="ukN-Sf-uWx">
-                                <rect key="frame" x="0.0" y="0.0" width="226" height="56"/>
-                                <color key="barTintColor" red="0.28183811902999878" green="0.27692458033561707" blue="0.4319603443145752" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kwD-bt-gpJ" firstAttribute="top" secondItem="ukN-Sf-uWx" secondAttribute="bottom" id="5sG-71-lHs"/>
-                            <constraint firstItem="ukN-Sf-uWx" firstAttribute="leading" secondItem="kwD-bt-gpJ" secondAttribute="leading" id="Br7-XS-KvR"/>
+                            <constraint firstItem="kwD-bt-gpJ" firstAttribute="top" secondItem="0kz-37-C6V" secondAttribute="top" id="OSE-re-Jw3"/>
                             <constraint firstAttribute="bottom" secondItem="kwD-bt-gpJ" secondAttribute="bottom" id="VOF-DC-MMu"/>
-                            <constraint firstItem="ukN-Sf-uWx" firstAttribute="top" secondItem="wcI-oj-o1W" secondAttribute="top" id="XsE-lx-XpI"/>
                             <constraint firstAttribute="trailing" secondItem="kwD-bt-gpJ" secondAttribute="trailing" id="dqK-Jc-kXS"/>
                             <constraint firstItem="kwD-bt-gpJ" firstAttribute="leading" secondItem="wcI-oj-o1W" secondAttribute="leading" id="oQg-22-KaI"/>
-                            <constraint firstItem="ukN-Sf-uWx" firstAttribute="trailing" secondItem="kwD-bt-gpJ" secondAttribute="trailing" id="qkz-I4-KXN"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="0kz-37-C6V"/>
                     </view>
                     <connections>
                         <outlet property="breedsTableView" destination="kwD-bt-gpJ" id="5T9-2E-M99"/>
-                        <outlet property="searchBar" destination="ukN-Sf-uWx" id="9yB-zj-Dje"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lja-7m-kgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="670.39999999999998" y="97.151424287856074"/>
+        </scene>
+        <!--Search Results Table View Controller-->
+        <scene sceneID="mBh-W0-x7R">
+            <objects>
+                <tableViewController storyboardIdentifier="SearchResultsTableViewController" id="wuE-Ti-qwN" customClass="SearchResultsTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lTe-Y9-d0x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="Awz-Hu-MlG">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Awz-Hu-MlG" id="90d-Aj-doY">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wuE-Ti-qwN" id="Din-Pf-gmT"/>
+                            <outlet property="delegate" destination="wuE-Ti-qwN" id="a0c-0H-Ix9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D9H-hQ-sIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1634" y="123"/>
         </scene>
     </scenes>
 </document>

@@ -8,9 +8,11 @@
 
 import UIKit
 
-class BreedSearchContainerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BreedSearchContainerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
-    // MARK: - Properties 
+    // MARK: - Properties
+    
+    var searchController : UISearchController?
     
     var breeds: [String] = [] {
         didSet {
@@ -22,13 +24,14 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
     
     // MARK: - Outlets 
 
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var breedsTableView: UITableView!
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpSearchController()
+        
         breedsTableView.delegate = self
         breedsTableView.dataSource = self
     }
@@ -49,9 +52,44 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         return cell
     }
     
-  
+    // MARK: - SearchController funcs
     
-
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let resultsController = searchController.searchResultsController as? SearchResultsTableViewController,
+            let searchTerm = searchController.searchBar.text?.lowercased() {
+            
+            let breedList = breeds
+            
+            let searchBreeds = breedList.filter({ (breed) -> Bool in
+                return breed.lowercased().contains(searchTerm)
+            }).map({ $0 })
+            resultsController.resultsArray = searchBreeds
+            resultsController.tableView.reloadData()
+            
+        }
+        print("shit")
+    }
+    
+    // MARK: - Private funcs
+    
+    func setUpSearchController() {
+        
+        
+        let resultsController = UIStoryboard(name: "CustomizableSearch", bundle: nil).instantiateViewController(withIdentifier: "SearchResultsTableViewController")
+        
+        searchController = UISearchController(searchResultsController: resultsController)
+        
+        searchController?.searchResultsUpdater = self
+        
+        searchController?.searchBar.sizeToFit()
+        searchController?.hidesNavigationBarDuringPresentation = true
+        
+        breedsTableView.tableHeaderView = searchController?.searchBar
+        definesPresentationContext = true
+        
+    }
+    
     /*
     // MARK: - Navigation
 
