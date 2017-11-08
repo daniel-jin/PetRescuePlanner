@@ -10,6 +10,8 @@ import UIKit
 
 class PetSwipeViewController: UIViewController {
     
+    var divisor: CGFloat!
+    
     // MARK: - Outlets
     
     @IBOutlet weak var card: UIView!
@@ -18,10 +20,10 @@ class PetSwipeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        divisor = (view.frame.width / 2) / 0.61
+        
+        card.layer.cornerRadius = 10.0
     }
-
-
 
     // MARK: - Navigation
 
@@ -34,8 +36,7 @@ class PetSwipeViewController: UIViewController {
 
     @IBAction func resetButtonTapped(_ sender: Any) {
         
-        
-        
+        resetCard()
     }
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
@@ -46,9 +47,12 @@ class PetSwipeViewController: UIViewController {
         
         card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
         
+        
+        card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
+        
         if xFromCenter > 0 {
-            faceImageView.image = #imageLiteral(resourceName: "happyFace")
-            faceImageView.tintColor = UIColor.green
+            faceImageView.image = #imageLiteral(resourceName: "doge")
+            faceImageView.tintColor = UIColor.black
             // Save
             
         } else {
@@ -75,11 +79,20 @@ class PetSwipeViewController: UIViewController {
                 })
                 return
             } else {
-                UIView.animate(withDuration: 0.2) {
-                    card.center = self.view.center
-                    self.faceImageView.alpha = 0
-                }
+                resetCard()
             }
         }
     }
+    
+    // MARK: - Private Functions
+    
+    func resetCard() {
+        UIView.animate(withDuration: 0.2) {
+            self.card.center = self.view.center
+            self.faceImageView.alpha = 0
+            self.card.alpha = 1
+            self.card.transform = CGAffineTransform.identity
+        }
+    }
+    
 }
