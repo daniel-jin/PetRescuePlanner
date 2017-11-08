@@ -21,7 +21,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     var breed: String? = nil
     
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
-    let sizes = ["", "Small", "Medium", "large", "Extra-Large"]
+    let sizes = ["", "Small", "Medium", "Large", "Extra-Large"]
     let ages = ["", "Baby", "Young", "Adult", "Senior"]
     
     // MARK: - Outlets
@@ -166,11 +166,12 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
         if pickerView == animalSizePicker {
             animalSizeTextField.text = sizes[row]
-            size = sizes[row].lowercased()
+            guard let temp = sizes[row].uppercased().characters.first else { return }
+            size = "\(temp)"
         }
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
-            age = ages[row].lowercased()
+            let age = ages[row]
         }
         
     }

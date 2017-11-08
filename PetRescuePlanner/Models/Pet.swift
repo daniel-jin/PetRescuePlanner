@@ -31,6 +31,7 @@ struct Pet {
     let shelterId: String
     let size: String
     let status: String
+    let imageIdCount: String
     
     var cloudKitRecordID: CKRecordID?
     
@@ -46,7 +47,8 @@ struct Pet {
     
     // MARK: - Failable init
     init?(dictionary: [String: Any]) {
-        guard let age = dictionary[apiKeys.ageKey] as? String,
+        guard let ageDictionary = dictionary[apiKeys.ageKey] as? [String:Any],
+            let age = ageDictionary[apiKeys.itemKey] as? String,
             let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
             let animal = animalDictionary[apiKeys.itemKey] as? String,
             let breedsDictionary = dictionary[apiKeys.breedsKey] as? [String:[String:Any]],
@@ -74,7 +76,9 @@ struct Pet {
             let mediaDictionary = dictionary[apiKeys.mediaKey] as? [String:[String:Any]],
             let photosDictionary = mediaDictionary[apiKeys.photosKey],
             let photosArray = photosDictionary[apiKeys.photoKey] as? [[String: Any]],
-            let mixDictionary = dictionary[apiKeys.mediaKey] as? [String:Any],
+            let lastImageDictionary = photosArray.last,
+            let lastId = lastImageDictionary[apiKeys.imageId] as? String,
+            let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any],
             let mix = mixDictionary[apiKeys.itemKey] as? String,
             let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
             let name = nameDictionary[apiKeys.itemKey] as? String,
@@ -125,6 +129,7 @@ struct Pet {
         self.size = size
         self.status = status
         self.imageDataArray = []
+        self.imageIdCount = lastId
     }
     
 }
