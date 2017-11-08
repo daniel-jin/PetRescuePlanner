@@ -23,9 +23,7 @@ struct Shelter {
     
     // Mark: - Failable
     init?(dictionary: [String: Any]) {
-        guard let petfinderDictionary = dictionary[ShelterKeys.petfinderKey] as? [String: Any],
-            let shelterDictionary = petfinderDictionary[ShelterKeys.shelterKey] as? [String: Any],
-            let addressDictionary = shelterDictionary[ShelterKeys.addressKey] as? [String: Any],
+        guard let addressDictionary = shelterDictionary[ShelterKeys.addressKey] as? [String: Any],
             let address = addressDictionary[apiKey.itemKey] as? String,
             let idDictionary = shelterDictionary[ShelterKeys.id] as? [String: Any],
             let id = idDictionary[apiKey.itemKey] as? String,

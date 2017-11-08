@@ -8,45 +8,59 @@
 
 import Foundation
 
-class ShelterController {
+class ShelterAPI {
     
-    
+    static let shelterShared = ShelterAPI()
     
     init() {
         
     }
     
-    let methods = API.Methods().specificShelter
+    let keys = API.Keys()
+    let methods = API.Methods()
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
-    let baseURL = URL(string: ShelterKeys.shelterKey)
     
-    // you might want to put Shelter? in the ()
-    func fetchShelter(by id: String, name: String?, address: String?, state: String?, city: String?, phone: String?, completion: @escaping () -> Void) {
-        
+    func fetchShelter(by id: String, completion: @escaping (_ success: Bool) -> Void) {
+        let method = methods.specificShelter
+        let output = responseFormat
         let apiKey = parameters.apiKey
+        let baseURL = URL(string: parameters.baseUrl)
         
-        guard let unwrappedURL = baseURL else {
-            print("Broken URL")
-            completion(); return
+        var queryItems:[URLQueryItem] = []
+        
+        var componets = URLComponents(url: (baseURL?.appendingPathComponent(method))!, resolvingAgainstBaseURL: true)
+        
+        let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
+        let outputItem = URLQueryItem(name: keys.formatKey, value: output)
+        queryItems.append(apiKeyItem)
+        queryItems.append(outputItem)
+        
+        componets?.queryItems = queryItems
+        
+        guard let searchURL = componets?.url else { return }
+        
+        NetworkController.performRequest(for: searchURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            
+            if let error = error {
+                NSLog("error \(error.localizedDescription)")
+            }
+            
+            guard let data = data else { return }
+            
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let petfinderDictionary = jsonDictionary["petfinder"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let shelterDictionary = petfinderDictionary["shelter"] as? [String: Any] else {
+                return completion(false)
+            }
+            
         }
-        
-        var componets = URLComponents(url: unwrappedURL, resolvingAgainstBaseURL: true)
-        
-        let queryItem1 = URLQueryItem(name: "key", value: parameters.apiKey)
-        let queryItem2 = URLQueryItem(name: "id", value: id)
-        let queryItem3 = URLQueryItem(name: "format", value: parameters.jsonFormat)
-        
-        guard let url = componets?.url else { completion(); return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = NetworkController.HTTPMethod.get.rawValue
-        request.httpBody = nil
-        
-        
-        
-        
-        
     }
     
 }
