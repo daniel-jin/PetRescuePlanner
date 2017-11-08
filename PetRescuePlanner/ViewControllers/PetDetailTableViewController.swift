@@ -18,12 +18,8 @@ class PetDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUI()
         
-        guard let pet = pet else { return }
-        PetController.shared.fetchImagesFor(pet: pet) {
-            self.setUpUI()
-            self.tableView.reloadData()
-        }
     }
     
     func setUpUI() {

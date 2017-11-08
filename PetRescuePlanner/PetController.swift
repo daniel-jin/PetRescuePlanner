@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PetController {
     
@@ -60,6 +61,8 @@ class PetController {
         var components = URLComponents(url: baseUrl.appendingPathComponent(method), resolvingAgainstBaseURL: true)
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
+        let locationItem = URLQueryItem(name: keys.locationKey, value: location)
+        queryItems.append(locationItem)
         queryItems.append(apiKeyItem)
         queryItems.append(outputItem)
         components?.queryItems = queryItems
@@ -83,9 +86,10 @@ class PetController {
         }
     }
     
-    func fetchImagesFor(pet: Pet, completion: @escaping () -> Void) {
+    func fetchImagesFor(pet: Pet, completion: @escaping (_ imageData: [Data]?,_ error: Error?) -> Void) {
         let photos = pet.media
         let dispatchGroup = DispatchGroup()
+        var images: [Data] = []
         
         for urlString in photos {
             
@@ -95,16 +99,16 @@ class PetController {
             NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
                 if let error = error {
                     NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+                    completion(nil, error)
                 }
-                guard let data = data,
-                    let image = UIImage(data: data) else { dispatchGroup.leave(); return }
-                self.imageArray.append(image)
+                guard let data = data else { dispatchGroup.leave(); return completion(nil, error) }
+                images.append(data)
                 
                 dispatchGroup.leave()
             })
         }
         dispatchGroup.notify(queue: .main) {
-            completion()
+            completion(images, nil)
         }
     }
 }
