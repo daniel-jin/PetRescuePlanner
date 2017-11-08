@@ -12,6 +12,10 @@ import CoreData
 
 extension Shelter {
     
+    var cloudKitRecordID: CKRecordID? {
+        return CKRecord(shelter: self)?.recordID
+    }
+    
     // MARK: - Failable initializer (convert a Shelter CKRecord into a Shelter object)
     convenience init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext? = CoreDataStack.context) {
         

@@ -12,7 +12,11 @@ import CloudKit
 extension PetController {
     
     // MARK: - Properties
-    var isSyncing: Bool = false
+    var isSyncing: Bool {
+        get {
+            return false
+        }
+    }
     
     // CloudKit Manager instance
     private var cloudKitManager: CloudKitManager {
@@ -25,7 +29,11 @@ extension PetController {
     func saveToCK(pet: Pet, completion: @escaping (_ success: Bool) -> Void) {
         
         // Get CK record of the pet to save to CK
-        let petCKRecord = CKRecord(pet: pet)
+        guard let petCKRecord = CKRecord(pet: pet) else {
+            NSLog("Error getting pet CK Record")
+            completion(false)
+            return
+        }
         
         // Save to CloudKit
         self.cloudKitManager.save(petCKRecord) { (error) in
@@ -133,7 +141,7 @@ extension PetController {
         let unsavedPets = unsyncedRecords() as? [Pet] ?? []
         var unsavedObjectsByRecord = [CKRecord: CloudKitSyncable]()
         for pet in unsavedPets {
-            let record = CKRecord(pet: pet)
+            guard let record = CKRecord(pet: pet) else {  }
             unsavedObjectsByRecord[record] = pet
         }
         let unsavedRecords = Array(unsavedObjectsByRecord.keys)

@@ -12,10 +12,16 @@ import CoreData
 
 extension Pet {
     
+    // MARK: - Computed Properties
+    
     private var apiKeys: API.Keys {
         get {
             return API.Keys()
         }
+    }
+    
+    var cloudKitRecordID: CKRecordID? {
+        return CKRecord(pet: self)?.recordID
     }
     
     // MARK: - Failable initializer (convert a Pet CKRecord into a Pet object)

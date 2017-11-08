@@ -7,21 +7,11 @@
 //
 
 import Foundation
-<<<<<<< HEAD:PetRescuePlanner/Models/Pet+Convenience.swift
 import CoreData
-=======
 import CloudKit
 import UIKit
->>>>>>> develop:PetRescuePlanner/Models/Pet.swift
 
 extension Pet {
-    
-<<<<<<< HEAD:PetRescuePlanner/Models/Pet+Convenience.swift
-    private var apiKeys: API.Keys {
-        get {
-            return API.Keys()
-        }
-    }
     
     @discardableResult convenience init(dictionary: [String: Any],
                                         context: NSManagedObjectContext? = CoreDataStack.context) {
@@ -33,42 +23,8 @@ extension Pet {
             self.init(entity: Pet.entity(), insertInto: nil)
         }
         
-=======
-    let apiKeys = API.Keys()
+        let apiKeys = API.Keys()
     
-    // MARK: - Properties
-    var imageDataArray: [Data]
-    let age: String
-    let animal: String
-    let breeds: String
-    let contactInfo: [String:String]
-    let description: String
-    let id: String
-    let lastUpdate: String
-    let media: [String]
-    let mix: String
-    let name: String
-    let options: [String]
-    let sex: String
-    let shelterId: String
-    let size: String
-    let status: String
-    
-    var cloudKitRecordID: CKRecordID?
-    
-    // MARK: - Computed Properties
-    var imageArray: [UIImage] {
-        var tempArray: [UIImage] = []
-        for data in imageDataArray {
-            guard let image = UIImage(data: data) else { return []}
-            tempArray.append(image)
-        }
-        return tempArray
-    }
-    
-    // MARK: - Failable init
-    init?(dictionary: [String: Any]) {
->>>>>>> develop:PetRescuePlanner/Models/Pet.swift
         guard let age = dictionary[apiKeys.ageKey] as? String,
             let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
             let animal = animalDictionary[apiKeys.itemKey] as? String,
@@ -148,10 +104,20 @@ extension Pet {
         self.shelterID = shelterId
         self.size = size
         self.status = status
-<<<<<<< HEAD:PetRescuePlanner/Models/Pet+Convenience.swift
         self.recordIDString = UUID().uuidString
-=======
+        
+        
+        
         self.imageDataArray = []
->>>>>>> develop:PetRescuePlanner/Models/Pet.swift
+    }
+    
+    // MARK: - Computed Properties
+    var imageArray: [UIImage] {
+        var tempArray: [UIImage] = []
+        for data in imageDataArray {
+            guard let image = UIImage(data: data) else { return []}
+            tempArray.append(image)
+        }
+        return tempArray
     }
 }
