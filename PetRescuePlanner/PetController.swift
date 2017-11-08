@@ -77,9 +77,9 @@ class PetController {
                 completion(false)
             }
             guard let data = data else { return }
-            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: [String: Any]],
-                let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: [String: Any]],
-                let petsDictionary = petfinderDictionary[self.keys.petsKey],
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+                let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: Any],
+                let petsDictionary = petfinderDictionary[self.keys.petsKey] as? [String: Any],
                 let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
             let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0) }
             self.pets = arrayOfPets
@@ -91,6 +91,9 @@ class PetController {
         let photos = pet.media
         let dispatchGroup = DispatchGroup()
         var images: [Data] = []
+        // let base = URL("http://photos.petfinder.com/photos/pets/\(pet.id)/\(pet.imageIdCount)/?.jpg")
+        
+        
         
         for urlString in photos {
             
