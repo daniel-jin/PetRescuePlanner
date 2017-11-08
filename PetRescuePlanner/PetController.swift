@@ -66,7 +66,28 @@ class PetController {
         
         guard let searchUrl = components?.url else { return }
         
-        NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get)
-        completion(true)
+        NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            
+            if let error = error {
+                NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
+                completion(false)
+            }
+            guard let data = data else { return }
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: [String: Any]],
+                let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: [String: Any]],
+                let petsDictionary = petfinderDictionary[self.keys.petsKey],
+                let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
+            let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0) }
+            self.pets = arrayOfPets
+            completion(true)
+        }
     }
 }
+
+
+
+
+
+
+
+
