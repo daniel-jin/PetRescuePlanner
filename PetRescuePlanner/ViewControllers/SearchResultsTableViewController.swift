@@ -11,6 +11,7 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
 
     var resultsArray: [String] = []
+    weak var customizableSearchViewController: CustomizableSearchViewController?
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -30,7 +31,7 @@ class SearchResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
+        customizableSearchViewController?.breed = cell?.textLabel?.text
         
     }
-
 }

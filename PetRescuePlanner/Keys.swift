@@ -44,6 +44,7 @@ class API {
         let lastOffsetKey = "lastOffset"
         let petsKey = "pets"
         let petKey = "pet"
+        let locationKey = "location"
         
         // MARK: - Top Level Keys
         var ageKey = "age"

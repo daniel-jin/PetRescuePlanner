@@ -83,6 +83,38 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
     }
     
+    // FIXME- move to a segue and create a corresponding generic segue
+    
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        
+        self.performSegue(withIdentifier: "toPetListTest", sender: self)
+        
+    }
+    
+    
+    
+    
+    
+    @IBAction func testOutputsButtonTapped(_ sender: Any) {
+        
+        if let animal = animal {
+            print("The Type of animal is \(animal),")
+        }
+        if let size = size {
+            print("and it is \(size) sized.")
+        }
+        if let age = age {
+            print("The animal is \(age).")
+        }
+        if let sex = sex {
+            print("It is a \(sex)")
+        }
+        if let breed = breed {
+            print("the breed of this animal is \(breed)")
+        }
+        
+    }
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -170,6 +202,11 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     func presentAlertWith(title: String, message: String) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let subview = alertController.view.subviews.first! as UIView
+        let alertContentView = subview.subviews.first! as UIView
+        alertContentView.backgroundColor = UIColor.yellow
+        
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         
         alertController.addAction(okAction)
@@ -185,6 +222,25 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
         if segue.identifier == "breedContainerSegue" {
             breedSearchViewController = segue.destination as? BreedSearchContainerViewController
+        }
+        
+        if segue.identifier == "toPetListTest" {
+            guard let destinationVC = segue.destination as? TestPetSearchTableViewController else {
+                return
+            }
+            
+            guard let zip = zipCodeTextField.text else {
+                presentAlertWith(title: "Zip Code Missing", message: "Please enter a zip code to base your search off of.")
+                return
+            }
+            
+            PetController.shared.fetchPetsFor(location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
+                if !success {
+                    NSLog("Error fetching adoptable pets from PetController")
+                    return
+                }
+                destinationVC.pets = PetController.shared.pets
+            })
         }
         
     }
