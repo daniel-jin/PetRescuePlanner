@@ -8,12 +8,14 @@
 
 import Foundation
 import CloudKit
+import UIKit
 
 struct Pet {
     
     let apiKeys = API.Keys()
     
     // MARK: - Properties
+    var imageDataArray: [Data]
     let age: String
     let animal: String
     let breeds: String
@@ -31,6 +33,16 @@ struct Pet {
     let status: String
     
     var cloudKitRecordID: CKRecordID?
+    
+    // MARK: - Computed Properties
+    var imageArray: [UIImage] {
+        var tempArray: [UIImage] = []
+        for data in imageDataArray {
+            guard let image = UIImage(data: data) else { return []}
+            tempArray.append(image)
+        }
+        return tempArray
+    }
     
     // MARK: - Failable init
     init?(dictionary: [String: Any]) {
@@ -112,6 +124,7 @@ struct Pet {
         self.shelterId = shelterId
         self.size = size
         self.status = status
+        self.imageDataArray = []
     }
     
 }

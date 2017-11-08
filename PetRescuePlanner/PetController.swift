@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PetController {
     
@@ -58,15 +59,65 @@ class PetController {
         }
         
         var components = URLComponents(url: baseUrl.appendingPathComponent(method), resolvingAgainstBaseURL: true)
+        
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
+        let locationItem = URLQueryItem(name: keys.locationKey, value: location)
+        queryItems.append(locationItem)
         queryItems.append(apiKeyItem)
         queryItems.append(outputItem)
         components?.queryItems = queryItems
         
         guard let searchUrl = components?.url else { return }
         
-        NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get)
-        completion(true)
+        NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            
+            if let error = error {
+                NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
+                completion(false)
+            }
+            guard let data = data else { return }
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: [String: Any]],
+                let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: [String: Any]],
+                let petsDictionary = petfinderDictionary[self.keys.petsKey],
+                let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
+            let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0) }
+            self.pets = arrayOfPets
+            completion(true)
+        }
+    }
+    
+    func fetchImagesFor(pet: Pet, completion: @escaping (_ imageData: [Data]?,_ error: Error?) -> Void) {
+        let photos = pet.media
+        let dispatchGroup = DispatchGroup()
+        var images: [Data] = []
+        
+        for urlString in photos {
+            
+            dispatchGroup.enter()
+            guard let searchUrl = URL(string: urlString) else { dispatchGroup.leave(); return }
+            
+            NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+                if let error = error {
+                    NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+                    completion(nil, error)
+                }
+                guard let data = data else { dispatchGroup.leave(); return completion(nil, error) }
+                images.append(data)
+                
+                dispatchGroup.leave()
+            })
+        }
+        dispatchGroup.notify(queue: .main) {
+            completion(images, nil)
+        }
     }
 }
+
+
+
+
+
+
+
+
