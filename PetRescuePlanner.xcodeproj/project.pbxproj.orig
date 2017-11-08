@@ -19,14 +19,22 @@
 		5F7C77EC1FB0C04A00BCDBE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EA1FB0C04A00BCDBE5 /* Main.storyboard */; };
 		5F7C77EE1FB0C04A00BCDBE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */; };
 		5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C77EF1FB0C04A00BCDBE5 /* LaunchScreen.storyboard */; };
-		5F7C78001FB0D57500BCDBE5 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */; };
 		5F7C78041FB1002600BCDBE5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7C78031FB1002600BCDBE5 /* CloudKit.framework */; };
 		5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */; };
 		5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */; };
 		6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */; };
 		6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */; };
 		6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */; };
+<<<<<<< HEAD
+		6A8E01AC1FB2158F00AEEE09 /* PetController+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01AB1FB2158F00AEEE09 /* PetController+CloudKit.swift */; };
+		6A8E01AF1FB22A4000AEEE09 /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01AE1FB22A4000AEEE09 /* CloudKitSyncable.swift */; };
+		6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */; };
+		6A8E01B41FB25FFA00AEEE09 /* Pet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */; };
+		6A8E01B61FB26EDA00AEEE09 /* Shelter+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B51FB26EDA00AEEE09 /* Shelter+Convenience.swift */; };
+		6A8E01B81FB2803E00AEEE09 /* Shelter+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E01B71FB2803E00AEEE09 /* Shelter+CloudKit.swift */; };
+=======
 		D30B58A01FB10A0E006C59FE /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B589F1FB10A0E006C59FE /* Shelter.swift */; };
+>>>>>>> develop
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 		D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */; };
 /* End PBXBuildFile section */
@@ -46,7 +54,6 @@
 		5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F7C77F01FB0C04A00BCDBE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F7C77F21FB0C04A00BCDBE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		5F7C78011FB1002000BCDBE5 /* PetRescuePlanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PetRescuePlanner.entitlements; sourceTree = "<group>"; };
 		5F7C78031FB1002600BCDBE5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5F7E2A2E1FB10965004E95DB /* CustomizableSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizableSearch.storyboard; sourceTree = "<group>"; };
@@ -54,7 +61,16 @@
 		6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+CloudKit.swift"; sourceTree = "<group>"; };
 		6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
+		6A8E01AB1FB2158F00AEEE09 /* PetController+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PetController+CloudKit.swift"; path = "PetRescuePlanner/Models/PetController+CloudKit.swift"; sourceTree = SOURCE_ROOT; };
+		6A8E01AE1FB22A4000AEEE09 /* CloudKitSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
+		6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetRescuePlanner.xcdatamodel; sourceTree = "<group>"; };
+		6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+Convenience.swift"; sourceTree = "<group>"; };
+		6A8E01B51FB26EDA00AEEE09 /* Shelter+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shelter+Convenience.swift"; sourceTree = "<group>"; };
+		6A8E01B71FB2803E00AEEE09 /* Shelter+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shelter+CloudKit.swift"; sourceTree = "<group>"; };
+=======
 		D30B589F1FB10A0E006C59FE /* Shelter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
+>>>>>>> develop
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 		D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShelterDetailSB.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +124,7 @@
 				5F7C77F91FB0C11100BCDBE5 /* ModelControllers */,
 				5F7C77F81FB0C10800BCDBE5 /* Models */,
 				3CC915A91FB0EC34008C5448 /* Helpers */,
+				6A8E01AD1FB22A2900AEEE09 /* Protocols */,
 				5F7C77FC1FB0C12D00BCDBE5 /* Storyboards */,
 				5F7C77FD1FB0C14400BCDBE5 /* Sources */,
 				5F7C77ED1FB0C04A00BCDBE5 /* Assets.xcassets */,
@@ -119,9 +136,10 @@
 		5F7C77F81FB0C10800BCDBE5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5F7C77FF1FB0D57500BCDBE5 /* Pet.swift */,
+				6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */,
 				6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */,
-				D30B589F1FB10A0E006C59FE /* Shelter.swift */,
+				6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */,
+				6A8E01B51FB26EDA00AEEE09 /* Shelter+Convenience.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				3C484A881FB10BA20024F947 /* PetController.swift */,
+				6A8E01AB1FB2158F00AEEE09 /* PetController+CloudKit.swift */,
 				D30B58A11FB11957006C59FE /* ShelterController.swift */,
 			);
 			path = ModelControllers;
@@ -147,11 +166,8 @@
 			children = (
 				5F7E2A301FB11877004E95DB /* CustomizableSearchViewController.swift */,
 				5F0B03121FB21A24002B4F71 /* BreedSearchContainerViewController.swift */,
-<<<<<<< HEAD
 				5F0B03161FB26615002B4F71 /* SearchResultsTableViewController.swift */,
-=======
 				3C5FF8F61FB25D1A0011CEFD /* PetDetailTableViewController.swift */,
->>>>>>> b1cd35dfbf97b0b0c4f14d49d1ba249376f7c903
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -189,8 +205,17 @@
 			children = (
 				6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */,
 				6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */,
+				6A8E01B71FB2803E00AEEE09 /* Shelter+CloudKit.swift */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		6A8E01AD1FB22A2900AEEE09 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6A8E01AE1FB22A4000AEEE09 /* CloudKitSyncable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,19 +303,30 @@
 			files = (
 				3C5FF8F71FB25D1A0011CEFD /* PetDetailTableViewController.swift in Sources */,
 				3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */,
+<<<<<<< HEAD
+				6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */,
+=======
 				5F0B03131FB21A24002B4F71 /* BreedSearchContainerViewController.swift in Sources */,
+>>>>>>> develop
 				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
+				6A8E01B61FB26EDA00AEEE09 /* Shelter+Convenience.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
 				3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */,
+				6A8E01AF1FB22A4000AEEE09 /* CloudKitSyncable.swift in Sources */,
 				6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */,
+				6A8E01B41FB25FFA00AEEE09 /* Pet+Convenience.swift in Sources */,
 				6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */,
 				6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */,
+				6A8E01B81FB2803E00AEEE09 /* Shelter+CloudKit.swift in Sources */,
 				D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */,
-				5F7C78001FB0D57500BCDBE5 /* Pet.swift in Sources */,
 				3C484A891FB10BA20024F947 /* PetController.swift in Sources */,
+<<<<<<< HEAD
+				6A8E01AC1FB2158F00AEEE09 /* PetController+CloudKit.swift in Sources */,
+=======
 				5F0B03151FB222CD002B4F71 /* BreedAPI.swift in Sources */,
 				5F0B03171FB26615002B4F71 /* SearchResultsTableViewController.swift in Sources */,
 				D30B58A01FB10A0E006C59FE /* Shelter.swift in Sources */,
+>>>>>>> develop
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +513,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */,
+			);
+			currentVersion = 6A8E01B11FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodel */;
+			path = PetRescuePlanner.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5F7C77DB1FB0C04A00BCDBE5 /* Project object */;
 }

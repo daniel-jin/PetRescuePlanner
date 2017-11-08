@@ -11,12 +11,6 @@ import CoreData
 
 extension Shelter {
     
-    private var shelterKeys: ShelterKeys {
-        get {
-            return ShelterKeys()
-        }
-    }
-    
     @discardableResult convenience init(dictionary: [String: Any],
                                         context: NSManagedObjectContext? = CoreDataStack.context) {
         // Init with context first
@@ -27,13 +21,13 @@ extension Shelter {
         }
         
         // Check for dictionary keys and values
-        guard let address = dictionary[shelterKeys.addressKey] as? String,
-            let name = dictionary[shelterKeys.nameKey] as? String,
-            let state = dictionary[shelterKeys.stateKey] as? String,
-            let city = dictionary[shelterKeys.cityKey] as? String,
-            let email = dictionary[shelterKeys.emailKey] as? String,
-            let phone = dictionary[shelterKeys.phoneKey] as? String,
-            let zip = dictionary[shelterKeys.phoneKey] as? String else { return }
+        guard let address = dictionary[ShelterKeys.addressKey] as? String,
+            let name = dictionary[ShelterKeys.nameKey] as? String,
+            let state = dictionary[ShelterKeys.stateKey] as? String,
+            let city = dictionary[ShelterKeys.cityKey] as? String,
+            let email = dictionary[ShelterKeys.emailKey] as? String,
+            let phone = dictionary[ShelterKeys.phoneKey] as? String,
+            let zip = dictionary[ShelterKeys.phoneKey] as? String else { return }
         
         // Initialize rest of properties
         self.address = address
