@@ -12,7 +12,7 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="options" attributeType="Binary" syncable="YES"/>
         <attribute name="petDescription" attributeType="String" syncable="YES"/>
-        <attribute name="recordIDString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordIDString" attributeType="String" syncable="YES"/>
         <attribute name="sex" attributeType="String" syncable="YES"/>
         <attribute name="shelterID" attributeType="String" syncable="YES"/>
         <attribute name="size" attributeType="String" syncable="YES"/>

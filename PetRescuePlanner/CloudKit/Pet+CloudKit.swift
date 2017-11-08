@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import CoreData
 
 extension Pet {
     
@@ -18,7 +19,14 @@ extension Pet {
     }
     
     // MARK: - Failable initializer (convert a Pet CKRecord into a Pet object)
-    convenience init?(cloudKitRecord: CKRecord) {
+    convenience init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext? = CoreDataStack.context) {
+        
+        if let context = context {
+            self.init(context: context)
+        } else {
+            self.init(entity: Pet.entity(), insertInto: nil)
+        }
+        
         // Check for CKRecord's values and record type
         guard let age = cloudKitRecord[apiKeys.ageKey] as? String,
             let animal = cloudKitRecord[apiKeys.animalKey] as? String,
@@ -34,7 +42,8 @@ extension Pet {
             let sex = cloudKitRecord[apiKeys.sexKey] as? String,
             let shelterId = cloudKitRecord[apiKeys.shelterIdKey] as? String,
             let size = cloudKitRecord[apiKeys.sizeKey] as? String,
-            let status = cloudKitRecord[apiKeys.statusKey] as? String else { return nil }
+            let status = cloudKitRecord[apiKeys.statusKey] as? String,
+            let recordIDString = cloudKitRecord["recordIDString"] as? String else { return nil }
         
         self.age = age
         self.animal = animal
@@ -51,20 +60,19 @@ extension Pet {
         self.shelterID = shelterId
         self.size = size
         self.status = status
-
-        self.recordIDString = cloudKitRecord.recordID
-        cloudKitRecordID = cloudKitRecord.recordID
+        self.recordIDString = recordIDString
     }
 }
 
 // MARK: - Extension on CKRecord to convert a Pet into CKRecord
 extension CKRecord {
-    convenience init(pet: Pet) {
+    convenience init?(pet: Pet) {
         
         let apiKeys = API.Keys()
         
         // Init CKRecord
-        let recordID = user.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
+        guard let recordIDString = pet.recordIDString else { return nil }
+        let recordID = CKRecordID(recordName: recordIDString)
         self.init(recordType: CloudKit.petRecordType, recordID: recordID)
         
         // Set values for the initialized CKRecord
