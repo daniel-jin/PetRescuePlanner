@@ -14,7 +14,7 @@ protocol CloudKitSyncable {
     
     init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext?)
     
-    var cloudKitRecordID: CKRecordID? { get }
+    var cloudKitRecordID: CKRecordID? { get set }
 }
 
 extension CloudKitSyncable {

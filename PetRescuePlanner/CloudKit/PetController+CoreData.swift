@@ -8,28 +8,10 @@
 
 import Foundation
 import CoreData
+import CloudKit
+
 
 extension PetController {
-    
-    convenience init() {
-        
-        // MARK: - Fetched REsults Controller configuration
-        // set up request
-        let request: NSFetchRequest<Pet> = Pet.fetchRequest()
-        
-        // Set up sort descriptors for the request
-        request.sortDescriptors = [NSSortDescriptor(key: "recordIDString", ascending: true)]
-        
-        // Fetched results controller
-        let fetchedResultsController: NSFetchedResultsController<Pet> = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        // Perform fetch - handle errors
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
-        }
-    }
     
     // MARK: - SaveToPersistantStore()
     func saveToPersistantStore() {
@@ -45,7 +27,12 @@ extension PetController {
     
     // MARK: - CRUD Functions
     // Create
-    func add(
+    func add(pet: Pet) {
+//        CoreDataStack.context.insert(pet)
+        pet.managedObjectContext = CoreDataStack.context
+        
+        saveToPersistantStore()
+    }
     
     
     // Delete

@@ -15,8 +15,11 @@ import CloudKit
 class Pet: NSManagedObject, CloudKitSyncable {
     
     var cloudKitRecordID: CKRecordID? {
-        guard let recordIDString = self.recordIDString else { return nil }
-        return CKRecordID(recordName: recordIDString)
+        get {
+            guard let recordIDString = self.recordIDString else { return nil }
+            return CKRecordID(recordName: recordIDString)
+        }
+        set {}
     }
     
     // MARK: - Computed Properties

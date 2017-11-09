@@ -162,6 +162,4 @@ extension PetController {
             completion(success, error)
         }
     }
-    
-    
 }

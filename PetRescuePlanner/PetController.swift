@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class PetController {
     
@@ -16,6 +17,23 @@ class PetController {
     static let shared = PetController()
     
     var pets: [Pet] = []
+    
+    var savedPets: [Pet] {
+        // MARK: - Fetched Results Controller configuration
+        // set up request
+        let request: NSFetchRequest<Pet> = Pet.fetchRequest()
+        
+        // Set up sort descriptors for the request
+        request.sortDescriptors = [NSSortDescriptor(key: "recordIDString", ascending: true)]
+        
+        // Perform fetch - handle errors
+        do {
+            return try CoreDataStack.context.fetch(request)
+        } catch {
+            NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
+            return []
+        }
+    }
     
     let cloudKitManager: CloudKitManager
     
@@ -88,7 +106,7 @@ class PetController {
                 let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: [String: Any]],
                 let petsDictionary = petfinderDictionary[self.keys.petsKey],
                 let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
-            let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0) }
+            let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0, context: nil) }
             self.pets = arrayOfPets
             completion(true)
         }
