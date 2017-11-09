@@ -91,7 +91,7 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
-                    // center and fetch next pet
+                    
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.card.isHidden = true
                         self.resetCard()
@@ -104,11 +104,12 @@ class PetSwipeViewController: UIViewController {
                 return
             } else if card.center.x > (view.frame.width - 75) {
                 
+                // save to store here 
+                
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
-                    // center and fetch next pet
                     
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.card.isHidden = true
