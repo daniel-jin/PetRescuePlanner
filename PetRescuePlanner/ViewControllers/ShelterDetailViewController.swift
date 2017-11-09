@@ -10,21 +10,6 @@ import UIKit
 import MapKit
 
 class ShelterDetailViewController: UIViewController {
-    @IBOutlet weak var shelterNameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
-    @IBOutlet weak var shelterMapView: MKMapView!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    
-    @IBAction func directionsButtonTapped(_ sender: Any) {
-        
-        guard let shelter = shelter else { return }
-        
-        let mapsDirectionURL = URL(string: "http://maps.apple.com/?daddr=\(shelter.latitude),\(shelter.longitude)")!
-        UIApplication.shared.open(mapsDirectionURL, completionHandler: nil)
-    }
     
     var shelter: Shelter? {
         didSet {
@@ -53,14 +38,20 @@ class ShelterDetailViewController: UIViewController {
     
     
     func updateShelterDetailView(shelter: Shelter){
+        
         DispatchQueue.main.async {
-            
             self.shelterNameLabel.text = shelter.name
             self.addressLabel.text = shelter.address
             self.cityLabel.text = shelter.city
             self.stateLabel.text = shelter.state
             self.numberLabel.text = shelter.phone
             self.emailLabel.text = shelter.email
+            
+            var numerToPhone = self.numberLabel.text
+            numerToPhone = shelter.phone
+            
+            guard let numberUrl = URL(string: "tel://\(String(describing: numerToPhone))") else { return }
+            UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
             
             
             
@@ -98,6 +89,22 @@ class ShelterDetailViewController: UIViewController {
             }
         }
     }
+    @IBOutlet weak var shelterNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var shelterMapView: MKMapView!
+    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
+    @IBAction func directionsButtonTapped(_ sender: Any) {
+        
+        guard let shelter = shelter else { return }
+        
+        let mapsDirectionURL = URL(string: "http://maps.apple.com/?daddr=\(shelter.latitude),\(shelter.longitude)")!
+        UIApplication.shared.open(mapsDirectionURL, completionHandler: nil)
+    }
 }
+
 
 

@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="128" id="iEi-es-jbK"/>
                                 </constraints>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gW-8e-YkR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gW-8e-YkR">
                                 <rect key="frame" x="19.5" y="322.5" width="337.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zRs-sT-ByV"/>
