@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Pet" representedClassName="Pet" syncable="YES" codeGenerationType="class">
+    <entity name="Pet" representedClassName="Pet" syncable="YES">
         <attribute name="age" attributeType="String" syncable="YES"/>
         <attribute name="animal" attributeType="String" syncable="YES"/>
         <attribute name="breeds" attributeType="String" syncable="YES"/>
@@ -19,7 +19,7 @@
         <attribute name="size" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Shelter" representedClassName="Shelter" syncable="YES" codeGenerationType="class">
+    <entity name="Shelter" representedClassName="Shelter" syncable="YES">
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="city" attributeType="String" syncable="YES"/>
         <attribute name="email" attributeType="String" syncable="YES"/>
@@ -30,7 +30,7 @@
         <attribute name="zip" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Pet" positionX="-216" positionY="108" width="128" height="300"/>
+        <element name="Pet" positionX="-216" positionY="108" width="128" height="298"/>
         <element name="Shelter" positionX="-45" positionY="108" width="128" height="163"/>
     </elements>
 </model>

@@ -8,12 +8,13 @@
 
 import Foundation
 import CloudKit
+import CoreData
 
 protocol CloudKitSyncable {
     
-    init?(record: CKRecord)
+    init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext?)
     
-    var cloudKitRecordID: CKRecordID? { get set }
+    var cloudKitRecordID: CKRecordID? { get }
 }
 
 extension CloudKitSyncable {

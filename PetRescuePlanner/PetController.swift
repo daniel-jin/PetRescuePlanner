@@ -11,11 +11,18 @@ import UIKit
 
 class PetController {
     
+    // MARK: - Properties
+    
     static let shared = PetController()
     
     var pets: [Pet] = []
     
+    let cloudKitManager: CloudKitManager
+    
     init() {
+        
+        self.cloudKitManager = CloudKitManager()
+        performFullSync()
         
     }
     

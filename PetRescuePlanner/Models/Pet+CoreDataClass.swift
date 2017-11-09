@@ -1,31 +1,30 @@
 //
-//  Pet+CloudKit.swift
+//  Pet+CoreDataClass.swift
 //  PetRescuePlanner
 //
-//  Created by Daniel Jin on 11/6/17.
+//  Created by Daniel Jin on 11/8/17.
 //  Copyright © 2017 Daniel Rodosky. All rights reserved.
+//
 //
 
 import Foundation
-import CloudKit
 import CoreData
+import CloudKit
 
-extension Pet {
+@objc(Pet)
+class Pet: NSManagedObject, CloudKitSyncable {
+    
+    var cloudKitRecordID: CKRecordID? {
+        guard let recordIDString = self.recordIDString else { return nil }
+        return CKRecordID(recordName: recordIDString)
+    }
     
     // MARK: - Computed Properties
     
-    private var apiKeys: API.Keys {
-        get {
-            return API.Keys()
-        }
-    }
-    
-    var cloudKitRecordID: CKRecordID? {
-        return CKRecord(pet: self)?.recordID
-    }
-    
+    private var apiKeys = API.Keys()
+
     // MARK: - Failable initializer (convert a Pet CKRecord into a Pet object)
-    convenience init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext? = CoreDataStack.context) {
+    @discardableResult convenience required init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext? = CoreDataStack.context) {
         
         if let context = context {
             self.init(context: context)
@@ -54,14 +53,14 @@ extension Pet {
         self.age = age
         self.animal = animal
         self.breeds = breeds
-        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactInfo, options: .prettyPrinted)
+        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactInfo, options: .prettyPrinted) as NSData
         self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = try? JSONSerialization.data(withJSONObject: media, options: .prettyPrinted)
+        self.media = try? JSONSerialization.data(withJSONObject: media, options: .prettyPrinted) as NSData
         self.mix = mix
         self.name = name
-        self.options = try? JSONSerialization.data(withJSONObject: options, options: .prettyPrinted)
+        self.options = try? JSONSerialization.data(withJSONObject: options, options: .prettyPrinted) as NSData
         self.sex = sex
         self.shelterID = shelterId
         self.size = size

@@ -1,23 +1,26 @@
 //
-//  Shelter+CloudKit.swift
+//  Shelter+CoreDataClass.swift
 //  PetRescuePlanner
 //
-//  Created by Daniel Jin on 11/7/17.
+//  Created by Daniel Jin on 11/8/17.
 //  Copyright © 2017 Daniel Rodosky. All rights reserved.
+//
 //
 
 import Foundation
-import CloudKit
 import CoreData
+import CloudKit
 
-extension Shelter {
-    
+@objc(Shelter)
+class Shelter: NSManagedObject, CloudKitSyncable {
+
     var cloudKitRecordID: CKRecordID? {
-        return CKRecord(shelter: self)?.recordID
+        guard let recordIDString = self.recordIDString else { return nil }
+        return CKRecordID(recordName: recordIDString)
     }
     
     // MARK: - Failable initializer (convert a Shelter CKRecord into a Shelter object)
-    convenience init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext? = CoreDataStack.context) {
+    convenience required init?(cloudKitRecord: CKRecord, context: NSManagedObjectContext? = CoreDataStack.context) {
         
         // Init with context first
         if let context = context {
@@ -25,7 +28,7 @@ extension Shelter {
         } else {
             self.init(entity: Shelter.entity(), insertInto: nil)
         }
-     
+        
         // Check for CKRecord's values
         guard let address = cloudKitRecord[ShelterKeys.addressKey] as? String,
             let name = cloudKitRecord[ShelterKeys.nameKey] as? String,

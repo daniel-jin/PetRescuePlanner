@@ -10,7 +10,11 @@ import Foundation
 
 class ShelterController {
     
+    // MARK: - Properties
+    
     static let shelterShared = ShelterController()
+    
+    var shelters: [Shelter] = []
     
     init() {
         

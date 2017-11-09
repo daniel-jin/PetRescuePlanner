@@ -92,14 +92,14 @@ extension Pet {
         self.age = age
         self.animal = animal
         self.breeds = breed
-        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted)
+        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted) as NSData
         self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = try? JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted)
+        self.media = try? JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
         self.mix = mix
         self.name = name
-        self.options = try? JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted)
+        self.options = try? JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted) as NSData
         self.sex = sex
         self.shelterID = shelterId
         self.size = size

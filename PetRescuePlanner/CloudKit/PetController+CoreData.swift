@@ -1,5 +1,5 @@
 //
-//  PostController+CoreData.swift
+//  PetController+CoreData.swift
 //  PetRescuePlanner
 //
 //  Created by Daniel Jin on 11/8/17.
@@ -45,6 +45,7 @@ extension PetController {
     
     // MARK: - CRUD Functions
     // Create
+    func add(
     
     
     // Delete
