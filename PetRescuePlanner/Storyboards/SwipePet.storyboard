@@ -21,8 +21,8 @@
                             <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-rU-hyc" userLabel="Card2">
                                 <rect key="frame" x="67" y="168" width="240" height="330"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPO-Nx-ocC" userLabel="NameLabel">
-                                        <rect key="frame" x="8" y="8" width="224" height="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPO-Nx-ocC" userLabel="NameLabel">
+                                        <rect key="frame" x="8" y="29" width="224" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="Qel-ur-O0n"/>
                                         </constraints>
@@ -30,8 +30,8 @@
                                         <color key="textColor" red="0.8605437279" green="0.060332715510000003" blue="0.37492141130000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7em-A4-4tY" userLabel="DescriptionLabel">
-                                        <rect key="frame" x="8" y="51" width="224" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7em-A4-4tY" userLabel="DescriptionLabel">
+                                        <rect key="frame" x="8" y="72" width="224" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.8605437279" green="0.060332715510000003" blue="0.37492141130000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -69,8 +69,8 @@
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-WS-E2S" userLabel="Card1">
                                 <rect key="frame" x="67" y="169" width="240" height="330"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-7b-BWP" userLabel="NameLabel">
-                                        <rect key="frame" x="8" y="8" width="224" height="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-7b-BWP" userLabel="NameLabel">
+                                        <rect key="frame" x="8" y="29" width="224" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="rHR-vx-KUZ"/>
                                         </constraints>
@@ -78,8 +78,8 @@
                                         <color key="textColor" red="0.86054372787475586" green="0.060332715511322021" blue="0.37492141127586365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE7-HV-SlV" userLabel="DescriptionLabel">
-                                        <rect key="frame" x="8" y="51" width="224" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE7-HV-SlV" userLabel="DescriptionLabel">
+                                        <rect key="frame" x="8" y="72" width="224" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.86054372787475586" green="0.060332715511322021" blue="0.37492141127586365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -139,9 +139,13 @@
                     </view>
                     <connections>
                         <outlet property="card" destination="Cin-WS-E2S" id="R25-dR-Vzv"/>
+                        <outlet property="card2" destination="dD2-rU-hyc" id="Cvl-c1-TQd"/>
                         <outlet property="faceImageView" destination="HFT-dQ-Fi5" id="Wdt-lo-THE"/>
+                        <outlet property="faceImageView2" destination="TbY-HC-i47" id="xUv-Ge-dCW"/>
                         <outlet property="petDescriptionLabel" destination="tE7-HV-SlV" id="9ac-ao-C7a"/>
+                        <outlet property="petDescriptionLabel2" destination="7em-A4-4tY" id="afN-lf-pf8"/>
                         <outlet property="petNameLabel" destination="vxO-7b-BWP" id="59u-PY-POw"/>
+                        <outlet property="petNameLabel2" destination="fPO-Nx-ocC" id="b8s-5V-gbm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WJI-Hi-aGB" userLabel="First Responder" sceneMemberID="firstResponder"/>

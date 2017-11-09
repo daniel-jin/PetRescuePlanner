@@ -16,7 +16,6 @@ class PetSwipeViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.createCard()
-                self.viewDidLoad()
             }
         }
     }
@@ -24,6 +23,14 @@ class PetSwipeViewController: UIViewController {
     var indexIntoPets = 0
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var card2: UIView!
+    
+    @IBOutlet weak var petNameLabel2: UILabel!
+    @IBOutlet weak var petDescriptionLabel2: UILabel!
+    
+    @IBOutlet weak var faceImageView2: UIImageView!
+    
     
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var faceImageView: UIImageView!
@@ -33,20 +40,22 @@ class PetSwipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        indexIntoPets = 0
         divisor = (view.frame.width / 2) / 0.61
         
         card.layer.cornerRadius = 10.0
+        card2.layer.cornerRadius = 10.0
     }
-
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
     }
     
     // MARK: - Actions 
-
+    
     @IBAction func resetButtonTapped(_ sender: Any) {
         
         resetCard()
@@ -77,22 +86,39 @@ class PetSwipeViewController: UIViewController {
         if sender.state == UIGestureRecognizerState.ended {
             
             if card.center.x < 75 {
-                // move off to left side of screen
+                
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
+                }, completion: { (success) in
+                    // center and fetch next pet
+                    if self.indexIntoPets < self.pets.count - 1 {
+                        self.card.isHidden = true
+                        self.resetCard()
+                        self.createCard()
+                    } else if self.indexIntoPets == self.pets.count - 1 {
+                        self.createLastCard()
+                    }
                 })
                 
-//                UIView.animate(withDuration: <#T##TimeInterval#>, animations: <#T##() -> Void#>, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
-                createCard()
                 return
             } else if card.center.x > (view.frame.width - 75) {
-                // move off to right of screen
+                
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
+                }, completion: { (success) in
+                    // center and fetch next pet
+                    
+                    if self.indexIntoPets < self.pets.count - 1 {
+                        self.card.isHidden = true
+                        self.resetCard()
+                        self.createCard()
+                    } else if self.indexIntoPets == self.pets.count - 1 {
+                        self.createLastCard()
+                    }
                 })
-                createCard()
+                
                 return
             } else {
                 resetCard()
@@ -104,32 +130,54 @@ class PetSwipeViewController: UIViewController {
     
     func createCard() {
         
-        
-        if indexIntoPets < pets.count {
+        if indexIntoPets < pets.count - 1 {
             
             let pet = pets[indexIntoPets]
-            
-            self.card.center = self.view.center
-            self.faceImageView.alpha = 0
-            self.card.alpha = 1
-            self.card.transform = CGAffineTransform.identity
+            let nextPet = pets[indexIntoPets + 1]
             
             self.petNameLabel.text = pet.name
             self.petDescriptionLabel.text = pet.breeds
             
+            self.petNameLabel2.text = nextPet.name
+            self.petDescriptionLabel2.text = nextPet.breeds
+            
             indexIntoPets += 1
             
+            return
+        } else if indexIntoPets == pets.count - 1 {
+        
+            let pet = pets[indexIntoPets]
+            
+            self.card2.isHidden = true
+            self.petNameLabel.text = pet.name
+            self.petDescriptionLabel.text = pet.breeds
         }
+    }
+    
+    func createLastCard() {
+        
+        resetCard()
+        card2.isHidden = true
+        let pet = pets[pets.count - 1]
+        
+        petNameLabel.text = pet.name
+        petDescriptionLabel.text = pet.breeds
+        
+        indexIntoPets += 1
         
     }
     
     func resetCard() {
-        UIView.animate(withDuration: 0.2) {
+        
+        UIView.animate(withDuration: 0.0000000001) {
+            
             self.card.center = self.view.center
             self.faceImageView.alpha = 0
             self.card.alpha = 1
             self.card.transform = CGAffineTransform.identity
+            
+            self.card.isHidden = false
+            
         }
     }
-    
 }
