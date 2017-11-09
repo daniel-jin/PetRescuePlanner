@@ -28,8 +28,9 @@ extension PetController {
     // MARK: - CRUD Functions
     // Create
     func add(pet: Pet) {
-//        CoreDataStack.context.insert(pet)
-        pet.managedObjectContext = CoreDataStack.context
+        
+        // Because we are going to save this pet to Core Data, need to insert into CoreDataStack.context
+        CoreDataStack.context.insert(pet)
         
         saveToPersistantStore()
     }
