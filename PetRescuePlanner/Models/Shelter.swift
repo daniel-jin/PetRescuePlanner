@@ -9,6 +9,8 @@
 import Foundation
 
 struct Shelter {
+    
+    
     let apiKey = API.Keys()
     
     // Mark: - Properties
@@ -20,24 +22,32 @@ struct Shelter {
     let email: String
     let phone: String
     let zip: String
+    let longitude: Double
+    let latitude: Double
+    
+    
     
     // Mark: - Failable
     init?(dictionary: [String: Any]) {
-        guard let addressDictionary = shelterDictionary[ShelterKeys.addressKey] as? [String: Any],
+        guard let addressDictionary = dictionary[ShelterKeys.addressKey] as? [String: Any],
             let address = addressDictionary[apiKey.itemKey] as? String,
-            let idDictionary = shelterDictionary[ShelterKeys.id] as? [String: Any],
+            let idDictionary = dictionary[ShelterKeys.idKey] as? [String: Any],
             let id = idDictionary[apiKey.itemKey] as? String,
-            let nameDictionary = shelterDictionary[ShelterKeys.nameKey] as? [String: Any],
+            let nameDictionary = dictionary[ShelterKeys.nameKey] as? [String: Any],
             let name = nameDictionary[apiKey.itemKey] as? String,
-            let stateDictionary = shelterDictionary[ShelterKeys.stateKey] as? [String: Any],
+            let stateDictionary = dictionary[ShelterKeys.stateKey] as? [String: Any],
             let state = stateDictionary[apiKey.itemKey] as? String,
-            let cityDictionary = shelterDictionary[ShelterKeys.cityKey] as? [String: Any],
+            let cityDictionary = dictionary[ShelterKeys.cityKey] as? [String: Any],
             let city = cityDictionary[apiKey.itemKey] as? String,
-            let emailDictionary = shelterDictionary[ShelterKeys.emailKey] as? [String: Any],
+            let emailDictionary = dictionary[ShelterKeys.emailKey] as? [String: Any],
             let email = emailDictionary[apiKey.itemKey] as? String,
-            let phoneDictionary = shelterDictionary[ShelterKeys.phoneKey] as? [String: Any],
+            let phoneDictionary = dictionary[ShelterKeys.phoneKey] as? [String: Any],
             let phone = phoneDictionary[apiKey.itemKey] as? String,
-            let zipDictionary = shelterDictionary[ShelterKeys.phoneKey] as? [String: Any],
+            let longitudeDictionary = dictionary[ShelterKeys.longitudeKey] as? [String: Any],
+            let longitude = longitudeDictionary[apiKey.itemKey] as? String,
+            let latitudeDictionary = dictionary[ShelterKeys.latitudeKey] as? [String: Any],
+            let latitude = latitudeDictionary[apiKey.itemKey] as? String,
+            let zipDictionary = dictionary[ShelterKeys.zipKey] as? [String: Any],
             let zip = zipDictionary[apiKey.itemKey] as? String else { return nil }
         
         self.address = address
@@ -47,7 +57,10 @@ struct Shelter {
         self.city = city
         self.email = email
         self.phone = phone
+        self.longitude = Double(longitude)!
+        self.latitude = Double(latitude)!
         self.zip = zip
+        
         
     }
 }

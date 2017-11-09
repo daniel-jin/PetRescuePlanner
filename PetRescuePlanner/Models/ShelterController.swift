@@ -8,20 +8,23 @@
 
 import Foundation
 
-class ShelterAPI {
+class ShelterController {
     
-    static let shelterShared = ShelterAPI()
+    var shelter: Shelter?
+    
+    static let shelterShared = ShelterController()
     
     init() {
         
     }
     
+    let id = ShelterKeys.idKey
     let keys = API.Keys()
     let methods = API.Methods()
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
     
-    func fetchShelter(by id: String, completion: @escaping (_ success: Bool) -> Void) {
+    func fetchShelter(by id: String?, completion: @escaping (_ success: Bool) -> Void) {
         let method = methods.specificShelter
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -30,11 +33,13 @@ class ShelterAPI {
         var queryItems:[URLQueryItem] = []
         
         var componets = URLComponents(url: (baseURL?.appendingPathComponent(method))!, resolvingAgainstBaseURL: true)
-        
+       
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
+        let shelterIdItem = URLQueryItem(name: ShelterKeys.idKey, value: id)
         queryItems.append(apiKeyItem)
         queryItems.append(outputItem)
+        queryItems.append(shelterIdItem)
         
         componets?.queryItems = queryItems
         
@@ -44,11 +49,12 @@ class ShelterAPI {
             
             if let error = error {
                 NSLog("error \(error.localizedDescription)")
+                return completion(false)
             }
             
             guard let data = data else { return }
             
-            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any] else {
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
                 return completion(false)
             }
             
@@ -59,6 +65,11 @@ class ShelterAPI {
             guard let shelterDictionary = petfinderDictionary["shelter"] as? [String: Any] else {
                 return completion(false)
             }
+            
+            let tempShelter = Shelter(dictionary: shelterDictionary)
+            
+            self.shelter = tempShelter
+            completion(true)
             
         }
     }
