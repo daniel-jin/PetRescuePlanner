@@ -13,6 +13,35 @@ import UIKit
 
 extension Pet {
     
+    let apiKeys = API.Keys()
+    
+    // MARK: - Properties
+    var imageDataArray: [Data]
+    let age: String
+    let animal: String
+    let breeds: String
+    let contactInfo: [String:String]
+    let description: String
+    let id: String
+    let lastUpdate: String
+    let media: [String]
+    let mix: String
+    let name: String
+    let options: [String]
+    let sex: String
+    let shelterId: String
+    let size: String
+    let status: String
+    let imageIdCount: String
+    
+    var cloudKitRecordID: CKRecordID?
+    
+    // MARK: - Computed Properties
+    var imageArray: [UIImage] {
+        var tempArray: [UIImage] = []
+        for data in imageDataArray {
+            guard let image = UIImage(data: data) else { return []}
+            tempArray.append(image)
     @discardableResult convenience init(dictionary: [String: Any],
                                         context: NSManagedObjectContext? = CoreDataStack.context) {
         // Init with context first
@@ -25,7 +54,10 @@ extension Pet {
         
         let apiKeys = API.Keys()
     
-        guard let age = dictionary[apiKeys.ageKey] as? String,
+    // MARK: - Failable init
+    init?(dictionary: [String: Any]) {
+        guard let ageDictionary = dictionary[apiKeys.ageKey] as? [String:Any],
+            let age = ageDictionary[apiKeys.itemKey] as? String,
             let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
             let animal = animalDictionary[apiKeys.itemKey] as? String,
             let breedsDictionary = dictionary[apiKeys.breedsKey] as? [String:[String:Any]],
@@ -53,7 +85,9 @@ extension Pet {
             let mediaDictionary = dictionary[apiKeys.mediaKey] as? [String:[String:Any]],
             let photosDictionary = mediaDictionary[apiKeys.photosKey],
             let photosArray = photosDictionary[apiKeys.photoKey] as? [[String: Any]],
-            let mixDictionary = dictionary[apiKeys.mediaKey] as? [String:Any],
+            let lastImageDictionary = photosArray.last,
+            let lastId = lastImageDictionary[apiKeys.imageId] as? String,
+            let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any],
             let mix = mixDictionary[apiKeys.itemKey] as? String,
             let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
             let name = nameDictionary[apiKeys.itemKey] as? String,
@@ -109,6 +143,7 @@ extension Pet {
         
         
         self.imageDataArray = []
+        self.imageIdCount = lastId
     }
     
     // MARK: - Computed Properties

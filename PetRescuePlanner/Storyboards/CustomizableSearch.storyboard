@@ -134,6 +134,7 @@
                         <outlet property="sexSegmentedControl" destination="UFO-dk-fgs" id="jNQ-xD-uJv"/>
                         <outlet property="zipCodeTextField" destination="fta-bK-v9F" id="27y-gY-aAM"/>
                         <segue destination="bxC-94-vOc" kind="show" identifier="toPetListTest" id="vxf-vu-499"/>
+                        <segue destination="bpw-S5-CQK" kind="show" identifier="toPetTinderPage" id="GvW-AO-pGO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAR-z7-4oP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,6 +235,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9H-hQ-sIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1972" y="122.78860569715144"/>
+        </scene>
+        <!--SwipePet-->
+        <scene sceneID="J2L-OG-bAc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SwipePet" id="bpw-S5-CQK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LVy-In-wYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="812" y="-1047"/>
         </scene>
         <!--Test Pet Search Table View Controller-->
         <scene sceneID="SjN-zL-nx9">
