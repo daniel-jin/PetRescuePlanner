@@ -14,6 +14,25 @@ class CloudKitManager {
     // Declare a public database for CKContainer.default
     let publicDatabase = CKContainer.default().publicCloudDatabase
     
+    // MARK: - User Info Discovery
+    
+    func fetchLoggedInUserRecord(_ completion: ((_ record: CKRecord?, _ error: Error? ) -> Void)?) {
+        
+        CKContainer.default().fetchUserRecordID { (recordID, error) in
+            
+            if let error = error,
+                let completion = completion {
+                completion(nil, error)
+            }
+            
+            if let recordID = recordID,
+                let completion = completion {
+                
+                self.fetchRecord(withID: recordID, completion: completion)
+            }
+        }
+    }
+    
     // MARK: - Fetch methods
     func fetchRecord(withID recordID: CKRecordID, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
         
