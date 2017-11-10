@@ -97,6 +97,9 @@ struct CloudKit {
     
     static let savedPetsRefKey = "savedPets"
     
+    // Notification center
+    static let CurrentUserWasSetNotification = Notification.Name("currentUserWasSet")
+    
 }
 
 class ShelterKeys {

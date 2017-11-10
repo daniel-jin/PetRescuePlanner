@@ -36,23 +36,18 @@ class LaunchScreenViewController: UIViewController {
                 appDelegate.window?.rootViewController = searchViewController
                 
             } else {
-                // Fetch default Apple "user" recordID
-                CKContainer.default().fetchUserRecordID(completionHandler: { (appleUserRecordID, error) in
-                    guard let appleUserRecordID = appleUserRecordID else { return }
-                    
-                    let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
-                    
-                    let user = User(appleUserRef: appleUserRef, savedPets: [])
-                    UserController.currentUser = user
-                    
-                    appDelegate.window?.rootViewController = searchViewController
-
+                
+                UserController.shared.createUser(completion: { (success) in
+                    if !success {
+                        NSLog("Error creating user")
+                        return
+                    }
                 })
+                
+                appDelegate.window?.rootViewController = searchViewController
+
+                }
             }
             
-        }
-        
-        
     }
-
 }
