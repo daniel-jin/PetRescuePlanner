@@ -11,6 +11,8 @@ import MapKit
 
 class ShelterDetailViewController: UIViewController {
     
+    let methods = API.Methods()
+    
     var shelter: Shelter? {
         didSet {
             guard let shelter = shelter else { return }
@@ -25,14 +27,13 @@ class ShelterDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ShelterController.shelterShared.fetchShelter(by: "UT183") { (success) in
+        ShelterController.shelterShared.fetchShelter(id: "UT183") { (success) in
             if !success {
                 NSLog("Error")
                 return
                 
             }
             self.shelter = ShelterController.shelterShared.shelter
-            
         }
     }
     

@@ -24,7 +24,7 @@ class ShelterController {
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
     
-    func fetchShelter(by id: String?, completion: @escaping (_ success: Bool) -> Void) {
+    func fetchShelter(id: String?, completion: @escaping (_ success: Bool) -> Void) {
         let method = methods.specificShelter
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -33,7 +33,7 @@ class ShelterController {
         var queryItems:[URLQueryItem] = []
         
         var componets = URLComponents(url: (baseURL?.appendingPathComponent(method))!, resolvingAgainstBaseURL: true)
-       
+        
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
         let shelterIdItem = URLQueryItem(name: ShelterKeys.idKey, value: id)
@@ -45,11 +45,29 @@ class ShelterController {
         
         guard let searchURL = componets?.url else { return }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = NetworkController.HTTPMethod.get.rawValue
-        request.httpBody = nil
-        
-        
+        NetworkController.performRequest(for: searchURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            
+            if let error = error {
+                NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
+                completion(false)
+            }
+            guard let data = data else {return}
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let petfinderDictionary = jsonDictionary["petfinder"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let shelterDictionary = petfinderDictionary["shelter"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            let tempShelter = Shelter(dictionary: shelterDictionary)
+            
+            self.shelter = tempShelter
+            completion(true)
+        }
     }
-    
 }
