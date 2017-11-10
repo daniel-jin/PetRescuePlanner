@@ -77,9 +77,9 @@ class PetController {
                 completion(false)
             }
             guard let data = data else { return }
-            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: [String: Any]],
-                let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: [String: Any]],
-                let petsDictionary = petfinderDictionary[self.keys.petsKey],
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+                let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: Any],
+                let petsDictionary = petfinderDictionary[self.keys.petsKey] as? [String: Any],
                 let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
             let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0) }
             self.pets = arrayOfPets
@@ -87,29 +87,25 @@ class PetController {
         }
     }
     
-    func fetchImagesFor(pet: Pet, completion: @escaping (_ imageData: [Data]?,_ error: Error?) -> Void) {
-        let photos = pet.media
-        let dispatchGroup = DispatchGroup()
-        var images: [Data] = []
+    // Updated by Dan Rodosky 11/9/2017
+    
+    func fetchImageFor(pet: Pet, number: Int, completion: @escaping (_ success: Bool, _ image: UIImage?) -> Void) {
         
-        for urlString in photos {
+        let photos = pet.media
+        let photo = photos[number]
+        
+        guard let photoURL = URL(string: photo) else { return completion(false, nil) }
+        
+        NetworkController.performRequest(for: photoURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            if let error = error {
+                NSLog("error fetching pet photo in pet controller \(error)")
+                completion(false, nil)
+            }
+            guard let data = data else { return completion(false, nil) }
             
-            dispatchGroup.enter()
-            guard let searchUrl = URL(string: urlString) else { dispatchGroup.leave(); return }
+            let imageReturned = UIImage(data: data)
             
-            NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
-                if let error = error {
-                    NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
-                    completion(nil, error)
-                }
-                guard let data = data else { dispatchGroup.leave(); return completion(nil, error) }
-                images.append(data)
-                
-                dispatchGroup.leave()
-            })
-        }
-        dispatchGroup.notify(queue: .main) {
-            completion(images, nil)
+            completion(true, imageReturned)
         }
     }
 }

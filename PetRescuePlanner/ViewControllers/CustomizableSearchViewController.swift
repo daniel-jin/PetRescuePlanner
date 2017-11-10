@@ -21,7 +21,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     var breed: String? = nil
     
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
-    let sizes = ["", "Small", "Medium", "large", "Extra-Large"]
+    let sizes = ["", "Small", "Medium", "Large", "Extra-Large"]
     let ages = ["", "Baby", "Young", "Adult", "Senior"]
     
     // MARK: - Outlets
@@ -87,7 +87,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "toPetListTest", sender: self)
+        self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
         
     }
     
@@ -166,11 +166,12 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
         if pickerView == animalSizePicker {
             animalSizeTextField.text = sizes[row]
-            size = sizes[row].lowercased()
+            guard let temp = sizes[row].uppercased().characters.first else { return }
+            size = "\(temp)"
         }
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
-            age = ages[row].lowercased()
+            let age = ages[row]
         }
         
     }
@@ -182,6 +183,10 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalTypePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         
         animalTypePicker.delegate = self
         animalSizePicker.delegate = self
@@ -196,7 +201,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalAgeTextField.inputView = animalAgePicker
         
         breedSearchContainerView.isHidden = true
-        
+                
     }
     
     func presentAlertWith(title: String, message: String) {
@@ -224,8 +229,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             breedSearchViewController = segue.destination as? BreedSearchContainerViewController
         }
         
-        if segue.identifier == "toPetListTest" {
-            guard let destinationVC = segue.destination as? TestPetSearchTableViewController else {
+        if segue.identifier == "toPetTinderPage" {
+            guard let destinationVC = segue.destination as? PetSwipeViewController else {
                 return
             }
             

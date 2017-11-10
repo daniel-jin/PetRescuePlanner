@@ -45,6 +45,7 @@ class API {
         let petsKey = "pets"
         let petKey = "pet"
         let locationKey = "location"
+        let imageId = "@id"
         
         // MARK: - Top Level Keys
         var ageKey = "age"
