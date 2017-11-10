@@ -104,7 +104,20 @@ class PetSwipeViewController: UIViewController {
                 return
             } else if card.center.x > (view.frame.width - 75) {
                 
-                // save to store here 
+                // Save pet to Core Data & CloudKit
+                let petToSave = pets[indexIntoPets]
+                
+                // Save to CoreData first
+                PetController.shared.add(pet: petToSave)
+                
+                // Then save to CK
+                PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
+                    if !success {
+                        NSLog("Error saving pet to CloudKit")
+                        return
+                    }
+                })
+                
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)

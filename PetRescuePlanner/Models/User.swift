@@ -7,9 +7,44 @@
 //
 
 import Foundation
+import CloudKit
 
 struct User {
     
-    var savedPets: [Pet] = []
+    let appleUserRef: CKReference
+    var savedPets: [CKReference] = []
     
+}
+
+extension User {
+    
+    // MARK: - Failable initializer (convert a User CKRecord into a User object)
+    init?(cloudKitRecord: CKRecord) {
+        
+        // Check for CKRecord's values and record type
+        guard let appleUserRef = cloudKitRecord[CloudKit.appleUserRefKey] as? CKReference else { return nil }
+        
+        let savedPetsRef = cloudKitRecord[CloudKit.savedPetsRefKey] as? [CKReference] ?? []
+        
+        self.init(appleUserRef: appleUserRef, savedPets: savedPetsRef)
+    }
+}
+
+extension CKRecord {
+    
+    // MARK: - Failable initializer (convert a User Object into a User CKRecord)
+    convenience init?(user: User) {
+        // Init CKRecord
+        let recordID = CKRecordID(recordName: UUID().uuidString)
+        
+        self.init(recordType: CloudKit.userRecordType, recordID: recordID)
+        
+        // Set values for the initialized CKRecord
+        self.setValue(user.appleUserRef, forKey: CloudKit.appleUserRefKey)
+        
+        if user.savedPets.count > 0 {
+            self.setValue(user.savedPets, forKey: CloudKit.savedPetsRefKey)
+        }
+    
+    }
 }
