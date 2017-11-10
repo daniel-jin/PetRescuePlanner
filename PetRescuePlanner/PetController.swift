@@ -24,9 +24,8 @@ class PetController {
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
     
-    func fetchPetsFor(location: String, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
+    func fetchPetsFor(method: String, location: String, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
         
-        let method = methods.pets
         let output = responseFormat
         let apiKey = parameters.apiKey
         let baseUrl = URL(string: parameters.baseUrl)!

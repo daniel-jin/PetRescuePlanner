@@ -239,7 +239,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
             
-            PetController.shared.fetchPetsFor(location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
+            let methods = API.Methods()
+            PetController.shared.fetchPetsFor(method: methods.pets,location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
                 if !success {
                     NSLog("Error fetching adoptable pets from PetController")
                     return
