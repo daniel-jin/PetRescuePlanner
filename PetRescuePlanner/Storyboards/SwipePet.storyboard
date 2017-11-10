@@ -36,7 +36,7 @@
                                         <color key="textColor" red="0.8605437279" green="0.060332715510000003" blue="0.37492141130000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TyH-ag-uFb" userLabel="PetImageView">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TyH-ag-uFb" userLabel="PetImageView">
                                         <rect key="frame" x="8" y="80" width="224" height="242"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happyFace" translatesAutoresizingMaskIntoConstraints="NO" id="TbY-HC-i47">
@@ -66,7 +66,7 @@
                                     <constraint firstItem="TyH-ag-uFb" firstAttribute="top" secondItem="7em-A4-4tY" secondAttribute="bottom" constant="8" symbolic="YES" id="wIq-fh-Xwz"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-WS-E2S" userLabel="Card1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-WS-E2S" userLabel="Card1">
                                 <rect key="frame" x="67" y="169" width="240" height="330"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-7b-BWP" userLabel="NameLabel">
@@ -84,7 +84,7 @@
                                         <color key="textColor" red="0.86054372787475586" green="0.060332715511322021" blue="0.37492141127586365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKm-eK-P7V" userLabel="PetImageView">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKm-eK-P7V" userLabel="PetImageView">
                                         <rect key="frame" x="8" y="80" width="224" height="242"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happyFace" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-dQ-Fi5">
@@ -137,9 +137,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UfC-3w-0dH"/>
                     </view>
+                    <navigationItem key="navigationItem" id="WRJ-X8-7Zj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="FNO-38-xAK"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="card" destination="Cin-WS-E2S" id="R25-dR-Vzv"/>
                         <outlet property="card2" destination="dD2-rU-hyc" id="Cvl-c1-TQd"/>
+                        <outlet property="card2ImageView" destination="TyH-ag-uFb" id="RO0-pQ-tmy"/>
+                        <outlet property="cardImageView" destination="nKm-eK-P7V" id="gBN-JQ-dVy"/>
                         <outlet property="faceImageView" destination="HFT-dQ-Fi5" id="Wdt-lo-THE"/>
                         <outlet property="faceImageView2" destination="TbY-HC-i47" id="xUv-Ge-dCW"/>
                         <outlet property="petDescriptionLabel" destination="tE7-HV-SlV" id="9ac-ao-C7a"/>
@@ -155,7 +160,25 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-804" y="-286.50674662668666"/>
+            <point key="canvasLocation" x="-464.80000000000001" y="-286.50674662668666"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="izb-ut-VD8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eZs-VP-Kop" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6y6-vH-7Ki">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qmj-np-UNR" kind="relationship" relationship="rootViewController" id="ZTp-eG-t3J"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0gB-yC-YsI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1518" y="-149"/>
         </scene>
     </scenes>
     <resources>
