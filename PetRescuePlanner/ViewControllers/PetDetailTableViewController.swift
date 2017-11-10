@@ -15,9 +15,13 @@ class PetDetailTableViewController: UITableViewController {
     @IBOutlet weak var petNameLabel: UILabel!
     var pet: Pet?
     var imageArray: [UIImage] = []
+    let tempSearchUrl = URL(string: "http://api.petfinder.com/pet.find?key=73c75e3c063309430144f8ad39125ec7&location=84101&animal=dog&format=json")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        PetController.shared.fetchPetsFor(location: "84101", animal: "dog", breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+            self.pet = 
+        }
         setUpUI()
         
     }
