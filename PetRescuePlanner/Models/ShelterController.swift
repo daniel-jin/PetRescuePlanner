@@ -44,9 +44,6 @@ class ShelterController {
         request.httpBody = nil
         
         
-        
-        
-        
     }
     
 }
