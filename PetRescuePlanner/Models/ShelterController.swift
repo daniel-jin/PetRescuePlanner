@@ -45,33 +45,11 @@ class ShelterController {
         
         guard let searchURL = componets?.url else { return }
         
-        NetworkController.performRequest(for: searchURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
-            
-            if let error = error {
-                NSLog("error \(error.localizedDescription)")
-                return completion(false)
-            }
-            
-            guard let data = data else { return }
-            
-            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
-                return completion(false)
-            }
-            
-            guard let petfinderDictionary = jsonDictionary["petfinder"] as? [String: Any] else {
-                return completion(false)
-            }
-            
-            guard let shelterDictionary = petfinderDictionary["shelter"] as? [String: Any] else {
-                return completion(false)
-            }
-            
-            let tempShelter = Shelter(dictionary: shelterDictionary)
-            
-            self.shelter = tempShelter
-            completion(true)
-            
-        }
+        var request = URLRequest(url: url)
+        request.httpMethod = NetworkController.HTTPMethod.get.rawValue
+        request.httpBody = nil
+        
+        
     }
     
 }
