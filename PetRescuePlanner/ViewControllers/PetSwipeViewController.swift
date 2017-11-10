@@ -15,7 +15,11 @@ class PetSwipeViewController: UIViewController {
     var pets: [Pet] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.createCard()
+                if self.pets.count > 1 {
+                    self.createCard()
+                } else {
+                    self.createLastCard()
+                }
             }
         }
     }
@@ -38,13 +42,15 @@ class PetSwipeViewController: UIViewController {
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var petDescriptionLabel: UILabel!
     
+    
+    @IBOutlet weak var card2ImageView: UIImageView!
+    @IBOutlet weak var cardImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        indexIntoPets = 0
-        divisor = (view.frame.width / 2) / 0.61
         
-        card.layer.cornerRadius = 10.0
-        card2.layer.cornerRadius = 10.0
+        setUpViews()
+
     }
     
     // MARK: - Navigation
@@ -91,7 +97,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
-                    
+                    self.cardImageView.image = UIImage()
+
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.card.isHidden = true
                         self.resetCard()
@@ -104,14 +111,16 @@ class PetSwipeViewController: UIViewController {
                 return
             } else if card.center.x > (view.frame.width - 75) {
                 
-                // save to store here 
+                // save to store here
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
-                    
+
                     if self.indexIntoPets < self.pets.count - 1 {
+                        self.cardImageView.image = UIImage()
+
                         self.card.isHidden = true
                         self.resetCard()
                         self.createCard()
@@ -136,6 +145,28 @@ class PetSwipeViewController: UIViewController {
             let pet = pets[indexIntoPets]
             let nextPet = pets[indexIntoPets + 1]
             
+            
+            PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                }
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                    self.cardImageView.image = image
+                }
+            })
+            
+            PetController.shared.fetchImageFor(pet: nextPet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                }
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                    self.card2ImageView.image = image
+                }
+            })
+            
+            
             self.petNameLabel.text = pet.name
             self.petDescriptionLabel.text = pet.breeds
             
@@ -145,13 +176,6 @@ class PetSwipeViewController: UIViewController {
             indexIntoPets += 1
             
             return
-        } else if indexIntoPets == pets.count - 1 {
-        
-            let pet = pets[indexIntoPets]
-            
-            self.card2.isHidden = true
-            self.petNameLabel.text = pet.name
-            self.petDescriptionLabel.text = pet.breeds
         }
     }
     
@@ -161,6 +185,16 @@ class PetSwipeViewController: UIViewController {
         card2.isHidden = true
         let pet = pets[pets.count - 1]
         
+        PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
+            if !success {
+                NSLog("error fetchingpet in pet controller")
+            }
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                self.cardImageView.image = image
+            }
+        })
+        
         petNameLabel.text = pet.name
         petDescriptionLabel.text = pet.breeds
         
@@ -169,7 +203,7 @@ class PetSwipeViewController: UIViewController {
     }
     
     func resetCard() {
-        
+        self.card.isHidden = true
         UIView.animate(withDuration: 0.0000000001) {
             
             self.card.center = self.view.center
@@ -180,5 +214,17 @@ class PetSwipeViewController: UIViewController {
             self.card.isHidden = false
             
         }
+    }
+    
+    func setUpViews() {
+        indexIntoPets = 0
+        divisor = (view.frame.width / 2) / 0.61
+        
+        card.layer.cornerRadius = 10.0
+        card2.layer.cornerRadius = 10.0
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
 }
