@@ -99,21 +99,18 @@ extension PetController {
         pushChangesToCloudKit { (success, error) in
             
             self.fetchNewPetRecordsOf(type: "Pet") {
-                
-                self.fetchNewPetRecordsOf(type: "Shelter") {
-                    self.isSyncing = false
-                    completion()
-                }
+                self.isSyncing = false
+                completion()
             }
         }
     }
     
     func fetchNewPetRecordsOf(type: String, completion: @escaping (() -> Void) = { }) {
-        
+            
         var referencesToExclude = [CKReference]()
         var predicate: NSPredicate!
         referencesToExclude = self.syncedRecordsOf(type: type).flatMap { $0.cloudKitReference }
-        predicate = NSPredicate(format: "NOT(recordID IN $@)", argumentArray: [referencesToExclude])
+        predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         
         if referencesToExclude.isEmpty {
             predicate = NSPredicate(value: true)
@@ -147,7 +144,10 @@ extension PetController {
         let unsavedPets = unsyncedRecordsOf(type: "Pet") as? [Pet] ?? []
         var unsavedObjectsByRecord = [CKRecord: CloudKitSyncable]()
         for pet in unsavedPets {
-            guard let record = CKRecord(pet: pet) else {  }
+            guard let record = CKRecord(pet: pet) else {
+                NSLog("Error getting CK Record of the pet")
+                return
+            }
             unsavedObjectsByRecord[record] = pet
         }
         let unsavedRecords = Array(unsavedObjectsByRecord.keys)

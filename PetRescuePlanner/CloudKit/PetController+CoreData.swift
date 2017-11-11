@@ -12,6 +12,29 @@ import CloudKit
 
 
 extension PetController {
+
+    func loadFromPersistantStore() {
+        
+        // Fetched results controller for Core Data
+        let fetchedResultsController: NSFetchedResultsController<Pet>!
+        
+        //MARK: Fetched Results Controller configuration
+        // Set up request
+        let request: NSFetchRequest<Pet> = Pet.fetchRequest()
+        
+        // Set up sort descriptors for the request
+        request.sortDescriptors = [NSSortDescriptor(key: "breed", ascending: true)]
+        
+        // Make the FRC using what we have now
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Perform fetch - handle errors
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
+        }
+    }
     
     // MARK: - SaveToPersistantStore()
     func saveToPersistantStore() {

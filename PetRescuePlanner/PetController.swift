@@ -40,7 +40,7 @@ class PetController {
     init() {
         
         self.cloudKitManager = CloudKitManager()
-        performFullSync()
+//        performFullSync()
         
     }
     
@@ -115,7 +115,13 @@ class PetController {
     
     func fetchImageFor(pet: Pet, number: Int, completion: @escaping (_ success: Bool, _ image: UIImage?) -> Void) {
         
-        let photos = pet.media
+        guard let media = pet.media else { return }
+        
+        guard let photos = (try? JSONSerialization.jsonObject(with: media as Data, options: .allowFragments)) as? [String] else {
+            completion(false, nil)
+            return
+        }
+        
         let photo = photos[number]
         
         guard let photoURL = URL(string: photo) else { return completion(false, nil) }

@@ -12,15 +12,6 @@ import CloudKit
 import UIKit
 
 extension Pet {
-    
-    // MARK: - Computed Properties
-    var imageArray: [UIImage] {
-        var tempArray: [UIImage] = []
-        for data in imageDataArray {
-            guard let image = UIImage(data: data) else { return []}
-            tempArray.append(image)
-        }
-    }
             
     @discardableResult convenience init(dictionary: [String: Any],
                                         context: NSManagedObjectContext? = CoreDataStack.context) {
@@ -29,7 +20,8 @@ extension Pet {
         if let context = context {
             self.init(context: context)
         } else {
-            self.init(entity: Pet.entity(), insertInto: nil)
+            let entity = NSEntityDescription.entity(forEntityName: "Pet", in: CoreDataStack.context)!
+            self.init(entity: entity, insertInto: nil)
         }
         
         let apiKeys = API.Keys()
@@ -118,7 +110,6 @@ extension Pet {
         self.size = size
         self.status = status
         self.recordIDString = UUID().uuidString
-        self.imageDataArray = []
         self.imageIdCount = lastId
     }
 }

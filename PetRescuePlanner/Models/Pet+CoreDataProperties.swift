@@ -2,7 +2,7 @@
 //  Pet+CoreDataProperties.swift
 //  PetRescuePlanner
 //
-//  Created by Daniel Jin on 11/9/17.
+//  Created by Daniel Jin on 11/10/17.
 //  Copyright © 2017 Daniel Rodosky. All rights reserved.
 //
 //
@@ -23,6 +23,7 @@ extension Pet {
     @NSManaged public var contactInfo: NSData?
     @NSManaged public var id: String?
     @NSManaged public var imageDataArray: NSData?
+    @NSManaged public var imageIdCount: String?
     @NSManaged public var lastUpdate: String?
     @NSManaged public var media: NSData?
     @NSManaged public var mix: String?
@@ -34,6 +35,5 @@ extension Pet {
     @NSManaged public var shelterID: String?
     @NSManaged public var size: String?
     @NSManaged public var status: String?
-    @NSManaged public var imageIdCount: String?
 
 }

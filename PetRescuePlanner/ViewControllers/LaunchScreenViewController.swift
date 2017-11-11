@@ -16,38 +16,25 @@ class LaunchScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cloudKitManager.fetchLoggedInUserRecord { (userRecord, error) in
+        let myStoryboard = UIStoryboard(name: "CustomizableSearch", bundle: nil)
+        let searchViewController = myStoryboard.instantiateViewController(withIdentifier: "SearchViewController")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        UserController.shared.fetchCurrentUser { (success) in
             
-            if let error = error {
-                NSLog("Error fetching logged in iCloud user: \(error.localizedDescription)")
-                return
-            }
-            
-            let myStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let searchViewController = myStoryboard.instantiateViewController(withIdentifier: "SearchViewController")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            
-            if let userRecord = userRecord {
-                
-                let user = User(cloudKitRecord: userRecord)
-                
-                UserController.currentUser = user
-                
-                appDelegate.window?.rootViewController = searchViewController
-                
-            } else {
-                
+            if !success {
                 UserController.shared.createUser(completion: { (success) in
-                    if !success {
-                        NSLog("Error creating user")
-                        return
+                    if success {
+                        appDelegate.window?.rootViewController = searchViewController
+                    } else {
+                        
                     }
                 })
-                
-                appDelegate.window?.rootViewController = searchViewController
-
+            } else {
+                DispatchQueue.main.async {
+                    appDelegate.window?.rootViewController = searchViewController
                 }
             }
-            
+        }
     }
 }

@@ -112,7 +112,7 @@ class PetSwipeViewController: UIViewController {
             } else if card.center.x > (view.frame.width - 75) {
                 
                 // Save pet to Core Data & CloudKit
-                let petToSave = pets[indexIntoPets]
+                let petToSave = pets[indexIntoPets - 1]
                 
                 // Save to CoreData first
                 PetController.shared.add(pet: petToSave)
