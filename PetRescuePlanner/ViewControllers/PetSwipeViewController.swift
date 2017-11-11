@@ -53,13 +53,6 @@ class PetSwipeViewController: UIViewController {
 
     }
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
     // MARK: - Actions 
     
     @IBAction func resetButtonTapped(_ sender: Any) {
@@ -240,4 +233,36 @@ class PetSwipeViewController: UIViewController {
         
         self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "swipeToPetListSegue" {
+            
+            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
+            
+            destinationVC.savedPets = pets
+            
+        }
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
