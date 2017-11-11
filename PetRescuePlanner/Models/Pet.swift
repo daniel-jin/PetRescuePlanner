@@ -15,7 +15,6 @@ struct Pet {
     let apiKeys = API.Keys()
     
     // MARK: - Properties
-    var imageDataArray: [Data]
     let age: String
     let animal: String
     let breeds: String
@@ -26,7 +25,7 @@ struct Pet {
     let media: [String]
     let mix: String
     let name: String
-    let options: [String]
+    var options: [String]
     let sex: String
     let shelterId: String
     let size: String
@@ -36,14 +35,7 @@ struct Pet {
     var cloudKitRecordID: CKRecordID?
     
     // MARK: - Computed Properties
-    var imageArray: [UIImage] {
-        var tempArray: [UIImage] = []
-        for data in imageDataArray {
-            guard let image = UIImage(data: data) else { return []}
-            tempArray.append(image)
-        }
-        return tempArray
-    }
+    
     
     // MARK: - Failable init
     init?(dictionary: [String: Any]) {
@@ -69,7 +61,7 @@ struct Pet {
             let address = addressDictionary[apiKeys.itemKey] as? String,
             let descriptionDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
             let description = descriptionDictionary[apiKeys.itemKey] as? String,
-            let idDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
+            let idDictionary = dictionary[apiKeys.idKey] as? [String:Any],
             let id = idDictionary[apiKeys.itemKey] as? String,
             let lastUpdateDictionary = dictionary[apiKeys.lastUpdatKey] as? [String:Any],
             let lastUpdate = lastUpdateDictionary[apiKeys.itemKey] as? String,
@@ -128,7 +120,6 @@ struct Pet {
         self.shelterId = shelterId
         self.size = size
         self.status = status
-        self.imageDataArray = []
         self.imageIdCount = lastId
     }
     

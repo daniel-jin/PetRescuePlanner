@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C045C481FB64508009C590F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C045C471FB64508009C590F /* CollectionViewController.swift */; };
 		3C484A891FB10BA20024F947 /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A881FB10BA20024F947 /* PetController.swift */; };
 		3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A8A1FB10BD30024F947 /* NetworkController.swift */; };
 		3C5FF8F51FB237C90011CEFD /* petDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C045C471FB64508009C590F /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionViewController.swift; path = "../../../../../Library/Autosave Information/CollectionViewController.swift"; sourceTree = "<group>"; };
 		3C484A881FB10BA20024F947 /* PetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetController.swift; path = PetRescuePlanner/PetController.swift; sourceTree = SOURCE_ROOT; };
 		3C484A8A1FB10BD30024F947 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = PetRescuePlanner/NetworkController.swift; sourceTree = SOURCE_ROOT; };
 		3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = petDetailView.storyboard; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		5F7C77FA1FB0C11900BCDBE5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3C045C471FB64508009C590F /* CollectionViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C045C481FB64508009C590F /* CollectionViewController.swift in Sources */,
 				3C5FF8F71FB25D1A0011CEFD /* PetDetailTableViewController.swift in Sources */,
 				3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */,
 				5F0B03131FB21A24002B4F71 /* BreedSearchContainerViewController.swift in Sources */,
