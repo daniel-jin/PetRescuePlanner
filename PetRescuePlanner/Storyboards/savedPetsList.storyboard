@@ -4,12 +4,12 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Saved Pets-->
+        <!--Saved Pets List Table View Controller-->
         <scene sceneID="scb-b5-1Zo">
             <objects>
                 <tableViewController id="Xzu-93-Lmt" customClass="SavedPetsListTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,7 +71,7 @@
                             <outlet property="delegate" destination="Xzu-93-Lmt" id="B02-dF-Nke"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Saved Pets" id="k5X-1l-xFk"/>
+                    <navigationItem key="navigationItem" id="k5X-1l-xFk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llI-66-Dwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

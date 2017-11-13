@@ -11,11 +11,11 @@ import UIKit
 class SavedPetsListTableViewController: UITableViewController {
     
     var savedPets: [Pet]? = []
-    {
-        didSet{
-            self.tableView.reloadData()
-        }
-    }
+//    {
+//        didSet{
+//            self.tableView.reloadData()
+//        }
+//    }
     
     // MARK: - Table View Life Cycle
 
@@ -28,7 +28,11 @@ class SavedPetsListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+<<<<<<< HEAD
+        return 150 
+=======
         return 150
+>>>>>>> develop
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
