@@ -35,6 +35,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     @IBOutlet var animalSizePicker: UIPickerView!
     @IBOutlet var animalAgePicker: UIPickerView!
     
+    @IBOutlet weak var selectBreedButton: UIButton!
+    
     @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var breedSearchContainerView: UIView!
@@ -91,29 +93,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
     }
     
-    
-    
-    
-    
-    @IBAction func testOutputsButtonTapped(_ sender: Any) {
-        
-        if let animal = animal {
-            print("The Type of animal is \(animal),")
-        }
-        if let size = size {
-            print("and it is \(size) sized.")
-        }
-        if let age = age {
-            print("The animal is \(age).")
-        }
-        if let sex = sex {
-            print("It is a \(sex)")
-        }
-        if let breed = breed {
-            print("the breed of this animal is \(breed)")
-        }
-        
-    }
     
     // MARK: - View Controller Life Cycle
     
