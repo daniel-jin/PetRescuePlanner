@@ -138,7 +138,11 @@
                         <viewLayoutGuide key="safeArea" id="UfC-3w-0dH"/>
                     </view>
                     <navigationItem key="navigationItem" id="WRJ-X8-7Zj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="FNO-38-xAK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="FNO-38-xAK">
+                            <connections>
+                                <segue destination="4Xi-a3-fCF" kind="show" identifier="swipeToPetListSegue" id="QFX-QG-iPq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="card" destination="Cin-WS-E2S" id="R25-dR-Vzv"/>
@@ -161,6 +165,14 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-464.80000000000001" y="-286.50674662668666"/>
+        </scene>
+        <!--savedPetsList-->
+        <scene sceneID="FzU-0L-csq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="savedPetsList" id="4Xi-a3-fCF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BgU-1J-cau" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1114" y="-287"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="izb-ut-VD8">

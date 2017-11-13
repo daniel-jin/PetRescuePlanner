@@ -51,10 +51,10 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             sex = nil
         }
         if sexSegmentedControl.selectedSegmentIndex == 1 {
-            sex = "male"
+            sex = "M"
         }
         if sexSegmentedControl.selectedSegmentIndex == 2 {
-            sex = "female"
+            sex = "F"
         }
     }
     @IBAction func selectBreedButtonTapped(_ sender: Any) {
@@ -172,6 +172,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
             let age = ages[row]
+            print("\(age)")
         }
         
     }
@@ -184,8 +185,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.1)
         self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         
         animalTypePicker.delegate = self
@@ -239,13 +239,17 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
             
+            
+            
             let methods = API.Methods()
             PetController.shared.fetchPetsFor(method: methods.pets,location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
                 if !success {
                     NSLog("Error fetching adoptable pets from PetController")
                     return
                 }
-                destinationVC.pets = PetController.shared.pets
+                DispatchQueue.main.async {
+                    destinationVC.pets = PetController.shared.pets
+                }
             })
         }
         

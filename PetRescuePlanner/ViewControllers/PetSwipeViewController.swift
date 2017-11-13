@@ -53,13 +53,6 @@ class PetSwipeViewController: UIViewController {
 
     }
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
     // MARK: - Actions 
     
     @IBAction func resetButtonTapped(_ sender: Any) {
@@ -97,6 +90,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
+                    self.indexIntoPets += 1
+
                     self.cardImageView.image = UIImage()
 
                     if self.indexIntoPets < self.pets.count - 1 {
@@ -117,6 +112,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
+                    self.indexIntoPets += 1
+
 
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.cardImageView.image = UIImage()
@@ -173,9 +170,6 @@ class PetSwipeViewController: UIViewController {
             self.petNameLabel2.text = nextPet.name
             self.petDescriptionLabel2.text = nextPet.breeds
             
-            indexIntoPets += 1
-            
-            return
         }
     }
     
@@ -197,8 +191,6 @@ class PetSwipeViewController: UIViewController {
         
         petNameLabel.text = pet.name
         petDescriptionLabel.text = pet.breeds
-        
-        indexIntoPets += 1
         
     }
     
@@ -227,4 +219,38 @@ class PetSwipeViewController: UIViewController {
         
         self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "swipeToPetListSegue" {
+            
+            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
+            
+            // do fetch request here for saved pets
+            
+            destinationVC.savedPets = pets
+            
+        }
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
