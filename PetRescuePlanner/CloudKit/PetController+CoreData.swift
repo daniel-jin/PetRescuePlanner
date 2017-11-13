@@ -31,9 +31,9 @@ extension PetController {
     func add(pet: Pet) {
         
         // Because we are going to save this pet to Core Data, need to insert into CoreDataStack.context
-//        CoreDataStack.context.insert(pet)
+        CoreDataStack.context.insert(pet)
         
-        let newPet = Pet(pet: pet)
+//        let newPet = Pet(pet: pet)
         
         saveToPersistantStore()
     }

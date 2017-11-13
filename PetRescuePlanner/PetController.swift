@@ -183,18 +183,16 @@ class PetController {
     
     func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
         
-        let lastId = pet.imageIdCount
+        guard let lastId = pet.imageIdCount else { return }
         let dispatchGroup = DispatchGroup()
         let imageBaseUrl = URL(string: "http://photos.petfinder.com/photos/pets")
         let count = Int(lastId) ?? 0
-        let id = pet.id
+        guard let id = pet.id else { return }
         var petImageArray: [UIImage] = []
         
         for index in 1...count {
             
             guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { return }
-            
-            
             
             NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
                 

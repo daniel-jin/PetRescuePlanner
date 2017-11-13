@@ -30,18 +30,18 @@ class ShelterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
     }
-    
-    
     
     func updateShelterDetailView(shelter: Shelter){
         
+        guard let shelterName = shelter.name,
+            let shelterAddress = shelter.address,
+            let shelterCity = shelter.city,
+            let shelterState = shelter.state else { return }
+        
         DispatchQueue.main.async {
-            self.shelterNameLabel.text = shelter.name
-            self.addressLabel.text = "\(shelter.address), \(shelter.city), \(shelter.state)"
+            self.shelterNameLabel.text = shelterName
+            self.addressLabel.text = "\(shelterAddress), \(shelterCity), \(shelterState)"
             self.numberLabel.text = shelter.phone
             self.emailLabel.text = shelter.email
             
@@ -111,7 +111,7 @@ class ShelterDetailViewController: UIViewController {
             guard let destinationVC = segue.destination as? SavedPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
-            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterId, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
                 if !success {
                     NSLog("Error fetching pets from shelter")
                     return

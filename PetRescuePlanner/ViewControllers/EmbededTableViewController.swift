@@ -46,29 +46,40 @@ class EmbededTableViewController: UITableViewController {
     func setUpLabels() {
         
         guard let pet = pet else { return }
-        let options = pet.options.reduce("", +)
+        guard let opt = pet.options else { return }
+        
+        guard let petOptions = (try? JSONSerialization.jsonObject(with: opt as Data, options: .allowFragments)) as? [String] else { return }
+        
+        let options = petOptions.reduce("", +)
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
         
-        let aboutString: NSMutableAttributedString = NSMutableAttributedString(string: "About \(pet.name): ", attributes: redForegroundAttribute)
-        let aboutDescription = NSAttributedString(string: "\(pet.description)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        guard let petDescription = pet.petDescription,
+            let petName = pet.name,
+            let petMix = pet.mix,
+            let petSize = pet.size,
+            let petAge = pet.age,
+            let petSex = pet.sex else { return }
+        
+        let aboutString: NSMutableAttributedString = NSMutableAttributedString(string: "About \(petName): ", attributes: redForegroundAttribute)
+        let aboutDescription = NSAttributedString(string: "\(petDescription)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         aboutString.append(aboutDescription)
         
         let mixString: NSMutableAttributedString = NSMutableAttributedString(string: "Mix: ", attributes: redForegroundAttribute)
-        let mixDescription = NSAttributedString(string: "\(pet.mix)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let mixDescription = NSAttributedString(string: "\(petMix)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         mixString.append(mixDescription)
         
         let sizeString: NSMutableAttributedString = NSMutableAttributedString(string: "Size: ", attributes: redForegroundAttribute)
-        let sizeDescription = NSAttributedString(string: "\(pet.size)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let sizeDescription = NSAttributedString(string: "\(petSize)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         sizeString.append(sizeDescription)
         
         let ageString: NSMutableAttributedString = NSMutableAttributedString(string: "Age: ", attributes: redForegroundAttribute)
-        let ageDescription = NSAttributedString(string: "\(pet.age)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let ageDescription = NSAttributedString(string: "\(petAge)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         ageString.append(ageDescription)
         
         let sexString: NSMutableAttributedString = NSMutableAttributedString(string: "Sex: ", attributes: redForegroundAttribute)
-        let sexDescription = NSAttributedString(string: "\(pet.sex)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let sexDescription = NSAttributedString(string: "\(petSex)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         sexString.append(sexDescription)
         
         let optionsString: NSMutableAttributedString = NSMutableAttributedString(string: "Options: ", attributes: redForegroundAttribute)
@@ -97,11 +108,10 @@ class EmbededTableViewController: UITableViewController {
             guard let pet = pet else { return }
 
             
-            ShelterController.shelterShared.fetchShelter(id: pet.shelterId) { (success) in
+            ShelterController.shelterShared.fetchShelter(id: pet.shelterID) { (success) in
                 if !success {
                     NSLog("Error")
                     return
-                    
                 }
                 destinationVC.shelter = ShelterController.shelterShared.shelter
                 destinationVC.pet = pet
