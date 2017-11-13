@@ -32,7 +32,8 @@ class PetController {
         
         // Perform fetch - handle errors
         do {
-            return try CoreDataStack.context.fetch(request)
+            let results = try CoreDataStack.context.fetch(request)
+            return results
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
