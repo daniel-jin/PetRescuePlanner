@@ -53,7 +53,7 @@ extension PetController {
                 completion(false)
                 return
             }
-        }
+        
         
         guard var currentUser = UserController.shared.currentUser else { return }
         
@@ -64,7 +64,7 @@ extension PetController {
             return
         }
         
-        fetchPet(petCKRecord: petCKRecord) { (record) in
+        self.fetchPet(petCKRecord: petCKRecord) { (record) in
             
 //            // Need to save to the user's list of CK References for favorite pets
 //            let petCKRef = CKReference(record: petCKRecord, action: .none)
@@ -97,7 +97,7 @@ extension PetController {
                     
                     // Need to save to the user's list of CK References for favorite pets
                     let petCKRef = CKReference(record: petCKRecord, action: .none)
-                    currentUser.savedPets.insert(petCKRef, at: 0)
+                    currentUser.savedPets.append(petCKRef)
                     guard let userRecord = CKRecord(user: currentUser) else { return }
                     
                     // Handle error
@@ -117,6 +117,7 @@ extension PetController {
                     // If no errors, complete with success as true
                     completion(true)
                 }
+            }
             }
         }
     }
