@@ -192,6 +192,8 @@ class PetController {
         
         for index in 1...count {
             
+            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { return }
+            
             dispatchGroup.enter()
             
             NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in

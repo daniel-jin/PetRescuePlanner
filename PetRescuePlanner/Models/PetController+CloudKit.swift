@@ -149,8 +149,6 @@ extension PetController {
         switch type {
         case "Pet":
             return pets.flatMap{ $0 as CloudKitSyncable }
-        case "Shelter":
-            return ShelterController.shelterShared.shelters.flatMap { $0 as CloudKitSyncable }
         default:
             return []
         }

@@ -244,7 +244,7 @@ class PetSwipeViewController: UIViewController {
         
         if segue.identifier == "swipeToPetListSegue" {
             
-            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
+//            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
             
 //            destinationVC.savedPets = PetController.shared.savedPets
             

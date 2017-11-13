@@ -34,14 +34,9 @@ class ShelterDetailViewController: UIViewController {
     
     func updateShelterDetailView(shelter: Shelter){
         
-        guard let shelterName = shelter.name,
-            let shelterAddress = shelter.address,
-            let shelterCity = shelter.city,
-            let shelterState = shelter.state else { return }
-        
         DispatchQueue.main.async {
-            self.shelterNameLabel.text = shelterName
-            self.addressLabel.text = "\(shelterAddress), \(shelterCity), \(shelterState)"
+            self.shelterNameLabel.text = shelter.name
+            self.addressLabel.text = "\(shelter.address), \(shelter.city), \(shelter.state)"
             self.numberLabel.text = shelter.phone
             self.emailLabel.text = shelter.email
             

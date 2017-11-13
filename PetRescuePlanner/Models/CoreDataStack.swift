@@ -24,7 +24,6 @@ class CoreDataStack {
     
     static var context: NSManagedObjectContext { return container.viewContext }
     let pet: Pet = context.insertObject()
-    let shelter: Shelter = context.insertObject()
 }
 
 extension NSManagedObjectContext {

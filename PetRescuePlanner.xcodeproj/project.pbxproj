@@ -45,6 +45,7 @@
 		6A8E02061FB51F8C00AEEE09 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E02051FB51F8C00AEEE09 /* User.swift */; };
 		6A8E02081FB51FE700AEEE09 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E02071FB51FE700AEEE09 /* UserController.swift */; };
 		6AD5999A1FBA597100D395BA /* zipCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AD599991FBA597100D395BA /* zipCodes.json */; };
+		6AD5999C1FBA638500D395BA /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5999B1FBA638500D395BA /* Shelter.swift */; };
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 		D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */; };
 		D30B58A81FB27D90006C59FE /* ShelterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A71FB27D90006C59FE /* ShelterDetailViewController.swift */; };
@@ -93,6 +94,7 @@
 		6A8E02051FB51F8C00AEEE09 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6A8E02071FB51FE700AEEE09 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = PetRescuePlanner/Models/UserController.swift; sourceTree = SOURCE_ROOT; };
 		6AD599991FBA597100D395BA /* zipCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = zipCodes.json; path = ../../../zipCodes.json; sourceTree = "<group>"; };
+		6AD5999B1FBA638500D395BA /* Shelter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 		D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShelterDetailSB.storyboard; sourceTree = "<group>"; };
 		D30B58A71FB27D90006C59FE /* ShelterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterDetailViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				6A8E01BD1FB3AF3B00AEEE09 /* Pet+CoreDataClass.swift */,
 				6A8E01BE1FB3AF3B00AEEE09 /* Pet+CoreDataProperties.swift */,
 				6A8E01B01FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld */,
+				6AD5999B1FBA638500D395BA /* Shelter.swift */,
 				6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */,
 				6A8E01B31FB25FFA00AEEE09 /* Pet+Convenience.swift */,
 				6A8E02051FB51F8C00AEEE09 /* User.swift */,
@@ -392,6 +395,7 @@
 				6A8E01BA1FB38DC700AEEE09 /* PetController+CoreData.swift in Sources */,
 				6A8E01AC1FB2158F00AEEE09 /* PetController+CloudKit.swift in Sources */,
 				6A8E01C11FB3AF3B00AEEE09 /* Pet+CoreDataClass.swift in Sources */,
+				6AD5999C1FBA638500D395BA /* Shelter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
