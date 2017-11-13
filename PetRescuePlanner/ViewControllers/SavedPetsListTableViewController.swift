@@ -78,7 +78,8 @@ class SavedPetsListTableViewController: UITableViewController {
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             
-            destinationVC.pet = pet 
+            destinationVC.pet = pet
+            
         }
         
         
