@@ -21,19 +21,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        PetController.shared.fetchPetsFor(method: "pet.find", location: "84101", animal: "dog", breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
-            if (success) {
-                self.pet = PetController.shared.pets.first
-                
-                guard let pet = self.pet else { return }
-                
-                PetController.shared.fetchAllPetImages(pet: pet) { (images) in
-                    guard let images = images else { print("optional images can't return"); return }
-                    
-                    self.imageArray = images
-                }
-            }
-        }
+        
     }
 
     // MARK: - Table view data source
@@ -64,6 +52,14 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     func updateLabels(pet: Pet) {
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPetInfo" {
+            guard let destinationVC = segue.destination as? EmbededTableViewController else { return }
+            
+            destinationVC.pet = pet
+        }
     }
  
     

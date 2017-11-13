@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C2AB38D1FB8F23F00BE2F85 /* PetDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2AB38C1FB8F23F00BE2F85 /* PetDetailTableViewController.swift */; };
+		3C1A513A1FBA01DE007794F3 /* EmbededTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A51391FBA01DE007794F3 /* EmbededTableViewController.swift */; };
 		3C484A891FB10BA20024F947 /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A881FB10BA20024F947 /* PetController.swift */; };
 		3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A8A1FB10BD30024F947 /* NetworkController.swift */; };
 		3C5331FB1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5331FA1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift */; };
@@ -40,7 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3C2AB38C1FB8F23F00BE2F85 /* PetDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailTableViewController.swift; sourceTree = "<group>"; };
+		3C1A51391FBA01DE007794F3 /* EmbededTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbededTableViewController.swift; sourceTree = "<group>"; };
 		3C484A881FB10BA20024F947 /* PetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetController.swift; path = PetRescuePlanner/PetController.swift; sourceTree = SOURCE_ROOT; };
 		3C484A8A1FB10BD30024F947 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = PetRescuePlanner/NetworkController.swift; sourceTree = SOURCE_ROOT; };
 		3C5331FA1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailCollectionTableViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 				5F4C16D61FB375230065FEAD /* PetSwipeViewController.swift */,
 				5FB0C1181FB6059600E55C05 /* SavedPetsListTableViewController.swift */,
 				3C5331FA1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift */,
-				3C2AB38C1FB8F23F00BE2F85 /* PetDetailTableViewController.swift */,
+				3C1A51391FBA01DE007794F3 /* EmbededTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -315,11 +315,11 @@
 				5FB0C1191FB6059600E55C05 /* SavedPetsListTableViewController.swift in Sources */,
 				6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */,
 				5F4C16D71FB375230065FEAD /* PetSwipeViewController.swift in Sources */,
+				3C1A513A1FBA01DE007794F3 /* EmbededTableViewController.swift in Sources */,
 				5F0B031A1FB27C86002B4F71 /* TestPetSearchTableViewController.swift in Sources */,
 				3C5331FD1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift in Sources */,
 				6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */,
 				6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */,
-				3C2AB38D1FB8F23F00BE2F85 /* PetDetailTableViewController.swift in Sources */,
 				D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */,
 				5F7C78001FB0D57500BCDBE5 /* Pet.swift in Sources */,
 				3C484A891FB10BA20024F947 /* PetController.swift in Sources */,

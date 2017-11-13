@@ -76,7 +76,7 @@ class SavedPetsListTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPathForSelectedRow, let pets = savedPets else { return }
             let pet = pets[indexPath.row]
             
-            guard let destinationVC = segue.destination as? PetDetailTableViewController else { return }
+            guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             
             destinationVC.pet = pet 
         }
