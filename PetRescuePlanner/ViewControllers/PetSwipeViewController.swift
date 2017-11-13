@@ -90,6 +90,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
+                    self.indexIntoPets += 1
+
                     self.cardImageView.image = UIImage()
 
                     if self.indexIntoPets < self.pets.count - 1 {
@@ -110,6 +112,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
+                    self.indexIntoPets += 1
+
 
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.cardImageView.image = UIImage()
@@ -166,9 +170,6 @@ class PetSwipeViewController: UIViewController {
             self.petNameLabel2.text = nextPet.name
             self.petDescriptionLabel2.text = nextPet.breeds
             
-            indexIntoPets += 1
-            
-            return
         }
     }
     
@@ -190,8 +191,6 @@ class PetSwipeViewController: UIViewController {
         
         petNameLabel.text = pet.name
         petDescriptionLabel.text = pet.breeds
-        
-        indexIntoPets += 1
         
     }
     
@@ -228,6 +227,8 @@ class PetSwipeViewController: UIViewController {
         if segue.identifier == "swipeToPetListSegue" {
             
             guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
+            
+            // do fetch request here for saved pets
             
             destinationVC.savedPets = pets
             

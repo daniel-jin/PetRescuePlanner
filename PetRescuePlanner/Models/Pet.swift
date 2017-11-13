@@ -69,7 +69,7 @@ struct Pet {
             let address = addressDictionary[apiKeys.itemKey] as? String,
             let descriptionDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
             let description = descriptionDictionary[apiKeys.itemKey] as? String,
-            let idDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
+            let idDictionary = dictionary[apiKeys.idKey] as? [String:Any],
             let id = idDictionary[apiKeys.itemKey] as? String,
             let lastUpdateDictionary = dictionary[apiKeys.lastUpdatKey] as? [String:Any],
             let lastUpdate = lastUpdateDictionary[apiKeys.itemKey] as? String,
