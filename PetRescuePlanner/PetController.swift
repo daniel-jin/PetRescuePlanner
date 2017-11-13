@@ -17,15 +17,18 @@ class PetController {
     
     static let shared = PetController()
     
+//    // Fetched results controller for Core Data
+//    let fetchedResultsController: NSFetchedResultsController<Pet>!
+    
     var pets: [Pet] = []
     
-    var savedPets: [Pet] {
+    var savedPets: [Pet]? {
         // MARK: - Fetched Results Controller configuration
         // set up request
         let request: NSFetchRequest<Pet> = Pet.fetchRequest()
         
         // Set up sort descriptors for the request
-        request.sortDescriptors = [NSSortDescriptor(key: "recordIDString", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "breeds", ascending: true)]
         
         // Perform fetch - handle errors
         do {
@@ -41,6 +44,7 @@ class PetController {
     init() {
         
         self.cloudKitManager = CloudKitManager()
+        
 //        performFullSync()
         
         /* flush function to delete all records of a record type
