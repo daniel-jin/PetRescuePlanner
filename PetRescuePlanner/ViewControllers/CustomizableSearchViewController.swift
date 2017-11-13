@@ -14,6 +14,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     weak var breedSearchViewController: BreedSearchContainerViewController?
     
+    var zipArray: [Int] = []
+    
     var animal: String? = nil
     var size: String? = nil
     var age: String? = nil
@@ -62,6 +64,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     @IBAction func selectBreedButtonTapped(_ sender: Any) {
         
         if animal == "dog" || animal == "cat" || animal == "bird" || animal == "reptile" || animal == "horse" || animal == "barnyard" || animal == "smallfurry" {
+            
             if breedSearchContainerView.isHidden == true {
                 guard let animal = animal else { return }
                 BreedAPI.shared.fetchBreedsFor(animalType: animal, completion: { (success) in
@@ -89,8 +92,17 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
-        
+        if let zipTextField = zipCodeTextField.text {
+            if let zip = Int(zipTextField) {
+                if isValid(zip) {
+                    self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
+                } else {
+                    presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!")
+                }
+            } else {
+                presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!")
+            }
+        }
     }
     
     
@@ -100,6 +112,11 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         super.viewDidLoad()
         
         self.setUpViews()
+        
+        // Get zipcodes from JSON to validate
+        ZipCodesStore.readJson { (zipCodes) in
+            self.zipArray = zipCodes
+        }
     }
     
     // MARK: - UIPickerView Data Source
@@ -157,6 +174,10 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     }
     
     // MARK: - Private Functions
+    
+    func isValid(_ zipCode: Int) -> Bool {
+        return zipArray.contains(zipCode)
+    }
     
     func setUpViews() {
         
