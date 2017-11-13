@@ -90,6 +90,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
+                    self.indexIntoPets += 1
+
                     self.cardImageView.image = UIImage()
 
                     if self.indexIntoPets < self.pets.count - 1 {
@@ -105,7 +107,7 @@ class PetSwipeViewController: UIViewController {
             } else if card.center.x > (view.frame.width - 75) {
                 
                 // Save pet to Core Data & CloudKit
-                let petToSave = pets[indexIntoPets - 1]
+                let petToSave = pets[indexIntoPets]
                 
                 // Save to CoreData first
 //                PetController.shared.add(pet: petToSave)po
@@ -123,6 +125,8 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
+                    self.indexIntoPets += 1
+
 
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.cardImageView.image = UIImage()
@@ -179,9 +183,6 @@ class PetSwipeViewController: UIViewController {
             self.petNameLabel2.text = nextPet.name
             self.petDescriptionLabel2.text = nextPet.breeds
             
-            indexIntoPets += 1
-            
-            return
         }
     }
     
@@ -204,7 +205,6 @@ class PetSwipeViewController: UIViewController {
         petNameLabel.text = pet.name
         petDescriptionLabel.text = pet.breeds
         
-        indexIntoPets += 1
         
     }
     

@@ -42,6 +42,12 @@ class UserController {
             // Fetch the custom user record
             self.cloudKitManager.fetchRecordsWithType(CloudKit.userRecordType, predicate: predicate, recordFetchedBlock: nil, completion: { (records, error) in
                 
+                if let error = error {
+                    NSLog("Error fetching matching user in cloudkit \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                
                 guard let currentUserRecord = records?.first else { completion(false); return }
                 
                 let currentUser = User(cloudKitRecord: currentUserRecord)

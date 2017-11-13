@@ -13,7 +13,7 @@ import UIKit
 
 extension Pet {
             
-    @discardableResult convenience init(dictionary: [String: Any],
+    @discardableResult convenience init?(dictionary: [String: Any],
                                         context: NSManagedObjectContext? = CoreDataStack.context) {
         // Init with context first
         
@@ -28,6 +28,8 @@ extension Pet {
     
         // MARK: - Failable init
         guard let ageDictionary = dictionary[apiKeys.ageKey] as? [String:Any],
+            let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
+            let name = nameDictionary[apiKeys.itemKey] as? String,
             let age = ageDictionary[apiKeys.itemKey] as? String,
             let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
             let animal = animalDictionary[apiKeys.itemKey] as? String,
@@ -60,10 +62,7 @@ extension Pet {
             let lastId = lastImageDictionary[apiKeys.imageId] as? String,
             let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any],
             let mix = mixDictionary[apiKeys.itemKey] as? String,
-            let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
-            let name = nameDictionary[apiKeys.itemKey] as? String,
             let optionsDictionary = dictionary[apiKeys.optionsKey] as? [String:Any],
-            let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]],
             let sexDictionary = dictionary[apiKeys.sexKey] as? [String:Any],
             let sex = sexDictionary[apiKeys.itemKey] as? String,
             let shelterIdDictionary = dictionary[apiKeys.shelterIdKey] as? [String:Any],
@@ -71,7 +70,10 @@ extension Pet {
             let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any],
             let size = sizeDictionary[apiKeys.itemKey] as? String,
             let statusDictionary = dictionary[apiKeys.statusKey] as? [String:Any],
-            let status = statusDictionary[apiKeys.itemKey] as? String else { return }
+            let status = statusDictionary[apiKeys.itemKey] as? String
+            else {
+                return nil
+            }
         
         var photoEndpoints: [String] = []
         for photoDictionary in photosArray {
@@ -80,9 +82,13 @@ extension Pet {
         }
         
         var optionsArray: [String] = []
-        for optionsDictionary in optionArray {
-            guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
-            optionsArray.append(option)
+        if !optionsDictionary.isEmpty {
+            if let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]] {
+                for optionsDictionary in optionArray {
+                    guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
+                    optionsArray.append(option)
+                }
+            }
         }
         
         var contactDictionaryTemp: [String:String] = [:]

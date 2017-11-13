@@ -47,6 +47,14 @@ extension PetController {
     // MARK: - Save
     func saveToCK(pet: Pet, completion: @escaping (_ success: Bool) -> Void) {
         
+        UserController.shared.fetchCurrentUser { (success) in
+            if !success {
+                NSLog("Unable to fetch current user")
+                completion(false)
+                return
+            }
+        }
+        
         guard var currentUser = UserController.shared.currentUser else { return }
         
         // Get CK record of the pet to save to CK
