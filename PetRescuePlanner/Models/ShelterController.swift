@@ -10,7 +10,7 @@ import Foundation
 
 class ShelterController {
     
-    // MARK: - Properties
+    var shelter: Shelter?
     
     static let shelterShared = ShelterController()
     
@@ -20,34 +20,56 @@ class ShelterController {
         
     }
     
-    let methods = API.Methods().specificShelter
+    let id = ShelterKeys.idKey
+    let keys = API.Keys()
+    let methods = API.Methods()
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
-    let baseURL = URL(string: ShelterKeys.shelterURL)
     
-    // you might want to put Shelter? in the ()
-    func fetchShelter(by id: String, name: String?, address: String?, state: String?, city: String?, phone: String?, completion: @escaping () -> Void) {
-        
+    func fetchShelter(id: String?, completion: @escaping (_ success: Bool) -> Void) {
+        let method = methods.specificShelter
+        let output = responseFormat
         let apiKey = parameters.apiKey
+        let baseURL = URL(string: parameters.baseUrl)
         
-        guard let unwrappedURL = baseURL else {
-            print("Broken URL")
-            completion(); return
+        var queryItems:[URLQueryItem] = []
+        
+        var componets = URLComponents(url: (baseURL?.appendingPathComponent(method))!, resolvingAgainstBaseURL: true)
+        
+        let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
+        let outputItem = URLQueryItem(name: keys.formatKey, value: output)
+        let shelterIdItem = URLQueryItem(name: ShelterKeys.idKey, value: id)
+        queryItems.append(apiKeyItem)
+        queryItems.append(outputItem)
+        queryItems.append(shelterIdItem)
+        
+        componets?.queryItems = queryItems
+        
+        guard let searchURL = componets?.url else { return }
+        
+        NetworkController.performRequest(for: searchURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+            
+            if let error = error {
+                NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
+                completion(false)
+            }
+            guard let data = data else {return}
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let petfinderDictionary = jsonDictionary["petfinder"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            guard let shelterDictionary = petfinderDictionary["shelter"] as? [String: Any] else {
+                return completion(false)
+            }
+            
+            let shelter = Shelter(dictionary: shelterDictionary)
+            
+            self.shelter = shelter
+            completion(true)
         }
-        
-        var componets = URLComponents(url: unwrappedURL, resolvingAgainstBaseURL: true)
-        
-        let queryItem1 = URLQueryItem(name: "key", value: parameters.apiKey)
-        let queryItem2 = URLQueryItem(name: "id", value: id)
-        let queryItem3 = URLQueryItem(name: "format", value: parameters.jsonFormat)
-        
-        guard let url = componets?.url else { completion(); return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = NetworkController.HTTPMethod.get.rawValue
-        request.httpBody = nil
-        
-        
     }
-    
 }

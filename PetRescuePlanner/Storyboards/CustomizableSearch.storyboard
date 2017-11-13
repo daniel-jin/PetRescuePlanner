@@ -70,31 +70,21 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hA-bN-RyL">
-                                <rect key="frame" x="149" y="279" width="226" height="314"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="226" id="L5I-77-FQz"/>
-                                    <constraint firstAttribute="height" constant="314" id="wwo-z2-dEk"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="279" width="375" height="388"/>
                                 <connections>
                                     <segue destination="pmx-fd-Gbv" kind="embed" identifier="breedContainerSegue" id="ztU-Yo-r4d"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F24-BU-Wz7">
-                                <rect key="frame" x="16" y="318" width="114" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Test outputs"/>
-                                <connections>
-                                    <action selector="testOutputsButtonTapped:" destination="tpd-qM-bBm" eventType="touchUpInside" id="Qhc-Ik-2U5"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98812824487686157" green="0.98829704523086548" blue="0.988117516040802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9Ed-vf-48M" firstAttribute="top" secondItem="2n6-9o-eZH" secondAttribute="top" constant="40" id="4eG-00-lkF"/>
                             <constraint firstItem="fta-bK-v9F" firstAttribute="width" secondItem="1Nr-4f-wXP" secondAttribute="width" id="6MV-So-Xnh"/>
                             <constraint firstItem="EMR-dU-cMt" firstAttribute="top" secondItem="UFO-dk-fgs" secondAttribute="bottom" constant="18" id="7Va-Gz-Ycb"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="bottom" secondItem="2n6-9o-eZH" secondAttribute="bottom" id="9QP-8L-qUQ"/>
                             <constraint firstItem="UFO-dk-fgs" firstAttribute="width" secondItem="vrB-xE-cO6" secondAttribute="width" id="Byh-ub-LMd"/>
                             <constraint firstItem="d1z-2D-pzZ" firstAttribute="width" secondItem="vrB-xE-cO6" secondAttribute="width" id="C7A-AS-UDQ"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" id="CQw-tA-v1d"/>
                             <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="9Ed-vf-48M" secondAttribute="trailing" constant="16" id="EsU-GG-A3C"/>
                             <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="vrB-xE-cO6" secondAttribute="trailing" constant="16" id="FcT-pU-P3R"/>
                             <constraint firstItem="fta-bK-v9F" firstAttribute="top" secondItem="1Nr-4f-wXP" secondAttribute="bottom" constant="16" id="KZf-cf-MfG"/>
@@ -108,10 +98,10 @@
                             <constraint firstItem="vrB-xE-cO6" firstAttribute="leading" secondItem="d1z-2D-pzZ" secondAttribute="trailing" constant="8" id="ZGS-bp-Kk9"/>
                             <constraint firstItem="1Nr-4f-wXP" firstAttribute="top" secondItem="d1z-2D-pzZ" secondAttribute="bottom" constant="16" id="drf-Y0-AGr"/>
                             <constraint firstItem="d1z-2D-pzZ" firstAttribute="top" secondItem="9Ed-vf-48M" secondAttribute="bottom" constant="16" id="gwO-GZ-W9h"/>
-                            <constraint firstItem="9hA-bN-RyL" firstAttribute="top" secondItem="EMR-dU-cMt" secondAttribute="bottom" constant="8" id="jem-1s-Rcp"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="trailing" secondItem="2n6-9o-eZH" secondAttribute="trailing" id="l8F-iw-f6M"/>
                             <constraint firstItem="1Nr-4f-wXP" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="lDD-yu-sle"/>
                             <constraint firstItem="vrB-xE-cO6" firstAttribute="top" secondItem="9Ed-vf-48M" secondAttribute="bottom" constant="16" id="m2g-5B-8LH"/>
-                            <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="9hA-bN-RyL" secondAttribute="trailing" id="nSK-3E-Y7h"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="top" secondItem="EMR-dU-cMt" secondAttribute="bottom" constant="8" id="mNH-Sh-FaO"/>
                             <constraint firstItem="EMR-dU-cMt" firstAttribute="width" secondItem="1Nr-4f-wXP" secondAttribute="width" id="r8V-0R-NbB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2n6-9o-eZH"/>
@@ -131,6 +121,7 @@
                         <outlet property="animalTypePicker" destination="Qvc-FK-hhV" id="2u4-v0-yur"/>
                         <outlet property="animalTypeTextField" destination="d1z-2D-pzZ" id="CJW-bg-vkI"/>
                         <outlet property="breedSearchContainerView" destination="9hA-bN-RyL" id="zUQ-ae-Bt9"/>
+                        <outlet property="selectBreedButton" destination="EMR-dU-cMt" id="b39-rP-edC"/>
                         <outlet property="sexSegmentedControl" destination="UFO-dk-fgs" id="jNQ-xD-uJv"/>
                         <outlet property="zipCodeTextField" destination="fta-bK-v9F" id="27y-gY-aAM"/>
                         <segue destination="bxC-94-vOc" kind="show" identifier="toPetListTest" id="vxf-vu-499"/>
@@ -158,28 +149,28 @@
             </objects>
             <point key="canvasLocation" x="237.59999999999999" y="97.601199400299862"/>
         </scene>
-        <!--Breed Search Container View Controller-->
+        <!--Title-->
         <scene sceneID="CKW-rl-0oS">
             <objects>
                 <viewController id="pmx-fd-Gbv" customClass="BreedSearchContainerViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wcI-oj-o1W">
-                        <rect key="frame" x="0.0" y="0.0" width="226" height="314"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="388"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kwD-bt-gpJ">
-                                <rect key="frame" x="0.0" y="0.0" width="226" height="314"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="388"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="amimalBreedCell" textLabel="U1U-C7-w30" style="IBUITableViewCellStyleDefault" id="b1Z-PR-LPt">
-                                        <rect key="frame" x="0.0" y="28" width="226" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b1Z-PR-LPt" id="mZq-6r-M1I">
-                                            <rect key="frame" x="0.0" y="0.0" width="226" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U1U-C7-w30">
-                                                    <rect key="frame" x="15" y="0.0" width="196" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -192,6 +183,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="kwD-bt-gpJ" firstAttribute="top" secondItem="0kz-37-C6V" secondAttribute="top" id="OSE-re-Jw3"/>
                             <constraint firstAttribute="bottom" secondItem="kwD-bt-gpJ" secondAttribute="bottom" id="VOF-DC-MMu"/>
@@ -200,13 +192,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0kz-37-C6V"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="vmo-HT-eWq"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="breedsTableView" destination="kwD-bt-gpJ" id="5T9-2E-M99"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lja-7m-kgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029" y="122"/>
+            <point key="canvasLocation" x="1028" y="121.88905547226388"/>
         </scene>
         <!--Search Results Table View Controller-->
         <scene sceneID="mBh-W0-x7R">

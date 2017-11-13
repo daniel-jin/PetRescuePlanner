@@ -84,7 +84,8 @@ class PetController {
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
     
-    func fetchPetsFor(method: String, location: String, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
+    
+    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
         
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -116,14 +117,20 @@ class PetController {
             let offsetItem = URLQueryItem(name: keys.offsetKey, value: offset)
             queryItems.append(offsetItem)
         }
+        if let location = location{
+            let locationItem = URLQueryItem(name: keys.locationKey, value: location)
+            queryItems.append(locationItem)
+        }
+        if let shelterId = shelterId {
+            let shelterIdItem = URLQueryItem(name: keys.idKey, value: shelterId)
+            queryItems.append(shelterIdItem)
+        }
         
         var components = URLComponents(url: baseUrl.appendingPathComponent(method), resolvingAgainstBaseURL: true)
         
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
-        let locationItem = URLQueryItem(name: keys.locationKey, value: location)
-        queryItems.append(locationItem)
-        queryItems.append(apiKeyItem)
+                queryItems.append(apiKeyItem)
         queryItems.append(outputItem)
         components?.queryItems = queryItems
         
@@ -173,6 +180,45 @@ class PetController {
             completion(true, imageReturned)
         }
     }
+    
+    func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
+        
+        let lastId = pet.imageIdCount
+        let dispatchGroup = DispatchGroup()
+        let imageBaseUrl = URL(string: "http://photos.petfinder.com/photos/pets")
+        let count = Int(lastId) ?? 0
+        let id = pet.id
+        var petImageArray: [UIImage] = []
+        
+        for index in 1...count {
+            
+            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { return }
+            
+            
+            
+            NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+                
+                dispatchGroup.enter()
+                
+                if let error = error {
+                    NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+                    completion(nil)
+                }
+                guard let data = data,
+                    let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
+                petImageArray.append(image)
+                
+                dispatchGroup.leave()
+                
+                dispatchGroup.notify(queue: .main) {
+                    completion(petImageArray)
+                }
+            })
+        }
+        
+        
+    }
+    
 }
 
 

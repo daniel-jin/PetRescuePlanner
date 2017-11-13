@@ -14,11 +14,14 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     weak var breedSearchViewController: BreedSearchContainerViewController?
     
+    var zipArray: [Int] = []
+    
     var animal: String? = nil
     var size: String? = nil
     var age: String? = nil
     var sex: String? = nil
     var breed: String? = nil
+    var shelterId: String? = nil
     
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
     let sizes = ["", "Small", "Medium", "Large", "Extra-Large"]
@@ -34,6 +37,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     @IBOutlet var animalTypePicker: UIPickerView!
     @IBOutlet var animalSizePicker: UIPickerView!
     @IBOutlet var animalAgePicker: UIPickerView!
+    
+    @IBOutlet weak var selectBreedButton: UIButton!
     
     @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
     
@@ -60,6 +65,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     @IBAction func selectBreedButtonTapped(_ sender: Any) {
         
         if animal == "dog" || animal == "cat" || animal == "bird" || animal == "reptile" || animal == "horse" || animal == "barnyard" || animal == "smallfurry" {
+            
             if breedSearchContainerView.isHidden == true {
                 guard let animal = animal else { return }
                 BreedAPI.shared.fetchBreedsFor(animalType: animal, completion: { (success) in
@@ -87,33 +93,19 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
-        
+        if let zipTextField = zipCodeTextField.text {
+            if let zip = Int(zipTextField) {
+                if isValid(zip) {
+                    self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
+                } else {
+                    presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!")
+                }
+            } else {
+                presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!")
+            }
+        }
     }
     
-    
-    
-    
-    
-    @IBAction func testOutputsButtonTapped(_ sender: Any) {
-        
-        if let animal = animal {
-            print("The Type of animal is \(animal),")
-        }
-        if let size = size {
-            print("and it is \(size) sized.")
-        }
-        if let age = age {
-            print("The animal is \(age).")
-        }
-        if let sex = sex {
-            print("It is a \(sex)")
-        }
-        if let breed = breed {
-            print("the breed of this animal is \(breed)")
-        }
-        
-    }
     
     // MARK: - View Controller Life Cycle
     
@@ -121,6 +113,11 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         super.viewDidLoad()
         
         self.setUpViews()
+        
+        // Get zipcodes from JSON to validate
+        ZipCodesStore.readJson { (zipCodes) in
+            self.zipArray = zipCodes
+        }
     }
     
     // MARK: - UIPickerView Data Source
@@ -172,11 +169,16 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
             let age = ages[row]
+            print("\(age)")
         }
         
     }
     
     // MARK: - Private Functions
+    
+    func isValid(_ zipCode: Int) -> Bool {
+        return zipArray.contains(zipCode)
+    }
     
     func setUpViews() {
         
@@ -238,13 +240,17 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
             
+            
+            
             let methods = API.Methods()
-            PetController.shared.fetchPetsFor(method: methods.pets,location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
+            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: shelterId, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
                 if !success {
                     NSLog("Error fetching adoptable pets from PetController")
                     return
                 }
-                destinationVC.pets = PetController.shared.pets
+                DispatchQueue.main.async {
+                    destinationVC.pets = PetController.shared.pets
+                }
             })
         }
         
