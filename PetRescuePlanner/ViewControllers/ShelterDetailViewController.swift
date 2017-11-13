@@ -44,9 +44,7 @@ class ShelterDetailViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.shelterNameLabel.text = shelter.name
-            self.addressLabel.text = shelter.address
-            self.cityLabel.text = "\(shelter.city),"
-            self.stateLabel.text = shelter.state
+            self.addressLabel.text = "\(shelter.address), \(shelter.city), \(shelter.state)"
             self.numberLabel.text = shelter.phone
             self.emailLabel.text = shelter.email
             
@@ -94,20 +92,20 @@ class ShelterDetailViewController: UIViewController {
     }
     @IBOutlet weak var shelterNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var shelterMapView: MKMapView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
     @IBAction func viewPetsAtShelterButtonTapped(_ sender: Any) {
-        
-        PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, location: nil, animal: pet?.animal, breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+                
+        PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, location: nil, animal: "Dog", breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
             if !success {
                 NSLog("Error fetching pets from shelter")
                 return
             }
         }
+
+        
     }
     
     @IBAction func directionsButtonTapped(_ sender: Any) {
