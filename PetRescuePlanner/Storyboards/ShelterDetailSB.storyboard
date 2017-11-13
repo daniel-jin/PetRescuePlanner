@@ -56,12 +56,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
                                 </constraints>
-                                <state key="normal" title="View more of this pet at this shelter.">
+                                <state key="normal" title="Find more pets at this shelter.">
                                     <color key="titleColor" red="0.87685841320000002" green="0.22127610449999999" blue="0.36875227090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="viewPetsAtShelterButtonTapped:" destination="uUa-0m-lGg" eventType="touchUpInside" id="lPI-U1-UV6"/>
-                                    <segue destination="fsM-SR-TKJ" kind="show" id="gZ4-yy-gbb"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kk-oW-zly">
@@ -120,6 +119,7 @@
                         <outlet property="numberLabel" destination="6gW-8e-YkR" id="8Wt-cz-nHK"/>
                         <outlet property="shelterMapView" destination="U6E-Wf-yLk" id="yFg-Tv-2ou"/>
                         <outlet property="shelterNameLabel" destination="32b-aX-hZW" id="8j6-gO-Aiy"/>
+                        <segue destination="fsM-SR-TKJ" kind="show" identifier="toPetsList" id="Vcb-6l-ml7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a82-tS-qUR" userLabel="First Responder" sceneMemberID="firstResponder"/>

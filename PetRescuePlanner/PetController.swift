@@ -24,7 +24,8 @@ class PetController {
     let parameters = API.Parameters()
     let responseFormat = API.Parameters().jsonFormat
     
-    func fetchPetsFor(method: String, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
+    
+    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
         
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -59,6 +60,10 @@ class PetController {
         if let location = location{
             let locationItem = URLQueryItem(name: keys.locationKey, value: location)
             queryItems.append(locationItem)
+        }
+        if let shelterId = shelterId {
+            let shelterIdItem = URLQueryItem(name: keys.idKey, value: shelterId)
+            queryItems.append(shelterIdItem)
         }
         
         var components = URLComponents(url: baseUrl.appendingPathComponent(method), resolvingAgainstBaseURL: true)

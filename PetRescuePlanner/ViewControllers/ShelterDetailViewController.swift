@@ -13,7 +13,8 @@ class ShelterDetailViewController: UIViewController {
     
     let methods = API.Methods()
     
-    let pet: Pet? = nil 
+    let pet: Pet? = nil
+    var petsAtShelter: [Pet] = []
     
     
     var shelter: Shelter? {
@@ -29,7 +30,9 @@ class ShelterDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ShelterController.shelterShared.fetchShelter(id: "UT183") { (success) in
+       
+        
+        ShelterController.shelterShared.fetchShelter(id: String(describing: pet?.shelterId)) { (success) in
             if !success {
                 NSLog("Error")
                 return
@@ -48,65 +51,55 @@ class ShelterDetailViewController: UIViewController {
             self.numberLabel.text = shelter.phone
             self.emailLabel.text = shelter.email
             
-            var numerToPhone = self.numberLabel.text
-            numerToPhone = shelter.phone
+            var numberToPhone = self.numberLabel.text
+            numberToPhone = shelter.phone
             
-            guard let numberUrl = URL(string: "tel://\(String(describing: numerToPhone))") else { return }
+            
+            guard let numberUrl = URL(string: "tel://\(String(describing: numberToPhone))") else { return }
             UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
             
+            // Mark: - Map view
             
             
-            let shelterRequeset = MKLocalSearchRequest()
-            shelterRequeset.naturalLanguageQuery = shelter.id
-            
-            let activeSearch = MKLocalSearch(request: shelterRequeset)
-            
-            activeSearch.start { (response, error) in
-                if response == nil
-                {
-                    print("Error")
-                } else {
                     // Mark: - Remove annotations
                     let annotaions = self.shelterMapView.annotations
                     self.shelterMapView.removeAnnotations(annotaions)
                     
-                    // Mark: - Get data
-                    let latitude = response?.boundingRegion.center.latitude
-                    let longitude = response?.boundingRegion.center.longitude
+                  
                     
                     // Mark: - create annotation
                     let annotation = MKPointAnnotation()
                     annotation.title = shelter.name
-                    annotation.coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
+                    annotation.coordinate = CLLocationCoordinate2DMake(shelter.latitude, shelter.longitude)
                     self.shelterMapView.addAnnotation(annotation)
                     
                     // Mark: - zooming in on the annotaion
-                    let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude!, longitude!)
+                    let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(shelter.latitude, shelter.longitude)
                     let span = MKCoordinateSpanMake(0.1, 0.1)
                     let region = MKCoordinateRegionMake(coordinate, span)
                     self.shelterMapView.setRegion(region, animated: true)
                     
-                }
-            }
+                
+            
         }
     }
+    
+    // Mark: - outlets
+    
     @IBOutlet weak var shelterNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var shelterMapView: MKMapView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
+    // Mark: - actions
+    
     @IBAction func viewPetsAtShelterButtonTapped(_ sender: Any) {
-                
-        PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, location: nil, animal: "Dog", breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
-            if !success {
-                NSLog("Error fetching pets from shelter")
-                return
-            }
-        }
-
+        
+        performSegue(withIdentifier: "toPetsList", sender: self)
         
     }
+    
     
     @IBAction func directionsButtonTapped(_ sender: Any) {
         
@@ -114,6 +107,27 @@ class ShelterDetailViewController: UIViewController {
         
         let mapsDirectionURL = URL(string: "http://maps.apple.com/?daddr=\(shelter.latitude),\(shelter.longitude)")!
         UIApplication.shared.open(mapsDirectionURL, completionHandler: nil)
+    }
+    
+    // Mark: - navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toPetsList" {
+            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else { return }
+            
+            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: "UT183", location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+                if !success {
+                    NSLog("Error fetching pets from shelter")
+                    return
+                }
+                self.petsAtShelter = PetController.shared.pets
+                destinationVC.savedPets = self.petsAtShelter
+
+            }
+            
+        }
+        
     }
 }
 
