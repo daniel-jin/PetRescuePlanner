@@ -18,7 +18,6 @@ struct User {
     init(appleUserRef: CKReference, savedPets: [CKReference]) {
         self.appleUserRef = appleUserRef
         self.savedPets = savedPets
-        
     }
     
 }

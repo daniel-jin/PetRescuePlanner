@@ -108,7 +108,7 @@ class PetSwipeViewController: UIViewController {
                 let petToSave = pets[indexIntoPets - 1]
                 
                 // Save to CoreData first
-                PetController.shared.add(pet: petToSave)
+//                PetController.shared.add(pet: petToSave)po
                 
                 // Then save to CK
                 PetController.shared.saveToCK(pet: petToSave, completion: { (success) in

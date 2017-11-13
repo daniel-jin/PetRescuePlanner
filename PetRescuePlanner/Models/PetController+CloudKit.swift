@@ -23,7 +23,6 @@ extension PetController {
     func fetchPet(petCKRecord: CKRecord, completion: @escaping (_ petRec: CKRecord?) -> Void) {
         
         guard let pet = Pet(cloudKitRecord: petCKRecord),
-            let recordIDString = pet.recordIDString,
             let id = pet.id else {
             completion(nil)
             return
@@ -59,27 +58,39 @@ extension PetController {
         
         fetchPet(petCKRecord: petCKRecord) { (record) in
             
-            guard let userRecord = CKRecord(user: currentUser) else { return }
-            
-            // Need to save to the user's list of CK References for favorite pets
-            let petCKRef = CKReference(record: petCKRecord, action: .none)
-            currentUser.savedPets.insert(petCKRef, at: 0)
+//            // Need to save to the user's list of CK References for favorite pets
+//            let petCKRef = CKReference(record: petCKRecord, action: .none)
+//            currentUser.savedPets.insert(petCKRef, at: 0)
+//            guard let userRecord = CKRecord(user: currentUser) else { return }
             
             // There is already a pet CK record that you swiped right on
             if record != nil {
                 
+                // Need to save to the user's list of CK References for favorite pets
+                guard let record = record else { return completion(false) }
+                let petCKRef = CKReference(record: record, action: .none)
+                currentUser.savedPets.append(petCKRef)
+                guard let userRecord = CKRecord(user: currentUser) else { return }
+                
                 // Modify/update CKRecord for user
-                self.cloudKitManager.modifyRecords([userRecord], perRecordCompletion: nil) { (record, error) in
+                self.cloudKitManager.modifyRecords([userRecord], perRecordCompletion: nil) { (records, error) in
                     if let error = error {
                         NSLog("Error updating user record with saved pet \(error.localizedDescription)")
-                        return completion(false)
+                        completion(false)
+                        return
                     }
+                    
                     completion(true)
                 }
             } else {
                 
                 // Save to CloudKit
                 self.cloudKitManager.save(petCKRecord) { (error) in
+                    
+                    // Need to save to the user's list of CK References for favorite pets
+                    let petCKRef = CKReference(record: petCKRecord, action: .none)
+                    currentUser.savedPets.insert(petCKRef, at: 0)
+                    guard let userRecord = CKRecord(user: currentUser) else { return }
                     
                     // Handle error
                     if error != nil {
@@ -88,7 +99,7 @@ extension PetController {
                         return
                     }
                     // Modify/update CKRecord for user
-                    self.cloudKitManager.modifyRecords([userRecord], perRecordCompletion: nil) { (record, error) in
+                    self.cloudKitManager.modifyRecords([userRecord], perRecordCompletion: nil) { (records, error) in
                         if let error = error {
                             NSLog("Error updating user record with saved pet \(error.localizedDescription)")
                             return completion(false)
