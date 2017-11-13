@@ -64,9 +64,9 @@ class ShelterController {
                 return completion(false)
             }
             
-            let tempShelter = Shelter(dictionary: shelterDictionary)
+            let shelter = Shelter(dictionary: shelterDictionary)
             
-            self.shelter = tempShelter
+            self.shelter = shelter
             completion(true)
         }
     }

@@ -21,6 +21,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     var age: String? = nil
     var sex: String? = nil
     var breed: String? = nil
+    var shelterId: String? = nil
     
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
     let sizes = ["", "Small", "Medium", "Large", "Extra-Large"]
@@ -242,7 +243,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             
             
             let methods = API.Methods()
-            PetController.shared.fetchPetsFor(method: methods.pets,location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
+            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: shelterId, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
                 if !success {
                     NSLog("Error fetching adoptable pets from PetController")
                     return
