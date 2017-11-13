@@ -114,6 +114,45 @@ class PetController {
             completion(true, imageReturned)
         }
     }
+    
+    func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
+        
+        let lastId = pet.imageIdCount
+        let dispatchGroup = DispatchGroup()
+        let imageBaseUrl = URL(string: "http://photos.petfinder.com/photos/pets")
+        let count = Int(lastId) ?? 0
+        let id = pet.id
+        var petImageArray: [UIImage] = []
+        
+        for index in 1...count {
+            
+            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { return }
+            
+            
+            
+            NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+                
+                dispatchGroup.enter()
+                
+                if let error = error {
+                    NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+                    completion(nil)
+                }
+                guard let data = data,
+                    let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
+                petImageArray.append(image)
+                
+                dispatchGroup.leave()
+                
+                dispatchGroup.notify(queue: .main) {
+                    completion(petImageArray)
+                }
+            })
+        }
+        
+        
+    }
+    
 }
 
 

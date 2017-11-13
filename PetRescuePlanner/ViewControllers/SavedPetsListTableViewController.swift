@@ -10,11 +10,12 @@ import UIKit
 
 class SavedPetsListTableViewController: UITableViewController {
     
-    var savedPets: [Pet]? {
-        didSet{
-            self.tableView.reloadData()
-        }
-    }
+    var savedPets: [Pet]? = []
+//    {
+//        didSet{
+//            self.tableView.reloadData()
+//        }
+//    }
     
     // MARK: - Table View Life Cycle
 
@@ -27,7 +28,7 @@ class SavedPetsListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150 
+        return 150
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,10 +60,9 @@ class SavedPetsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            PetController.shared.pets.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     // MARK: - Navigation
@@ -76,7 +76,7 @@ class SavedPetsListTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPathForSelectedRow, let pets = savedPets else { return }
             let pet = pets[indexPath.row]
             
-            guard let destinationVC = segue.destination as? PetDetailTableViewController else { return }
+            guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             
             destinationVC.pet = pet 
         }

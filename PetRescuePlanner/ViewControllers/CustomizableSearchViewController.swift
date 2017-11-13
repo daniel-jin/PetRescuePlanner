@@ -173,6 +173,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
             let age = ages[row]
+            print("\(age)")
         }
         
     }
@@ -239,13 +240,17 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
             
+            
+            
             let methods = API.Methods()
             PetController.shared.fetchPetsFor(method: methods.pets, shelterId: shelterId, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
                 if !success {
                     NSLog("Error fetching adoptable pets from PetController")
                     return
                 }
-                destinationVC.pets = PetController.shared.pets
+                DispatchQueue.main.async {
+                    destinationVC.pets = PetController.shared.pets
+                }
             })
         }
         
