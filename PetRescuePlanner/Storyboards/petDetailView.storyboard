@@ -104,6 +104,9 @@
                             <outlet property="delegate" destination="qJE-Lt-hyQ" id="BJp-ba-yUj"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="collectionView" destination="O90-bf-d3N" id="HoY-Dx-6qS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvL-dE-0fY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -235,7 +238,7 @@
                             </tableViewSection>
                             <tableViewSection id="mTG-n3-SeI">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="dMK-Hb-yyN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="dMK-Hb-yyN" userLabel="Age Cell">
                                         <rect key="frame" x="0.0" y="176" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dMK-Hb-yyN" id="6ea-cP-4Bc">
@@ -261,7 +264,7 @@
                             </tableViewSection>
                             <tableViewSection id="hlk-mb-Ybk">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="mGk-FT-bss">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="mGk-FT-bss" userLabel="Sex Cell">
                                         <rect key="frame" x="0.0" y="220" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mGk-FT-bss" id="I9U-d4-F0H">
@@ -287,7 +290,7 @@
                             </tableViewSection>
                             <tableViewSection id="g9K-Ub-dex">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Options" id="FRR-ju-wZR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Options" id="FRR-ju-wZR" userLabel="Options Cell">
                                         <rect key="frame" x="0.0" y="264" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FRR-ju-wZR" id="hd4-lL-Slt">
