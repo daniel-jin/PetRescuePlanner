@@ -22,6 +22,8 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         }
     }
     
+    var breed: String?
+    
     // MARK: - Outlets 
 
     @IBOutlet weak var breedsTableView: UITableView!
@@ -50,6 +52,18 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         cell.textLabel?.text = breed
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        breed = breeds[indexPath.row]
+        searchController?.searchBar.text = breed
+        guard let p = self.parent as? CustomizableSearchViewController else { return }
+        
+        p.breed = self.breed
+
+        p.breedSearchContainerView.isHidden = true
+        
+
     }
     
     // MARK: - SearchController funcs
@@ -83,19 +97,11 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         
         searchController?.searchBar.sizeToFit()
         searchController?.searchBar.searchBarStyle = .minimal
-        searchController?.hidesNavigationBarDuringPresentation = true
+        searchController?.hidesNavigationBarDuringPresentation = false
         
         breedsTableView.tableHeaderView = searchController?.searchBar
         definesPresentationContext = true
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    */
 
 }

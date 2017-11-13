@@ -13,9 +13,12 @@ class ShelterDetailViewController: UIViewController {
     
     let methods = API.Methods()
     
-    var pet: Pet? = nil
-    
+<<<<<<< HEAD
+    let pet: Pet? = nil
     var petsAtShelter: [Pet] = []
+=======
+    var pet: Pet?
+>>>>>>> develop
     
     
     var shelter: Shelter? {
@@ -31,10 +34,17 @@ class ShelterDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
         
-
+        ShelterController.shelterShared.fetchShelter(id: String(describing: pet?.shelterId)) { (success) in
+            if !success {
+                NSLog("Error")
+                return
+                
+            }
+            self.shelter = ShelterController.shelterShared.shelter
+        }
     }
-    
     
     
     func updateShelterDetailView(shelter: Shelter){
@@ -55,25 +65,25 @@ class ShelterDetailViewController: UIViewController {
             // Mark: - Map view
             
             
-            // Mark: - Remove annotations
-            let annotaions = self.shelterMapView.annotations
-            self.shelterMapView.removeAnnotations(annotaions)
-            
-            
-            
-            // Mark: - create annotation
-            let annotation = MKPointAnnotation()
-            annotation.title = shelter.name
-            annotation.coordinate = CLLocationCoordinate2DMake(shelter.latitude, shelter.longitude)
-            self.shelterMapView.addAnnotation(annotation)
-            
-            // Mark: - zooming in on the annotaion
-            let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(shelter.latitude, shelter.longitude)
-            let span = MKCoordinateSpanMake(0.1, 0.1)
-            let region = MKCoordinateRegionMake(coordinate, span)
-            self.shelterMapView.setRegion(region, animated: true)
-            
-            
+                    // Mark: - Remove annotations
+                    let annotaions = self.shelterMapView.annotations
+                    self.shelterMapView.removeAnnotations(annotaions)
+                    
+                  
+                    
+                    // Mark: - create annotation
+                    let annotation = MKPointAnnotation()
+                    annotation.title = shelter.name
+                    annotation.coordinate = CLLocationCoordinate2DMake(shelter.latitude, shelter.longitude)
+                    self.shelterMapView.addAnnotation(annotation)
+                    
+                    // Mark: - zooming in on the annotaion
+                    let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(shelter.latitude, shelter.longitude)
+                    let span = MKCoordinateSpanMake(0.1, 0.1)
+                    let region = MKCoordinateRegionMake(coordinate, span)
+                    self.shelterMapView.setRegion(region, animated: true)
+                    
+                
             
         }
     }
@@ -109,16 +119,15 @@ class ShelterDetailViewController: UIViewController {
         
         if segue.identifier == "toPetsList" {
             guard let destinationVC = segue.destination as? SavedPetsListTableViewController else { return }
-            guard let pet = pet else { return }
             
-            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterId, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: "UT183", location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
                 if !success {
                     NSLog("Error fetching pets from shelter")
                     return
                 }
-                
-                destinationVC.savedPets = PetController.shared.pets
-                
+                self.petsAtShelter = PetController.shared.pets
+                destinationVC.savedPets = self.petsAtShelter
+
             }
             
         }

@@ -175,22 +175,27 @@ class PetSwipeViewController: UIViewController {
     
     func createLastCard() {
         
-        resetCard()
-        card2.isHidden = true
-        let pet = pets[pets.count - 1]
-        
-        PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
-            if !success {
-                NSLog("error fetchingpet in pet controller")
-            }
-            guard let image = image else { return }
-            DispatchQueue.main.async {
-                self.cardImageView.image = image
-            }
-        })
-        
-        petNameLabel.text = pet.name
-        petDescriptionLabel.text = pet.breeds
+        if pets.count > 0 {
+            
+            resetCard()
+            card2.isHidden = true
+            let pet = pets[pets.count - 1]
+            
+            PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                }
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                    self.cardImageView.image = image
+                }
+            })
+            
+            petNameLabel.text = pet.name
+            petDescriptionLabel.text = pet.breeds
+        } else {
+            presentAlertWith(title: "Uh Oh...", message: "No pets were found near you")
+        }
         
     }
     
@@ -235,6 +240,23 @@ class PetSwipeViewController: UIViewController {
         }
         
     }
+    
+    func presentAlertWith(title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let subview = alertController.view.subviews.first! as UIView
+        let alertContentView = subview.subviews.first! as UIView
+        alertContentView.backgroundColor = UIColor.yellow
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
 }
 
 
