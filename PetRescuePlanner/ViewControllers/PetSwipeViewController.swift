@@ -242,7 +242,7 @@ class PetSwipeViewController: UIViewController {
             
             guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
             
-            destinationVC.savedPets = PetController.shared.savedPets
+//            destinationVC.savedPets = PetController.shared.savedPets
             
         }
         

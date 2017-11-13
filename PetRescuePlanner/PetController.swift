@@ -22,7 +22,7 @@ class PetController {
     
     var pets: [Pet] = []
     
-    var savedPets: [Pet]? {
+    var savedPets: [Pet] {
         // MARK: - Fetched Results Controller configuration
         // set up request
         let request: NSFetchRequest<Pet> = Pet.fetchRequest()
@@ -44,6 +44,15 @@ class PetController {
     init() {
         
         self.cloudKitManager = CloudKitManager()
+        
+//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Pet")
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+//        do {
+//            try NSManagedObjectContext.execute
+//        } catch {
+//            // error handling
+//        }
+        
         
 //        performFullSync()
         

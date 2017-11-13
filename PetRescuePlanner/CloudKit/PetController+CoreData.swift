@@ -48,5 +48,9 @@ extension PetController {
     }
     
     
+    func clearPersistentStore() {
+        PetController.shared.savedPets.forEach({ delete(pet: $0) })
+    }
+    
     
 }

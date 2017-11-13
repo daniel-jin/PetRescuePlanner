@@ -12,11 +12,11 @@ import CloudKit
 
 class SavedPetsListTableViewController: UITableViewController {
     
-    var savedPets: [Pet]? {
-        didSet{
-            self.tableView.reloadData()
-        }
-    }
+    var savedPets = PetController.shared.savedPets
+//        didSet{
+//            self.tableView.reloadData()
+//        }
+    
     
     // MARK: - Table View Life Cycle
 
@@ -27,7 +27,7 @@ class SavedPetsListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let pets = savedPets else { return 0 }
+        let pets = savedPets
         return pets.count
     }
 
@@ -36,10 +36,7 @@ class SavedPetsListTableViewController: UITableViewController {
             return SavedPetTableViewCell()
         }
         
-        guard let pets = savedPets else {
-            return SavedPetTableViewCell()
-        }
-        let pet = pets[indexPath.row]
+        let pet = savedPets[indexPath.row]
         cell.pet = pet
 
         return cell
@@ -69,8 +66,8 @@ class SavedPetsListTableViewController: UITableViewController {
         // Segue to Detail view with pet and fetch shelter
         if segue.identifier == "petCellToDetailSegue" {
             
-            guard let indexPath = tableView.indexPathForSelectedRow, let pets = savedPets else { return }
-            let pet = pets[indexPath.row]
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let pet = savedPets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailTableViewController else { return }
             

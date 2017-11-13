@@ -15,6 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // If we want to clear core data objects for Pet
+//        PetController.shared.clearPersistentStore()
+//        print(PetController.shared.savedPets.count)
+        
+        
         // Override point for customization after application launch.
         return true
     }
