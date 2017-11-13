@@ -272,11 +272,22 @@
                         <outlet property="petNameLabel" destination="bLz-D5-M0o" id="MfH-kW-4tU"/>
                         <outlet property="shelterInfoButton" destination="BMJ-6f-N9K" id="bwb-ck-wli"/>
                         <outlet property="sizeLabel" destination="iW2-ln-toG" id="zQX-TA-l4Z"/>
+                        <segue destination="gYN-2B-1n7" kind="push" identifier="toShelter" id="Ugt-SK-j3S"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhT-oI-VBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="345" y="-25"/>
+        </scene>
+        <!--ShelterDetailSB-->
+        <scene sceneID="duP-74-9th">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ShelterDetailSB" id="gYN-2B-1n7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="SVU-xV-43d"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SAt-ZA-6i1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="809" y="-26"/>
         </scene>
     </scenes>
 </document>

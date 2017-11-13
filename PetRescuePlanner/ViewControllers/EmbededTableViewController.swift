@@ -55,10 +55,17 @@ class EmbededTableViewController: UITableViewController {
     
     @IBAction func shelterInfoButtonTapped(_ sender: Any) {
         
-        
+        performSegue(withIdentifier: "toShelter", sender: self)
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toShelter" {
+            guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
+            
+            destinationVC.pet = pet
+        }
+    }
 
 }
 
