@@ -49,7 +49,7 @@ extension Pet {
             let address = addressDictionary[apiKeys.itemKey] as? String,
             let descriptionDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
             let description = descriptionDictionary[apiKeys.itemKey] as? String,
-            let idDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
+            let idDictionary = dictionary[apiKeys.idKey] as? [String:Any],
             let id = idDictionary[apiKeys.itemKey] as? String,
             let lastUpdateDictionary = dictionary[apiKeys.lastUpdatKey] as? [String:Any],
             let lastUpdate = lastUpdateDictionary[apiKeys.itemKey] as? String,
@@ -97,14 +97,14 @@ extension Pet {
         self.age = age
         self.animal = animal
         self.breeds = breed
-        self.contactInfo = try? JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted) as NSData
+        self.contactInfo = try! JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted) as NSData
         self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = try? JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
+        self.media = try! JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
         self.mix = mix
         self.name = name
-        self.options = try? JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted) as NSData
+        self.options = try! JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted) as NSData
         self.sex = sex
         self.shelterID = shelterId
         self.size = size

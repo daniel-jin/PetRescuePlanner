@@ -6,7 +6,6 @@
         <attribute name="breeds" attributeType="String" syncable="YES"/>
         <attribute name="contactInfo" attributeType="Binary" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="imageDataArray" attributeType="Binary" syncable="YES"/>
         <attribute name="imageIdCount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdate" attributeType="String" syncable="YES"/>
         <attribute name="media" attributeType="Binary" syncable="YES"/>
@@ -31,7 +30,7 @@
         <attribute name="zip" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Pet" positionX="-216" positionY="108" width="128" height="313"/>
+        <element name="Pet" positionX="-216" positionY="108" width="128" height="300"/>
         <element name="Shelter" positionX="-45" positionY="108" width="128" height="163"/>
     </elements>
 </model>

@@ -16,7 +16,7 @@ class UserController {
     
     private let cloudKitManager = CloudKitManager()
     
-    static var currentUser: User? {
+    var currentUser: User? {
         didSet {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: CloudKit.CurrentUserWasSetNotification, object: nil)
@@ -45,7 +45,7 @@ class UserController {
                 guard let currentUserRecord = records?.first else { completion(false); return }
                 
                 let currentUser = User(cloudKitRecord: currentUserRecord)
-                UserController.currentUser = currentUser
+                self.currentUser = currentUser
                 completion(true)
             })
         }
@@ -53,14 +53,15 @@ class UserController {
     
     // MARK: - CRUD
     // Create
-    func createUser(completion: @escaping ((_ success: Bool) -> Void) = { _ in }) {
+    func createUser(savedPetsRef: [CKReference], completion: @escaping ((_ success: Bool) -> Void) = { _ in }) {
         // Fetch default Apple "user" recordID
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
+            
             guard let appleUserRecordID = appleUserRecordID else { return }
             
             let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
             
-            let user = User(appleUserRef: appleUserRef, savedPets: [])
+            let user = User(appleUserRef: appleUserRef, savedPets: savedPetsRef)
             
             // Get the CKRecord of the user object
             guard let userRecord = CKRecord(user: user) else { return }
@@ -76,7 +77,7 @@ class UserController {
                 }
                 
                 // Set current user and complete
-                UserController.currentUser = user
+                self.currentUser = User(cloudKitRecord: userRecord)
                 completion(true)
             }
         }

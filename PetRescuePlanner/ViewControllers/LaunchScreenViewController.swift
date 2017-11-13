@@ -23,9 +23,11 @@ class LaunchScreenViewController: UIViewController {
         UserController.shared.fetchCurrentUser { (success) in
             
             if !success {
-                UserController.shared.createUser(completion: { (success) in
+                UserController.shared.createUser(savedPetsRef: [CKReference](), completion: { (success) in
                     if success {
-                        appDelegate.window?.rootViewController = searchViewController
+                        DispatchQueue.main.async {
+                            appDelegate.window?.rootViewController = searchViewController
+                        }
                     } else {
                         
                     }

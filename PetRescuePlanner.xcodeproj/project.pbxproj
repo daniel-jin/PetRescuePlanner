@@ -355,7 +355,6 @@
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
 				3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */,
 				5FB0C1191FB6059600E55C05 /* SavedPetsListTableViewController.swift in Sources */,
-				6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */,
 				5F4C16D71FB375230065FEAD /* PetSwipeViewController.swift in Sources */,
 				6A8E01C01FB3AF3B00AEEE09 /* Shelter+CoreDataProperties.swift in Sources */,
 				6A8E01AF1FB22A4000AEEE09 /* CloudKitSyncable.swift in Sources */,

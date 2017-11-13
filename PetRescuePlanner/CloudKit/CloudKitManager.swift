@@ -187,6 +187,16 @@ class CloudKitManager {
         }
     }
     
+    func deleteRecordsWithID(_ recordIDs: [CKRecordID], completion: ((_ records: [CKRecord]?, _ recordIDs: [CKRecordID]?, _ error: Error?) -> Void)?) {
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDs)
+        operation.savePolicy = .ifServerRecordUnchanged
+        
+        operation.modifyRecordsCompletionBlock = completion
+        
+        publicDatabase.add(operation)
+    }
+    
     // MARK: - Modify records
     func modifyRecords(_ records: [CKRecord], perRecordCompletion: ((_ record: CKRecord?, _ error: Error?) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
         

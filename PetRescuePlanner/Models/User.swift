@@ -12,7 +12,14 @@ import CloudKit
 struct User {
     
     let appleUserRef: CKReference
-    var savedPets: [CKReference] = []
+    var savedPets: [CKReference]
+    var cloudKitRecordID: CKRecordID?
+    
+    init(appleUserRef: CKReference, savedPets: [CKReference]) {
+        self.appleUserRef = appleUserRef
+        self.savedPets = savedPets
+        
+    }
     
 }
 
@@ -26,7 +33,10 @@ extension User {
         
         let savedPetsRef = cloudKitRecord[CloudKit.savedPetsRefKey] as? [CKReference] ?? []
         
-        self.init(appleUserRef: appleUserRef, savedPets: savedPetsRef)
+        self.cloudKitRecordID = cloudKitRecord.recordID
+        self.appleUserRef = appleUserRef
+        self.savedPets = savedPetsRef
+
     }
 }
 
@@ -35,7 +45,7 @@ extension CKRecord {
     // MARK: - Failable initializer (convert a User Object into a User CKRecord)
     convenience init?(user: User) {
         // Init CKRecord
-        let recordID = CKRecordID(recordName: UUID().uuidString)
+        let recordID = user.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
         
         self.init(recordType: CloudKit.userRecordType, recordID: recordID)
         
