@@ -192,29 +192,31 @@ class PetController {
         
         for index in 1...count {
             
-            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { return }
+            dispatchGroup.enter()
             
             NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
                 
-                dispatchGroup.enter()
                 
                 if let error = error {
                     NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+                    dispatchGroup.leave()
                     completion(nil)
+                    return
                 }
                 guard let data = data,
                     let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
+                
+                guard petImageArray.count < count else { return }
                 petImageArray.append(image)
                 
                 dispatchGroup.leave()
                 
-                dispatchGroup.notify(queue: .main) {
-                    completion(petImageArray)
-                }
             })
         }
         
-        
+        dispatchGroup.notify(queue: .main) {
+            completion(petImageArray)
+        }
     }
     
 }

@@ -35,7 +35,7 @@ class EmbededTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 5
+        return 7
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,6 +92,8 @@ class EmbededTableViewController: UITableViewController {
         sizeLabel.attributedText = sizeString
         ageLabel.attributedText = ageString
         sexLabel.attributedText = sexString
+        optionsLabel.attributedText = optionsString
+        
         
     }
     

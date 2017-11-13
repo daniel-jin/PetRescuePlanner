@@ -10,12 +10,24 @@ import UIKit
 
 class PetDetailCollectionTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     var pet: Pet? {
         didSet {
-            updateLabels(pet: pet!)
+            PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
+                guard let images = images else { return }
+                self.imageArray = images
+            }
         }
     }
-    var imageArray: [UIImage] = []
+    var imageArray: [UIImage] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.collectionView.reloadData()
+            }
+        }
+    }
 
     
     override func viewDidLoad() {
@@ -46,12 +58,10 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCell", for: indexPath) as? PetImageCollectionViewCell else { return UICollectionViewCell() }
         
         cell.imageView.image = imageArray[indexPath.section]
+        cell.imageView.contentMode = UIViewContentMode.scaleAspectFit
+        cell.imageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.25)
         
         return cell
-    }
-    
-    func updateLabels(pet: Pet) {
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
