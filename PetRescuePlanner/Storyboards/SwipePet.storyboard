@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qmj-np-UNR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qmj-np-UNR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -117,22 +117,12 @@
                                     <outletCollection property="gestureRecognizers" destination="gd0-8N-P6y" appends="YES" id="hkk-8t-k8R"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anW-kL-1Na">
-                                <rect key="frame" x="167.5" y="75" width="39" height="30"/>
-                                <color key="tintColor" red="0.86054372787475586" green="0.060332715511322021" blue="0.37492141127586365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Reset"/>
-                                <connections>
-                                    <action selector="resetButtonTapped:" destination="qmj-np-UNR" eventType="touchUpInside" id="iiA-f3-9Df"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dD2-rU-hyc" firstAttribute="leading" secondItem="Cin-WS-E2S" secondAttribute="leading" id="MEo-uf-vAQ"/>
                             <constraint firstItem="Cin-WS-E2S" firstAttribute="centerY" secondItem="9fn-Zu-3UR" secondAttribute="centerY" id="UMp-J6-as4"/>
                             <constraint firstItem="Cin-WS-E2S" firstAttribute="centerX" secondItem="9fn-Zu-3UR" secondAttribute="centerX" id="gYZ-7A-H88"/>
-                            <constraint firstItem="dD2-rU-hyc" firstAttribute="centerX" secondItem="anW-kL-1Na" secondAttribute="centerX" id="ga7-1C-yhQ"/>
-                            <constraint firstItem="dD2-rU-hyc" firstAttribute="top" secondItem="anW-kL-1Na" secondAttribute="bottom" constant="63" id="qW1-rE-fwQ"/>
                             <constraint firstItem="dD2-rU-hyc" firstAttribute="centerY" secondItem="9fn-Zu-3UR" secondAttribute="centerY" id="une-v5-kwG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UfC-3w-0dH"/>
@@ -190,7 +180,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gB-yC-YsI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1518" y="-149"/>
+            <point key="canvasLocation" x="-1495" y="-287"/>
         </scene>
     </scenes>
     <resources>

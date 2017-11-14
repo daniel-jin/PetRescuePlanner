@@ -21,6 +21,7 @@ class PetController {
 //    let fetchedResultsController: NSFetchedResultsController<Pet>!
     
     var pets: [Pet] = []
+    var offset: String = ""
     
     var savedPets: [Pet] {
         // MARK: - Fetched Results Controller configuration
@@ -142,8 +143,23 @@ class PetController {
         
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
-                queryItems.append(apiKeyItem)
+        queryItems.append(apiKeyItem)
         queryItems.append(outputItem)
+        
+        // Tesing with larger count
+        
+        var count = ""
+        
+        if method == "pet.find" {
+            count = "10"
+        } else {
+            count = "50"
+        }
+        
+        let countItem = URLQueryItem(name: "count", value: count)
+        
+        queryItems.append(countItem)
+        
         components?.queryItems = queryItems
         
         guard let searchUrl = components?.url else { return }
@@ -157,9 +173,18 @@ class PetController {
             guard let data = data else { return }
             guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
                 let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: Any],
+                let offsetDict = petfinderDictionary["lastOffset"] as? [String: Any],
+                let lastOffset = offsetDict[self.keys.itemKey] as? String,
                 let petsDictionary = petfinderDictionary[self.keys.petsKey] as? [String: Any],
-                let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
+                let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else {
+                    return
+            }
+            
+            
             let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0, context: nil) }
+            
+            self.offset = lastOffset
+            
             self.pets = arrayOfPets
             completion(true)
         }
@@ -197,18 +222,34 @@ class PetController {
         
         guard let lastId = pet.imageIdCount else { return }
         let dispatchGroup = DispatchGroup()
-        let imageBaseUrl = URL(string: "http://photos.petfinder.com/photos/pets")
         let count = Int(lastId) ?? 0
-        guard let id = pet.id else { return }
-        var petImageArray: [UIImage] = []
         
-        for index in 1...count {
+        guard let media = pet.media else { return }
+        
+        guard let urls = (try? JSONSerialization.jsonObject(with: media as Data, options: .allowFragments)) as? [String] else { return }
+        
+        var petImageArray: [(String, UIImage)] = []
+        
+        var photoUrls: [String] = []
+        
+        for i in 1...count {
+            for url in urls {
+                if url.contains("/\(i)") && url.contains("width=500")  && !photoUrls.contains(url) {
+                    photoUrls.append(url)
+                }
+            }
+        }
+        
+        let tempUrls = photoUrls
+        photoUrls += tempUrls
+        
+        for photo in photoUrls {
+            
+            guard let photoUrl = URL(string: photo) else { return }
             
             dispatchGroup.enter()
-
-            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { dispatchGroup.leave(); break }
             
-            NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+            NetworkController.performRequest(for: photoUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
                 
                 if let error = error {
                     NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
@@ -216,22 +257,31 @@ class PetController {
                     completion(nil)
                     return
                 }
+                
                 guard let data = data,
                     let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
                 
-                guard petImageArray.count < count else { return }
-                petImageArray.append(image)
+                guard petImageArray.count < count * 2 else { return }
+                
+                petImageArray.append((photo, image))
                 
                 dispatchGroup.leave()
                 
             })
         }
-        
         dispatchGroup.notify(queue: .main) {
-            completion(petImageArray)
+            
+            var images: [UIImage] = []
+            var urlStrings: [String] = []
+            for item in petImageArray {
+                if !urlStrings.contains(item.0) {
+                    urlStrings.append(item.0)
+                    images.append(item.1)
+                }
+            }
+            completion(images)
         }
     }
-    
 }
 
 

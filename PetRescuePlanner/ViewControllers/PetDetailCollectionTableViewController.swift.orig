@@ -66,8 +66,16 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPetInfo" {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> develop
             guard let destinationVC = segue.destination as? EmbededTableViewController else { return }
             destinationVC.pet = pet
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
         }
     }
 }

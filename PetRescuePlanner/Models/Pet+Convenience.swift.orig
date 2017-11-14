@@ -70,9 +70,16 @@ extension Pet {
             let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any],
             let size = sizeDictionary[apiKeys.itemKey] as? String,
             let statusDictionary = dictionary[apiKeys.statusKey] as? [String:Any],
+<<<<<<< HEAD:PetRescuePlanner/Models/Pet.swift
             let status = statusDictionary[apiKeys.itemKey] as? String else {
                 return nil
         }
+=======
+            let status = statusDictionary[apiKeys.itemKey] as? String
+            else {
+                return nil
+            }
+>>>>>>> develop:PetRescuePlanner/Models/Pet+Convenience.swift
         
         var photoEndpoints: [String] = []
         for photoDictionary in photosArray {
