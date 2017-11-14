@@ -34,13 +34,13 @@ class PetController {
         // Perform fetch - handle errors
         do {
             let results = try CoreDataStack.context.fetch(request)
-            return results
+            return results.filter { $0.contactInfo != nil }
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
         }
     }
-    
+
     let cloudKitManager: CloudKitManager
     
     init() {

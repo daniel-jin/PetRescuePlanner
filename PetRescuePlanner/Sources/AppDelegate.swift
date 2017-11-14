@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        PetController.shared.clearPersistentStore()
 //        print(PetController.shared.savedPets.count)
         
+        // If we want to flush cloudkit records for Pet
+        
+        
         
         // Override point for customization after application launch.
         return true
