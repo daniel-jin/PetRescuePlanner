@@ -81,13 +81,10 @@ class ShelterDetailViewController: UIViewController {
     // Mark: - actions
     
     @IBAction func numberButtonTapped(_ sender: Any) {
-        
         guard let shelter = shelter else { return }
+        let phoneUrl = URL(string: "tel://\(shelter.phone)")
         
-        if let url: NSURL = NSURL(string: "tel://\(String(describing: shelter.phone))"),
-            UIApplication.shared.canOpenURL(url as URL) {
-            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-        }
+        UIApplication.shared.open(phoneUrl!, options: [:], completionHandler: nil)
     }
     
     @IBAction func AddressButtonTapped(_ sender: Any) {
