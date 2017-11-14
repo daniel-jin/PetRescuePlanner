@@ -26,6 +26,7 @@ class PetController {
         // MARK: - Fetched Results Controller configuration
         // set up request
         let request: NSFetchRequest<Pet> = Pet.fetchRequest()
+//        request.predicate = NSPredicate(format: <#T##String#>, <#T##args: CVarArg...##CVarArg#>) // Set up predicate to filter pets?
         
         // Set up sort descriptors for the request
         request.sortDescriptors = [NSSortDescriptor(key: "breeds", ascending: true)]

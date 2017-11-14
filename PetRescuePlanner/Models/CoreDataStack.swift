@@ -23,6 +23,12 @@ class CoreDataStack {
     }()
     
     static var context: NSManagedObjectContext { return container.viewContext }
+    
+    static var tempContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = CoreDataStack.context
+        return context
+    }()
     let pet: Pet = context.insertObject()
 }
 

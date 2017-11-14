@@ -20,7 +20,7 @@ extension Pet {
         if let context = context {
             self.init(context: context)
         } else {
-            let entity = NSEntityDescription.entity(forEntityName: "Pet", in: CoreDataStack.context)!
+            let entity = NSEntityDescription.entity(forEntityName: "Pet", in: CoreDataStack.tempContext)!
             self.init(entity: entity, insertInto: nil)
         }
         

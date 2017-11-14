@@ -208,7 +208,7 @@ extension PetController {
             }
             guard let records = records else { return }
             
-            records.forEach { Pet(cloudKitRecord: $0, context: CoreDataStack.context) }
+            records.forEach { Pet(cloudKitRecord: $0, context: nil) }
             
             self.saveToPersistantStore()
             

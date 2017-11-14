@@ -32,7 +32,7 @@ class Pet: NSManagedObject, CloudKitSyncable {
         if let context = context {
             self.init(context: context)
         } else {
-            self.init(entity: Pet.entity(), insertInto: nil)
+            self.init(entity: Pet.entity(), insertInto: CoreDataStack.tempContext)
         }
         
         // Check for CKRecord's values and record type
