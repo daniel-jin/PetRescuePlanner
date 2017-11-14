@@ -137,7 +137,15 @@ class PetController {
         
         // Tesing with larger count
         
-        let countItem = URLQueryItem(name: "count", value: "10")
+        var count = ""
+        
+        if method == "pet.find" {
+            count = "10"
+        } else {
+            count = "50"
+        }
+        
+        let countItem = URLQueryItem(name: "count", value: count)
         
         queryItems.append(countItem)
         
