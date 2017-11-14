@@ -128,17 +128,17 @@ class PetController {
         var petImageArray: [(String, UIImage)] = []
         
         var photoUrls: [String] = []
-        var debugStrings: [String] = []
         
         for i in 1...count {
             for url in urls {
-                if url.contains("/\(i)") && url.contains("width=500") && !photoUrls.contains(url) {
+                if url.contains("/\(i)") && url.contains("width=500")  && !photoUrls.contains(url) {
                     photoUrls.append(url)
                 }
             }
         }
         
-        // needs to run twice as many times? 
+        let tempUrls = photoUrls
+        photoUrls += tempUrls
         
         for photo in photoUrls {
             
@@ -158,11 +158,8 @@ class PetController {
                 guard let data = data,
                     let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
                 
-                guard petImageArray.count < count else { return }
+                guard petImageArray.count < count * 2 else { return }
                 
-                DispatchQueue.main.async {
-                    debugStrings.append(photo)
-                }
                 petImageArray.append((photo, image))
                 
                 dispatchGroup.leave()
