@@ -48,10 +48,7 @@ class ShelterDetailViewController: UIViewController {
             
             
             
-            if let url:NSURL = NSURL(string: "tel://\(String(describing: self.numberLabel.text))"),
-                UIApplication.shared.canOpenURL(url as URL) {
-                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-            }
+           
             
             // Mark: - Map view
             
@@ -88,6 +85,15 @@ class ShelterDetailViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     
     // Mark: - actions
+    @IBAction func callButtonTapped(_ sender: Any) {
+        
+        guard let shelter = shelter else { return }
+        
+        if let url: NSURL = NSURL(string: "tel://\(String(describing: shelter.phone))"),
+            UIApplication.shared.canOpenURL(url as URL) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    }
     
     @IBAction func viewPetsAtShelterButtonTapped(_ sender: Any) {
         
