@@ -14,6 +14,8 @@ class ShelterController {
     
     static let shelterShared = ShelterController()
     
+    var shelters: [Shelter] = []
+    
     init() {
         
     }

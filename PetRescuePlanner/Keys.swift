@@ -93,6 +93,12 @@ struct CloudKit {
     
     static let petRecordType = "Pet"
     
+    static let userRecordType = "User"
+    
+    static let savedPetsRefKey = "savedPets"
+    
+    // Notification center
+    static let CurrentUserWasSetNotification = Notification.Name("currentUserWasSet")
     
 }
 
