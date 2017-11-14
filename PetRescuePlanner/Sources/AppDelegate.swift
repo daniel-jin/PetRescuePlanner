@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(PetController.shared.savedPets.count)
         
         // If we want to flush cloudkit records for Pet
-        
+//        CloudKitManager().flushPetRecords()
         
         
         // Override point for customization after application launch.
