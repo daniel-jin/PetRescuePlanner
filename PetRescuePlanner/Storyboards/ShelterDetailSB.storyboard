@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uUa-0m-lGg">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="uUa-0m-lGg" customClass="ShelterDetailViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xrv-xN-qZb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32b-aX-hZW">
-                                <rect key="frame" x="0.0" y="64" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="BBr-ad-l20"/>
                                 </constraints>
@@ -28,16 +28,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="U6E-Wf-yLk">
-                                <rect key="frame" x="0.0" y="209" width="414" height="305"/>
+                                <rect key="frame" x="0.0" y="209" width="320" height="137"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg3-OS-og2">
-                                <rect key="frame" x="19.999999999999996" y="594" width="40.666666666666657" height="21"/>
+                                <rect key="frame" x="20" y="426" width="40.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.27650937440000001" green="0.26893666389999998" blue="0.43528982999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayh-8O-G8o">
-                                <rect key="frame" x="19" y="666" width="372.66666666666669" height="50"/>
+                                <rect key="frame" x="14.5" y="498" width="288" height="50"/>
                                 <color key="backgroundColor" red="0.87685841320000002" green="0.22127610449999999" blue="0.36875227090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsq-Nw-1Zb">
-                                <rect key="frame" x="20.666666666666657" y="623" width="372.66666666666663" height="35"/>
+                                <rect key="frame" x="16" y="455" width="288" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="2LQ-9r-II6"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6Y-Xo-cBj">
-                                <rect key="frame" x="20.666666666666657" y="166" width="372.66666666666663" height="35"/>
+                                <rect key="frame" x="16" y="166" width="288" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Wfu-PT-cSR"/>
                                 </constraints>
@@ -80,13 +80,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3h-rc-4P2">
-                                <rect key="frame" x="20" y="522" width="115" height="21"/>
+                                <rect key="frame" x="20" y="354" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.27650937440000001" green="0.26893666389999998" blue="0.43528982999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPG-uY-Dl5" userLabel="number Button">
-                                <rect key="frame" x="20.666666666666657" y="551" width="372.66666666666663" height="35"/>
+                                <rect key="frame" x="16" y="383" width="288" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="aX4-Ta-Rbx"/>
                                 </constraints>
@@ -98,7 +98,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="numberButtonTapped:" destination="uUa-0m-lGg" eventType="touchUpInside" id="Qd9-SJ-RTJ"/>
+                                    <action selector="numberButtonTapped:" destination="uUa-0m-lGg" eventType="touchUpInside" id="JRf-Cz-OFl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -145,16 +145,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a82-tS-qUR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="v8u-us-Ot8" userLabel="call number">
-                    <connections>
-                        <action selector="callNumber:" destination="uUa-0m-lGg" id="7l7-Dy-xxd"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="fbt-vT-xdt" userLabel="get directions" colorLabel="IBBuiltInLabel-Blue">
-                    <connections>
-                        <action selector="getDirections:" destination="uUa-0m-lGg" id="GyD-1e-Kiz"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1311.5942028985507" y="223.36956521739131"/>
         </scene>
@@ -172,7 +162,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WVo-1C-uvv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T5j-nI-auU">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

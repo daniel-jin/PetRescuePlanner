@@ -79,13 +79,27 @@ class ShelterDetailViewController: UIViewController {
     @IBOutlet weak var emailButton: UIButton!
     
     // Mark: - actions
-    
     @IBAction func numberButtonTapped(_ sender: Any) {
         guard let shelter = shelter else { return }
-        let phoneUrl = URL(string: "tel://\(shelter.phone)")
+        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         
-        UIApplication.shared.open(phoneUrl!, options: [:], completionHandler: nil)
+        if let phoneCallURL:URL = URL(string: "tel:\(number)") {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                let alertController = UIAlertController(title: "PetRescuePlanner", message: "Are you sure you want to call \n\(String(describing: self.shelter?.phone))?", preferredStyle: .alert)
+                let yesPressed = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                    application.open(phoneCallURL)
+                })
+                let noPressed = UIAlertAction(title: "No", style: .default, handler: { (action) in
+                    
+                })
+                alertController.addAction(yesPressed)
+                alertController.addAction(noPressed)
+                present(alertController, animated: true, completion: nil)
+            }
+        }
     }
+    
     
     @IBAction func AddressButtonTapped(_ sender: Any) {
         
@@ -123,6 +137,22 @@ class ShelterDetailViewController: UIViewController {
         
     }
 }
+
+//extension String {
+//
+//    var length : Int {
+//        return self.characters.count
+//    }
+//
+//    func digitsOnly() -> String{
+//        let stringArray = self.components(separatedBy: CharacterSet)
+//        let stringArray = self.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+//        let newString = stringArray.joinWithSeparator("")
+//
+//        return newString
+//    }
+//
+//}
 
 
 
