@@ -249,6 +249,13 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                     return
                 }
                 DispatchQueue.main.async {
+                    destinationVC.zip = self.zipCodeTextField.text
+                    destinationVC.animal = self.animal
+                    destinationVC.size = self.size
+                    destinationVC.sex = self.sex
+                    destinationVC.age = self.age
+                    destinationVC.breed = self.breed
+                    destinationVC.offSet = PetController.shared.offset
                     destinationVC.pets = PetController.shared.pets
                 }
             })

@@ -21,6 +21,7 @@ class PetController {
 //    let fetchedResultsController: NSFetchedResultsController<Pet>!
     
     var pets: [Pet] = []
+    var offset: String = ""
     
     var savedPets: [Pet] {
         // MARK: - Fetched Results Controller configuration
@@ -136,7 +137,7 @@ class PetController {
         
         // Tesing with larger count
         
-        let countItem = URLQueryItem(name: "count", value: "100")
+        let countItem = URLQueryItem(name: "count", value: "10")
         
         queryItems.append(countItem)
         
@@ -153,9 +154,18 @@ class PetController {
             guard let data = data else { return }
             guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
                 let petfinderDictionary = jsonDictionary[self.keys.petFinderKey] as? [String: Any],
+                let offsetDict = petfinderDictionary["lastOffset"] as? [String: Any],
+                let lastOffset = offsetDict[self.keys.itemKey] as? String,
                 let petsDictionary = petfinderDictionary[self.keys.petsKey] as? [String: Any],
-                let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else { return }
+                let petsArray = petsDictionary[self.keys.petKey] as? [[String: Any]] else {
+                    return
+            }
+            
+            
             let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0, context: nil) }
+            
+            self.offset = lastOffset
+            
             self.pets = arrayOfPets
             completion(true)
         }
@@ -194,10 +204,10 @@ class PetController {
         guard let lastId = pet.imageIdCount else { return }
         let dispatchGroup = DispatchGroup()
         let count = Int(lastId) ?? 0
-        guard let id = pet.id else { return }
-        var petImageArray: [UIImage] = []
         
-        let urls = pet.media
+        guard let media = pet.media else { return }
+        
+        guard let urls = (try? JSONSerialization.jsonObject(with: media as Data, options: .allowFragments)) as? [String] else { return }
         
         var petImageArray: [(String, UIImage)] = []
         
@@ -220,7 +230,7 @@ class PetController {
             
             dispatchGroup.enter()
             
-            NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+            NetworkController.performRequest(for: photoUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
                 
                 if let error = error {
                     NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
