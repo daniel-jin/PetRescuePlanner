@@ -13,12 +13,6 @@ import CloudKit
 class SavedPetsListTableViewController: UITableViewController {
     
     var savedPets = PetController.shared.savedPets
-//        didSet{
-//            self.tableView.reloadData()
-//        }
-    
-    
-    
     
     // MARK: - Table View Life Cycle
 
