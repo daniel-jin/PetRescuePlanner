@@ -116,5 +116,6 @@ extension Pet {
         self.status = status
         self.recordIDString = UUID().uuidString
         self.imageIdCount = lastId
+        self.dateAdded = NSDate()
     }
 }

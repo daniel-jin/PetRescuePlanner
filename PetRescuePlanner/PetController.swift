@@ -29,7 +29,7 @@ class PetController {
         let request: NSFetchRequest<Pet> = Pet.fetchRequest()
         
         // Set up sort descriptors for the request
-        request.sortDescriptors = [NSSortDescriptor(key: "breeds", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "dateAdded", ascending: false)]
         
         // Perform fetch - handle errors
         do {
