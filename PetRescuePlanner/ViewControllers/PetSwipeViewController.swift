@@ -12,6 +12,14 @@ class PetSwipeViewController: UIViewController {
     
     var divisor: CGFloat!
     
+    var offSet: String? = nil
+    var zip: String? = nil
+    var animal: String? = nil
+    var size: String? = nil
+    var sex: String? = nil
+    var age: String? = nil
+    var breed: String? = nil
+    
     var pets: [Pet] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -54,12 +62,7 @@ class PetSwipeViewController: UIViewController {
     }
     
     // MARK: - Actions 
-    
-    @IBAction func resetButtonTapped(_ sender: Any) {
         
-        resetCard()
-    }
-    
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         
         let card = sender.view!
@@ -99,7 +102,11 @@ class PetSwipeViewController: UIViewController {
                         self.resetCard()
                         self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
+                        
                         self.createLastCard()
+                        
+                        self.fetchMorePets()
+
                     }
                 })
                 
@@ -135,7 +142,10 @@ class PetSwipeViewController: UIViewController {
                         self.resetCard()
                         self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
+                        
                         self.createLastCard()
+                        
+                        self.fetchMorePets()
                     }
                 })
                 
@@ -223,6 +233,27 @@ class PetSwipeViewController: UIViewController {
             
             self.card.isHidden = false
             
+        }
+    }
+    
+    func fetchMorePets() {
+        if indexIntoPets == pets.count - 1 {
+            
+            let methods = API.Methods()
+            
+            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success) in
+                if !success {
+                    NSLog("No more pets fetched In swipe to save view")
+                    return
+                }
+                self.offSet = PetController.shared.offset
+                self.pets = PetController.shared.pets
+                self.indexIntoPets = 0
+                
+                DispatchQueue.main.async {
+                    self.card2.isHidden = false
+                }
+            })
         }
     }
     
