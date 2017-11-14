@@ -102,7 +102,7 @@ class EmbededTableViewController: UITableViewController {
         if segue.identifier == "toShelter" {
             guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
             guard let pet = pet else { return }
-            ShelterController.shelterShared.fetchShelter(id: pet.shelterId) { (success) in
+            ShelterController.shelterShared.fetchShelter(id: pet.shelterID) { (success) in
                 if !success {
                     NSLog("Error")
                     return
