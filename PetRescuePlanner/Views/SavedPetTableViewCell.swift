@@ -29,7 +29,7 @@ class SavedPetTableViewCell: UITableViewCell {
         guard let pet = pet else { return }
         
         nameLabel.text = pet.name
-        descriptionLabel.text = pet.description
+        descriptionLabel.text = pet.petDescription
         
         PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
             if !success {

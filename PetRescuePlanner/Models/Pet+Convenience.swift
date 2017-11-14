@@ -1,45 +1,35 @@
 //
-//  Pet.swift
+//  Pet+Convenience.swift
 //  PetRescuePlanner
 //
-//  Created by Daniel Rodosky on 11/6/17.
+//  Created by Daniel Jin on 11/7/17.
 //  Copyright © 2017 Daniel Rodosky. All rights reserved.
 //
 
 import Foundation
+import CoreData
 import CloudKit
 import UIKit
 
-struct Pet {
+extension Pet {
+            
+    @discardableResult convenience init?(dictionary: [String: Any],
+                                        context: NSManagedObjectContext? = CoreDataStack.context) {
+        // Init with context first
+        
+        if let context = context {
+            self.init(context: context)
+        } else {
+            let entity = NSEntityDescription.entity(forEntityName: "Pet", in: CoreDataStack.tempContext)!
+            self.init(entity: entity, insertInto: nil)
+        }
+        
+        let apiKeys = API.Keys()
     
-    let apiKeys = API.Keys()
-    
-    // MARK: - Properties
-    let age: String
-    let animal: String
-    let breeds: String
-    let contactInfo: [String:String]
-    let description: String
-    let id: String
-    let lastUpdate: String
-    let media: [String]
-    let mix: String
-    let name: String
-    var options: [String]
-    let sex: String
-    let shelterId: String
-    let size: String
-    let status: String
-    let imageIdCount: String
-    
-    var cloudKitRecordID: CKRecordID?
-    
-    // MARK: - Computed Properties
-    
-    
-    // MARK: - Failable init
-    init?(dictionary: [String: Any]) {
+        // MARK: - Failable init
         guard let ageDictionary = dictionary[apiKeys.ageKey] as? [String:Any],
+            let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
+            let name = nameDictionary[apiKeys.itemKey] as? String,
             let age = ageDictionary[apiKeys.itemKey] as? String,
             let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
             let animal = animalDictionary[apiKeys.itemKey] as? String,
@@ -72,10 +62,7 @@ struct Pet {
             let lastId = lastImageDictionary[apiKeys.imageId] as? String,
             let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any],
             let mix = mixDictionary[apiKeys.itemKey] as? String,
-            let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
-            let name = nameDictionary[apiKeys.itemKey] as? String,
             let optionsDictionary = dictionary[apiKeys.optionsKey] as? [String:Any],
-            let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]],
             let sexDictionary = dictionary[apiKeys.sexKey] as? [String:Any],
             let sex = sexDictionary[apiKeys.itemKey] as? String,
             let shelterIdDictionary = dictionary[apiKeys.shelterIdKey] as? [String:Any],
@@ -89,14 +76,18 @@ struct Pet {
         
         var photoEndpoints: [String] = []
         for photoDictionary in photosArray {
-            guard let imageEndPoint = photoDictionary[apiKeys.itemKey] as? String else { return nil }
+            guard let imageEndPoint = photoDictionary[apiKeys.itemKey] as? String else { return }
             photoEndpoints.append(imageEndPoint)
         }
         
         var optionsArray: [String] = []
-        for optionsDictionary in optionArray {
-            guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return nil }
-            optionsArray.append(option)
+        if !optionsDictionary.isEmpty {
+            if let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]] {
+                for optionsDictionary in optionArray {
+                    guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
+                    optionsArray.append(option)
+                }
+            }
         }
         
         var contactDictionaryTemp: [String:String] = [:]
@@ -107,23 +98,23 @@ struct Pet {
         contactDictionaryTemp[apiKeys.zipKey] = zip
         contactDictionaryTemp[apiKeys.addressKey] = address
         
+        // Initialize rest of properties
         self.age = age
         self.animal = animal
         self.breeds = breed
-        self.contactInfo = contactDictionaryTemp
-        self.description = description
+        self.contactInfo = try! JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted) as NSData
+        self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = photoEndpoints
+        self.media = try! JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
         self.mix = mix
         self.name = name
-        self.options = optionsArray
+        self.options = try! JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted) as NSData
         self.sex = sex
-        self.shelterId = shelterId
+        self.shelterID = shelterId
         self.size = size
         self.status = status
+        self.recordIDString = UUID().uuidString
         self.imageIdCount = lastId
     }
-    
 }
-
