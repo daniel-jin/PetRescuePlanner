@@ -7,22 +7,23 @@
 //
 
 import UIKit
+import CoreData
+import CloudKit
 
 class SavedPetsListTableViewController: UITableViewController {
     
-    var savedPets: [Pet]? = []
-    {
-        didSet{
-            self.tableView.reloadData()
-        }
-    }
+    var savedPets = PetController.shared.savedPets
+//        didSet{
+//            self.tableView.reloadData()
+//        }
+    
+    
+    
     
     // MARK: - Table View Life Cycle
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
+        super.viewDidLoad()        
     }
 
     // MARK: - Table view data source
@@ -32,8 +33,7 @@ class SavedPetsListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let pets = savedPets else { return 0 }
-        return pets.count
+        return savedPets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,10 +41,7 @@ class SavedPetsListTableViewController: UITableViewController {
             return SavedPetTableViewCell()
         }
         
-        guard let pets = savedPets else {
-            return SavedPetTableViewCell()
-        }
-        let pet = pets[indexPath.row]
+        let pet = savedPets[indexPath.row]
         cell.pet = pet
 
         return cell
@@ -73,8 +70,8 @@ class SavedPetsListTableViewController: UITableViewController {
         // Segue to Detail view with pet and fetch shelter
         if segue.identifier == "petCellToDetailSegue" {
             
-            guard let indexPath = tableView.indexPathForSelectedRow, let pets = savedPets else { return }
-            let pet = pets[indexPath.row]
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let pet = savedPets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             

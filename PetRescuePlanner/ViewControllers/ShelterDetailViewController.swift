@@ -30,12 +30,7 @@ class ShelterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
     }
-    
-    
     
     func updateShelterDetailView(shelter: Shelter){
         
@@ -111,7 +106,7 @@ class ShelterDetailViewController: UIViewController {
             guard let destinationVC = segue.destination as? SavedPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
-            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterId, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
                 if !success {
                     NSLog("Error fetching pets from shelter")
                     return
