@@ -28,7 +28,6 @@ class EmbededTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLabels()
-
     }
 
     // MARK: - Table view data source
@@ -84,36 +83,26 @@ class EmbededTableViewController: UITableViewController {
         ageLabel.attributedText = ageString
         sexLabel.attributedText = sexString
         optionsLabel.attributedText = optionsString
-        
-        
     }
     
     @IBAction func shelterInfoButtonTapped(_ sender: Any) {
-        
         performSegue(withIdentifier: "toShelter", sender: self)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toShelter" {
             guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
-            
             guard let pet = pet else { return }
-
-            
             ShelterController.shelterShared.fetchShelter(id: pet.shelterId) { (success) in
                 if !success {
                     NSLog("Error")
                     return
-                    
                 }
                 destinationVC.shelter = ShelterController.shelterShared.shelter
                 destinationVC.pet = pet
-                
             }
         }
     }
-
 }
 
 
