@@ -45,12 +45,13 @@ class ShelterDetailViewController: UIViewController {
             self.numberLabel.text = shelter.phone
             self.emailLabel.text = shelter.email
             
-            var numberToPhone = self.numberLabel.text
-            numberToPhone = shelter.phone
             
             
-            guard let numberUrl = URL(string: "tel://\(String(describing: numberToPhone))") else { return }
-            UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+            
+            if let url:NSURL = NSURL(string: "tel://\(String(describing: self.numberLabel.text))"),
+                UIApplication.shared.canOpenURL(url as URL) {
+                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            }
             
             // Mark: - Map view
             
