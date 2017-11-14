@@ -36,16 +36,9 @@ class ShelterDetailViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.shelterNameLabel.text = shelter.name
-            self.addressLabel.text = "\(shelter.address), \(shelter.city), \(shelter.state)"
-            self.numberLabel.text = shelter.phone
-            self.emailLabel.text = shelter.email
-            
-            var numberToPhone = self.numberLabel.text
-            numberToPhone = shelter.phone
-            
-            
-            guard let numberUrl = URL(string: "tel://\(String(describing: numberToPhone))") else { return }
-            UIApplication.shared.open(numberUrl, options: [:], completionHandler: nil)
+            self.addressbutton.setTitle("\(shelter.address) \(shelter.city), \(shelter.state)", for: .normal)
+            self.numberButton.setTitle(shelter.phone, for: .normal)
+            self.emailButton.setTitle(shelter.email, for: .normal)
             
             // Mark: - Map view
             
@@ -76,26 +69,35 @@ class ShelterDetailViewController: UIViewController {
     // Mark: - outlets
     
     @IBOutlet weak var shelterNameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var shelterMapView: MKMapView!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var addressbutton: UIButton!
+    @IBOutlet weak var numberButton: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
     
     // Mark: - actions
     
-    @IBAction func viewPetsAtShelterButtonTapped(_ sender: Any) {
+    @IBAction func numberButtonTapped(_ sender: Any) {
         
-        performSegue(withIdentifier: "toPetsList", sender: self)
+        guard let shelter = shelter else { return }
         
+        if let url: NSURL = NSURL(string: "tel://\(String(describing: shelter.phone))"),
+            UIApplication.shared.canOpenURL(url as URL) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
     }
     
-    
-    @IBAction func directionsButtonTapped(_ sender: Any) {
+    @IBAction func AddressButtonTapped(_ sender: Any) {
         
         guard let shelter = shelter else { return }
         
         let mapsDirectionURL = URL(string: "http://maps.apple.com/?daddr=\(shelter.latitude),\(shelter.longitude)")!
         UIApplication.shared.open(mapsDirectionURL, completionHandler: nil)
+    }
+    
+    @IBAction func viewPetsAtShelterButtonTapped(_ sender: Any) {
+        
+        performSegue(withIdentifier: "toPetsList", sender: self)
+        
     }
     
     // Mark: - navigation

@@ -30,7 +30,7 @@ struct Shelter {
     // Mark: - Failable
     init?(dictionary: [String: Any]) {
         guard let addressDictionary = dictionary[ShelterKeys.addressKey] as? [String: Any],
-            let address = addressDictionary[apiKey.itemKey] as? String?,
+            let address = addressDictionary[apiKey.itemKey] as? String,
             let idDictionary = dictionary[ShelterKeys.idKey] as? [String: Any],
             let id = idDictionary[apiKey.itemKey] as? String,
             let nameDictionary = dictionary[ShelterKeys.nameKey] as? [String: Any],
@@ -50,12 +50,7 @@ struct Shelter {
             let zipDictionary = dictionary[ShelterKeys.zipKey] as? [String: Any],
             let zip = zipDictionary[apiKey.itemKey] as? String else { return nil }
         
-        if let address = address {
-            self.address = address
-        } else {
-            self.address = ""
-        }
-        
+        self.address = address
         self.id = id 
         self.name = name
         self.state = state
@@ -65,5 +60,7 @@ struct Shelter {
         self.longitude = Double(longitude)!
         self.latitude = Double(latitude)!
         self.zip = zip
+        
+        
     }
 }
