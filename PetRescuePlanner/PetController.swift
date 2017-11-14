@@ -122,38 +122,96 @@ class PetController {
         let imageBaseUrl = URL(string: "http://photos.petfinder.com/photos/pets")
         let count = Int(lastId) ?? 0
         let id = pet.id
-        var petImageArray: [UIImage] = []
         
-        for index in 1...count {
+        let urls = pet.media
+        
+        var petImageArray: [(String, UIImage)] = []
+        
+        var photoUrls: [String] = []
+        var debugStrings: [String] = []
+        
+        for i in 1...count {
+            for url in urls {
+                if url.contains("/\(i)") && url.contains("width=500") && !photoUrls.contains(url) {
+                    photoUrls.append(url)
+                }
+            }
+        }
+        
+        // needs to run twice as many times? 
+        
+        for photo in photoUrls {
+            
+            guard let photoUrl = URL(string: photo) else { return }
             
             dispatchGroup.enter()
-
-            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { dispatchGroup.leave(); break }
             
             
-            NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
-                
-                
+            NetworkController.performRequest(for: photoUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
                 if let error = error {
                     NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
                     dispatchGroup.leave()
                     completion(nil)
                     return
                 }
+                
                 guard let data = data,
                     let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
                 
                 guard petImageArray.count < count else { return }
-                petImageArray.append(image)
+                
+                DispatchQueue.main.async {
+                    debugStrings.append(photo)
+                }
+                petImageArray.append((photo, image))
                 
                 dispatchGroup.leave()
                 
             })
         }
-        
         dispatchGroup.notify(queue: .main) {
-            completion(petImageArray)
+            
+            var images: [UIImage] = []
+            var urlStrings: [String] = []
+            for item in petImageArray {
+                if !urlStrings.contains(item.0) {
+                    urlStrings.append(item.0)
+                    images.append(item.1)
+                }
+            }
+            completion(images)
         }
+        
+//
+//        for index in 1...count {
+//
+//            dispatchGroup.enter()
+//
+//            guard let imageEndpoint = imageBaseUrl?.appendingPathComponent(id).appendingPathComponent("\(index)/") else { dispatchGroup.leave(); break }
+//
+//
+//            NetworkController.performRequest(for: imageEndpoint, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+//
+//                if let error = error {
+//                    NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
+//                    dispatchGroup.leave()
+//                    completion(nil)
+//                    return
+//                }
+//                guard let data = data,
+//                    let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
+//
+//                guard petImageArray.count < count else { return }
+//                petImageArray.append(image)
+//
+//                dispatchGroup.leave()
+//
+//            })
+//        }
+//
+//        dispatchGroup.notify(queue: .main) {
+//            completion(petImageArray)
+//        }
     }
     
 }

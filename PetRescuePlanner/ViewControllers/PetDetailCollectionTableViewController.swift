@@ -23,7 +23,6 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     var imageArray: [UIImage] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
                 self.collectionView.reloadData()
             }
         }
@@ -57,7 +56,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCell", for: indexPath) as? PetImageCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.imageView.image = imageArray[indexPath.section]
+        cell.imageView.image = imageArray[indexPath.row]
         cell.imageView.contentMode = UIViewContentMode.scaleAspectFit
         cell.imageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.25)
         
