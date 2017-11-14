@@ -13,7 +13,7 @@
         <scene sceneID="kwo-F1-DMN">
             <objects>
                 <tableViewController id="qJE-Lt-hyQ" customClass="PetDetailCollectionTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j2f-wL-8NI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j2f-wL-8NI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,10 +50,10 @@
                                                                 </subviews>
                                                             </view>
                                                             <constraints>
-                                                                <constraint firstItem="hgT-1L-Imb" firstAttribute="top" secondItem="q2R-TO-11E" secondAttribute="top" id="AGV-ya-6pB"/>
-                                                                <constraint firstAttribute="bottom" secondItem="hgT-1L-Imb" secondAttribute="bottom" id="GqY-mq-hps"/>
-                                                                <constraint firstAttribute="trailing" secondItem="hgT-1L-Imb" secondAttribute="trailing" id="Pnb-0F-UIJ"/>
-                                                                <constraint firstItem="hgT-1L-Imb" firstAttribute="leading" secondItem="q2R-TO-11E" secondAttribute="leading" id="o4L-hW-twB"/>
+                                                                <constraint firstItem="hgT-1L-Imb" firstAttribute="width" secondItem="q2R-TO-11E" secondAttribute="width" id="A8V-Oe-4LB"/>
+                                                                <constraint firstItem="hgT-1L-Imb" firstAttribute="height" secondItem="q2R-TO-11E" secondAttribute="height" id="Quy-UK-Bzi"/>
+                                                                <constraint firstItem="hgT-1L-Imb" firstAttribute="centerY" secondItem="q2R-TO-11E" secondAttribute="centerY" id="ajg-cM-nXw"/>
+                                                                <constraint firstItem="hgT-1L-Imb" firstAttribute="centerX" secondItem="q2R-TO-11E" secondAttribute="centerX" id="baL-nI-AhN"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="hgT-1L-Imb" id="7za-VJ-KWE"/>
@@ -68,17 +68,17 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="O90-bf-d3N" secondAttribute="trailing" id="F3G-I2-SQu"/>
-                                                <constraint firstItem="O90-bf-d3N" firstAttribute="top" secondItem="5Tu-Ew-nf9" secondAttribute="top" id="d0A-YV-eC4"/>
+                                                <constraint firstItem="O90-bf-d3N" firstAttribute="top" secondItem="5Tu-Ew-nf9" secondAttribute="top" id="JjV-Zo-xT0"/>
                                                 <constraint firstItem="O90-bf-d3N" firstAttribute="leading" secondItem="5Tu-Ew-nf9" secondAttribute="leading" id="mQq-MH-FpJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="O90-bf-d3N" secondAttribute="bottom" id="zRd-pd-zxA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="petInfoCell" rowHeight="434" id="3Tx-Ue-wvP">
-                                        <rect key="frame" x="0.0" y="215" width="375" height="434"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="petInfoCell" rowHeight="454" id="3Tx-Ue-wvP">
+                                        <rect key="frame" x="0.0" y="215" width="375" height="454"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Tx-Ue-wvP" id="Bln-Ir-ZH7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="433.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="453.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdZ-uy-vae">
