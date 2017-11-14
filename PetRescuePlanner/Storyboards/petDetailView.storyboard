@@ -13,7 +13,7 @@
         <scene sceneID="kwo-F1-DMN">
             <objects>
                 <tableViewController id="qJE-Lt-hyQ" customClass="PetDetailCollectionTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j2f-wL-8NI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j2f-wL-8NI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,15 +74,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="petInfoCell" rowHeight="454" id="3Tx-Ue-wvP">
-                                        <rect key="frame" x="0.0" y="215" width="375" height="454"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="petInfoCell" rowHeight="441" id="3Tx-Ue-wvP">
+                                        <rect key="frame" x="0.0" y="215" width="375" height="441"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Tx-Ue-wvP" id="Bln-Ir-ZH7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="453.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="440.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdZ-uy-vae">
-                                                    <rect key="frame" x="16" y="11" width="343" height="412"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="419"/>
                                                     <connections>
                                                         <segue destination="yhQ-co-Y5d" kind="embed" identifier="toPetInfo" id="DsD-hn-l2W"/>
                                                     </connections>
@@ -117,7 +117,7 @@
             <objects>
                 <tableViewController id="yhQ-co-Y5d" customClass="EmbededTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BMJ-6f-N9K">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="412"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OQT-lt-rGW">
@@ -134,7 +134,7 @@
                         <sections>
                             <tableViewSection id="8nk-3f-tp6">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PetName" id="5kP-5t-Uws">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PetName" id="5kP-5t-Uws">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5kP-5t-Uws" id="eAD-Ke-7Wa">
@@ -160,7 +160,7 @@
                             </tableViewSection>
                             <tableViewSection id="0P1-e5-Uy7">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionCell" id="IWw-eE-e1S">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionCell" id="IWw-eE-e1S">
                                         <rect key="frame" x="0.0" y="44" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IWw-eE-e1S" id="fuy-iL-B3w">
@@ -186,7 +186,7 @@
                             </tableViewSection>
                             <tableViewSection id="Ylz-9a-wfI">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MixCell" id="t0q-14-mQQ">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MixCell" id="t0q-14-mQQ">
                                         <rect key="frame" x="0.0" y="88" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t0q-14-mQQ" id="HnN-Lc-7dS">
@@ -212,7 +212,7 @@
                             </tableViewSection>
                             <tableViewSection id="HuP-Qc-xso">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SizeCell" id="2UU-cL-W1g">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SizeCell" id="2UU-cL-W1g">
                                         <rect key="frame" x="0.0" y="132" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2UU-cL-W1g" id="8Zl-UO-HsV">
@@ -238,7 +238,7 @@
                             </tableViewSection>
                             <tableViewSection id="mTG-n3-SeI">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="dMK-Hb-yyN" userLabel="Age Cell">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="dMK-Hb-yyN" userLabel="Age Cell">
                                         <rect key="frame" x="0.0" y="176" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dMK-Hb-yyN" id="6ea-cP-4Bc">
@@ -264,7 +264,7 @@
                             </tableViewSection>
                             <tableViewSection id="hlk-mb-Ybk">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="mGk-FT-bss" userLabel="Sex Cell">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Age/SexCell" id="mGk-FT-bss" userLabel="Sex Cell">
                                         <rect key="frame" x="0.0" y="220" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mGk-FT-bss" id="I9U-d4-F0H">
@@ -290,7 +290,7 @@
                             </tableViewSection>
                             <tableViewSection id="g9K-Ub-dex">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Options" id="FRR-ju-wZR" userLabel="Options Cell">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Options" id="FRR-ju-wZR" userLabel="Options Cell">
                                         <rect key="frame" x="0.0" y="264" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FRR-ju-wZR" id="hd4-lL-Slt">
@@ -320,6 +320,7 @@
                             <outlet property="delegate" destination="yhQ-co-Y5d" id="j1C-HU-Dps"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="ageLabel" destination="MaM-J7-4Dt" id="WCb-zm-egQ"/>
                         <outlet property="descriptionLabel" destination="ceh-9G-xkh" id="A2A-qd-rh1"/>
@@ -334,7 +335,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhT-oI-VBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="-25"/>
+            <point key="canvasLocation" x="297" y="-155"/>
         </scene>
         <!--ShelterDetailSB-->
         <scene sceneID="duP-74-9th">
