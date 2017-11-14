@@ -70,8 +70,15 @@ class PetController {
         
         let apiKeyItem = URLQueryItem(name: keys.apiKey, value: apiKey)
         let outputItem = URLQueryItem(name: keys.formatKey, value: output)
-                queryItems.append(apiKeyItem)
+        queryItems.append(apiKeyItem)
         queryItems.append(outputItem)
+        
+        // Tesing with larger count
+        
+        let countItem = URLQueryItem(name: "count", value: "100")
+        
+        queryItems.append(countItem)
+        
         components?.queryItems = queryItems
         
         guard let searchUrl = components?.url else { return }

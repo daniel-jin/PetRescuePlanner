@@ -32,7 +32,7 @@
 		5FB0C1171FB6052700E55C05 /* SavedPetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB0C1161FB6052700E55C05 /* SavedPetTableViewCell.swift */; };
 		5FB0C1191FB6059600E55C05 /* SavedPetsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB0C1181FB6059600E55C05 /* SavedPetsListTableViewController.swift */; };
 		5FDDE21A1FBA42CA002E1FB0 /* ZipCodesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDE2191FBA42CA002E1FB0 /* ZipCodesStore.swift */; };
-		5FDDE21C1FBA4686002E1FB0 /* zipCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FDDE21B1FBA4686002E1FB0 /* zipCodes.json */; };
+		5FF472011FBB568900B52D52 /* zipCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FF472001FBB568900B52D52 /* zipCodes.json */; };
 		6A43E61E1FB104EB000EA73A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */; };
 		6A43E6201FB109F0000EA73A /* Pet+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */; };
 		6A43E6241FB11C5A000EA73A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */; };
@@ -72,7 +72,7 @@
 		5FB0C1161FB6052700E55C05 /* SavedPetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPetTableViewCell.swift; sourceTree = "<group>"; };
 		5FB0C1181FB6059600E55C05 /* SavedPetsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPetsListTableViewController.swift; sourceTree = "<group>"; };
 		5FDDE2191FBA42CA002E1FB0 /* ZipCodesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipCodesStore.swift; sourceTree = "<group>"; };
-		5FDDE21B1FBA4686002E1FB0 /* zipCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = zipCodes.json; path = ../../../../../Desktop/zipCodes.json; sourceTree = "<group>"; };
+		5FF472001FBB568900B52D52 /* zipCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = zipCodes.json; path = ../../../../../Desktop/zipCodes.json; sourceTree = "<group>"; };
 		6A43E61D1FB104EB000EA73A /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		6A43E61F1FB109F0000EA73A /* Pet+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+CloudKit.swift"; sourceTree = "<group>"; };
 		6A43E6231FB11C5A000EA73A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		5FDDE2161FBA428C002E1FB0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5FDDE21B1FBA4686002E1FB0 /* zipCodes.json */,
+				5FF472001FBB568900B52D52 /* zipCodes.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -311,8 +311,8 @@
 			files = (
 				5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */,
 				5F4C16D51FB371C80065FEAD /* SwipePet.storyboard in Resources */,
-				5FDDE21C1FBA4686002E1FB0 /* zipCodes.json in Resources */,
 				5FB0C1151FB604DB00E55C05 /* savedPetsList.storyboard in Resources */,
+				5FF472011FBB568900B52D52 /* zipCodes.json in Resources */,
 				D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */,
 				3C5FF8F51FB237C90011CEFD /* petDetailView.storyboard in Resources */,
 				5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */,

@@ -83,7 +83,9 @@ struct Pet {
             let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any],
             let size = sizeDictionary[apiKeys.itemKey] as? String,
             let statusDictionary = dictionary[apiKeys.statusKey] as? [String:Any],
-            let status = statusDictionary[apiKeys.itemKey] as? String else { return nil }
+            let status = statusDictionary[apiKeys.itemKey] as? String else {
+                return nil
+        }
         
         var photoEndpoints: [String] = []
         for photoDictionary in photosArray {
