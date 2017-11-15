@@ -33,13 +33,15 @@ class EmbededTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 7
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func setUpLabels() {
@@ -48,8 +50,6 @@ class EmbededTableViewController: UITableViewController {
         guard let opt = pet.options else { return }
         
         guard let petOptions = (try? JSONSerialization.jsonObject(with: opt as Data, options: .allowFragments)) as? [String] else { return }
-        
-        let options = petOptions.reduce("", +)
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
@@ -62,6 +62,7 @@ class EmbededTableViewController: UITableViewController {
             let petSex = pet.sex else { return }
         
         let aboutString: NSMutableAttributedString = NSMutableAttributedString(string: "About \(petName): ", attributes: redForegroundAttribute)
+        
         let aboutDescription = NSAttributedString(string: "\(petDescription)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         aboutString.append(aboutDescription)
         
@@ -82,8 +83,11 @@ class EmbededTableViewController: UITableViewController {
         sexString.append(sexDescription)
         
         let optionsString: NSMutableAttributedString = NSMutableAttributedString(string: "Options: ", attributes: redForegroundAttribute)
-        let optionsDescription = NSAttributedString(string: "\(options)", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
-        optionsString.append(optionsDescription)
+        for option in petOptions {
+            let petOption = NSAttributedString(string: "\n\u{2022} \(option)", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            optionsString.append(petOption)
+        }
+        
         
         petNameLabel.text = pet.name
         descriptionLabel.attributedText = aboutString
