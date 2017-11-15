@@ -17,9 +17,6 @@ class PetController {
     
     static let shared = PetController()
     
-//    // Fetched results controller for Core Data
-//    let fetchedResultsController: NSFetchedResultsController<Pet>!
-    
     var pets: [Pet] = []
     var offset: String = ""
     
@@ -33,9 +30,16 @@ class PetController {
         
         // Perform fetch - handle errors
         do {
-            let results = try CoreDataStack.context.fetch(request)
-            return results
+            var results = try CoreDataStack.context.fetch(request)
             
+            for result in results {
+                if result.contactInfo == nil {
+                    CoreDataStack.context.delete(result)
+                }
+            }
+            
+            results = try CoreDataStack.context.fetch(request)
+            return results
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
