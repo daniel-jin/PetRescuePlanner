@@ -88,7 +88,6 @@ class EmbededTableViewController: UITableViewController {
             optionsString.append(petOption)
         }
         
-        
         petNameLabel.text = pet.name
         descriptionLabel.attributedText = aboutString
         mixLabel.attributedText = mixString

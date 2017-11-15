@@ -37,6 +37,14 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
             navigationController?.isNavigationBarHidden = true
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
 
     // MARK: - Table view data source
 
