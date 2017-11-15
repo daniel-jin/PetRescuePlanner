@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PetDetailCollectionTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PetDetailCollectionTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -23,17 +23,29 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     var imageArray: [UIImage] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
                 self.collectionView.reloadData()
             }
         }
     }
+    
+    var isButtonHidden: Bool = true 
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+        if (self.navigationController != nil) {
+            navigationController?.isNavigationBarHidden = true
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
     }
 
     // MARK: - Table view data source
@@ -56,26 +68,38 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCell", for: indexPath) as? PetImageCollectionViewCell else { return UICollectionViewCell() }
-        
-        cell.imageView.image = imageArray[indexPath.section]
+        cell.imageView.image = imageArray[indexPath.row]
         cell.imageView.contentMode = UIViewContentMode.scaleAspectFit
         cell.imageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.25)
-        
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellSize: CGSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return cellSize
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPetInfo" {
-            
-            
             guard let destinationVC = segue.destination as? EmbededTableViewController else { return }
-            
+            destinationVC.isButtonHidden = isButtonHidden
             destinationVC.pet = pet
-
-            
         }
     }
- 
+    
+    @IBAction func exitButtonTapped(_ sender: UIButton) {
+        
+        if (self.navigationController != nil) {
+            navigationController?.popViewController(animated: true)
+            navigationController?.isNavigationBarHidden = false
+        } else {
+            self.dismiss(animated: true)
+        }
+        
+    }
+    
+    
+    
     
 }
 

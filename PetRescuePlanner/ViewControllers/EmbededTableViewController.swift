@@ -13,7 +13,8 @@ class EmbededTableViewController: UITableViewController {
     // MARK: - Oulets
     @IBOutlet weak var petTestLabel: UILabel!
     
-    // MARK: - Properties
+    
+
     var pet: Pet?
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -23,59 +24,82 @@ class EmbededTableViewController: UITableViewController {
     @IBOutlet weak var sexLabel: UILabel!
     @IBOutlet var shelterInfoButton: UITableView!
     @IBOutlet weak var optionsLabel: UILabel!
+    @IBOutlet weak var shelterInfoBtn: UIButton!
+    
+    // MARK: - Properties
+    
+    var isButtonHidden: Bool = false 
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLabels()
 
+        
+        if isButtonHidden == true {
+            self.shelterInfoBtn.isHidden = true
+        } else {
+            self.shelterInfoBtn.isHidden = false
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 7
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func setUpLabels() {
         
         guard let pet = pet else { return }
+        guard let opt = pet.options else { return }
         
-        // TODO: - Format options better
-        let options = pet.options.reduce("") {text, option in "\(text), \(option)"}
+        guard let petOptions = (try? JSONSerialization.jsonObject(with: opt as Data, options: .allowFragments)) as? [String] else { return }
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
         
-        let aboutString: NSMutableAttributedString = NSMutableAttributedString(string: "About \(pet.name): ", attributes: redForegroundAttribute)
-        let aboutDescription = NSAttributedString(string: "\(pet.description)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        guard let petDescription = pet.petDescription,
+            let petName = pet.name,
+            let petMix = pet.mix,
+            let petSize = pet.size,
+            let petAge = pet.age,
+            let petSex = pet.sex else { return }
+        
+        let aboutString: NSMutableAttributedString = NSMutableAttributedString(string: "About \(petName): ", attributes: redForegroundAttribute)
+        
+        let aboutDescription = NSAttributedString(string: "\(petDescription)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         aboutString.append(aboutDescription)
         
         let mixString: NSMutableAttributedString = NSMutableAttributedString(string: "Mix: ", attributes: redForegroundAttribute)
-        let mixDescription = NSAttributedString(string: "\(pet.mix)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let mixDescription = NSAttributedString(string: "\(petMix)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         mixString.append(mixDescription)
         
         let sizeString: NSMutableAttributedString = NSMutableAttributedString(string: "Size: ", attributes: redForegroundAttribute)
-        let sizeDescription = NSAttributedString(string: "\(pet.size)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let sizeDescription = NSAttributedString(string: "\(petSize)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         sizeString.append(sizeDescription)
         
         let ageString: NSMutableAttributedString = NSMutableAttributedString(string: "Age: ", attributes: redForegroundAttribute)
-        let ageDescription = NSAttributedString(string: "\(pet.age)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let ageDescription = NSAttributedString(string: "\(petAge)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         ageString.append(ageDescription)
         
         let sexString: NSMutableAttributedString = NSMutableAttributedString(string: "Sex: ", attributes: redForegroundAttribute)
-        let sexDescription = NSAttributedString(string: "\(pet.sex)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        let sexDescription = NSAttributedString(string: "\(petSex)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         sexString.append(sexDescription)
         
         let optionsString: NSMutableAttributedString = NSMutableAttributedString(string: "Options: ", attributes: redForegroundAttribute)
-        let optionsDescription = NSAttributedString(string: "\(options)", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
-        optionsString.append(optionsDescription)
+        for option in petOptions {
+            let petOption = NSAttributedString(string: "\n\u{2022} \(option)", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            optionsString.append(petOption)
+        }
         
         petNameLabel.text = pet.name
         descriptionLabel.attributedText = aboutString
@@ -84,36 +108,32 @@ class EmbededTableViewController: UITableViewController {
         ageLabel.attributedText = ageString
         sexLabel.attributedText = sexString
         optionsLabel.attributedText = optionsString
-        
-        
     }
     
     @IBAction func shelterInfoButtonTapped(_ sender: Any) {
-        
         performSegue(withIdentifier: "toShelter", sender: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super .viewWillDisappear(true)
         
+        self.shelterInfoBtn.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toShelter" {
             guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
-            
             guard let pet = pet else { return }
-
-            
-            ShelterController.shelterShared.fetchShelter(id: pet.shelterId) { (success) in
+            ShelterController.shelterShared.fetchShelter(id: pet.shelterID) { (success) in
                 if !success {
                     NSLog("Error")
                     return
-                    
                 }
                 destinationVC.shelter = ShelterController.shelterShared.shelter
                 destinationVC.pet = pet
-                
             }
         }
     }
-
 }
 
 

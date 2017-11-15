@@ -9,12 +9,13 @@
 import Foundation
 import CoreData
 
+import CoreData
+
 class CoreDataStack {
     
     static let container: NSPersistentContainer = {
         
-        let appName = Bundle.main.object(forInfoDictionaryKey: (kCFBundleNameKey as String)) as! String
-        let container = NSPersistentContainer(name: appName)
+        let container = NSPersistentContainer(name: "PetRescuePlanner")
         container.loadPersistentStores() { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -24,4 +25,11 @@ class CoreDataStack {
     }()
     
     static var context: NSManagedObjectContext { return container.viewContext }
+    
+    static var tempContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = CoreDataStack.context
+        return context
+    }()
 }
+

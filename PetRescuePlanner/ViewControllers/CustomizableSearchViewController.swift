@@ -14,7 +14,11 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     weak var breedSearchViewController: BreedSearchContainerViewController?
     
+    // set to all USA Zipcodes to validate zipcode input
+    
     var zipArray: [Int] = []
+    
+    // values to structure API call
     
     var animal: String? = nil
     var size: String? = nil
@@ -23,9 +27,17 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     var breed: String? = nil
     var shelterId: String? = nil
     
+    // Picker view values
+    
     let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
     let sizes = ["", "Small", "Medium", "Large", "Extra-Large"]
     let ages = ["", "Baby", "Young", "Adult", "Senior"]
+    
+    // alert view colors
+    
+    let warningColor = UIColor.yellow
+    let errorColor = UIColor.red
+    let noticeColor = UIColor.white
     
     // MARK: - Outlets
     
@@ -46,11 +58,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     // MARK: - Actions
     
-    @IBAction func userTappedView(_ sender: UITapGestureRecognizer) {
-        breedSearchContainerView.isHidden = true 
-        self.view.endEditing(true)
-    }
-    
     @IBAction func sexSegmentedControlChanged(_ sender: Any) {
         if sexSegmentedControl.selectedSegmentIndex == 0 {
             sex = nil
@@ -62,6 +69,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             sex = "F"
         }
     }
+    
     @IBAction func selectBreedButtonTapped(_ sender: Any) {
         
         if animal == "dog" || animal == "cat" || animal == "bird" || animal == "reptile" || animal == "horse" || animal == "barnyard" || animal == "smallfurry" {
@@ -85,7 +93,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             }
         } else {
             breedSearchContainerView.isHidden = true
-            presentAlertWith(title: "No Animal Type Selected", message: "Choose an animal to search for a certain breed, or leave blank to look for all breeds!")
+            presentAlertWith(title: "No Animal Type Selected", message: "Choose an animal to search for a certain breed, or leave blank to look for all breeds!", color: warningColor)
         }
     }
     
@@ -98,19 +106,21 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 if isValid(zip) {
                     self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
                 } else {
-                    presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!")
+                    presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!", color: errorColor)
                 }
             } else {
-                presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!")
+                presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!", color: errorColor)
             }
         }
     }
-    
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
         
         self.setUpViews()
         
@@ -171,7 +181,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             let age = ages[row]
             print("\(age)")
         }
-        
     }
     
     // MARK: - Private Functions
@@ -205,13 +214,13 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 
     }
     
-    func presentAlertWith(title: String, message: String) {
+    func presentAlertWith(title: String, message: String, color: UIColor) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let subview = alertController.view.subviews.first! as UIView
         let alertContentView = subview.subviews.first! as UIView
-        alertContentView.backgroundColor = UIColor.yellow
+        alertContentView.backgroundColor = color
         
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         
@@ -219,6 +228,10 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
         self.present(alertController, animated: true, completion: nil)
         
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
     
     // MARK: - Navigation
@@ -236,7 +249,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             }
             
             guard let zip = zipCodeTextField.text else {
-                presentAlertWith(title: "Zip Code Missing", message: "Please enter a zip code to base your search off of.")
                 return
             }
             
@@ -249,6 +261,13 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                     return
                 }
                 DispatchQueue.main.async {
+                    destinationVC.zip = self.zipCodeTextField.text
+                    destinationVC.animal = self.animal
+                    destinationVC.size = self.size
+                    destinationVC.sex = self.sex
+                    destinationVC.age = self.age
+                    destinationVC.breed = self.breed
+                    destinationVC.offSet = PetController.shared.offset
                     destinationVC.pets = PetController.shared.pets
                 }
             })
