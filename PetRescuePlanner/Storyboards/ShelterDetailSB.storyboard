@@ -38,7 +38,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayh-8O-G8o">
                                 <rect key="frame" x="14.5" y="498" width="288" height="50"/>
-                                <color key="backgroundColor" red="0.87685841320000002" green="0.22127610449999999" blue="0.36875227090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.86582928895950317" green="0.21922922134399414" blue="0.37388807535171509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
                                 </constraints>
@@ -57,8 +57,11 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.87685841320000002" green="0.22127610449999999" blue="0.36875227090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.865829289" green="0.2192292213" blue="0.37388807540000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="emailButtonTapped:" destination="uUa-0m-lGg" eventType="touchUpInside" id="6tF-JT-Zt6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6Y-Xo-cBj">
                                 <rect key="frame" x="16" y="166" width="288" height="35"/>
@@ -67,7 +70,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.87685841320000002" green="0.22127610449999999" blue="0.36875227090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.865829289" green="0.2192292213" blue="0.37388807540000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="AddressButtonTapped:" destination="uUa-0m-lGg" eventType="touchUpInside" id="iqc-Tl-eg7"/>
@@ -92,7 +95,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.87685841320000002" green="0.22127610449999999" blue="0.36875227090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.865829289" green="0.2192292213" blue="0.37388807540000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <state key="highlighted" title="asfsad">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -128,7 +131,7 @@
                             <constraint firstItem="qsq-Nw-1Zb" firstAttribute="width" secondItem="Xrv-xN-qZb" secondAttribute="width" multiplier="9/10" id="s29-zM-D8B"/>
                             <constraint firstItem="U6E-Wf-yLk" firstAttribute="width" secondItem="Xrv-xN-qZb" secondAttribute="width" id="vRQ-GU-Lqa"/>
                             <constraint firstItem="qsq-Nw-1Zb" firstAttribute="top" secondItem="Sg3-OS-og2" secondAttribute="bottom" constant="8" id="xio-kl-bNE"/>
-                            <constraint firstItem="Ayh-8O-G8o" firstAttribute="centerX" secondItem="3Ic-DD-DQs" secondAttribute="centerX" constant="-1.6666666666666572" id="yWs-jG-iyC"/>
+                            <constraint firstItem="Ayh-8O-G8o" firstAttribute="centerX" secondItem="3Ic-DD-DQs" secondAttribute="centerX" constant="-1.6699999999999999" id="yWs-jG-iyC"/>
                             <constraint firstItem="32b-aX-hZW" firstAttribute="centerX" secondItem="3Ic-DD-DQs" secondAttribute="centerX" id="z3j-8Z-MUT"/>
                             <constraint firstItem="32b-aX-hZW" firstAttribute="top" secondItem="3Ic-DD-DQs" secondAttribute="top" id="zi0-HE-FMj"/>
                         </constraints>

@@ -8,8 +8,10 @@
 
 import UIKit
 import MapKit
+import MessageUI
+import CallKit
 
-class ShelterDetailViewController: UIViewController {
+class ShelterDetailViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let methods = API.Methods()
     
@@ -79,9 +81,42 @@ class ShelterDetailViewController: UIViewController {
     @IBOutlet weak var emailButton: UIButton!
     
     // Mark: - actions
+    
+    @IBAction func emailButtonTapped(_ sender: Any) {
+        guard let shelter = shelter else { return }
+        
+        func configureMailController() -> MFMailComposeViewController {
+            
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self
+            mailComposerVC.setToRecipients([shelter.email])
+            
+            return mailComposerVC
+        }
+        
+        func showMailError() {
+            let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
+            let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            sendMailErrorAlert.addAction(dismiss)
+            self.present(sendMailErrorAlert, animated: true, completion: nil)
+        }
+        
+        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
+            controller.dismiss(animated: true, completion: nil)
+        }
+        
+        let mailComposeViewController = configureMailController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            showMailError()
+        }
+    }
+    
+    
     @IBAction func numberButtonTapped(_ sender: Any) {
         guard let shelter = shelter else { return }
-        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted)
         
         if let phoneCallURL:URL = URL(string: "tel:\(number)") {
             let application:UIApplication = UIApplication.shared
@@ -138,21 +173,7 @@ class ShelterDetailViewController: UIViewController {
     }
 }
 
-//extension String {
-//
-//    var length : Int {
-//        return self.characters.count
-//    }
-//
-//    func digitsOnly() -> String{
-//        let stringArray = self.components(separatedBy: CharacterSet)
-//        let stringArray = self.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-//        let newString = stringArray.joinWithSeparator("")
-//
-//        return newString
-//    }
-//
-//}
+
 
 
 
