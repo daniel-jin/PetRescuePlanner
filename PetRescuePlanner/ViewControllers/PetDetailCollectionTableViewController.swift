@@ -33,6 +33,17 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
+        if (self.navigationController != nil) {
+            navigationController?.isNavigationBarHidden = true
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
     }
 
     // MARK: - Table view data source
@@ -72,6 +83,21 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
             destinationVC.pet = pet
         }
     }
+    
+    @IBAction func exitButtonTapped(_ sender: UIButton) {
+        
+        if (self.navigationController != nil) {
+            navigationController?.popViewController(animated: true)
+            navigationController?.isNavigationBarHidden = false
+        } else {
+            self.dismiss(animated: true)
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 
