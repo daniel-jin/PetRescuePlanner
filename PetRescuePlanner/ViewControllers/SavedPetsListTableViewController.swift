@@ -72,11 +72,7 @@ class SavedPetsListTableViewController: UITableViewController {
             destinationVC.pet = pet
             
         }
-        
-        
     }
-    
-
 }
 
 

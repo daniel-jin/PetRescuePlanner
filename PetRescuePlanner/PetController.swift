@@ -33,23 +33,8 @@ class PetController {
         
         // Perform fetch - handle errors
         do {
-            var results = try CoreDataStack.context.fetch(request)
-            
-            // Filter the fetched Core Data objects - filter out ones with nil attributes
-            let filterdResults = results.filter { $0.contactInfo != nil }
-            
-            for result in results {
-                if result.contactInfo == nil {
-                    CoreDataStack.context.delete(result)
-                }
-            }
-            
-            results = try CoreDataStack.context.fetch(request)
-            
-            print("results count: \(results.count)")
-            print("filteredResults count: \(filterdResults.count)")
-            
-            return filterdResults
+            let results = try CoreDataStack.context.fetch(request)
+            return results
             
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")

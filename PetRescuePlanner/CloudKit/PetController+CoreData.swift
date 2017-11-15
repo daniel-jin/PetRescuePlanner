@@ -22,19 +22,6 @@ extension PetController {
         } catch {
             NSLog("Error saving to persistant store. \(error.localizedDescription)")
         }
-        
-        
-//        let container = CoreDataStack.container
-//        container.performBackgroundTask { (context) in
-//
-//            do {
-//                try moc.save()
-//            } catch {
-//                fatalError("BIG FAIL:\(error)")
-//            }
-//
-//        }
-        
     }
     
     // MARK: - CRUD Functions
