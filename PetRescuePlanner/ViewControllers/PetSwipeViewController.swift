@@ -188,7 +188,7 @@ class PetSwipeViewController: UIViewController {
             self.petNameLabel2.text = nextPet.name
             self.petDescriptionLabel2.text = nextPet.breeds
             
-            print("CREATCARD PET1 = \(pet.name), PET2 = \(nextPet.name)")
+//            print("CREATCARD PET1 = \(pet.name), PET2 = \(nextPet.name)")
             
         }
     }
@@ -214,7 +214,7 @@ class PetSwipeViewController: UIViewController {
             petNameLabel.text = pet.name
             petDescriptionLabel.text = pet.breeds
             
-            print("CREATELASTCARD: PET = \(pet.name)")
+//            print("CREATELASTCARD: PET = \(pet.name)")
             
             fetchMorePets(pet: pet)
         } else {
