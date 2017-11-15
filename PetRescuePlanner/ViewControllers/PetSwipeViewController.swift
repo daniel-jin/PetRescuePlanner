@@ -116,6 +116,8 @@ class PetSwipeViewController: UIViewController {
                 // Save to CoreData first
                 PetController.shared.add(pet: petToSave)
                 
+                self.indexIntoPets += 1
+                
                 // Then save to CK
                 PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
                     if !success {
@@ -129,7 +131,7 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
-                    self.indexIntoPets += 1
+                    
 
 
                     if self.indexIntoPets < self.pets.count - 1 {

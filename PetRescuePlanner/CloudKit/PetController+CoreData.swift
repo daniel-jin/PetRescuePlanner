@@ -10,20 +10,18 @@ import Foundation
 import CoreData
 import CloudKit
 
-
 extension PetController {
 
     // MARK: - SaveToPersistantStore()
     func saveToPersistantStore() {
         
         let moc = CoreDataStack.context
-        
+
         do {
             return try moc.save()
         } catch {
             NSLog("Error saving to persistant store. \(error.localizedDescription)")
         }
-        
     }
     
     // MARK: - CRUD Functions
@@ -54,8 +52,6 @@ extension PetController {
         petToSave.shelterID = pet.shelterID
         petToSave.size = pet.size
         petToSave.status = pet.status
-        
-//        let newPet = Pet(pet: pet)
         
         saveToPersistantStore()
     }
