@@ -52,6 +52,7 @@ extension Pet {
                 self.animal = "No animal available"
             }
         }
+        
         if let breedsDictionary = dictionary[apiKeys.breedsKey] as? [String:[String:Any]] {
             if let breedDictionary = breedsDictionary[apiKeys.breedKey] {
                 if let breed = breedDictionary[apiKeys.itemKey] as? String {

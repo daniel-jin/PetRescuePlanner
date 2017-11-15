@@ -202,9 +202,13 @@ class CloudKitManager {
         let query = CKQuery(recordType: CloudKit.petRecordType, predicate: NSPredicate(value: true))
         
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            
             if error == nil {
                 if let records = records {
-                    self.deleteRecordsWithID(records.map{ $0.recordID }, completion: { (records, recordIDs, error) in
+                    
+                    let recordIDs = records.map { $0.recordID }
+
+                    self.deleteRecordsWithID(recordIDs, completion: { (records, recordIDs, error) in
                         
                         if let error = error {
                             NSLog("Error deleting Pet records \(error.localizedDescription)")

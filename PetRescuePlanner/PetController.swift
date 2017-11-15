@@ -46,6 +46,9 @@ class PetController {
             
             results = try CoreDataStack.context.fetch(request)
             
+            print("results count: \(results.count)")
+            print("filteredResults count: \(filterdResults.count)")
+            
             return filterdResults
             
         } catch {
