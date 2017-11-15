@@ -76,7 +76,12 @@ extension PetController {
                     // Need to save to the user's list of CK References for favorite pets
                     guard let record = record else { return completion(false) }
                     let petCKRef = CKReference(record: record, action: .none)
-                    currentUser.savedPets.append(petCKRef)
+                    
+                    // Check to prevent duplicate pet records from being saved into the current user's CKRef array
+                    if !currentUser.savedPets.contains(petCKRef) {
+                        currentUser.savedPets.append(petCKRef)
+                    }
+            
                     guard let userRecord = CKRecord(user: currentUser) else { return }
                     
                     // Modify/update CKRecord for user
@@ -96,7 +101,12 @@ extension PetController {
                         
                         // Need to save to the user's list of CK References for favorite pets
                         let petCKRef = CKReference(record: petCKRecord, action: .none)
-                        currentUser.savedPets.append(petCKRef)
+                        
+                        // Check to prevent duplicate pet records from being saved into the current user's CKRef array
+                        if !currentUser.savedPets.contains(petCKRef) {
+                            currentUser.savedPets.append(petCKRef)
+                        }
+                        
                         guard let userRecord = CKRecord(user: currentUser) else { return }
                         
                         // Handle error
