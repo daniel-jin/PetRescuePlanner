@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Pet" representedClassName="Pet" syncable="YES">
-        <attribute name="age" attributeType="String" syncable="YES"/>
-        <attribute name="animal" attributeType="String" syncable="YES"/>
-        <attribute name="breeds" attributeType="String" syncable="YES"/>
-        <attribute name="contactInfo" attributeType="Binary" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="animal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="breeds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactInfo" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageIdCount" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastUpdate" attributeType="String" syncable="YES"/>
-        <attribute name="media" attributeType="Binary" syncable="YES"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="mix" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="options" attributeType="Binary" syncable="YES"/>
-        <attribute name="petDescription" attributeType="String" syncable="YES"/>
-        <attribute name="recordIDString" attributeType="String" syncable="YES"/>
-        <attribute name="sex" attributeType="String" syncable="YES"/>
-        <attribute name="shelterID" attributeType="String" syncable="YES"/>
-        <attribute name="size" attributeType="String" syncable="YES"/>
-        <attribute name="status" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="options" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="petDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordIDString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shelterID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Pet" positionX="-216" positionY="108" width="128" height="315"/>

@@ -107,9 +107,6 @@ class PetSwipeViewController: UIViewController {
                     } else if self.indexIntoPets == self.pets.count - 1 {
                         
                         self.createLastCard()
-                        
-                        self.fetchMorePets()
-
                     }
                 })
                 
@@ -121,6 +118,8 @@ class PetSwipeViewController: UIViewController {
                 
                 // Save to CoreData first
                 PetController.shared.add(pet: petToSave)
+                
+                self.indexIntoPets += 1
                 
                 // Then save to CK
                 PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
@@ -135,7 +134,7 @@ class PetSwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { (success) in
-                    self.indexIntoPets += 1
+                    
 
 
                     if self.indexIntoPets < self.pets.count - 1 {
@@ -147,8 +146,6 @@ class PetSwipeViewController: UIViewController {
                     } else if self.indexIntoPets == self.pets.count - 1 {
                         
                         self.createLastCard()
-                        
-                        self.fetchMorePets()
                     }
                 })
                 
@@ -196,6 +193,8 @@ class PetSwipeViewController: UIViewController {
             self.petNameLabel2.text = nextPet.name
             self.petDescriptionLabel2.text = nextPet.breeds
             
+//            print("CREATCARD PET1 = \(pet.name), PET2 = \(nextPet.name)")
+            
         }
     }
     
@@ -204,7 +203,7 @@ class PetSwipeViewController: UIViewController {
         if pets.count > 0 {
             
             resetCard()
-            card2.isHidden = true
+            card2.isHidden = false 
             let pet = pets[pets.count - 1]
             
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
@@ -219,10 +218,13 @@ class PetSwipeViewController: UIViewController {
             
             petNameLabel.text = pet.name
             petDescriptionLabel.text = pet.breeds
+            
+//            print("CREATELASTCARD: PET = \(pet.name)")
+            
+            fetchMorePets(pet: pet)
         } else {
             presentAlertWith(title: "Uh Oh...", message: "No pets were found near you")
         }
-        
     }
     
     func resetCard() {
@@ -239,7 +241,7 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
-    func fetchMorePets() {
+    func fetchMorePets(pet: Pet) {
         if indexIntoPets == pets.count - 1 {
             
             let methods = API.Methods()
@@ -251,6 +253,7 @@ class PetSwipeViewController: UIViewController {
                 }
                 self.offSet = PetController.shared.offset
                 self.pets = PetController.shared.pets
+                self.pets.insert(pet, at: 0)
                 self.indexIntoPets = 0
                 
                 DispatchQueue.main.async {
@@ -281,6 +284,16 @@ class PetSwipeViewController: UIViewController {
 //            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
             
 //            destinationVC.savedPets = PetController.shared.savedPets
+            
+        }
+        
+        if segue.identifier == "tinderToDetailSegue" {
+            let pet = pets[indexIntoPets]
+            
+            let destinationVC = segue.destination as? PetDetailCollectionTableViewController
+            destinationVC?.isButtonHidden = true 
+            destinationVC?.pet = pet
+            
             
         }
         

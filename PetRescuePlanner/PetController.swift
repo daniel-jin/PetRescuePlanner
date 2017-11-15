@@ -17,9 +17,6 @@ class PetController {
     
     static let shared = PetController()
     
-//    // Fetched results controller for Core Data
-//    let fetchedResultsController: NSFetchedResultsController<Pet>!
-    
     var pets: [Pet] = []
     var offset: String = ""
     
@@ -33,10 +30,7 @@ class PetController {
         
         // Perform fetch - handle errors
         do {
-            let results = try CoreDataStack.context.fetch(request)
-            
-            // Filter the fetched Core Data objects - filter out ones with nil attributes
-            let filterdResults = results.filter { $0.contactInfo != nil }
+            var results = try CoreDataStack.context.fetch(request)
             
             for result in results {
                 if result.contactInfo == nil {
@@ -44,8 +38,8 @@ class PetController {
                 }
             }
             
-            return filterdResults
-            
+            results = try CoreDataStack.context.fetch(request)
+            return results
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
@@ -184,7 +178,37 @@ class PetController {
             
             self.offset = lastOffset
             
-            self.pets = arrayOfPets
+            var filteredPets: [Pet] = []
+            
+            var tempPet = arrayOfPets[0]
+            
+            for index in 1...arrayOfPets.count - 1 {
+                var pet = arrayOfPets[index]
+                
+                guard let petName = pet.name,
+                    let lastPetName = tempPet.name,
+                    let petBreed = pet.breeds,
+                    let lastPetBreed = tempPet.breeds,
+                    let petDescrip = pet.petDescription,
+                    let lastPetDescrip = tempPet.petDescription,
+                    let petId = pet.id,
+                    let lastPetId = tempPet.id else {
+                        return
+                }
+                
+                if !petName.contains(lastPetName) {
+                    if petBreed != lastPetBreed {
+                        if petDescrip != lastPetDescrip {
+                            if petId != lastPetId {
+                                filteredPets.append(tempPet)
+                            }
+                        }
+                    }
+                }
+                tempPet = pet
+            }
+            
+            self.pets = filteredPets
             completion(true)
         }
     }

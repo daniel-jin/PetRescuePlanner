@@ -57,8 +57,20 @@ class SavedPetsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            PetController.shared.pets.remove(at: indexPath.row)
+            let petToDelete = savedPets[indexPath.row]
+            
+            savedPets.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // Delete from Core Data
+            PetController.shared.delete(pet: petToDelete)
+            
+            // Delete from CloudKit
+            //            PetController.shared.deleteFromCK(pet: petToDelete, completion: { (success) in
+            //                if !success {
+            //                    NSLog("Error deleting pet from CloudKit")
+            //                }
+            //            })
         }
     }
 
@@ -74,15 +86,11 @@ class SavedPetsListTableViewController: UITableViewController {
             let pet = savedPets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
-            
+            destinationVC.isButtonHidden = false 
             destinationVC.pet = pet
             
         }
-        
-        
     }
-    
-
 }
 
 

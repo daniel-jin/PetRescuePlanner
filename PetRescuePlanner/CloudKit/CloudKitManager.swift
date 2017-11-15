@@ -197,6 +197,29 @@ class CloudKitManager {
         publicDatabase.add(operation)
     }
     
+    // Flush delete Pet records
+    func flushPetRecords() {
+        let query = CKQuery(recordType: CloudKit.petRecordType, predicate: NSPredicate(value: true))
+        
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            
+            if error == nil {
+                if let records = records {
+                    
+                    let recordIDs = records.map { $0.recordID }
+
+                    self.deleteRecordsWithID(recordIDs, completion: { (records, recordIDs, error) in
+                        
+                        if let error = error {
+                            NSLog("Error deleting Pet records \(error.localizedDescription)")
+                        }
+                        
+                    })
+                }
+            }
+        }
+    }
+    
     // MARK: - Modify records
     func modifyRecords(_ records: [CKRecord], perRecordCompletion: ((_ record: CKRecord?, _ error: Error?) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
         

@@ -93,6 +93,13 @@
                                             <constraint firstAttribute="width" constant="105" id="N4i-uD-d5G"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGf-Rc-OcQ">
+                                        <rect key="frame" x="8" y="0.0" width="225" height="330"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <segue destination="W7M-zJ-PTc" kind="presentation" identifier="tinderToDetailSegue" modalTransitionStyle="coverVertical" id="p0O-aC-jcW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.28181922435760498" green="0.2747204601764679" blue="0.43220216035842896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
@@ -160,6 +167,14 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-464.80000000000001" y="-286.50674662668666"/>
+        </scene>
+        <!--petDetailView-->
+        <scene sceneID="CPK-KN-rVl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="petDetailView" id="W7M-zJ-PTc" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xFd-b2-wDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-465" y="292"/>
         </scene>
         <!--savedPetsList-->
         <scene sceneID="FzU-0L-csq">
