@@ -116,7 +116,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     
     @IBAction func numberButtonTapped(_ sender: Any) {
         guard let shelter = shelter else { return }
-        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted)
+        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         
         if let phoneCallURL:URL = URL(string: "tel:\(number)") {
             let application:UIApplication = UIApplication.shared
