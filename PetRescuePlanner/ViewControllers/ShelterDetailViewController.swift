@@ -8,8 +8,10 @@
 
 import UIKit
 import MapKit
+import MessageUI
+import CallKit
 
-class ShelterDetailViewController: UIViewController {
+class ShelterDetailViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let methods = API.Methods()
     
@@ -76,15 +78,56 @@ class ShelterDetailViewController: UIViewController {
     
     // Mark: - actions
     
-    @IBAction func numberButtonTapped(_ sender: Any) {
+    // Mark: - Emailing shelter
+    
+    @IBAction func emailButtonTapped(_ sender: Any) {
         
-        guard let shelter = shelter else { return }
         
-        if let url: NSURL = NSURL(string: "tel://\(String(describing: shelter.phone))"),
-            UIApplication.shared.canOpenURL(url as URL) {
-            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        let mailComposeViewController = configureMailController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            showMailError()
         }
     }
+    
+    func configureMailController() -> MFMailComposeViewController {
+        if let pet = pet {
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self
+            mailComposerVC.setToRecipients([(shelter?.email)!])
+            guard let name = pet.name else { return MFMailComposeViewController() }
+            mailComposerVC.setSubject("Interested in \(String(describing: name))")
+            
+            return mailComposerVC
+        }
+        return MFMailComposeViewController()
+    }
+    
+    func showMailError() {
+        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
+        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        sendMailErrorAlert.addAction(dismiss)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    // Mark: - calling shelters
+    
+    @IBAction func numberButtonTapped(_ sender: Any) {
+        guard let shelter = shelter else { return }
+        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        
+        if let phoneCallURL:URL = URL(string: "tel:\(number)") {
+            let application:UIApplication = UIApplication.shared
+            application.open(phoneCallURL)
+        }
+    }
+    
+    // Mark: - getting direections
     
     @IBAction func AddressButtonTapped(_ sender: Any) {
         
@@ -122,6 +165,8 @@ class ShelterDetailViewController: UIViewController {
         
     }
 }
+
+
 
 
 

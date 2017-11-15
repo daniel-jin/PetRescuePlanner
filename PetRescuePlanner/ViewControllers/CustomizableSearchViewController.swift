@@ -114,6 +114,11 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
     }
     
+    @IBAction func toSavedPetsButtonTapped(_ sender: Any) {
+        
+        self.performSegue(withIdentifier: "toSavedPets", sender: self)
+        
+    }
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -271,6 +276,12 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                     destinationVC.pets = PetController.shared.pets
                 }
             })
+        }
+        
+        if segue.identifier == "toSavedPets" {
+            
+            
+            
         }
         
     }
