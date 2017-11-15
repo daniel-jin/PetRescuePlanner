@@ -28,8 +28,14 @@ extension PetController {
     // Create
     func add(pet: Pet) {
         
-        // Because we are going to save this pet to Core Data, need to insert into CoreDataStack.context
-//        CoreDataStack.context.insert(pet)
+        // Check if the pet has already been saved
+        let savedPetIDs = PetController.shared.savedPets.flatMap{ $0.id }
+        
+        guard let petID = pet.id else { return }
+        
+        if savedPetIDs.contains(petID) {
+            return
+        }
         
         let petToSave = Pet(context: CoreDataStack.context)
         
