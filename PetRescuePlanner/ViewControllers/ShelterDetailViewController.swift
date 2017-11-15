@@ -92,13 +92,16 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     }
     
     func configureMailController() -> MFMailComposeViewController {
-        
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients([(shelter?.email)!])
-        mailComposerVC.setSubject("Interested in \(String(describing: pet!.name))")
-        
-        return mailComposerVC
+        if let pet = pet {
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self
+            mailComposerVC.setToRecipients([(shelter?.email)!])
+            guard let name = pet.name else { return MFMailComposeViewController() }
+            mailComposerVC.setSubject("Interested in \(String(describing: name))")
+            
+            return mailComposerVC
+        }
+        return MFMailComposeViewController()
     }
     
     func showMailError() {
