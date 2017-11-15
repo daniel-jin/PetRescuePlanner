@@ -32,6 +32,10 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        findMorePetsButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        addressbutton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        numberButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        emailButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
     
     func updateShelterDetailView(shelter: Shelter){
@@ -75,6 +79,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     @IBOutlet weak var addressbutton: UIButton!
     @IBOutlet weak var numberButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var findMorePetsButton: UIButton!
     
     // Mark: - actions
     

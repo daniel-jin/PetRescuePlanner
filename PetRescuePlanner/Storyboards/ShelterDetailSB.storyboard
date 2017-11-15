@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uUa-0m-lGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uUa-0m-lGg">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -141,6 +141,7 @@
                     <connections>
                         <outlet property="addressbutton" destination="F6Y-Xo-cBj" id="XeQ-la-oK2"/>
                         <outlet property="emailButton" destination="qsq-Nw-1Zb" id="T2h-lE-sSK"/>
+                        <outlet property="findMorePetsButton" destination="Ayh-8O-G8o" id="EOg-ze-fmT"/>
                         <outlet property="numberButton" destination="oPG-uY-Dl5" id="ocf-vN-n3F"/>
                         <outlet property="shelterMapView" destination="U6E-Wf-yLk" id="yFg-Tv-2ou"/>
                         <outlet property="shelterNameLabel" destination="32b-aX-hZW" id="8j6-gO-Aiy"/>
