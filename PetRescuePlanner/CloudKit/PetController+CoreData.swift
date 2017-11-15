@@ -31,7 +31,29 @@ extension PetController {
     func add(pet: Pet) {
         
         // Because we are going to save this pet to Core Data, need to insert into CoreDataStack.context
-        CoreDataStack.context.insert(pet)
+//        CoreDataStack.context.insert(pet)
+        
+        let petToSave = Pet(context: CoreDataStack.context)
+        
+        petToSave.age = pet.age
+        petToSave.animal = pet.animal
+        petToSave.breeds = pet.breeds
+        petToSave.cloudKitRecordID = pet.cloudKitRecordID
+        petToSave.contactInfo = pet.contactInfo
+        petToSave.dateAdded = pet.dateAdded
+        petToSave.id = pet.id
+        petToSave.imageIdCount = pet.imageIdCount
+        petToSave.lastUpdate = pet.lastUpdate
+        petToSave.media = pet.media
+        petToSave.mix = pet.mix
+        petToSave.name = pet.name
+        petToSave.options = pet.options
+        petToSave.petDescription = pet.petDescription
+        petToSave.recordIDString = pet.recordIDString
+        petToSave.sex = pet.sex
+        petToSave.shelterID = pet.shelterID
+        petToSave.size = pet.size
+        petToSave.status = pet.status
         
 //        let newPet = Pet(pet: pet)
         
