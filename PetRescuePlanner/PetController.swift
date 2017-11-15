@@ -33,7 +33,7 @@ class PetController {
         
         // Perform fetch - handle errors
         do {
-            let results = try CoreDataStack.context.fetch(request)
+            var results = try CoreDataStack.context.fetch(request)
             
             // Filter the fetched Core Data objects - filter out ones with nil attributes
             let filterdResults = results.filter { $0.contactInfo != nil }
@@ -43,6 +43,8 @@ class PetController {
                     CoreDataStack.context.delete(result)
                 }
             }
+            
+            results = try CoreDataStack.context.fetch(request)
             
             return filterdResults
             
