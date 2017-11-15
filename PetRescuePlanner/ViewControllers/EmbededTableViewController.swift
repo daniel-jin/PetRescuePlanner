@@ -13,7 +13,8 @@ class EmbededTableViewController: UITableViewController {
     // MARK: - Oulets
     @IBOutlet weak var petTestLabel: UILabel!
     
-    // MARK: - Properties
+    
+
     var pet: Pet?
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -23,11 +24,23 @@ class EmbededTableViewController: UITableViewController {
     @IBOutlet weak var sexLabel: UILabel!
     @IBOutlet var shelterInfoButton: UITableView!
     @IBOutlet weak var optionsLabel: UILabel!
+    @IBOutlet weak var shelterInfoBtn: UIButton!
+    
+    // MARK: - Properties
+    
+    var isButtonHidden: Bool = false 
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLabels()
+
+        
+        if isButtonHidden == true {
+            self.shelterInfoBtn.isHidden = true
+        } else {
+            self.shelterInfoBtn.isHidden = false
+        }
     }
 
     // MARK: - Table view data source
@@ -99,6 +112,12 @@ class EmbededTableViewController: UITableViewController {
     
     @IBAction func shelterInfoButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "toShelter", sender: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super .viewWillDisappear(true)
+        
+        self.shelterInfoBtn.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

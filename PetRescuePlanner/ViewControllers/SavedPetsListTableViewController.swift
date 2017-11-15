@@ -68,7 +68,7 @@ class SavedPetsListTableViewController: UITableViewController {
             let pet = savedPets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
-            
+            destinationVC.isButtonHidden = false 
             destinationVC.pet = pet
             
         }

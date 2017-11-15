@@ -343,6 +343,7 @@
                         <outlet property="optionsLabel" destination="Od4-D7-7Gg" id="eZC-6u-I3g"/>
                         <outlet property="petNameLabel" destination="bLz-D5-M0o" id="MfH-kW-4tU"/>
                         <outlet property="sexLabel" destination="amp-yE-Hiv" id="JSX-xX-afv"/>
+                        <outlet property="shelterInfoBtn" destination="OQT-lt-rGW" id="VWD-Y5-x60"/>
                         <outlet property="shelterInfoButton" destination="BMJ-6f-N9K" id="bwb-ck-wli"/>
                         <outlet property="sizeLabel" destination="iW2-ln-toG" id="zQX-TA-l4Z"/>
                         <segue destination="gYN-2B-1n7" kind="push" identifier="toShelter" id="Ugt-SK-j3S"/>
