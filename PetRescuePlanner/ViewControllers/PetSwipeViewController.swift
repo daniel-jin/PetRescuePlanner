@@ -59,7 +59,7 @@ class PetSwipeViewController: UIViewController {
         
         setUpViews()
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.title = "Sexy Dog Tinder"
+        self.title = "PetRescuePlanner"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
 
     }
