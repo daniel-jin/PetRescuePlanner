@@ -25,97 +25,184 @@ extension Pet {
         }
         
         let apiKeys = API.Keys()
+        
+        var contactDictionaryTemp: [String:String] = [:]
+
     
         // MARK: - Failable init
-        guard let ageDictionary = dictionary[apiKeys.ageKey] as? [String:Any],
-            let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any],
-            let name = nameDictionary[apiKeys.itemKey] as? String,
-            let age = ageDictionary[apiKeys.itemKey] as? String,
-            let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any],
-            let animal = animalDictionary[apiKeys.itemKey] as? String,
-            let breedsDictionary = dictionary[apiKeys.breedsKey] as? [String:[String:Any]],
-            let breedDictionary = breedsDictionary[apiKeys.breedKey],
-            let breed = breedDictionary[apiKeys.itemKey] as? String,
-            let contactDictionary = dictionary[apiKeys.contactInfoKey] as? [String:[String:Any]],
-            let phoneDictionary = contactDictionary[apiKeys.phoneKey],
-            let phoneNumber = phoneDictionary[apiKeys.itemKey] as? String,
-            let stateDictionary = contactDictionary[apiKeys.stateKey],
-            let state = stateDictionary[apiKeys.itemKey] as? String,
-            let emailDictionary = contactDictionary[apiKeys.emailKey],
-            let email = emailDictionary[apiKeys.itemKey] as? String,
-            let cityDictionary = contactDictionary[apiKeys.cityKey],
-            let city = cityDictionary[apiKeys.itemKey] as? String,
-            let zipDictionary = contactDictionary[apiKeys.zipKey],
-            let zip = zipDictionary[apiKeys.itemKey] as? String,
-            let addressDictionary = contactDictionary[apiKeys.addressKey],
-            let address = addressDictionary[apiKeys.itemKey] as? String,
-            let descriptionDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any],
-            let description = descriptionDictionary[apiKeys.itemKey] as? String,
-            let idDictionary = dictionary[apiKeys.idKey] as? [String:Any],
-            let id = idDictionary[apiKeys.itemKey] as? String,
-            let lastUpdateDictionary = dictionary[apiKeys.lastUpdatKey] as? [String:Any],
-            let lastUpdate = lastUpdateDictionary[apiKeys.itemKey] as? String,
-            let mediaDictionary = dictionary[apiKeys.mediaKey] as? [String:[String:Any]],
-            let photosDictionary = mediaDictionary[apiKeys.photosKey],
-            let photosArray = photosDictionary[apiKeys.photoKey] as? [[String: Any]],
-            let lastImageDictionary = photosArray.last,
-            let lastId = lastImageDictionary[apiKeys.imageId] as? String,
-            let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any],
-            let mix = mixDictionary[apiKeys.itemKey] as? String,
-            let optionsDictionary = dictionary[apiKeys.optionsKey] as? [String:Any],
-            let sexDictionary = dictionary[apiKeys.sexKey] as? [String:Any],
-            let sex = sexDictionary[apiKeys.itemKey] as? String,
-            let shelterIdDictionary = dictionary[apiKeys.shelterIdKey] as? [String:Any],
-            let shelterId = shelterIdDictionary[apiKeys.itemKey] as? String,
-            let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any],
-            let size = sizeDictionary[apiKeys.itemKey] as? String,
-            let statusDictionary = dictionary[apiKeys.statusKey] as? [String:Any],
-            let status = statusDictionary[apiKeys.itemKey] as? String else {
-                return nil
+        if let ageDictionary = dictionary[apiKeys.ageKey] as? [String:Any] {
+            if let age = ageDictionary[apiKeys.itemKey] as? String {
+                self.age = age
+            } else {
+                self.age = "No age available"
+            }
         }
-        
-        var photoEndpoints: [String] = []
-        for photoDictionary in photosArray {
-            guard let imageEndPoint = photoDictionary[apiKeys.itemKey] as? String else { return }
-            photoEndpoints.append(imageEndPoint)
-        }
-        
-        var optionsArray: [String] = []
-        if !optionsDictionary.isEmpty {
-            if let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]] {
-                for optionsDictionary in optionArray {
-                    guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
-                    optionsArray.append(option)
-                }
+        if let nameDictionary = dictionary[apiKeys.nameKey] as? [String:Any] {
+            if let name = nameDictionary[apiKeys.itemKey] as? String {
+                self.name = name
+            } else {
+                self.name = "No name availabel"
             }
         }
         
-        var contactDictionaryTemp: [String:String] = [:]
-        contactDictionaryTemp[apiKeys.phoneKey] = phoneNumber
-        contactDictionaryTemp[apiKeys.stateKey] = state
-        contactDictionaryTemp[apiKeys.emailKey] = email
-        contactDictionaryTemp[apiKeys.cityKey] = city
-        contactDictionaryTemp[apiKeys.zipKey] = zip
-        contactDictionaryTemp[apiKeys.addressKey] = address
+        if let animalDictionary = dictionary[apiKeys.animalKey] as? [String:Any] {
+            if let animal = animalDictionary[apiKeys.itemKey] as? String {
+                self.animal = animal
+            } else {
+                self.animal = "No animal available"
+            }
+        }
+        if let breedsDictionary = dictionary[apiKeys.breedsKey] as? [String:[String:Any]] {
+            if let breedDictionary = breedsDictionary[apiKeys.breedKey] {
+                if let breed = breedDictionary[apiKeys.itemKey] as? String {
+                    self.breeds = breed
+                } else {
+                    self.breeds = "No breed available"
+                }
+            }
+        } else {
+            if let breedsDictionary = dictionary[apiKeys.breedsKey] as? [String: Any] {
+                if let breedsArray = breedsDictionary[apiKeys.breedKey] as? [[String: Any]]{
+                    var tempBreed = ""
+                    for breed in breedsArray {
+                        tempBreed += "\(breed[apiKeys.itemKey]!), "
+                    }
+                    // FIXME: - remove last comma
+                    self.breeds = tempBreed
+                }
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////
+        if let contactDictionary = dictionary[apiKeys.contactInfoKey] as? [String:[String:Any]] {
+            if let phoneDictionary = contactDictionary[apiKeys.phoneKey] {
+                if let phoneNumber = phoneDictionary[apiKeys.itemKey] as? String {
+                    contactDictionaryTemp[apiKeys.phoneKey] = phoneNumber
+                   
+                }
+            }
+            if let stateDictionary = contactDictionary[apiKeys.stateKey] {
+                if let state = stateDictionary[apiKeys.itemKey] as? String {
+                    contactDictionaryTemp[apiKeys.stateKey] = state
+
+                }
+            }
+            if let emailDictionary = contactDictionary[apiKeys.emailKey] {
+                if let email = emailDictionary[apiKeys.itemKey] as? String {
+                    contactDictionaryTemp[apiKeys.emailKey] = email
+              
+                }
+            }
+            if let cityDictionary = contactDictionary[apiKeys.cityKey] {
+                if let city = cityDictionary[apiKeys.itemKey] as? String {
+                    contactDictionaryTemp[apiKeys.cityKey] = city
+              
+                }
+            }
+            if let zipDictionary = contactDictionary[apiKeys.zipKey] {
+                if let zip = zipDictionary[apiKeys.itemKey] as? String {
+                    contactDictionaryTemp[apiKeys.zipKey] = zip
+                    
+                }
+            }
+            if let addressDictionary = contactDictionary[apiKeys.addressKey] {
+                if let address = addressDictionary[apiKeys.itemKey] as? String {
+                    contactDictionaryTemp[apiKeys.addressKey] = address
+                }
+            }
+            self.contactInfo = try! JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted) as NSData
+        }
+        ////////////////////////////////////////////////////////////////////////////////////
+        if let descriptionDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any] {
+            if let description = descriptionDictionary[apiKeys.itemKey] as? String {
+                self.petDescription = description
+            } else {
+                self.petDescription = "No description available"
+            }
+        }
+        if let idDictionary = dictionary[apiKeys.idKey] as? [String:Any] {
+            if let id = idDictionary[apiKeys.itemKey] as? String {
+                self.id = id
+            } else {
+                self.id = "No id available"
+            }
+        }
+        if let lastUpdateDictionary = dictionary[apiKeys.lastUpdatKey] as? [String:Any] {
+            if let lastUpdate = lastUpdateDictionary[apiKeys.itemKey] as? String {
+                self.lastUpdate = lastUpdate
+            } else {
+                self.lastUpdate = "Last update not available"
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////
+        if let mediaDictionary = dictionary[apiKeys.mediaKey] as? [String:[String:Any]] {
+            if let photosDictionary = mediaDictionary[apiKeys.photosKey] {
+                if let photosArray = photosDictionary[apiKeys.photoKey] as? [[String: Any]] {
+                    var photoEndpoints: [String] = []
+                    for photoDictionary in photosArray {
+                        guard let imageEndPoint = photoDictionary[apiKeys.itemKey] as? String else { return }
+                        photoEndpoints.append(imageEndPoint)
+                    }
+                    if let lastImageDictionary = photosArray.last {
+                        if let lastId = lastImageDictionary[apiKeys.imageId] as? String {
+                            self.imageIdCount = lastId
+                        }
+                    }
+                    self.media = try! JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
+                }
+            }
+            
+        }
+        ////////////////////////////////////////////////////////////////////////////////////
+        if let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any] {
+            if let mix = mixDictionary[apiKeys.itemKey] as? String {
+                self.mix = mix
+            } else {
+                self.mix = "No mix available"
+            }
+        }
+        if let optionsDictionary = dictionary[apiKeys.optionsKey] as? [String:Any] {
+            var optionsArray: [String] = []
+            if !optionsDictionary.isEmpty {
+                if let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]] {
+                    for optionsDictionary in optionArray {
+                        guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
+                        optionsArray.append(option)
+                    }
+                }
+            }
+            self.options = try! JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted) as NSData
+        }
+        if let sexDictionary = dictionary[apiKeys.sexKey] as? [String:Any] {
+            if let sex = sexDictionary[apiKeys.itemKey] as? String {
+                self.sex = sex
+            } else {
+                self.sex = "No sex available"
+            }
+        }
+        if let shelterIdDictionary = dictionary[apiKeys.shelterIdKey] as? [String:Any] {
+            if let shelterId = shelterIdDictionary[apiKeys.itemKey] as? String {
+                self.shelterID = shelterId
+            } else {
+                self.shelterID = "No shelter ID available"
+            }
+        }
+        if let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any] {
+            if let size = sizeDictionary[apiKeys.itemKey] as? String {
+                self.size = size
+            } else {
+                self.size = "No size available"
+            }
+        }
+        if let statusDictionary = dictionary[apiKeys.statusKey] as? [String:Any] {
+            if let status = statusDictionary[apiKeys.itemKey] as? String {
+                self.status = status
+            } else {
+                self.status = "No status available"
+            }
+        }
         
-        // Initialize rest of properties
-        self.age = age
-        self.animal = animal
-        self.breeds = breed
-        self.contactInfo = try! JSONSerialization.data(withJSONObject: contactDictionaryTemp, options: .prettyPrinted) as NSData
-        self.petDescription = description
-        self.id = id
-        self.lastUpdate = lastUpdate
-        self.media = try! JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
-        self.mix = mix
-        self.name = name
-        self.options = try! JSONSerialization.data(withJSONObject: optionsArray, options: .prettyPrinted) as NSData
-        self.sex = sex
-        self.shelterID = shelterId
-        self.size = size
-        self.status = status
-        self.recordIDString = UUID().uuidString
-        self.imageIdCount = lastId
         self.dateAdded = NSDate()
+        self.recordIDString = UUID().uuidString
+
     }
 }

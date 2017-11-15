@@ -52,7 +52,7 @@
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 		D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */; };
 		D30B58A81FB27D90006C59FE /* ShelterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A71FB27D90006C59FE /* ShelterDetailViewController.swift */; };
-		D31C3A0B1FB4FB1F00580D14 /* ShelterPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3A0A1FB4FB1F00580D14 /* ShelterPetController.swift */; };
+		D381D8B51FBA58A700DF9C0D /* zipCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = D381D8B41FBA58A600DF9C0D /* zipCodes.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +105,7 @@
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 		D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShelterDetailSB.storyboard; sourceTree = "<group>"; };
 		D30B58A71FB27D90006C59FE /* ShelterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterDetailViewController.swift; sourceTree = "<group>"; };
-		D31C3A0A1FB4FB1F00580D14 /* ShelterPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterPetController.swift; path = PetRescuePlanner/Models/ShelterPetController.swift; sourceTree = SOURCE_ROOT; };
+		D381D8B41FBA58A600DF9C0D /* zipCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = zipCodes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,7 +393,6 @@
 				6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */,
 				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,
-				D31C3A0B1FB4FB1F00580D14 /* ShelterPetController.swift in Sources */,
 				3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */,
 				5FB0C1191FB6059600E55C05 /* SavedPetsListTableViewController.swift in Sources */,
 				5F4C16D71FB375230065FEAD /* PetSwipeViewController.swift in Sources */,

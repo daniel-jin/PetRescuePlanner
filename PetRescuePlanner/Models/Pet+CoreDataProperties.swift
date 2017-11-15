@@ -2,7 +2,7 @@
 //  Pet+CoreDataProperties.swift
 //  PetRescuePlanner
 //
-//  Created by Daniel Jin on 11/14/17.
+//  Created by Daniel Rodosky on 11/14/17.
 //  Copyright © 2017 Daniel Rodosky. All rights reserved.
 //
 //
