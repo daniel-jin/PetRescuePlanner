@@ -14,10 +14,16 @@ class SavedPetsListTableViewController: UITableViewController {
     
     var savedPets = PetController.shared.savedPets
     
+
+    
     // MARK: - Table View Life Cycle
 
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        
+        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.title = "My Saved Pets"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
     }
 
     // MARK: - Table view data source
