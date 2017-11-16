@@ -183,7 +183,7 @@ class PetController {
             var tempPet = arrayOfPets[0]
             
             for index in 1...arrayOfPets.count - 1 {
-                var pet = arrayOfPets[index]
+                let pet = arrayOfPets[index]
                 
                 guard let petName = pet.name,
                     let lastPetName = tempPet.name,

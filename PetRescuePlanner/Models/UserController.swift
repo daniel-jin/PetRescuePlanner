@@ -63,7 +63,7 @@ class UserController {
         // Fetch default Apple "user" recordID
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
             
-            guard let appleUserRecordID = appleUserRecordID else { return }
+            guard let appleUserRecordID = appleUserRecordID else { return completion(false) }
             
             let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
             

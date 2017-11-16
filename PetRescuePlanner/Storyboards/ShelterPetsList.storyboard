@@ -71,11 +71,27 @@
                             <outlet property="delegate" destination="8eR-Qx-RJ2" id="RlL-IW-WwG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="V4e-8z-jiO"/>
+                    <navigationItem key="navigationItem" id="V4e-8z-jiO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="LW1-mN-5jx">
+                            <color key="tintColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="toSavedPetsButtonTapped:" destination="8eR-Qx-RJ2" id="HyK-wW-Evg"/>
+                                <segue destination="c4j-e4-HZD" kind="show" identifier="toSavedPets" id="nUt-ZT-ftg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qa3-xS-Cks" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="317.60000000000002" y="133.5832083958021"/>
+        </scene>
+        <!--savedPetsList-->
+        <scene sceneID="mSs-C3-SJ6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="savedPetsList" id="c4j-e4-HZD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUu-gE-cOZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045" y="-198"/>
         </scene>
         <!--petDetailView-->
         <scene sceneID="s29-zH-SWz">
