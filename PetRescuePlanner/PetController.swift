@@ -13,11 +13,14 @@ import CloudKit
 
 class PetController {
     
+    var guardCount = 0
+    
     // MARK: - Properties
     
     static let shared = PetController()
     
     var pets: [Pet] = []
+    var petPhotos: [UIImage] = []
     var offset: String = ""
     
     var savedPets: [Pet] {
@@ -45,42 +48,42 @@ class PetController {
             return []
         }
     }
-
+    
     let cloudKitManager: CloudKitManager
     
     init() {
         
         self.cloudKitManager = CloudKitManager()
         
-//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Pet")
-//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-//        do {
-//            try NSManagedObjectContext.execute
-//        } catch {
-//            // error handling
-//        }
+        //        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Pet")
+        //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+        //        do {
+        //            try NSManagedObjectContext.execute
+        //        } catch {
+        //            // error handling
+        //        }
         
         
-//        performFullSync()
+        //        performFullSync()
         
         /* flush function to delete all records of a record type
-        let query = CKQuery(recordType: "Pet", predicate: NSPredicate(value: true))
-        CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { (records, error) in
-            
-            if error == nil {
-                
-                for record in records! {
-                    
-                    CKContainer.default().publicCloudDatabase.delete(withRecordID: record.recordID, completionHandler: { (recordId, error) in
-                        
-                        if error == nil {
-                            
-                            //Record deleted
-                        }
-                    })
-                }
-            }
-        }
+         let query = CKQuery(recordType: "Pet", predicate: NSPredicate(value: true))
+         CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { (records, error) in
+         
+         if error == nil {
+         
+         for record in records! {
+         
+         CKContainer.default().publicCloudDatabase.delete(withRecordID: record.recordID, completionHandler: { (recordId, error) in
+         
+         if error == nil {
+         
+         //Record deleted
+         }
+         })
+         }
+         }
+         }
          */
         
     }
@@ -92,6 +95,8 @@ class PetController {
     
     
     func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
+        
+        var groupCount = 0
         
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -208,8 +213,17 @@ class PetController {
                 tempPet = pet
             }
             
+//            self.preFetchImagesFor(pets: filteredPets, completion: { (images) in
+//                if images == nil {
+//                    return
+//                }
+//
+//            })
+            
+            
             self.pets = filteredPets
             completion(true)
+            
         }
     }
     
@@ -217,7 +231,7 @@ class PetController {
     
     func fetchImageFor(pet: Pet, number: Int, completion: @escaping (_ success: Bool, _ image: UIImage?) -> Void) {
         
-        guard let media = pet.media else { return }
+        guard let media = pet.media else { completion(false, nil); return }
         
         guard let photos = (try? JSONSerialization.jsonObject(with: media as Data, options: .allowFragments)) as? [String] else {
             completion(false, nil)
@@ -305,6 +319,42 @@ class PetController {
             completion(images)
         }
     }
+    
+    func preFetchImagesFor(pets: [Pet], completion: @escaping (_ photos: [UIImage]?) -> Void) {
+        
+        let dispatchGroup = DispatchGroup()
+        var tempPhotos: [UIImage] = []
+        
+        for index in 0...pets.count - 1 {
+            
+            guard guardCount <= pets.count else { return }
+            
+            let pet = pets[index]
+
+            dispatchGroup.enter()
+            
+            guardCount += 1
+            fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                    completion(nil)
+                    dispatchGroup.leave()
+                    return
+                }
+                guard let image = image else { dispatchGroup.leave(); return completion(nil) }
+                
+                tempPhotos.append(image)
+                dispatchGroup.leave()
+                
+            })
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(tempPhotos)
+        }
+    }
+    
+    
 }
 
 
