@@ -38,23 +38,26 @@ class PetSwipeViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var card2: UIView!
+    @IBOutlet weak var bottomCard: UIView!
     
-    @IBOutlet weak var petNameLabel2: UILabel!
-    @IBOutlet weak var petDescriptionLabel2: UILabel!
+    @IBOutlet weak var bottomPetNameLabel: UILabel!
+    @IBOutlet weak var bottomPetBreedLabel: UILabel!
     
-    @IBOutlet weak var faceImageView2: UIImageView!
-    
-    
-    @IBOutlet weak var card: UIView!
-    @IBOutlet weak var faceImageView: UIImageView!
-    
-    @IBOutlet weak var petNameLabel: UILabel!
-    @IBOutlet weak var petDescriptionLabel: UILabel!
+    @IBOutlet weak var bottomSwipeIndicatorImage: UIImageView!
     
     
-    @IBOutlet weak var card2ImageView: UIImageView!
-    @IBOutlet weak var cardImageView: UIImageView!
+    @IBOutlet weak var topCard: UIView!
+    @IBOutlet weak var topSwipeIndicatorImage: UIImageView!
+    
+    @IBOutlet weak var topPetNameLabel: UILabel!
+    @IBOutlet weak var topPetBreedLabel: UILabel!
+    
+    
+    @IBOutlet weak var bottomCardImageView: UIImageView!
+    @IBOutlet weak var topCardImageView: UIImageView!
+    
+    @IBOutlet weak var topImageHolder: UIView!
+    @IBOutlet weak var bottomImageHolder: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,15 +91,15 @@ class PetSwipeViewController: UIViewController {
         card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
         
         if xFromCenter > 0 {
-            faceImageView.image = #imageLiteral(resourceName: "doge")
-            faceImageView.tintColor = UIColor.lightGray
+            topSwipeIndicatorImage.image = #imageLiteral(resourceName: "greenCheck")
+//            topSwipeIndicatorImage.tintColor = UIColor.lightGray
             
         } else {
-            faceImageView.image = #imageLiteral(resourceName: "sadFace")
-            faceImageView.tintColor = UIColor.red
+            topSwipeIndicatorImage.image = #imageLiteral(resourceName: "sadFace")
+            topSwipeIndicatorImage.tintColor = UIColor.red
         }
         
-        faceImageView.alpha = abs(xFromCenter) / view.center.x
+        topSwipeIndicatorImage.alpha = abs(xFromCenter) / view.center.x
         
         if sender.state == UIGestureRecognizerState.ended {
             
@@ -108,10 +111,10 @@ class PetSwipeViewController: UIViewController {
                 }, completion: { (success) in
                     self.indexIntoPets += 1
 
-                    self.cardImageView.image = UIImage()
+                    self.topCardImageView.image = UIImage()
 
                     if self.indexIntoPets < self.pets.count - 1 {
-                        self.card.isHidden = true
+                        self.topCard.isHidden = true
                         self.resetCard()
                         self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
@@ -148,9 +151,9 @@ class PetSwipeViewController: UIViewController {
 
 
                     if self.indexIntoPets < self.pets.count - 1 {
-                        self.cardImageView.image = UIImage()
+                        self.topCardImageView.image = UIImage()
 
-                        self.card.isHidden = true
+                        self.topCard.isHidden = true
                         self.resetCard()
                         self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
@@ -182,7 +185,7 @@ class PetSwipeViewController: UIViewController {
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {
-                    self.cardImageView.image = image
+                    self.topCardImageView.image = image
                 }
             })
 
@@ -192,7 +195,7 @@ class PetSwipeViewController: UIViewController {
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {
-                    self.card2ImageView.image = image
+                    self.bottomCardImageView.image = image
                 }
             })
             
@@ -200,11 +203,11 @@ class PetSwipeViewController: UIViewController {
 //            self.card2ImageView.image = petPhotos[indexIntoPets + 1]
 //
             
-            self.petNameLabel.text = pet.name
-            self.petDescriptionLabel.text = pet.breeds
+            self.topPetNameLabel.text = pet.name
+            self.topPetBreedLabel.text = pet.breeds
             
-            self.petNameLabel2.text = nextPet.name
-            self.petDescriptionLabel2.text = nextPet.breeds
+            self.bottomPetNameLabel.text = nextPet.name
+            self.bottomPetBreedLabel.text = nextPet.breeds
             
 //            print("CREATCARD PET1 = \(pet.name), PET2 = \(nextPet.name)")
             
@@ -216,7 +219,7 @@ class PetSwipeViewController: UIViewController {
         if pets.count > 0 {
             
             resetCard()
-            card2.isHidden = false 
+            bottomCard.isHidden = false
             let pet = pets[pets.count - 1]
             let petImage = petPhotos[pets.count - 1]
             
@@ -226,7 +229,7 @@ class PetSwipeViewController: UIViewController {
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {
-                    self.cardImageView.image = image
+                    self.topCardImageView.image = image
                 }
             })
             
@@ -242,15 +245,15 @@ class PetSwipeViewController: UIViewController {
     }
     
     func resetCard() {
-        self.card.isHidden = true
+        self.topCard.isHidden = true
         UIView.animate(withDuration: 0.0000000001) {
             
-            self.card.center = self.view.center
-            self.faceImageView.alpha = 0
-            self.card.alpha = 1
-            self.card.transform = CGAffineTransform.identity
+            self.topCard.center = self.bottomCard.center
+            self.topSwipeIndicatorImage.alpha = 0
+            self.topCard.alpha = 1
+            self.topCard.transform = CGAffineTransform.identity
             
-            self.card.isHidden = false
+            self.topCard.isHidden = false
             
         }
     }
@@ -274,7 +277,7 @@ class PetSwipeViewController: UIViewController {
                 self.indexIntoPets = 0
                 
                 DispatchQueue.main.async {
-                    self.card2.isHidden = false
+                    self.bottomCard.isHidden = false
                 }
             })
         }
@@ -284,8 +287,18 @@ class PetSwipeViewController: UIViewController {
         indexIntoPets = 0
         divisor = (view.frame.width / 2) / 0.61
         
-        card.layer.cornerRadius = 10.0
-        card2.layer.cornerRadius = 10.0
+        topImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        bottomImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        
+        
+        topCard.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        topCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        
+        bottomCard.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        bottomCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        
+        topCard.layer.cornerRadius = 10.0
+        bottomCard.layer.cornerRadius = 10.0
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
