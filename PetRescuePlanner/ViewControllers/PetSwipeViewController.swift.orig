@@ -221,7 +221,7 @@ class PetSwipeViewController: UIViewController {
             resetCard()
             bottomCard.isHidden = false
             let pet = pets[pets.count - 1]
-//            let petImage = petPhotos[pets.count - 1]
+            let petImage = petPhotos[pets.count - 1]
             
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
@@ -233,13 +233,19 @@ class PetSwipeViewController: UIViewController {
                 }
             })
             
+<<<<<<< HEAD
 //            self.cardImageView.image = petImage
             
-            self.topPetNameLabel.text = pet.name
+            petNameLabel.text = pet.name
+            petDescriptionLabel.text = pet.breeds
+=======
+            topPetNameLabel.text = pet.name
             topPetBreedLabel.text = pet.breeds
+>>>>>>> develop
+            
 //            print("CREATELASTCARD: PET = \(pet.name)")
             
-            fetchMorePets(pet: pet)
+            fetchMorePets(pet: pet, image: petImage)
         }
     }
     
@@ -257,7 +263,7 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
-    func fetchMorePets(pet: Pet) {
+    func fetchMorePets(pet: Pet, image: UIImage) {
         if indexIntoPets == pets.count - 1 {
             
             let methods = API.Methods()
