@@ -31,6 +31,7 @@ class LaunchScreenViewController: UIViewController {
                     if !success {
                         UserController.shared.createUser(savedPetsRef: [CKReference](), completion: { (success) in
                             if success {
+                                UserController.shared.isUserLoggedIntoiCloud = true
                                 DispatchQueue.main.async {
                                     self.changeRootViewController()
                                 }
@@ -38,6 +39,7 @@ class LaunchScreenViewController: UIViewController {
                         })
                     } else {
                         // There is already a current user - go to customized search screen
+                        UserController.shared.isUserLoggedIntoiCloud = true
                         DispatchQueue.main.async {
                             self.changeRootViewController()
                         }

@@ -14,8 +14,6 @@ class SavedPetsListTableViewController: UITableViewController {
     
     var savedPets = PetController.shared.savedPets
     
-
-    
     // MARK: - Table View Life Cycle
 
     override func viewDidLoad() {

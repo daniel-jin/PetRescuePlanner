@@ -119,8 +119,10 @@ class PetSwipeViewController: UIViewController {
                 // Save to CoreData first
                 PetController.shared.add(pet: petToSave)
                 
-                self.indexIntoPets += 1
+                // Sync with CloudKit
+                PetController.shared.performFullSync()
                 
+                /*
                 // Then save to CK
                 PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
                     if !success {
@@ -128,6 +130,11 @@ class PetSwipeViewController: UIViewController {
                         return
                     }
                 })
+                 */
+                
+                self.indexIntoPets += 1
+                
+                
                 
                 
                 UIView.animate(withDuration: 0.3, animations: {

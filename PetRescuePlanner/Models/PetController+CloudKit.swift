@@ -205,12 +205,9 @@ extension PetController {
             predicate = NSPredicate(value: true)
         }
         
-        // TODO: Code sortdescriptors to order by most recently saved/favorited
-        /*
         let sortDescriptors: [NSSortDescriptor]?
-        let sortDescriptor = NSSortDescriptor(key: "savedDateTime", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "dateAdded", ascending: false)
         sortDescriptors = [sortDescriptor]
-         */
         
         cloudKitManager.fetchRecordsWithType(CloudKit.petRecordType, predicate: predicate, sortDescriptors: nil) { (records, error) in
             
