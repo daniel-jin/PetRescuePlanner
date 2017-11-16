@@ -79,6 +79,9 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     // Mark: - actions
     
     // Mark: - Emailing shelter
+    @IBAction func toSavedPetsButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "toSavedPets", sender: self)
+    }
     
     @IBAction func emailButtonTapped(_ sender: Any) {
         
