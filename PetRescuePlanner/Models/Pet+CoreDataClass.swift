@@ -51,7 +51,9 @@ class Pet: NSManagedObject, CloudKitSyncable {
             let shelterId = cloudKitRecord[apiKeys.shelterIdKey] as? String,
             let size = cloudKitRecord[apiKeys.sizeKey] as? String,
             let status = cloudKitRecord[apiKeys.statusKey] as? String,
-            let recordIDString = cloudKitRecord["recordIDString"] as? String else { return nil }
+            let recordIDString = cloudKitRecord["recordIDString"] as? String,
+            let dateAdded = cloudKitRecord["dateAdded"] as? NSDate,
+            let imageIdCount = cloudKitRecord["imageIdCount"] as? String else { return nil }
         
         self.age = age
         self.animal = animal
@@ -69,6 +71,8 @@ class Pet: NSManagedObject, CloudKitSyncable {
         self.size = size
         self.status = status
         self.recordIDString = recordIDString
+        self.dateAdded = dateAdded
+        self.imageIdCount = imageIdCount
     }
 }
 
@@ -99,5 +103,7 @@ extension CKRecord {
         self.setValue(pet.size, forKey: apiKeys.sizeKey)
         self.setValue(pet.status, forKey: apiKeys.statusKey)
         self.setValue(pet.recordIDString, forKey: "recordIDString")
+        self.setValue(pet.dateAdded, forKey: "dateAdded")
+        self.setValue(pet.imageIdCount, forKey: "imageIdCount")
     }
 }

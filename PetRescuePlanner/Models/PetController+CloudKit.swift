@@ -105,6 +105,9 @@ extension PetController {
                         // Check to prevent duplicate pet records from being saved into the current user's CKRef array
                         if !currentUser.savedPets.contains(petCKRef) {
                             currentUser.savedPets.append(petCKRef)
+                        } else {
+                            // If there is already a pet in the user's saved pets, update the date added property
+                            currentUser.savedPets.index(of: petCKRef).
                         }
                         
                         guard let userRecord = CKRecord(user: currentUser) else { return }
