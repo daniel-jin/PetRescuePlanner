@@ -277,13 +277,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 }
             })
         }
-        
-        if segue.identifier == "toSavedPets" {
-            
-            
-            
-        }
-        
     }
  
     

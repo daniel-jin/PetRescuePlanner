@@ -17,6 +17,15 @@ class ShelterPetsListTableViewController: UITableViewController {
             }
         }
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func toSavedPetsButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "toSavedPets", sender: self)
+    }
+    
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
