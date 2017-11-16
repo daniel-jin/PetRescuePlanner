@@ -107,7 +107,7 @@ extension PetController {
                             currentUser.savedPets.append(petCKRef)
                         } else {
                             // If there is already a pet in the user's saved pets, update the date added property
-                            currentUser.savedPets.index(of: petCKRef).
+                       //     currentUser.savedPets.index(of: petCKRef).
                         }
                         
                         guard let userRecord = CKRecord(user: currentUser) else { return }
