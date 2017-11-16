@@ -32,6 +32,8 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
+    var petPhotos: [UIImage] = []
+    
     var indexIntoPets = 0
     
     // MARK: - Outlets
@@ -56,6 +58,14 @@ class PetSwipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let methods = API.Methods()
+        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
+            if !success {
+                NSLog("Error fetching adoptable pets from PetController")
+                return
+            }
+        })
         
         setUpViews()
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
@@ -175,7 +185,7 @@ class PetSwipeViewController: UIViewController {
                     self.cardImageView.image = image
                 }
             })
-            
+
             PetController.shared.fetchImageFor(pet: nextPet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("error fetchingpet in pet controller")
@@ -186,6 +196,9 @@ class PetSwipeViewController: UIViewController {
                 }
             })
             
+//            self.cardImageView.image = petPhotos[indexIntoPets]
+//            self.card2ImageView.image = petPhotos[indexIntoPets + 1]
+//
             
             self.petNameLabel.text = pet.name
             self.petDescriptionLabel.text = pet.breeds
@@ -205,6 +218,7 @@ class PetSwipeViewController: UIViewController {
             resetCard()
             card2.isHidden = false 
             let pet = pets[pets.count - 1]
+            let petImage = petPhotos[pets.count - 1]
             
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
@@ -216,14 +230,14 @@ class PetSwipeViewController: UIViewController {
                 }
             })
             
+//            self.cardImageView.image = petImage
+            
             petNameLabel.text = pet.name
             petDescriptionLabel.text = pet.breeds
             
 //            print("CREATELASTCARD: PET = \(pet.name)")
             
-            fetchMorePets(pet: pet)
-        } else {
-            presentAlertWith(title: "Uh Oh...", message: "No pets were found near you")
+            fetchMorePets(pet: pet, image: petImage)
         }
     }
     
@@ -241,7 +255,7 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
-    func fetchMorePets(pet: Pet) {
+    func fetchMorePets(pet: Pet, image: UIImage) {
         if indexIntoPets == pets.count - 1 {
             
             let methods = API.Methods()
@@ -249,6 +263,9 @@ class PetSwipeViewController: UIViewController {
             PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success) in
                 if !success {
                     NSLog("No more pets fetched In swipe to save view")
+                    
+                    self.presentAlertWith(title: "Uh Oh...", message: "No pets were found near you")
+                    
                     return
                 }
                 self.offSet = PetController.shared.offset
@@ -271,7 +288,6 @@ class PetSwipeViewController: UIViewController {
         card2.layer.cornerRadius = 10.0
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        
         self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
     
