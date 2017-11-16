@@ -11,6 +11,7 @@ import UIKit
 class PetDetailCollectionTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var saveButton: UIButton!
     
     var pet: Pet? {
         didSet {
@@ -32,11 +33,16 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
 
     
     override func viewDidLoad() {
+        guard let pet = pet else { return }
+        
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         if (self.navigationController != nil) {
             navigationController?.isNavigationBarHidden = true
+        }
+        if PetController.shared.savedPets.contains(pet) {
+            saveButton.isHidden = true
         }
     }
     
@@ -98,6 +104,14 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         
     }
     
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        
+        guard let pet = self.pet else { return }
+        
+        PetController.shared.add(pet: pet)
+        navigationController?.popViewController(animated: true)
+        
+    }
     
     
     

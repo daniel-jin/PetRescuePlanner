@@ -28,7 +28,13 @@ class SavedPetTableViewCell: UITableViewCell {
         
         guard let pet = pet else { return }
         
-        nameLabel.text = pet.name
+        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
+        
+        guard let petName = pet.name else { return }
+        let petNameString: NSMutableAttributedString = NSMutableAttributedString(string: "\(petName)", attributes: redForegroundAttribute)
+        nameLabel.attributedText = petNameString
+        
         descriptionLabel.text = pet.petDescription
         
         PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
