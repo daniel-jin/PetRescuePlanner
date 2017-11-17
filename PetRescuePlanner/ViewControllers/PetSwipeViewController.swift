@@ -22,11 +22,13 @@ class PetSwipeViewController: UIViewController {
     
     var pets: [Pet] = [] {
         didSet {
-            DispatchQueue.main.async {
-                if self.pets.count > 1 {
-                    self.createCard()
-                } else {
-                    self.createLastCard()
+            if isViewLoaded{
+                DispatchQueue.main.async {
+                    if self.pets.count > 1 {
+                        self.createCard()
+                    } else {
+                        self.createLastCard()
+                    }
                 }
             }
         }
