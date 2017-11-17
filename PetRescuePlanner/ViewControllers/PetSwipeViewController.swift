@@ -62,13 +62,7 @@ class PetSwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let methods = API.Methods()
-        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
-            if !success {
-                NSLog("Error fetching adoptable pets from PetController")
-                return
-            }
-        })
+ 
         
         setUpViews()
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
@@ -198,10 +192,6 @@ class PetSwipeViewController: UIViewController {
                     self.bottomCardImageView.image = image
                 }
             })
-            
-//            self.cardImageView.image = petPhotos[indexIntoPets]
-//            self.card2ImageView.image = petPhotos[indexIntoPets + 1]
-//
             
             self.topPetNameLabel.text = pet.name
             self.topPetBreedLabel.text = pet.breeds
