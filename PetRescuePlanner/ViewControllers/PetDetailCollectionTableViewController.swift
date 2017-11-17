@@ -18,6 +18,11 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     var pet: Pet? {
         didSet {
             PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
+                if images == nil {
+                    NSLog("No images found for pet")
+                    // set the default image
+                    self.imageArray = [#imageLiteral(resourceName: "doge")]
+                }
                 guard let images = images else { return }
                 self.imageArray = images
             }

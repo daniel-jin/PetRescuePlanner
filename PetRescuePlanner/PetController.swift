@@ -20,8 +20,8 @@ class PetController {
     static let shared = PetController()
     
     var pets: [Pet] = []
-    var petPhotos: [UIImage] = []
-    var offset: String = ""
+//    var petPhotos: [UIImage] = []
+//    var offset: String = ""
     
     var savedPets: [Pet] {
         // MARK: - Fetched Results Controller configuration
@@ -94,10 +94,8 @@ class PetController {
     let responseFormat = API.Parameters().jsonFormat
     
     
-    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
-        
-        var groupCount = 0
-        
+    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
+                
         let output = responseFormat
         let apiKey = parameters.apiKey
         let baseUrl = URL(string: parameters.baseUrl)!
@@ -162,11 +160,11 @@ class PetController {
         
         guard let searchUrl = components?.url else { return }
         
-        NetworkController.performRequest(for: searchUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+        URLSession.shared.dataTask(with: searchUrl) { (data, _, error) in
             
             if let error = error {
                 NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
-                completion(false)
+                completion(false, nil, nil)
             }
             guard let data = data else { return }
             guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
@@ -180,8 +178,6 @@ class PetController {
             
             
             let arrayOfPets = petsArray.flatMap { Pet(dictionary: $0, context: nil) }
-            
-            self.offset = lastOffset
             
             var filteredPets: [Pet] = []
             
@@ -213,18 +209,9 @@ class PetController {
                 tempPet = pet
             }
             
-//            self.preFetchImagesFor(pets: filteredPets, completion: { (images) in
-//                if images == nil {
-//                    return
-//                }
-//
-//            })
-            
-            
-            self.pets = filteredPets
-            completion(true)
-            
-        }
+            completion(true, filteredPets, lastOffset)
+            return 
+            }.resume()
     }
     
     // Updated by Dan Rodosky 11/9/2017
@@ -242,7 +229,8 @@ class PetController {
         
         guard let photoURL = URL(string: photo) else { return completion(false, nil) }
         
-        NetworkController.performRequest(for: photoURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
+        URLSession.shared.dataTask(with: photoURL) { (data, _, error) in
+            
             if let error = error {
                 NSLog("error fetching pet photo in pet controller \(error)")
                 completion(false, nil)
@@ -252,7 +240,7 @@ class PetController {
             let imageReturned = UIImage(data: data)
             
             completion(true, imageReturned)
-        }
+        }.resume()
     }
     
     func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
@@ -277,16 +265,14 @@ class PetController {
             }
         }
         
-        let tempUrls = photoUrls
-        photoUrls += tempUrls
-        
         for photo in photoUrls {
             
             guard let photoUrl = URL(string: photo) else { return }
             
             dispatchGroup.enter()
             
-            NetworkController.performRequest(for: photoUrl, httpMethod: NetworkController.HTTPMethod.get, body: nil, completion: { (data, error) in
+            
+            URLSession.shared.dataTask(with: photoUrl) { (data, _, error) in
                 
                 if let error = error {
                     NSLog("Error fetching images. \(#file) \(#function), \(error): \(error.localizedDescription)")
@@ -298,13 +284,13 @@ class PetController {
                 guard let data = data,
                     let image = UIImage(data: data) else { dispatchGroup.leave(); completion(nil); return}
                 
-                guard petImageArray.count < count * 2 else { return }
+                guard petImageArray.count < count else { return }
                 
                 petImageArray.append((photo, image))
                 
                 dispatchGroup.leave()
                 
-            })
+            }.resume()
         }
         dispatchGroup.notify(queue: .main) {
             
