@@ -28,16 +28,16 @@ extension PetController {
     // Create
     func add(pet: Pet) {
         
-        // Check if the pet has already been saved
-        let savedPetIDs = PetController.shared.savedPets.flatMap{ $0.id }
-        
         guard let petID = pet.id else { return }
         
-        if savedPetIDs.contains(petID) {
-
+        if let duplicatePet = PetController.shared.savedPets.filter({ $0.id == petID}).first {
+            // There is a duplicate
+            duplicatePet.dateAdded = NSDate()
+            saveToPersistantStore()
             return
-        }
+        } else {
         
+        // There is no duplicat - create Pet object for Core Data saving
         let petToSave = Pet(context: CoreDataStack.context)
         
         petToSave.age = pet.age
@@ -61,6 +61,7 @@ extension PetController {
         petToSave.status = pet.status
         
         saveToPersistantStore()
+        }
     }
     
     

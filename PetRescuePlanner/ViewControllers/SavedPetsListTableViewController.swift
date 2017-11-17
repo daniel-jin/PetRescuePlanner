@@ -22,6 +22,18 @@ class SavedPetsListTableViewController: UITableViewController {
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         self.title = "My Saved Pets"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
+        
+        PetController.shared.fetchNewPetRecordsOf(type: CloudKit.petRecordType) {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+                
+//        PetController.shared.performFullSync {
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     }
 
     // MARK: - Table view data source

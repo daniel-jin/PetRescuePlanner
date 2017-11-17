@@ -122,20 +122,7 @@ class PetSwipeViewController: UIViewController {
                 // Sync with CloudKit
                 PetController.shared.performFullSync()
                 
-                /*
-                // Then save to CK
-                PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
-                    if !success {
-                        NSLog("Error saving pet to CloudKit")
-                        return
-                    }
-                })
-                 */
-                
                 self.indexIntoPets += 1
-                
-                
-                
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)

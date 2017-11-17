@@ -20,10 +20,9 @@ extension PetController {
     }
     
     // Fetch function to check if a user's swiped animal is already in their favorites list
-    func fetchPet(petCKRecord: CKRecord, completion: @escaping (_ petRec: CKRecord?) -> Void) {
+    func fetchPet(pet: Pet, completion: @escaping (_ petRec: CKRecord?) -> Void) {
         
-        guard let pet = Pet(cloudKitRecord: petCKRecord),
-            let id = pet.id else {
+        guard let id = pet.id else {
             completion(nil)
             return
         }
@@ -32,13 +31,14 @@ extension PetController {
         
         cloudKitManager.fetchRecordsWithType(CloudKit.petRecordType, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
             if let error = error {
-                    NSLog("Error fetching record with the Pet's Record ID \(error.localizedDescription)" )
-                    completion(nil)
-                    return
+                NSLog("Error fetching record with the Pet's Record ID \(error.localizedDescription)" )
+                completion(nil)
+                return
             }
-            guard let records = records else { completion(nil);return }
+            guard let record = records?.first else { completion(nil);return }
             
-            completion(records.first)
+            completion(record)
+            
             return
         }
     }
@@ -52,8 +52,8 @@ extension PetController {
                 completion(false)
                 return
             }
-        
-        
+            
+            
             guard var currentUser = UserController.shared.currentUser else { return }
             
             // Get CK record of the pet to save to CK
@@ -62,13 +62,8 @@ extension PetController {
                 completion(false)
                 return
             }
-        
-            self.fetchPet(petCKRecord: petCKRecord) { (record) in
-                
-    //            // Need to save to the user's list of CK References for favorite pets
-    //            let petCKRef = CKReference(record: petCKRecord, action: .none)
-    //            currentUser.savedPets.insert(petCKRef, at: 0)
-    //            guard let userRecord = CKRecord(user: currentUser) else { return }
+            
+            self.fetchPet(pet: pet) { (record) in
                 
                 // There is already a pet CK record that you swiped right on
                 if record != nil {
@@ -81,7 +76,7 @@ extension PetController {
                     if !currentUser.savedPets.contains(petCKRef) {
                         currentUser.savedPets.append(petCKRef)
                     }
-            
+                    
                     guard let userRecord = CKRecord(user: currentUser) else { return }
                     
                     // Modify/update CKRecord for user
@@ -105,9 +100,6 @@ extension PetController {
                         // Check to prevent duplicate pet records from being saved into the current user's CKRef array
                         if !currentUser.savedPets.contains(petCKRef) {
                             currentUser.savedPets.append(petCKRef)
-                        } else {
-                            // If there is already a pet in the user's saved pets, update the date added property
-                       //     currentUser.savedPets.index(of: petCKRef).
                         }
                         
                         guard let userRecord = CKRecord(user: currentUser) else { return }
@@ -161,7 +153,7 @@ extension PetController {
     private func recordsOf(type: String) -> [CloudKitSyncable] {
         switch type {
         case "Pet":
-            return pets.flatMap{ $0 as CloudKitSyncable }
+            return savedPets.flatMap{ $0 as CloudKitSyncable }
         default:
             return []
         }
@@ -178,37 +170,71 @@ extension PetController {
     // MARK: - Sync
     func performFullSync(completion: @escaping (() -> Void) = { }) {
         
-        guard !isSyncing else {
-            completion()
-            return
-        }
-        
-        isSyncing = true
-        
-        pushChangesToCloudKit { (success, error) in
+        if UserController.shared.isUserLoggedIntoiCloud {
             
-            self.fetchNewPetRecordsOf(type: "Pet") {
-                self.isSyncing = false
+            guard !isSyncing else {
                 completion()
+                return
+            }
+            
+            isSyncing = true
+            
+            pushChangesToCloudKit { (success, error) in
+                
+                self.fetchNewPetRecordsOf(type: "Pet") {
+                    self.isSyncing = false
+                    completion()
+                }
             }
         }
     }
     
     func fetchNewPetRecordsOf(type: String, completion: @escaping (() -> Void) = { }) {
-            
-        var referencesToExclude = [CKReference]()
-        var predicate: NSPredicate!
-        referencesToExclude = self.syncedRecordsOf(type: type).flatMap { $0.cloudKitReference }
-        predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         
-        if referencesToExclude.isEmpty {
-            predicate = NSPredicate(value: true)
+        var referencesToExclude = [CKReference]()
+        referencesToExclude = self.syncedRecordsOf(type: type).flatMap { $0.cloudKitReference }
+        
+//        var predicate: NSPredicate!
+//        predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
+        
+//        if referencesToExclude.isEmpty {
+//            predicate = NSPredicate(value: true)
+//        }
+        
+        guard let currUser = UserController.shared.currentUser,
+            let currUserRec = CKRecord(user: currUser) else { return }
+        
+        cloudKitManager.fetchRecord(withID: currUserRec.recordID) { (record, error) in
+            if let error = error {
+                NSLog("Unable to fetch current user's record in CloudKit: \(error.localizedDescription)")
+                completion()
+                return
+            }
+            
+            guard let record = record,
+                let user = User(cloudKitRecord: record) else { completion(); return }
+                
+            let petRefs = user.savedPets
+            let petRefsFiltered = petRefs.filter { !referencesToExclude.contains($0) }
+            
+            for ref in petRefsFiltered {
+                
+                self.cloudKitManager.fetchRecord(withID: ref.recordID, completion: { (record, error) in
+                    if let error = error {
+                        NSLog("Unable to fetch record with the reference for the pet: \(error.localizedDescription)")
+                        completion()
+                        return
+                    }
+                    
+                    guard let record = record,
+                        let pet = Pet(cloudKitRecord: record) else { completion(); return }
+                    
+                    PetController.shared.add(pet: pet)
+                })
+            }
         }
         
-        let sortDescriptors: [NSSortDescriptor]?
-        let sortDescriptor = NSSortDescriptor(key: "dateAdded", ascending: false)
-        sortDescriptors = [sortDescriptor]
-        
+        /*
         cloudKitManager.fetchRecordsWithType(CloudKit.petRecordType, predicate: predicate, sortDescriptors: nil) { (records, error) in
             
             defer { completion() }
@@ -218,34 +244,81 @@ extension PetController {
             }
             guard let records = records else { return }
             
-            records.forEach { Pet(cloudKitRecord: $0, context: nil) }
+            let pets = records.flatMap { Pet(cloudKitRecord: $0, context: nil) }
             
-            self.saveToPersistantStore()
+            pets.forEach({ self.add(pet: $0) })
             
+            print(self.savedPets.count)
         }
+         */
     }
     
     func pushChangesToCloudKit(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void) = { _,_ in }) {
         
-        let unsavedPets = unsyncedRecordsOf(type: "Pet") as? [Pet] ?? []
-        var unsavedObjectsByRecord = [CKRecord: CloudKitSyncable]()
-        for pet in unsavedPets {
-            guard let record = CKRecord(pet: pet) else {
-                NSLog("Error getting CK Record of the pet")
-                return
-            }
-            unsavedObjectsByRecord[record] = pet
-        }
-        let unsavedRecords = Array(unsavedObjectsByRecord.keys)
+        // Pets that are unsynced (have not been saved to CloudKit)
+        let unsavedPets = unsyncedRecordsOf(type: CloudKit.petRecordType) as? [Pet] ?? []
         
-        cloudKitManager.saveRecords(unsavedRecords, perRecordCompletion: { (record, error) in
-            guard let record = record else { return }
-            unsavedObjectsByRecord[record]?.cloudKitRecordID = record.recordID
+        var unsavedObjectsByRecord = [CKRecord: CloudKitSyncable]()
+        
+        guard let unsavedUser = UserController.shared.currentUser,
+            let userRec = CKRecord(user: unsavedUser) else {
+                completion(false, nil)
+                return
+        }
+        
+        var petReferences = (syncedRecordsOf(type: CloudKit.petRecordType) as? [Pet] ?? []).flatMap({$0.cloudKitReference})
+        
+        let group = DispatchGroup()
+        
+        for pet in unsavedPets {
             
-        }) { (records, error) in
+            group.enter()
             
-            let success = records != nil
-            completion(success, error)
+            fetchPet(pet: pet, completion: { (existingRecord) in
+                if let existingRecord = existingRecord {
+                    
+                    // If the pet exists, we just add its reference to the array of references for the User record.
+                    let existingRecordReference = CKReference(record: existingRecord, action: .none)
+                    petReferences.append(existingRecordReference)
+                    group.leave()
+                } else {
+                    
+                    // If it doesn't exist, we need to save it to CloudKit and also add it to the array of references for the user.
+                    guard let record = CKRecord(pet: pet) else {
+                        NSLog("Error getting CK Record of the pet")
+                        group.leave()
+                        return
+                    }
+                    unsavedObjectsByRecord[record] = pet
+                    group.leave()
+                }
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+        
+            var unsavedRecords = Array(unsavedObjectsByRecord.keys)
+            
+            // CK References for Pets that have already been saved to CloudKit
+            
+            // CK References that have not been saved to CloudKit
+            let unsavedPetReferences = unsavedRecords.flatMap({ CKReference(record: $0, action: .none)})
+            
+            petReferences.append(contentsOf: unsavedPetReferences)
+            
+            userRec.setValue(petReferences, forKey: CloudKit.savedPetsRefKey)
+            
+            unsavedRecords.append(userRec)
+            
+            self.cloudKitManager.saveRecords(unsavedRecords, perRecordCompletion: { (record, error) in
+                guard let record = record else { return }
+                unsavedObjectsByRecord[record]?.cloudKitRecordID = record.recordID
+                
+            }) { (records, error) in
+                
+                let success = records != nil
+                completion(success, error)
+            }
         }
     }
 }
