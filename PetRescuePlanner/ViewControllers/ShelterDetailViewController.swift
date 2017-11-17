@@ -38,9 +38,19 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         
         DispatchQueue.main.async {
             self.shelterNameLabel.text = shelter.name
-            self.addressbutton.setTitle("\(shelter.address) \(shelter.city), \(shelter.state)", for: .normal)
             self.numberButton.setTitle(shelter.phone, for: .normal)
             self.emailButton.setTitle(shelter.email, for: .normal)
+            
+            var addressButtonTitle = ""
+            
+            if shelter.address == ShelterKeys.noInfo {
+                addressButtonTitle = "Get directions"
+            } else {
+                addressButtonTitle = "\(shelter.address) \(shelter.city), \(shelter.state)"
+            }
+            
+            self.addressbutton.setTitle(addressButtonTitle, for: .normal)
+            
             
             // Mark: - Map view
             // Mark: - Remove annotations
@@ -107,7 +117,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         controller.dismiss(animated: true, completion: nil)
     }
     
-    // Mark: - calling shelters
+    // Mark: - calling shelter
     
     @IBAction func numberButtonTapped(_ sender: Any) {
         guard let shelter = shelter else {return}
@@ -146,7 +156,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             
         }
     }
-    
+    // Mark: - clean up a bit have all the letters that are asigned to the same number on the same row
     let letterDictionary: [Character: Character] = ["a" : "2",
                                                     "b" : "2",
                                                     "c" : "2",
@@ -197,6 +207,8 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         if segue.identifier == "toPetsList" {
             guard let destinationVC = segue.destination as? ShelterPetsListTableViewController else { return }
             guard let pet = pet else { return }
+            
+            
             
             PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
                 if !success {

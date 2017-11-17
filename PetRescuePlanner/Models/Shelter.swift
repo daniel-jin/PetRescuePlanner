@@ -42,7 +42,6 @@ struct Shelter {
             self.address = ShelterKeys.noInfo
         }
         
-        
         if let idDictionary = dictionary[ShelterKeys.idKey] as? [String: Any]{
             if let id = idDictionary[apiKey.itemKey] as? String {
                 self.id = id
@@ -52,8 +51,7 @@ struct Shelter {
         } else {
             self.id = ShelterKeys.noInfo
         }
-        
-        
+    
         if let nameDictionary = dictionary[ShelterKeys.nameKey] as? [String: Any] {
             if let name = nameDictionary[apiKey.itemKey] as? String {
                 self.name = name
@@ -63,7 +61,6 @@ struct Shelter {
         } else {
             self.name = ShelterKeys.noInfo
         }
-        
         
         if let stateDictionary = dictionary[ShelterKeys.stateKey] as? [String: Any] {
             if let state = stateDictionary[apiKey.itemKey] as? String {
@@ -75,7 +72,6 @@ struct Shelter {
             self.state = ShelterKeys.noInfo
         }
         
-        
         if let cityDictionary = dictionary[ShelterKeys.cityKey] as? [String: Any] {
             if let city = cityDictionary[apiKey.itemKey] as? String {
                 self.city = city
@@ -85,7 +81,6 @@ struct Shelter {
         } else {
             self.city = ShelterKeys.noInfo
         }
-        
         
         if let emailDictionary = dictionary[ShelterKeys.emailKey] as? [String: Any] {
             if let email = emailDictionary[apiKey.itemKey] as? String {
@@ -97,7 +92,6 @@ struct Shelter {
             self.email = ShelterKeys.noInfo
         }
         
-        
         if let phoneDictionary = dictionary[ShelterKeys.phoneKey] as? [String: Any] {
             if let phone = phoneDictionary[apiKey.itemKey] as? String {
                 self.phone = phone
@@ -108,7 +102,6 @@ struct Shelter {
             self.phone = ShelterKeys.noInfo
         }
         
-        
         if let zipDictionary = dictionary[ShelterKeys.zipKey] as? [String: Any] {
             if let zip = zipDictionary[apiKey.itemKey] as? String {
                 self.zip = zip
@@ -118,7 +111,6 @@ struct Shelter {
         } else {
             self.zip = ShelterKeys.noInfo
         }
-        
         
         // Mark: - try to come back and change that value if we dont get a lon or lat and make it so itll send you a message telling you that we cant get the directions
         if let longitudeDictionary = dictionary[ShelterKeys.longitudeKey] as? [String: Any] {
@@ -131,8 +123,6 @@ struct Shelter {
             self.longitude = ShelterKeys.fakeLanLon
         }
         
-        
-        
         if let latitudeDictionary = dictionary[ShelterKeys.latitudeKey] as? [String: Any] {
             if let latitude = latitudeDictionary[apiKey.itemKey] as? String {
                 self.latitude = Double(latitude)!
@@ -142,6 +132,8 @@ struct Shelter {
         } else {
             self.latitude = ShelterKeys.fakeLanLon
         }
+        
+        
     
     }
 }
