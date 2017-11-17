@@ -81,6 +81,7 @@ class Pet: NSManagedObject, CloudKitSyncable {
         self.recordIDString = recordIDString
         self.dateAdded = dateAdded
         self.imageIdCount = imageIdCount
+        self.cloudKitRecordID = cloudKitRecord.recordID
     }
 }
 

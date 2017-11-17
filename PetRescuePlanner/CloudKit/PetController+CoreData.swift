@@ -11,12 +11,12 @@ import CoreData
 import CloudKit
 
 extension PetController {
-
+    
     // MARK: - SaveToPersistantStore()
     func saveToPersistantStore() {
         
         let moc = CoreDataStack.context
-
+        
         do {
             return try moc.save()
         } catch {
@@ -26,41 +26,45 @@ extension PetController {
     
     // MARK: - CRUD Functions
     // Create
-    func add(pet: Pet) {
+    func add(pet: Pet, shouldSaveContext: Bool = true) {
         
         guard let petID = pet.id else { return }
         
         if let duplicatePet = PetController.shared.savedPets.filter({ $0.id == petID}).first {
             // There is a duplicate
-            duplicatePet.dateAdded = NSDate()
+            duplicatePet.dateAdded = Date() as NSDate
+            
+            guard shouldSaveContext else { return }
             saveToPersistantStore()
             return
         } else {
-        
-        // There is no duplicat - create Pet object for Core Data saving
-        let petToSave = Pet(context: CoreDataStack.context)
-        
-        petToSave.age = pet.age
-        petToSave.animal = pet.animal
-        petToSave.breeds = pet.breeds
-        petToSave.cloudKitRecordID = pet.cloudKitRecordID
-        petToSave.contactInfo = pet.contactInfo
-        petToSave.dateAdded = pet.dateAdded
-        petToSave.id = pet.id
-        petToSave.imageIdCount = pet.imageIdCount
-        petToSave.lastUpdate = pet.lastUpdate
-        petToSave.media = pet.media
-        petToSave.mix = pet.mix
-        petToSave.name = pet.name
-        petToSave.options = pet.options
-        petToSave.petDescription = pet.petDescription
-        petToSave.recordIDString = pet.recordIDString
-        petToSave.sex = pet.sex
-        petToSave.shelterID = pet.shelterID
-        petToSave.size = pet.size
-        petToSave.status = pet.status
-        
-        saveToPersistantStore()
+            
+            // There is no duplicat - create Pet object for Core Data saving
+            let petToSave = Pet(context: CoreDataStack.context)
+            
+            petToSave.age = pet.age
+            petToSave.animal = pet.animal
+            petToSave.breeds = pet.breeds
+            petToSave.cloudKitRecordID = pet.cloudKitRecordID
+            petToSave.contactInfo = pet.contactInfo
+            petToSave.dateAdded = pet.dateAdded
+            petToSave.id = pet.id
+            petToSave.imageIdCount = pet.imageIdCount
+            petToSave.lastUpdate = pet.lastUpdate
+            petToSave.media = pet.media
+            petToSave.mix = pet.mix
+            petToSave.name = pet.name
+            petToSave.options = pet.options
+            petToSave.petDescription = pet.petDescription
+            petToSave.recordIDString = pet.recordIDString
+            petToSave.sex = pet.sex
+            petToSave.shelterID = pet.shelterID
+            petToSave.size = pet.size
+            petToSave.status = pet.status
+            petToSave.cloudKitRecordID = pet.cloudKitRecordID
+            
+            guard shouldSaveContext else { return }
+            saveToPersistantStore()
         }
     }
     

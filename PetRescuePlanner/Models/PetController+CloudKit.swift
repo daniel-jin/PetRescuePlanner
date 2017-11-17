@@ -179,13 +179,15 @@ extension PetController {
             
             isSyncing = true
             
-            pushChangesToCloudKit { (success, error) in
-                
-                self.fetchNewPetRecordsOf(type: "Pet") {
-                    self.isSyncing = false
-                    completion()
+            UserController.shared.fetchCurrentUser(completion: { (success) in
+                self.pushChangesToCloudKit { (success, error) in
+                    
+                    self.fetchNewPetRecordsOf(type: "Pet") {
+                        self.isSyncing = false
+                        completion()
+                    }
                 }
-            }
+            })
         }
     }
     
@@ -217,21 +219,36 @@ extension PetController {
             let petRefs = user.savedPets
             let petRefsFiltered = petRefs.filter { !referencesToExclude.contains($0) }
             
+            let group = DispatchGroup()
+            
             for ref in petRefsFiltered {
+                
+                group.enter()
                 
                 self.cloudKitManager.fetchRecord(withID: ref.recordID, completion: { (record, error) in
                     if let error = error {
                         NSLog("Unable to fetch record with the reference for the pet: \(error.localizedDescription)")
-                        completion()
+                        group.leave()
                         return
                     }
                     
                     guard let record = record,
-                        let pet = Pet(cloudKitRecord: record) else { completion(); return }
+                        let pet = Pet(cloudKitRecord: record, context: nil) else {
+                        group.leave()
+                        return
+                    }
                     
-                    PetController.shared.add(pet: pet)
+                    PetController.shared.add(pet: pet, shouldSaveContext: false)
+                    
+                    group.leave()
                 })
             }
+            
+            group.notify(queue: DispatchQueue.main, execute: {
+                self.saveToPersistantStore()
+                completion()
+            })
+            
         }
         
         /*
@@ -297,6 +314,18 @@ extension PetController {
         
         group.notify(queue: DispatchQueue.main) {
         
+            for reference in unsavedUser.savedPets {
+                
+                if !petReferences.contains(reference) {
+                    petReferences.append(reference)
+                }
+                
+//                guard !petReferences.contains(reference) else { return }
+//
+//                petReferences.append(reference)
+                
+            }
+            
             var unsavedRecords = Array(unsavedObjectsByRecord.keys)
             
             // CK References for Pets that have already been saved to CloudKit
