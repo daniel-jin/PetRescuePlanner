@@ -154,17 +154,31 @@
                                     <outletCollection property="gestureRecognizers" destination="gd0-8N-P6y" appends="YES" id="wC8-hj-b1R"/>
                                 </connections>
                             </view>
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointerRight" translatesAutoresizingMaskIntoConstraints="NO" id="S2d-tj-WpR" userLabel="pointerRight">
+                                <rect key="frame" x="329.5" y="305.5" width="37.5" height="56"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointerLeft" translatesAutoresizingMaskIntoConstraints="NO" id="TzO-dS-efc" userLabel="pointerLeft">
+                                <rect key="frame" x="8" y="305.5" width="37.5" height="56"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="S2d-tj-WpR" firstAttribute="trailing" secondItem="UfC-3w-0dH" secondAttribute="trailing" constant="-8" id="6qe-p1-AIz"/>
                             <constraint firstItem="MbC-wQ-hzV" firstAttribute="centerY" secondItem="UfC-3w-0dH" secondAttribute="centerY" id="CfA-jv-nqc"/>
                             <constraint firstItem="MbC-wQ-hzV" firstAttribute="centerX" secondItem="UfC-3w-0dH" secondAttribute="centerX" id="F82-TI-3nS"/>
+                            <constraint firstItem="TzO-dS-efc" firstAttribute="leading" secondItem="UfC-3w-0dH" secondAttribute="leading" constant="8" id="Fyt-jY-qbr"/>
                             <constraint firstItem="C3J-Fg-eih" firstAttribute="centerX" secondItem="UfC-3w-0dH" secondAttribute="centerX" id="Lks-0r-49L"/>
                             <constraint firstItem="C3J-Fg-eih" firstAttribute="centerY" secondItem="UfC-3w-0dH" secondAttribute="centerY" id="Ti7-96-Mu0"/>
+                            <constraint firstItem="S2d-tj-WpR" firstAttribute="centerY" secondItem="9fn-Zu-3UR" secondAttribute="centerY" id="VOa-2N-tYk"/>
                             <constraint firstItem="MbC-wQ-hzV" firstAttribute="width" secondItem="9fn-Zu-3UR" secondAttribute="width" multiplier="2/3" id="X7U-ps-35W"/>
+                            <constraint firstItem="TzO-dS-efc" firstAttribute="centerY" secondItem="9fn-Zu-3UR" secondAttribute="centerY" id="aaO-5E-ewD"/>
                             <constraint firstItem="MbC-wQ-hzV" firstAttribute="height" secondItem="9fn-Zu-3UR" secondAttribute="height" multiplier="2/4" id="fc1-zA-po5"/>
+                            <constraint firstItem="S2d-tj-WpR" firstAttribute="width" secondItem="9fn-Zu-3UR" secondAttribute="width" multiplier="1/10" id="ggY-1b-B25"/>
+                            <constraint firstItem="S2d-tj-WpR" firstAttribute="height" secondItem="9fn-Zu-3UR" secondAttribute="height" multiplier="1/12" id="hig-aD-F5i"/>
+                            <constraint firstItem="TzO-dS-efc" firstAttribute="height" secondItem="9fn-Zu-3UR" secondAttribute="height" multiplier="1/12" id="jS3-wg-IjW"/>
                             <constraint firstItem="C3J-Fg-eih" firstAttribute="height" secondItem="9fn-Zu-3UR" secondAttribute="height" multiplier="2/4" id="t9x-Sg-je5"/>
                             <constraint firstItem="C3J-Fg-eih" firstAttribute="width" secondItem="9fn-Zu-3UR" secondAttribute="width" multiplier="2/3" id="tii-vC-aef"/>
+                            <constraint firstItem="TzO-dS-efc" firstAttribute="width" secondItem="9fn-Zu-3UR" secondAttribute="width" multiplier="1/10" id="ywD-bg-jiz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UfC-3w-0dH"/>
                     </view>
@@ -182,6 +196,8 @@
                         <outlet property="bottomPetBreedLabel" destination="zTL-JA-FOr" id="y51-OG-6ws"/>
                         <outlet property="bottomPetNameLabel" destination="J8g-7s-xNC" id="e5k-DM-6db"/>
                         <outlet property="bottomSwipeIndicatorImage" destination="DSh-th-NrY" id="2qy-1P-v6Y"/>
+                        <outlet property="leftPointer" destination="TzO-dS-efc" id="ISE-8O-48O"/>
+                        <outlet property="rightPointer" destination="S2d-tj-WpR" id="R4Y-TB-G7B"/>
                         <outlet property="topCard" destination="C3J-Fg-eih" id="HE0-9i-j9p"/>
                         <outlet property="topCardImageView" destination="PMB-cc-WTn" id="yV4-sf-WuL"/>
                         <outlet property="topImageHolder" destination="Qj7-jU-pBI" id="Igw-ft-t28"/>
@@ -234,4 +250,8 @@
             <point key="canvasLocation" x="-1495" y="-287"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pointerLeft" width="512" height="982"/>
+        <image name="pointerRight" width="512" height="982"/>
+    </resources>
 </document>

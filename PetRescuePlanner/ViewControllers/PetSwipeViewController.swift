@@ -61,6 +61,10 @@ class PetSwipeViewController: UIViewController {
     @IBOutlet weak var topImageHolder: UIView!
     @IBOutlet weak var bottomImageHolder: UIView!
     
+    @IBOutlet weak var leftPointer: UIImageView!
+    @IBOutlet weak var rightPointer: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,14 +80,10 @@ class PetSwipeViewController: UIViewController {
         })
         
         setUpViews()
-        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.title = "PetRescuePlanner"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
-
     }
     
     // MARK: - Actions 
-        
+    
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         
         let card = sender.view!
@@ -97,7 +97,7 @@ class PetSwipeViewController: UIViewController {
         
         if xFromCenter > 0 {
             topSwipeIndicatorImage.image = #imageLiteral(resourceName: "greenCheck")
-//            topSwipeIndicatorImage.tintColor = UIColor.lightGray
+            //            topSwipeIndicatorImage.tintColor = UIColor.lightGray
             
         } else {
             topSwipeIndicatorImage.image = #imageLiteral(resourceName: "sadFace")
@@ -115,9 +115,9 @@ class PetSwipeViewController: UIViewController {
                     card.alpha = 0
                 }, completion: { (success) in
                     self.indexIntoPets += 1
-
+                    
                     self.topCardImageView.image = UIImage()
-
+                    
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.topCard.isHidden = true
                         self.hardResetCard()
@@ -158,11 +158,11 @@ class PetSwipeViewController: UIViewController {
                     card.alpha = 0
                 }, completion: { (success) in
                     
-
-
+                    
+                    
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.topCardImageView.image = UIImage()
-
+                        
                         self.topCard.isHidden = true
                         self.hardResetCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
@@ -202,7 +202,7 @@ class PetSwipeViewController: UIViewController {
                     self.topCardImageView.image = image
                 }
             })
-
+            
             PetController.shared.fetchImageFor(pet: nextPet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("error fetching pet in pet controller")
@@ -332,6 +332,14 @@ class PetSwipeViewController: UIViewController {
         indexIntoPets = 0
         divisor = (view.frame.width / 2) / 0.61
         
+        self.title = "PetRescuePlanner"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        leftPointer.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 0.3)
+        rightPointer.tintColor = UIColor(red: 3.0/255.0, green: 209.0/255.0, blue: 0.0, alpha: 0.3)
+        
         topImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
         bottomImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
         
@@ -345,8 +353,6 @@ class PetSwipeViewController: UIViewController {
         topCard.layer.cornerRadius = 10.0
         bottomCard.layer.cornerRadius = 10.0
         
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
     
     // MARK: - Navigation
@@ -355,9 +361,9 @@ class PetSwipeViewController: UIViewController {
         
         if segue.identifier == "swipeToPetListSegue" {
             
-//            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
+            //            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
             
-//            destinationVC.savedPets = PetController.shared.savedPets
+            //            destinationVC.savedPets = PetController.shared.savedPets
             
         }
         
