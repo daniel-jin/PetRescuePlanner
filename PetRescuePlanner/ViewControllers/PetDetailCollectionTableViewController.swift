@@ -12,6 +12,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var saveButton: UIButton!
+    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     
     
     var pet: Pet? {
@@ -108,10 +109,10 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         
         guard let pet = self.pet else { return }
         
-        let originalFrame = self.saveButton.frame
+        impactFeedback.impactOccurred()
         
         // MARK: - Saving original size to restore later
-        
+        let originalFrame = self.saveButton.frame
         
         UIView.animate(withDuration: 0.35, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             
