@@ -38,7 +38,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayh-8O-G8o">
                                 <rect key="frame" x="14.5" y="498" width="288" height="50"/>
-                                <color key="backgroundColor" red="0.86582928895950317" green="0.21922922134399414" blue="0.37388807535171509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.79876488450000005" green="0.1709644645" blue="0.37262448669999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
                                 </constraints>
@@ -139,7 +139,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="AfL-t2-hx8">
                         <barButtonItem key="rightBarButtonItem" systemItem="organize" id="lVL-Mc-HTy">
-                            <color key="tintColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="0.99305898579999996" blue="0.98648353379999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="toSavedPetsButtonTapped:" destination="uUa-0m-lGg" id="Zcu-wI-xnp"/>
                                 <segue destination="XXZ-Fg-wyj" kind="show" identifier="toSavedPets" id="sBf-Zd-CJT"/>
@@ -149,6 +149,7 @@
                     <connections>
                         <outlet property="addressbutton" destination="F6Y-Xo-cBj" id="XeQ-la-oK2"/>
                         <outlet property="emailButton" destination="qsq-Nw-1Zb" id="T2h-lE-sSK"/>
+                        <outlet property="findMorePetsButton" destination="Ayh-8O-G8o" id="EOg-ze-fmT"/>
                         <outlet property="numberButton" destination="oPG-uY-Dl5" id="ocf-vN-n3F"/>
                         <outlet property="shelterMapView" destination="U6E-Wf-yLk" id="yFg-Tv-2ou"/>
                         <outlet property="shelterNameLabel" destination="32b-aX-hZW" id="8j6-gO-Aiy"/>
