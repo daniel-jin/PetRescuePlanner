@@ -88,12 +88,14 @@ class PetSwipeViewController: UIViewController {
         
         let card = sender.view!
         let point = sender.translation(in: view)
-        let xFromCenter = card.center.x - view.center.x
+        print(point.x)
         
         card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
         
+        let xFromCenter = card.center.x - view.center.x
         
         card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
+//        print(xFromCenter / divisor)
         
         if xFromCenter > 0 {
             topSwipeIndicatorImage.image = #imageLiteral(resourceName: "greenCheck")
@@ -270,7 +272,7 @@ class PetSwipeViewController: UIViewController {
         self.topCard.isHidden = true
         self.topCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
         
-        UIView.animate(withDuration: 0.01, animations: {
+        UIView.animate(withDuration: 0.0001, animations: {
             
             self.topCard.center = self.bottomCard.center
             self.topSwipeIndicatorImage.alpha = 0

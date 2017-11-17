@@ -126,6 +126,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="RAX-jv-i7C" secondAttribute="trailing" id="OiN-8V-Oh9"/>
                                             <constraint firstItem="nJo-gj-j9T" firstAttribute="height" secondItem="2ND-IT-G9g" secondAttribute="height" multiplier="1/6" id="TR7-IV-VVU"/>
@@ -160,7 +161,7 @@
                                     <constraint firstItem="2ND-IT-G9g" firstAttribute="centerX" secondItem="lVk-uc-zlf" secondAttribute="centerX" id="z7q-q4-2bK"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="gd0-8N-P6y" appends="YES" id="mvV-Tu-NGd"/>
+                                    <outletCollection property="gestureRecognizers" destination="hPP-v8-E1R" appends="YES" id="emf-Nj-xhO"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -209,9 +210,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WJI-Hi-aGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="gd0-8N-P6y">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="hPP-v8-E1R">
                     <connections>
-                        <action selector="panCard:" destination="qmj-np-UNR" id="llq-qv-zZ2"/>
+                        <action selector="panCard:" destination="qmj-np-UNR" id="2BE-bX-HXs"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
