@@ -65,14 +65,14 @@ class PetSwipeViewController: UIViewController {
         super.viewDidLoad()
         
         let methods = API.Methods()
-        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList) in
+        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList, offset) in
             if !success {
                 NSLog("Error fetching adoptable pets from PetController")
                 return
             }
             guard let pets = petList else { return }
             self.pets = pets
-            self.offSet = PetController.shared.offset
+            self.offSet = offset
         })
         
         setUpViews()
@@ -120,7 +120,7 @@ class PetSwipeViewController: UIViewController {
 
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.topCard.isHidden = true
-                        self.resetCard()
+                        self.hardResetCard()
                         self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
                         
@@ -159,7 +159,7 @@ class PetSwipeViewController: UIViewController {
                         self.topCardImageView.image = UIImage()
 
                         self.topCard.isHidden = true
-                        self.resetCard()
+                        self.hardResetCard()
                         self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
                         
@@ -219,7 +219,7 @@ class PetSwipeViewController: UIViewController {
         
         if pets.count > 0 {
             
-            resetCard()
+            hardResetCard()
             bottomCard.isHidden = false
             let pet = pets[pets.count - 1]
             
@@ -242,7 +242,7 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
-    func resetCard() {
+    func hardResetCard() {
         self.topCard.isHidden = true
         UIView.animate(withDuration: 0.0000000001) {
             
@@ -256,12 +256,24 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
+    func resetCard() {
+        UIView.animate(withDuration: 0.3) {
+            
+            self.topCard.center = self.bottomCard.center
+            self.topSwipeIndicatorImage.alpha = 0
+            self.topCard.alpha = 1
+            self.topCard.transform = CGAffineTransform.identity
+            
+            
+        }
+    }
+    
     func fetchMorePets(pet: Pet) {
         if indexIntoPets == pets.count - 1 {
             
             let methods = API.Methods()
             
-            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList) in
+            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
                 if !success {
                     NSLog("No more pets fetched In swipe to save view")
                     
@@ -277,14 +289,14 @@ class PetSwipeViewController: UIViewController {
                 
                 if petList.count == 0 {
                     
-                    return 
+                    return
                     
                 }
                 
                 var pets: [Pet] = petList
                 pets.insert(pet, at: 0)
                 
-                self.offSet = PetController.shared.offset
+                self.offSet = offset
                 self.pets = pets
                 
                 DispatchQueue.main.async {

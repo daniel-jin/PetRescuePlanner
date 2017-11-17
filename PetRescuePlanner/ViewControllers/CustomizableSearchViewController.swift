@@ -288,7 +288,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             destinationVC.sex = self.sex
             destinationVC.age = self.age
             destinationVC.breed = self.breed
-            destinationVC.offSet = PetController.shared.offset
 //            destinationVC.pets = PetController.shared.pets
 //            destinationVC.petPhotos = PetController.shared.petPhotos
         }
