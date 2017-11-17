@@ -95,9 +95,7 @@ class PetController {
     
     
     func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
-        
-        print("feting pets func")
-        
+                
         let output = responseFormat
         let apiKey = parameters.apiKey
         let baseUrl = URL(string: parameters.baseUrl)!
@@ -211,7 +209,6 @@ class PetController {
                 tempPet = pet
             }
             
-            print(lastOffset)
             completion(true, filteredPets, lastOffset)
             return 
             }.resume()

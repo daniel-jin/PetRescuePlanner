@@ -121,7 +121,6 @@ class PetSwipeViewController: UIViewController {
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.topCard.isHidden = true
                         self.hardResetCard()
-                        self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
                         
                         self.createLastCard()
@@ -160,7 +159,6 @@ class PetSwipeViewController: UIViewController {
 
                         self.topCard.isHidden = true
                         self.hardResetCard()
-                        self.createCard()
                     } else if self.indexIntoPets == self.pets.count - 1 {
                         
                         self.createLastCard()
@@ -219,7 +217,7 @@ class PetSwipeViewController: UIViewController {
         
         if pets.count > 0 {
             
-            hardResetCard()
+            self.hardResetCard()
             bottomCard.isHidden = false
             let pet = pets[pets.count - 1]
             
@@ -236,7 +234,6 @@ class PetSwipeViewController: UIViewController {
             
             self.topPetNameLabel.text = pet.name
             topPetBreedLabel.text = pet.breeds
-//            print("CREATELASTCARD: PET = \(pet.name)")
             
             fetchMorePets(pet: pet)
         }
@@ -244,16 +241,19 @@ class PetSwipeViewController: UIViewController {
     
     func hardResetCard() {
         self.topCard.isHidden = true
-        UIView.animate(withDuration: 0.0000000001) {
+        
+        UIView.animate(withDuration: 0.01, animations: {
             
             self.topCard.center = self.bottomCard.center
             self.topSwipeIndicatorImage.alpha = 0
-            self.topCard.alpha = 1
             self.topCard.transform = CGAffineTransform.identity
             
+        }) { (success) in
             self.topCard.isHidden = false
-            
+            self.topCard.alpha = 1.0
+            self.createCard()
         }
+        
     }
     
     func resetCard() {
@@ -288,9 +288,7 @@ class PetSwipeViewController: UIViewController {
                 }
                 
                 if petList.count == 0 {
-                    
                     return
-                    
                 }
                 
                 var pets: [Pet] = petList
