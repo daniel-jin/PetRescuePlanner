@@ -115,7 +115,6 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         guard let pet = self.pet else { return }
         
         impactFeedback.impactOccurred()
-        impactFeedback.impactOccurred()
         
         // MARK: - Saving original size to restore later
         let originalFrame = self.saveButton.frame
@@ -134,6 +133,8 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
             self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - (self.saveButton.frame.size.height / 4)
             
         }) { (finished: Bool) in
+            
+            self.impactFeedback.impactOccurred()
             
             PetController.shared.add(pet: pet)
             
