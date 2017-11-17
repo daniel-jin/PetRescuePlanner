@@ -73,7 +73,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="V4e-8z-jiO">
                         <barButtonItem key="rightBarButtonItem" systemItem="organize" id="LW1-mN-5jx">
-                            <color key="tintColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="0.99305898579999996" blue="0.98648353379999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="toSavedPetsButtonTapped:" destination="8eR-Qx-RJ2" id="HyK-wW-Evg"/>
                                 <segue destination="c4j-e4-HZD" kind="show" identifier="toSavedPets" id="nUt-ZT-ftg"/>
