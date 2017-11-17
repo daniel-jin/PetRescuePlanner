@@ -114,5 +114,7 @@ extension CKRecord {
         self.setValue(pet.recordIDString, forKey: "recordIDString")
         self.setValue(pet.dateAdded, forKey: "dateAdded")
         self.setValue(pet.imageIdCount, forKey: "imageIdCount")
+        
+        pet.cloudKitRecordID = recordID
     }
 }

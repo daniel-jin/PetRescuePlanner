@@ -53,6 +53,8 @@ extension CKRecord {
         
         if user.savedPets.count > 0 {
             self.setValue(user.savedPets, forKey: CloudKit.savedPetsRefKey)
+        } else {
+            self.setValue([], forKey: CloudKit.savedPetsRefKey)
         }
     
     }

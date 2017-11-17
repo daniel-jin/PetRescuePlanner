@@ -70,14 +70,40 @@ extension PetController {
     
     
     // Delete
-    func delete(pet: Pet) {
+    func delete(pet: Pet, completion: @escaping () -> Void = {}) {
         
-        // Delete from MOC
-        guard let moc = pet.managedObjectContext else { return }
-        moc.delete(pet)
-        
-        // Then save changes
-        saveToPersistantStore()
+        if let petRecordID = pet.cloudKitRecordID,
+            let petRef = UserController.shared.currentUser?.savedPets.filter({$0.recordID == petRecordID}).first {
+            
+            guard let index = UserController.shared.currentUser?.savedPets.index(of: petRef) else {
+                completion()
+                return
+            }
+            UserController.shared.currentUser?.savedPets.remove(at: index)
+            
+            
+            if let currentUser = UserController.shared.currentUser,
+                let userRecord = CKRecord(user: currentUser) {
+                
+                self.cloudKitManager.modifyRecords([userRecord], perRecordCompletion: nil) { (records, error) in
+                    if let error = error {
+                        NSLog("Error updating user record with saved pet \(error.localizedDescription)")
+                        completion()
+                        return
+                    }
+                    // Delete from MOC
+                    guard let moc = pet.managedObjectContext else {
+                        completion()
+                        return
+                    }
+                    moc.delete(pet)
+                    
+                    // Then save changes
+                    self.saveToPersistantStore()
+                    completion()
+                }
+            }
+        }
     }
     
     

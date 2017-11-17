@@ -277,6 +277,8 @@ extension PetController {
         
         var unsavedObjectsByRecord = [CKRecord: CloudKitSyncable]()
         
+        UserController.shared.fetchCurrentUser()
+        
         guard let unsavedUser = UserController.shared.currentUser,
             let userRec = CKRecord(user: unsavedUser) else {
                 completion(false, nil)
@@ -297,6 +299,11 @@ extension PetController {
                     // If the pet exists, we just add its reference to the array of references for the User record.
                     let existingRecordReference = CKReference(record: existingRecord, action: .none)
                     petReferences.append(existingRecordReference)
+                    
+                    pet.cloudKitRecordID = existingRecord.recordID
+                    
+                    self.saveToPersistantStore()
+                    
                     group.leave()
                 } else {
                     
@@ -315,20 +322,12 @@ extension PetController {
         group.notify(queue: DispatchQueue.main) {
         
             for reference in unsavedUser.savedPets {
-                
                 if !petReferences.contains(reference) {
                     petReferences.append(reference)
                 }
-                
-//                guard !petReferences.contains(reference) else { return }
-//
-//                petReferences.append(reference)
-                
             }
             
             var unsavedRecords = Array(unsavedObjectsByRecord.keys)
-            
-            // CK References for Pets that have already been saved to CloudKit
             
             // CK References that have not been saved to CloudKit
             let unsavedPetReferences = unsavedRecords.flatMap({ CKReference(record: $0, action: .none)})
@@ -344,7 +343,6 @@ extension PetController {
                 unsavedObjectsByRecord[record]?.cloudKitRecordID = record.recordID
                 
             }) { (records, error) in
-                
                 let success = records != nil
                 completion(success, error)
             }

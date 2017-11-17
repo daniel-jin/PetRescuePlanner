@@ -24,7 +24,6 @@ class SavedPetsListTableViewController: UITableViewController {
         PetController.shared.performFullSync {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                print("\(PetController.shared.savedPets.count)")
             }
         }
     }
@@ -59,16 +58,20 @@ class SavedPetsListTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+
             let petToDelete = PetController.shared.savedPets[indexPath.row]
             
             // Delete from Core Data
-            PetController.shared.delete(pet: petToDelete)
             
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            // Sync with CloudKit to update
-            PetController.shared.performFullSync()
+            PetController.shared.delete(pet: petToDelete, completion: {
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+                // Sync with CloudKit to update
+                PetController.shared.performFullSync()
+            })
         }
     }
 
