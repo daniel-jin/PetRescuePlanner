@@ -88,14 +88,12 @@ class PetSwipeViewController: UIViewController {
         
         let card = sender.view!
         let point = sender.translation(in: view)
-        print(point.x)
         
         card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
         
         let xFromCenter = card.center.x - view.center.x
         
         card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
-//        print(xFromCenter / divisor)
         
         if xFromCenter > 0 {
             topSwipeIndicatorImage.image = #imageLiteral(resourceName: "greenCheck")
@@ -270,9 +268,9 @@ class PetSwipeViewController: UIViewController {
     
     func hardResetCard() {
         self.topCard.isHidden = true
-        self.topCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+        self.topCardImageView.backgroundColor = UIColor.clear
         
-        UIView.animate(withDuration: 0.0001, animations: {
+        UIView.animate(withDuration: 0.01, animations: {
             
             self.topCard.center = self.bottomCard.center
             self.topSwipeIndicatorImage.alpha = 0
@@ -348,18 +346,7 @@ class PetSwipeViewController: UIViewController {
         leftPointer.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 0.3)
         rightPointer.tintColor = UIColor(red: 3.0/255.0, green: 209.0/255.0, blue: 0.0, alpha: 0.3)
         
-//        topImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
-//        bottomImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
-        
-        
-//        topCard.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
-//        topCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
-//
-//        bottomCard.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
-//        bottomCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
-//
-//        topCard.layer.cornerRadius = 10.0
-//        bottomCard.layer.cornerRadius = 10.0
+
         
     }
     

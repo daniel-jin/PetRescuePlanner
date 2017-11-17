@@ -115,6 +115,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         guard let pet = self.pet else { return }
         
         impactFeedback.impactOccurred()
+        impactFeedback.impactOccurred()
         
         // MARK: - Saving original size to restore later
         let originalFrame = self.saveButton.frame
