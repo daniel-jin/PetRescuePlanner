@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "blackPointer.png",
+      "filename" : "CardFrame.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "blackPointer-1.png",
+      "filename" : "CardFrame-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "blackPointer-2.png",
+      "filename" : "CardFrame-2.png",
       "scale" : "3x"
     }
   ],

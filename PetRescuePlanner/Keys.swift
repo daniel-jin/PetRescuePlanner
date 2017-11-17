@@ -125,6 +125,8 @@ class ShelterKeys {
     static let zipKey = "zip"
     static let longitudeKey = "longitude"
     static let latitudeKey = "latitude"
+    static let noInfo = "No info available"
+    static let fakeLanLon = 10101010101010101010101010101010101.17459813759812739587213947123984791823749
 }
 
 

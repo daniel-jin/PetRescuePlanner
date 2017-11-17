@@ -225,8 +225,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.1)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         animalTypePicker.delegate = self
         animalSizePicker.delegate = self
@@ -282,25 +282,14 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
             
-            let methods = API.Methods()
-            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
-                if !success {
-                    NSLog("Error fetching adoptable pets from PetController")
-                    return
-                }
-                destinationVC.pets = PetController.shared.pets
-                destinationVC.offSet = PetController.shared.offset
-            })
-            
-            destinationVC.zip = self.zipCodeTextField.text
+            destinationVC.zip = zip
             destinationVC.animal = self.animal
             destinationVC.size = self.size
             destinationVC.sex = self.sex
             destinationVC.age = self.age
             destinationVC.breed = self.breed
-            destinationVC.offSet = PetController.shared.offset
-            destinationVC.pets = PetController.shared.pets
-            destinationVC.petPhotos = PetController.shared.petPhotos
+//            destinationVC.pets = PetController.shared.pets
+//            destinationVC.petPhotos = PetController.shared.petPhotos
         }
     }
  

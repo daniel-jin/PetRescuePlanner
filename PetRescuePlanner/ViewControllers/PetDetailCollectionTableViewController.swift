@@ -12,10 +12,17 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var saveButton: UIButton!
+    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+    
     
     var pet: Pet? {
         didSet {
             PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
+                if images == nil {
+                    NSLog("No images found for pet")
+                    // set the default image
+                    self.imageArray = [#imageLiteral(resourceName: "doge")]
+                }
                 guard let images = images else { return }
                 self.imageArray = images
             }
@@ -30,7 +37,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     }
     
     var isButtonHidden: Bool = true 
-
+    
     
     override func viewDidLoad() {
         guard let pet = pet else { return }
@@ -53,13 +60,13 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     override func viewDidDisappear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -79,7 +86,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         cell.imageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.25)
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellSize: CGSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         return cellSize
@@ -101,31 +108,41 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         } else {
             self.dismiss(animated: true)
         }
-        
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         
         guard let pet = self.pet else { return }
         
-        PetController.shared.add(pet: pet)
-        navigationController?.popViewController(animated: true)
+        impactFeedback.impactOccurred()
         
+        // MARK: - Saving original size to restore later
+        let originalFrame = self.saveButton.frame
+        
+        UIView.animate(withDuration: 0.35, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            
+            // MARK: - Saving pet
+            PetController.shared.add(pet: pet)
+            
+            // MARK: - Making button grow (2x original size)
+            self.saveButton.frame.size.height = self.saveButton.frame.size.height * 2
+            self.saveButton.frame.size.width = self.saveButton.frame.size.width * 2
+            
+            // MARK: - Adjusting coordinates to appear in same spot
+            self.saveButton.frame.origin.x = self.saveButton.frame.origin.x - (self.saveButton.frame.size.width / 4)
+            self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - (self.saveButton.frame.size.height / 4)
+            
+        }) { (finished: Bool) in
+            
+            self.impactFeedback.impactOccurred()
+            
+            PetController.shared.add(pet: pet)
+            
+            // MARK: - Restoring to original size
+            UIView.animate(withDuration: 0.35, animations: {
+                self.saveButton.frame = originalFrame
+                
+            })
+        }   
     }
-    
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
