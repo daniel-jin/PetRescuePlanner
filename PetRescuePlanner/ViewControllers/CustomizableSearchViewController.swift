@@ -13,6 +13,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     // MARK: - Data
     
     weak var breedSearchViewController: BreedSearchContainerViewController?
+    static let shared = CustomizableSearchViewController()
     
     // set to all USA Zipcodes to validate zipcode input
     
@@ -41,6 +42,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     // MARK: - Outlets
     
+    @IBOutlet weak var selectBreedLabel: UILabel!
     @IBOutlet weak var animalTypeTextField: UITextField!
     @IBOutlet weak var animalSizeTextField: UITextField!
     @IBOutlet weak var animalAgeTextField: UITextField!
@@ -97,6 +99,14 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
     }
     
+    @IBAction func resetBreedButtonTapped(_ sender: Any) {
+        
+        self.breed = nil
+        self.selectBreedLabel.text = "Select Breed"
+        self.breedSearchContainerView.isHidden = true 
+        
+    }
+    
     // FIXME- move to a segue and create a corresponding generic segue
     
     @IBAction func searchButtonTapped(_ sender: Any) {
@@ -123,6 +133,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(setBreed(notification:)), name: Notifications.BreedWasSetNotification, object: nil)
+        self.breedSearchContainerView.isHidden = true 
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -133,6 +145,19 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         ZipCodesStore.readJson { (zipCodes) in
             self.zipArray = zipCodes
         }
+    }
+    
+    @objc func setBreed(notification: Notification) {
+        
+        guard let userInfo = notification.userInfo else { return }
+        guard let breed = userInfo["breed"] as? String else { return }
+        guard let status = userInfo["containerStatus"] as? Bool else { return }
+        
+        
+        self.breed = breed
+        self.selectBreedLabel.text = breed
+        self.breedSearchContainerView.isHidden = status
+        
     }
     
     // MARK: - UIPickerView Data Source
@@ -257,25 +282,25 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
                 return
             }
             
-            
-            
             let methods = API.Methods()
-            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: shelterId, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
+            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success) in
                 if !success {
                     NSLog("Error fetching adoptable pets from PetController")
                     return
                 }
-                DispatchQueue.main.async {
-                    destinationVC.zip = self.zipCodeTextField.text
-                    destinationVC.animal = self.animal
-                    destinationVC.size = self.size
-                    destinationVC.sex = self.sex
-                    destinationVC.age = self.age
-                    destinationVC.breed = self.breed
-                    destinationVC.offSet = PetController.shared.offset
-                    destinationVC.pets = PetController.shared.pets
-                }
+                destinationVC.pets = PetController.shared.pets
+                destinationVC.offSet = PetController.shared.offset
             })
+            
+            destinationVC.zip = self.zipCodeTextField.text
+            destinationVC.animal = self.animal
+            destinationVC.size = self.size
+            destinationVC.sex = self.sex
+            destinationVC.age = self.age
+            destinationVC.breed = self.breed
+            destinationVC.offSet = PetController.shared.offset
+            destinationVC.pets = PetController.shared.pets
+            destinationVC.petPhotos = PetController.shared.petPhotos
         }
     }
  
