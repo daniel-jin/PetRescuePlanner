@@ -107,28 +107,27 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         
         guard let pet = self.pet else { return }
         
-        // MARK: - Saving original size to restore later
         let originalFrame = self.saveButton.frame
         
-        UIView.animate(withDuration: 1.0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animateKeyframes(withDuration: 2.0, delay: 0, options: UIViewKeyframeAnimationOptions.calculationModeLinear, animations: {
             
-            // MARK: - Saving pet
-            PetController.shared.add(pet: pet)
+            // make the button grow and become dark gray
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+                self.saveButton.frame.size.height = self.saveButton.frame.size.height * 2
+                self.saveButton.frame.size.width = self.saveButton.frame.size.width * 2
+                
+                self.saveButton.frame.origin.x = self.saveButton.frame.origin.x - (self.saveButton.frame.size.width / 4)
+                self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - (self.saveButton.frame.size.height / 4)
+                
+                self.saveButton.backgroundColor = UIColor.darkGray
+            }
             
-            // MARK: - Making button grow (2x original size)
-            self.saveButton.frame.size.height = self.saveButton.frame.size.height * 2
-            self.saveButton.frame.size.width = self.saveButton.frame.size.width * 2
-            
-            // MARK: - Adjusting coordinates to appear in same spot
-            self.saveButton.frame.origin.x = self.saveButton.frame.origin.x - (self.saveButton.frame.size.width / 4)
-            self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - (self.saveButton.frame.size.height / 4)
-            
-        }) { (finished: Bool) in
-            // MARK: - Restoring to original size
-            UIView.animate(withDuration: 1.0, animations: {
+            // restore the button to original size and color
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
                 self.saveButton.frame = originalFrame
-            })
-        }
+            }
+        }, completion: nil)
+
     }
     
     
@@ -136,10 +135,31 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
 }
 
 
+/*
+// MARK: - Saving original size to restore later
+let originalFrame = self.saveButton.frame
 
+UIView.animate(withDuration: 1.0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+    
+    // MARK: - Saving pet
+    PetController.shared.add(pet: pet)
+    
+    // MARK: - Making button grow (2x original size)
+    self.saveButton.frame.size.height = self.saveButton.frame.size.height * 2
+    self.saveButton.frame.size.width = self.saveButton.frame.size.width * 2
+    
+    // MARK: - Adjusting coordinates to appear in same spot
+    self.saveButton.frame.origin.x = self.saveButton.frame.origin.x - (self.saveButton.frame.size.width / 4)
+    self.saveButton.frame.origin.y = self.saveButton.frame.origin.y - (self.saveButton.frame.size.height / 4)
+    
+}) { (finished: Bool) in
+    // MARK: - Restoring to original size
+    UIView.animate(withDuration: 1.0, animations: {
+        self.saveButton.frame = originalFrame
+    })
+}
 
-
-
+*/
 
 
 
