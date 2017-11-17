@@ -158,8 +158,6 @@ class PetSwipeViewController: UIViewController {
                     card.alpha = 0
                 }, completion: { (success) in
                     
-                    
-                    
                     if self.indexIntoPets < self.pets.count - 1 {
                         self.topCardImageView.image = UIImage()
                         
@@ -221,6 +219,14 @@ class PetSwipeViewController: UIViewController {
             
             self.bottomPetNameLabel.text = nextPet.name
             self.bottomPetBreedLabel.text = nextPet.breeds
+            
+            
+            // fetch
+            if indexIntoPets + 1 == pets.count - 1{
+                
+                fetchMorePets(pet: nextPet)
+                
+            }
             
             
             
