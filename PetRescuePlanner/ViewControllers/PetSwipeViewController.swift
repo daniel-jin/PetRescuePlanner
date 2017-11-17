@@ -131,7 +131,13 @@ class PetSwipeViewController: UIViewController {
             } else if card.center.x > (view.frame.width - 75) {
                 
                 // Save pet to Core Data & CloudKit
-                let petToSave = pets[indexIntoPets]
+                let petToSave: Pet
+
+                if indexIntoPets == pets.count {
+                    petToSave = pets[indexIntoPets - 1]
+                } else {
+                    petToSave = pets[indexIntoPets]
+                }
                 
                 // Save to CoreData first
                 PetController.shared.add(pet: petToSave)
@@ -178,13 +184,18 @@ class PetSwipeViewController: UIViewController {
         
         if indexIntoPets < pets.count - 1 {
             
+            self.topCard.isHidden = false 
+            
             let pet = pets[indexIntoPets]
             let nextPet = pets[indexIntoPets + 1]
             
             
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
-                    NSLog("error fetchingpet in pet controller")
+                    NSLog("error fetching pet in pet controller")
+                    // Set a default image here
+                    self.topCardImageView.backgroundColor = UIColor.white
+                    self.topCardImageView.image = #imageLiteral(resourceName: "doge")
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {
@@ -194,7 +205,10 @@ class PetSwipeViewController: UIViewController {
 
             PetController.shared.fetchImageFor(pet: nextPet, number: 2, completion: { (success, image) in
                 if !success {
-                    NSLog("error fetchingpet in pet controller")
+                    NSLog("error fetching pet in pet controller")
+                    // set a default image here
+                    self.topCardImageView.backgroundColor = UIColor.white
+                    self.topCardImageView.image = #imageLiteral(resourceName: "doge")
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {
@@ -208,6 +222,8 @@ class PetSwipeViewController: UIViewController {
             self.bottomPetNameLabel.text = nextPet.name
             self.bottomPetBreedLabel.text = nextPet.breeds
             
+            
+            
 //            print("CREATCARD PET1 = \(pet.name), PET2 = \(nextPet.name)")
             
         }
@@ -219,11 +235,15 @@ class PetSwipeViewController: UIViewController {
             
             self.hardResetCard()
             bottomCard.isHidden = false
+            topCard.isHidden = false
             let pet = pets[pets.count - 1]
             
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("error fetchingpet in pet controller")
+                    // set a default image here
+                    self.topCardImageView.backgroundColor = UIColor.white
+                    self.topCardImageView.image = #imageLiteral(resourceName: "doge")
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {
@@ -235,12 +255,14 @@ class PetSwipeViewController: UIViewController {
             self.topPetNameLabel.text = pet.name
             topPetBreedLabel.text = pet.breeds
             
+            
             fetchMorePets(pet: pet)
         }
     }
     
     func hardResetCard() {
         self.topCard.isHidden = true
+        self.topCardImageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
         
         UIView.animate(withDuration: 0.01, animations: {
             
@@ -288,6 +310,8 @@ class PetSwipeViewController: UIViewController {
                 }
                 
                 if petList.count == 0 {
+                    // Alert user that no more pets were found
+                    self.presentAlertWith(title: "Uh Oh...", message: "We ran out of pets to show you, try another zip code to search from!")
                     return
                 }
                 
@@ -364,7 +388,6 @@ class PetSwipeViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
         
     }
-    
 }
 
 
