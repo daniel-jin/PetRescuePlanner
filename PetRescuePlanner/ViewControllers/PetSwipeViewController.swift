@@ -64,7 +64,16 @@ class PetSwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
+        let methods = API.Methods()
+        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList) in
+            if !success {
+                NSLog("Error fetching adoptable pets from PetController")
+                return
+            }
+            guard let pets = petList else { return }
+            self.pets = pets
+            self.offSet = PetController.shared.offset
+        })
         
         setUpViews()
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
@@ -213,7 +222,6 @@ class PetSwipeViewController: UIViewController {
             resetCard()
             bottomCard.isHidden = false
             let pet = pets[pets.count - 1]
-//            let petImage = petPhotos[pets.count - 1]
             
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
@@ -225,7 +233,6 @@ class PetSwipeViewController: UIViewController {
                 }
             })
             
-//            self.cardImageView.image = petImage
             
             self.topPetNameLabel.text = pet.name
             topPetBreedLabel.text = pet.breeds
@@ -254,18 +261,31 @@ class PetSwipeViewController: UIViewController {
             
             let methods = API.Methods()
             
-            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success) in
+            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList) in
                 if !success {
                     NSLog("No more pets fetched In swipe to save view")
                     
                     self.presentAlertWith(title: "Uh Oh...", message: "No pets were found near you")
-                    
                     return
                 }
-                self.offSet = PetController.shared.offset
-                self.pets = PetController.shared.pets
-                self.pets.insert(pet, at: 0)
+
                 self.indexIntoPets = 0
+                
+                guard let petList = petList else {
+                    return
+                }
+                
+                if petList.count == 0 {
+                    
+                    return 
+                    
+                }
+                
+                var pets: [Pet] = petList
+                pets.insert(pet, at: 0)
+                
+                self.offSet = PetController.shared.offset
+                self.pets = pets
                 
                 DispatchQueue.main.async {
                     self.bottomCard.isHidden = false

@@ -94,7 +94,7 @@ class PetController {
     let responseFormat = API.Parameters().jsonFormat
     
     
-    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool) -> Void) {
+    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?) -> Void) {
         
         var groupCount = 0
         
@@ -166,7 +166,7 @@ class PetController {
             
             if let error = error {
                 NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
-                completion(false)
+                completion(false, nil)
             }
             guard let data = data else { return }
             guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
@@ -221,8 +221,8 @@ class PetController {
 //            })
             
             
-            self.pets = filteredPets
-            completion(true)
+//            self.pets = filteredPets
+            completion(true, filteredPets)
             
         }
     }
