@@ -18,39 +18,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a pet that fits you!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ed-vf-48M">
-                                <rect key="frame" x="16" y="104" width="343" height="26.5"/>
+                                <rect key="frame" x="16" y="104" width="343" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.28181922435760498" green="0.2747204601764679" blue="0.43220216035842896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select animal type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d1z-2D-pzZ">
-                                <rect key="frame" x="16" y="146.5" width="167.5" height="30"/>
+                                <rect key="frame" x="16" y="147" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select size of animal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vrB-xE-cO6">
-                                <rect key="frame" x="191.5" y="146.5" width="167.5" height="30"/>
+                                <rect key="frame" x="191.5" y="147" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select age " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-4f-wXP">
-                                <rect key="frame" x="16" y="192.5" width="167.5" height="30"/>
+                                <rect key="frame" x="16" y="193" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMR-dU-cMt">
-                                <rect key="frame" x="191.5" y="239" width="167.5" height="32"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
-                                <state key="normal" title="Select breed">
-                                    <color key="titleColor" red="0.87251204252243042" green="0.0" blue="0.3664262592792511" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="selectBreedButtonTapped:" destination="tpd-qM-bBm" eventType="touchUpInside" id="Zub-b7-t4b"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UFO-dk-fgs">
                                 <rect key="frame" x="191.5" y="193" width="167.5" height="29"/>
                                 <segments>
@@ -63,53 +53,98 @@
                                     <action selector="sexSegmentedControlChanged:" destination="tpd-qM-bBm" eventType="valueChanged" id="SEj-VE-K6E"/>
                                 </connections>
                             </segmentedControl>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fta-bK-v9F">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip code (Required)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fta-bK-v9F">
                                 <rect key="frame" x="16" y="239" width="167.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hA-bN-RyL">
-                                <rect key="frame" x="0.0" y="279" width="375" height="388"/>
+                                <rect key="frame" x="0.0" y="321" width="375" height="346"/>
                                 <connections>
                                     <segue destination="pmx-fd-Gbv" kind="embed" identifier="breedContainerSegue" id="ztU-Yo-r4d"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXH-kX-q9Y">
+                                <rect key="frame" x="191.5" y="239" width="167.5" height="30"/>
+                                <color key="backgroundColor" red="0.87251204252243042" green="0.0" blue="0.3664262592792511" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchButtonTapped:" destination="tpd-qM-bBm" eventType="touchUpInside" id="JhW-Fo-vO4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMR-dU-cMt">
+                                <rect key="frame" x="16" y="285" width="168" height="32"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.87251204252243042" green="0.0" blue="0.3664262592792511" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectBreedButtonTapped:" destination="tpd-qM-bBm" eventType="touchUpInside" id="Zub-b7-t4b"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Breed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbU-ZP-jxo">
+                                <rect key="frame" x="16" y="291" width="168" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqh-2Q-BgL">
+                                <rect key="frame" x="192" y="286" width="98" height="30"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetBreedButtonTapped:" destination="tpd-qM-bBm" eventType="touchUpInside" id="FjY-4K-9Cs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98812824487686157" green="0.98829704523086548" blue="0.988117516040802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="LXH-kX-q9Y" firstAttribute="top" secondItem="UFO-dk-fgs" secondAttribute="bottom" constant="18" id="36J-uB-PBT"/>
                             <constraint firstItem="9Ed-vf-48M" firstAttribute="top" secondItem="2n6-9o-eZH" secondAttribute="top" constant="40" id="4eG-00-lkF"/>
                             <constraint firstItem="fta-bK-v9F" firstAttribute="width" secondItem="1Nr-4f-wXP" secondAttribute="width" id="6MV-So-Xnh"/>
-                            <constraint firstItem="EMR-dU-cMt" firstAttribute="top" secondItem="UFO-dk-fgs" secondAttribute="bottom" constant="18" id="7Va-Gz-Ycb"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="top" secondItem="EMR-dU-cMt" secondAttribute="bottom" constant="4" id="8LV-dy-oeE"/>
                             <constraint firstItem="9hA-bN-RyL" firstAttribute="bottom" secondItem="2n6-9o-eZH" secondAttribute="bottom" id="9QP-8L-qUQ"/>
+                            <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="EMR-dU-cMt" secondAttribute="trailing" constant="191" id="9Uf-OB-ELI"/>
                             <constraint firstItem="UFO-dk-fgs" firstAttribute="width" secondItem="vrB-xE-cO6" secondAttribute="width" id="Byh-ub-LMd"/>
                             <constraint firstItem="d1z-2D-pzZ" firstAttribute="width" secondItem="vrB-xE-cO6" secondAttribute="width" id="C7A-AS-UDQ"/>
                             <constraint firstItem="9hA-bN-RyL" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" id="CQw-tA-v1d"/>
+                            <constraint firstItem="LXH-kX-q9Y" firstAttribute="width" secondItem="UFO-dk-fgs" secondAttribute="width" id="Cn9-Wa-4Rv"/>
                             <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="9Ed-vf-48M" secondAttribute="trailing" constant="16" id="EsU-GG-A3C"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="top" secondItem="CbU-ZP-jxo" secondAttribute="bottom" constant="9" id="Fb5-m7-yru"/>
                             <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="vrB-xE-cO6" secondAttribute="trailing" constant="16" id="FcT-pU-P3R"/>
+                            <constraint firstItem="CbU-ZP-jxo" firstAttribute="top" secondItem="fta-bK-v9F" secondAttribute="bottom" constant="22" id="Ge1-Wz-bLU"/>
                             <constraint firstItem="fta-bK-v9F" firstAttribute="top" secondItem="1Nr-4f-wXP" secondAttribute="bottom" constant="16" id="KZf-cf-MfG"/>
                             <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="UFO-dk-fgs" secondAttribute="trailing" constant="16" id="KcL-Np-FIl"/>
                             <constraint firstItem="fta-bK-v9F" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="Kkr-fg-k8W"/>
+                            <constraint firstItem="EMR-dU-cMt" firstAttribute="top" secondItem="fta-bK-v9F" secondAttribute="bottom" constant="16" id="LcL-3v-jun"/>
                             <constraint firstItem="d1z-2D-pzZ" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="QhX-Nz-PnY"/>
                             <constraint firstItem="UFO-dk-fgs" firstAttribute="top" secondItem="vrB-xE-cO6" secondAttribute="bottom" constant="16.5" id="QxG-t2-fUf"/>
-                            <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="EMR-dU-cMt" secondAttribute="trailing" constant="16" id="RHj-E5-HAh"/>
+                            <constraint firstItem="9hA-bN-RyL" firstAttribute="top" secondItem="Dqh-2Q-BgL" secondAttribute="bottom" constant="5" id="Viv-nV-ByJ"/>
                             <constraint firstItem="1Nr-4f-wXP" firstAttribute="width" secondItem="d1z-2D-pzZ" secondAttribute="width" id="Wrh-kg-XEq"/>
                             <constraint firstItem="9Ed-vf-48M" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="X6o-bL-8A6"/>
                             <constraint firstItem="vrB-xE-cO6" firstAttribute="leading" secondItem="d1z-2D-pzZ" secondAttribute="trailing" constant="8" id="ZGS-bp-Kk9"/>
+                            <constraint firstItem="CbU-ZP-jxo" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="cXR-b2-e15"/>
                             <constraint firstItem="1Nr-4f-wXP" firstAttribute="top" secondItem="d1z-2D-pzZ" secondAttribute="bottom" constant="16" id="drf-Y0-AGr"/>
                             <constraint firstItem="d1z-2D-pzZ" firstAttribute="top" secondItem="9Ed-vf-48M" secondAttribute="bottom" constant="16" id="gwO-GZ-W9h"/>
+                            <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="Dqh-2Q-BgL" secondAttribute="trailing" constant="85" id="l46-pm-Hbj"/>
                             <constraint firstItem="9hA-bN-RyL" firstAttribute="trailing" secondItem="2n6-9o-eZH" secondAttribute="trailing" id="l8F-iw-f6M"/>
                             <constraint firstItem="1Nr-4f-wXP" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="lDD-yu-sle"/>
+                            <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="CbU-ZP-jxo" secondAttribute="trailing" constant="191" id="lj1-eV-Egx"/>
                             <constraint firstItem="vrB-xE-cO6" firstAttribute="top" secondItem="9Ed-vf-48M" secondAttribute="bottom" constant="16" id="m2g-5B-8LH"/>
-                            <constraint firstItem="9hA-bN-RyL" firstAttribute="top" secondItem="EMR-dU-cMt" secondAttribute="bottom" constant="8" id="mNH-Sh-FaO"/>
-                            <constraint firstItem="EMR-dU-cMt" firstAttribute="width" secondItem="1Nr-4f-wXP" secondAttribute="width" id="r8V-0R-NbB"/>
+                            <constraint firstItem="Dqh-2Q-BgL" firstAttribute="leading" secondItem="EMR-dU-cMt" secondAttribute="trailing" constant="8" id="qiV-kM-9Zo"/>
+                            <constraint firstItem="EMR-dU-cMt" firstAttribute="leading" secondItem="2n6-9o-eZH" secondAttribute="leading" constant="16" id="sCk-eq-IUa"/>
+                            <constraint firstItem="2n6-9o-eZH" firstAttribute="trailing" secondItem="LXH-kX-q9Y" secondAttribute="trailing" constant="16" id="tQr-6D-MD2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2n6-9o-eZH"/>
                     </view>
                     <navigationItem key="navigationItem" id="2oA-Bd-EhI">
-                        <barButtonItem key="rightBarButtonItem" title="Search" id="dSb-2K-rwk">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="dSb-2K-rwk">
                             <connections>
-                                <action selector="searchButtonTapped:" destination="tpd-qM-bBm" id="YAo-Nq-nG6"/>
+                                <action selector="toSavedPetsButtonTapped:" destination="tpd-qM-bBm" id="mS5-qC-nn9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -122,10 +157,12 @@
                         <outlet property="animalTypeTextField" destination="d1z-2D-pzZ" id="CJW-bg-vkI"/>
                         <outlet property="breedSearchContainerView" destination="9hA-bN-RyL" id="zUQ-ae-Bt9"/>
                         <outlet property="selectBreedButton" destination="EMR-dU-cMt" id="b39-rP-edC"/>
+                        <outlet property="selectBreedLabel" destination="CbU-ZP-jxo" id="7kk-eF-hOF"/>
                         <outlet property="sexSegmentedControl" destination="UFO-dk-fgs" id="jNQ-xD-uJv"/>
                         <outlet property="zipCodeTextField" destination="fta-bK-v9F" id="27y-gY-aAM"/>
                         <segue destination="bxC-94-vOc" kind="show" identifier="toPetListTest" id="vxf-vu-499"/>
                         <segue destination="bpw-S5-CQK" kind="show" identifier="toPetTinderPage" id="GvW-AO-pGO"/>
+                        <segue destination="vqZ-aA-DDU" kind="show" identifier="toSavedPets" id="jV2-iV-A7c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAR-z7-4oP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,11 +186,11 @@
             <objects>
                 <viewController id="pmx-fd-Gbv" customClass="BreedSearchContainerViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wcI-oj-o1W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="388"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="346"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kwD-bt-gpJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="388"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="346"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -233,6 +270,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVy-In-wYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="812" y="-1047"/>
+        </scene>
+        <!--savedPetsList-->
+        <scene sceneID="Mzz-N9-1aq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="savedPetsList" id="vqZ-aA-DDU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ifi-Je-res" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="921" y="-913"/>
         </scene>
         <!--Test Pet Search Table View Controller-->
         <scene sceneID="SjN-zL-nx9">

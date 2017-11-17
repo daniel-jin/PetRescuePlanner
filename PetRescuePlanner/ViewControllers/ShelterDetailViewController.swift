@@ -32,6 +32,10 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        findMorePetsButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        addressbutton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        numberButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        emailButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
     
     func updateShelterDetailView(shelter: Shelter){
@@ -78,10 +82,15 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     @IBOutlet weak var addressbutton: UIButton!
     @IBOutlet weak var numberButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var findMorePetsButton: UIButton!
     
     // Mark: - actions
     
     // Mark: - Emailing shelter
+    @IBAction func toSavedPetsButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "toSavedPets", sender: self)
+    }
+    
     @IBAction func emailButtonTapped(_ sender: Any) {
         
         
@@ -208,15 +217,14 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             guard let destinationVC = segue.destination as? ShelterPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
-            
-            
-            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
+            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success, petList, offset) in
                 if !success {
                     NSLog("Error fetching pets from shelter")
                     return
                 }
                 
-                destinationVC.savedPets = PetController.shared.pets
+                guard let petList = petList else { return }
+                destinationVC.savedPets = petList
                 
             }
             

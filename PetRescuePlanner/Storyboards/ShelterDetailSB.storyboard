@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uUa-0m-lGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uUa-0m-lGg">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayh-8O-G8o">
                                 <rect key="frame" x="14.5" y="498" width="288" height="50"/>
-                                <color key="backgroundColor" red="0.86582928895950317" green="0.21922922134399414" blue="0.37388807535171509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.79876488450000005" green="0.1709644645" blue="0.37262448669999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
                                 </constraints>
@@ -137,10 +137,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Ic-DD-DQs"/>
                     </view>
-                    <navigationItem key="navigationItem" id="AfL-t2-hx8"/>
+                    <navigationItem key="navigationItem" id="AfL-t2-hx8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="lVL-Mc-HTy">
+                            <color key="tintColor" red="1" green="0.99305898579999996" blue="0.98648353379999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="toSavedPetsButtonTapped:" destination="uUa-0m-lGg" id="Zcu-wI-xnp"/>
+                                <segue destination="XXZ-Fg-wyj" kind="show" identifier="toSavedPets" id="sBf-Zd-CJT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressbutton" destination="F6Y-Xo-cBj" id="XeQ-la-oK2"/>
                         <outlet property="emailButton" destination="qsq-Nw-1Zb" id="T2h-lE-sSK"/>
+                        <outlet property="findMorePetsButton" destination="Ayh-8O-G8o" id="EOg-ze-fmT"/>
                         <outlet property="numberButton" destination="oPG-uY-Dl5" id="ocf-vN-n3F"/>
                         <outlet property="shelterMapView" destination="U6E-Wf-yLk" id="yFg-Tv-2ou"/>
                         <outlet property="shelterNameLabel" destination="32b-aX-hZW" id="8j6-gO-Aiy"/>
@@ -150,6 +159,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a82-tS-qUR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1311.5942028985507" y="223.36956521739131"/>
+        </scene>
+        <!--savedPetsList-->
+        <scene sceneID="chD-hI-rrW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="savedPetsList" id="XXZ-Fg-wyj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gA7-Hz-Wee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2268" y="-117"/>
         </scene>
         <!--ShelterPetsList-->
         <scene sceneID="RVc-f8-wbA">

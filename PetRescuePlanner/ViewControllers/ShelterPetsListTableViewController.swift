@@ -21,15 +21,22 @@ class ShelterPetsListTableViewController: UITableViewController {
         }
     }
     
-    var storedImages: [UIImage] = []
+    // MARK: - Actions
     
+    @IBAction func toSavedPetsButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "toSavedPets", sender: self)
+    }
+    
+    
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        tableView.prefetchDataSource = self
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         self.title = "At This Shelter"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
     }
     

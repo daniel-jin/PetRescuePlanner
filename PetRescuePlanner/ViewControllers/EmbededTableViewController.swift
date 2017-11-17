@@ -97,7 +97,9 @@ class EmbededTableViewController: UITableViewController {
         
         let optionsString: NSMutableAttributedString = NSMutableAttributedString(string: "Options: ", attributes: redForegroundAttribute)
         for option in petOptions {
-            let petOption = NSAttributedString(string: "\n\u{2022} \(option)", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let bulletChar = NSAttributedString(string: "\n\u{2022} ", attributes: redForegroundAttribute)
+            let petOption = NSAttributedString(string: "\(option)", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            optionsString.append(bulletChar)
             optionsString.append(petOption)
         }
         

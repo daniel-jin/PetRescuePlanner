@@ -102,6 +102,10 @@ struct CloudKit {
     
 }
 
+struct Notifications {
+    static let BreedWasSetNotification = Notification.Name("BreedWasSetNotification")
+}
+
 class ShelterKeys {
     
     // Mark: - Top level
