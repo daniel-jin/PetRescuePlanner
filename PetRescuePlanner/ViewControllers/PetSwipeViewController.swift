@@ -61,16 +61,13 @@ class PetSwipeViewController: UIViewController {
     @IBOutlet weak var topImageHolder: UIView!
     @IBOutlet weak var bottomImageHolder: UIView!
     
+    @IBOutlet weak var leftPointer: UIImageView!
+    @IBOutlet weak var rightPointer: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
- 
-        
         setUpViews()
-        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.title = "PetRescuePlanner"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
-
     }
     
     // MARK: - Actions 
@@ -277,6 +274,13 @@ class PetSwipeViewController: UIViewController {
     func setUpViews() {
         indexIntoPets = 0
         divisor = (view.frame.width / 2) / 0.61
+        
+        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.title = "PetRescuePlanner"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: redColor]
+        
+        leftPointer.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 0.3)
+        rightPointer.tintColor = UIColor(red: 3.0/255.0, green: 209.0/255.0, blue: 0.0, alpha: 0.3)
         
         topImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
         bottomImageHolder.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
