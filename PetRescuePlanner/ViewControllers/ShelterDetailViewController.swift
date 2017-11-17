@@ -43,13 +43,9 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             self.emailButton.setTitle(shelter.email, for: .normal)
             
             // Mark: - Map view
-            
-            
             // Mark: - Remove annotations
             let annotaions = self.shelterMapView.annotations
             self.shelterMapView.removeAnnotations(annotaions)
-            
-            
             
             // Mark: - create annotation
             let annotation = MKPointAnnotation()
@@ -62,9 +58,6 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(coordinate, span)
             self.shelterMapView.setRegion(region, animated: true)
-            
-            
-            
         }
     }
     
@@ -79,7 +72,6 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     // Mark: - actions
     
     // Mark: - Emailing shelter
-    
     @IBAction func emailButtonTapped(_ sender: Any) {
         
         
@@ -118,16 +110,71 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     // Mark: - calling shelters
     
     @IBAction func numberButtonTapped(_ sender: Any) {
-        guard let shelter = shelter else { return }
-        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        guard let shelter = shelter else {return}
         
-        if let phoneCallURL:URL = URL(string: "tel:\(number)") {
+        var number = shelter.phone.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+        
+        var realPhoneNumber: String = ""
+        
+        let numbers: [Character] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        
+        if number.count > 10 {
+            
+            let numbersToDrop = number.count - 10
+            
+            for _ in 1...numbersToDrop {
+                number.removeLast()
+            }
+        }
+        
+        for character in number {
+            
+            var characterToAddToPhoneNumber = character
+            
+            if !numbers.contains(character) {
+                
+                guard let numberValue = letterDictionary[character] else { break }
+                
+                characterToAddToPhoneNumber = numberValue
+            }
+            realPhoneNumber.append(characterToAddToPhoneNumber)
+        }
+        
+        if let phoneCallURL:URL = URL(string: "tel:\(realPhoneNumber)") {
             let application:UIApplication = UIApplication.shared
             application.open(phoneCallURL)
+            
         }
     }
     
-    // Mark: - getting direections
+    let letterDictionary: [Character: Character] = ["a" : "2",
+                                                    "b" : "2",
+                                                    "c" : "2",
+                                                    "d" : "3",
+                                                    "e" : "3",
+                                                    "f" : "3",
+                                                    "g" : "4",
+                                                    "h" : "4",
+                                                    "i" : "4",
+                                                    "j" : "5",
+                                                    "k" : "5",
+                                                    "l" : "5",
+                                                    "m" : "6",
+                                                    "n" : "6",
+                                                    "o" : "6",
+                                                    "p" : "7",
+                                                    "q" : "7",
+                                                    "r" : "7",
+                                                    "s" : "7",
+                                                    "t" : "8",
+                                                    "u" : "8",
+                                                    "v" : "8",
+                                                    "w" : "9",
+                                                    "x" : "9",
+                                                    "y" : "9",
+                                                    "z" : "9"]
+    
+    // Mark: - getting directions
     
     @IBAction func AddressButtonTapped(_ sender: Any) {
         
