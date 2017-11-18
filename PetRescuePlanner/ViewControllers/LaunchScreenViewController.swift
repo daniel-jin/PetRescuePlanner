@@ -33,7 +33,12 @@ class LaunchScreenViewController: UIViewController {
                             if success {
                                 UserController.shared.isUserLoggedIntoiCloud = true
                                 DispatchQueue.main.async {
-                                    self.changeRootViewController()
+                                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                    
+                                    let myStoryboard = UIStoryboard(name: "CustomizableSearch", bundle: nil)
+                                    let searchViewController = myStoryboard.instantiateViewController(withIdentifier: "SearchViewController")
+                                    
+                                    appDelegate.window?.rootViewController = searchViewController
                                 }
                             }
                         })
@@ -41,7 +46,12 @@ class LaunchScreenViewController: UIViewController {
                         // There is already a current user - go to customized search screen
                         UserController.shared.isUserLoggedIntoiCloud = true
                         DispatchQueue.main.async {
-                            self.changeRootViewController()
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            
+                            let myStoryboard = UIStoryboard(name: "CustomizableSearch", bundle: nil)
+                            let searchViewController = myStoryboard.instantiateViewController(withIdentifier: "SearchViewController")
+                            
+                            appDelegate.window?.rootViewController = searchViewController
                         }
                     }
                 })
