@@ -13,8 +13,7 @@ import CloudKit
 class SavedPetsListTableViewController: UITableViewController {
     
     var savedPets = PetController.shared.savedPets
-    
-
+    // Simple change
     
     // MARK: - Table View Life Cycle
 
