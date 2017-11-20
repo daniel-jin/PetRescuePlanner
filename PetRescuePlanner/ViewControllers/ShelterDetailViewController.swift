@@ -32,34 +32,24 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        findMorePetsButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        addressbutton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        numberButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        emailButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
     }
     
     func updateShelterDetailView(shelter: Shelter){
         
         DispatchQueue.main.async {
             self.shelterNameLabel.text = shelter.name
+            self.addressbutton.setTitle("\(shelter.address) \(shelter.city), \(shelter.state)", for: .normal)
             self.numberButton.setTitle(shelter.phone, for: .normal)
             self.emailButton.setTitle(shelter.email, for: .normal)
             
-            var addressButtonTitle = ""
-            
-            if shelter.address == ShelterKeys.noInfo {
-                addressButtonTitle = "Get directions"
-            } else {
-                addressButtonTitle = "\(shelter.address) \(shelter.city), \(shelter.state)"
-            }
-            
-            self.addressbutton.setTitle(addressButtonTitle, for: .normal)
-            
-            
             // Mark: - Map view
+            
+            
             // Mark: - Remove annotations
             let annotaions = self.shelterMapView.annotations
             self.shelterMapView.removeAnnotations(annotaions)
+            
+            
             
             // Mark: - create annotation
             let annotation = MKPointAnnotation()
@@ -72,6 +62,9 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(coordinate, span)
             self.shelterMapView.setRegion(region, animated: true)
+            
+            
+            
         }
     }
     
@@ -82,7 +75,6 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     @IBOutlet weak var addressbutton: UIButton!
     @IBOutlet weak var numberButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
-    @IBOutlet weak var findMorePetsButton: UIButton!
     
     // Mark: - actions
     
@@ -126,74 +118,19 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         controller.dismiss(animated: true, completion: nil)
     }
     
-    // Mark: - calling shelter
+    // Mark: - calling shelters
     
     @IBAction func numberButtonTapped(_ sender: Any) {
-        guard let shelter = shelter else {return}
+        guard let shelter = shelter else { return }
+        let number = shelter.phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         
-        var number = shelter.phone.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
-        
-        var realPhoneNumber: String = ""
-        
-        let numbers: [Character] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        
-        if number.count > 10 {
-            
-            let numbersToDrop = number.count - 10
-            
-            for _ in 1...numbersToDrop {
-                number.removeLast()
-            }
-        }
-        
-        for character in number {
-            
-            var characterToAddToPhoneNumber = character
-            
-            if !numbers.contains(character) {
-                
-                guard let numberValue = letterDictionary[character] else { break }
-                
-                characterToAddToPhoneNumber = numberValue
-            }
-            realPhoneNumber.append(characterToAddToPhoneNumber)
-        }
-        
-        if let phoneCallURL:URL = URL(string: "tel:\(realPhoneNumber)") {
+        if let phoneCallURL:URL = URL(string: "tel:\(number)") {
             let application:UIApplication = UIApplication.shared
             application.open(phoneCallURL)
-            
         }
     }
-    // Mark: - clean up a bit have all the letters that are asigned to the same number on the same row
-    let letterDictionary: [Character: Character] = ["a" : "2",
-                                                    "b" : "2",
-                                                    "c" : "2",
-                                                    "d" : "3",
-                                                    "e" : "3",
-                                                    "f" : "3",
-                                                    "g" : "4",
-                                                    "h" : "4",
-                                                    "i" : "4",
-                                                    "j" : "5",
-                                                    "k" : "5",
-                                                    "l" : "5",
-                                                    "m" : "6",
-                                                    "n" : "6",
-                                                    "o" : "6",
-                                                    "p" : "7",
-                                                    "q" : "7",
-                                                    "r" : "7",
-                                                    "s" : "7",
-                                                    "t" : "8",
-                                                    "u" : "8",
-                                                    "v" : "8",
-                                                    "w" : "9",
-                                                    "x" : "9",
-                                                    "y" : "9",
-                                                    "z" : "9"]
     
-    // Mark: - getting directions
+    // Mark: - getting direections
     
     @IBAction func AddressButtonTapped(_ sender: Any) {
         
@@ -217,14 +154,13 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             guard let destinationVC = segue.destination as? ShelterPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
-            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success, petList, offset) in
+            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success) in
                 if !success {
                     NSLog("Error fetching pets from shelter")
                     return
                 }
                 
-                guard let petList = petList else { return }
-                destinationVC.savedPets = petList
+                destinationVC.savedPets = PetController.shared.pets
                 
             }
             
