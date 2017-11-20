@@ -52,6 +52,7 @@
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 		D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */; };
 		D30B58A81FB27D90006C59FE /* ShelterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A71FB27D90006C59FE /* ShelterDetailViewController.swift */; };
+		D381D8B51FBA58A700DF9C0D /* zipCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = D381D8B41FBA58A600DF9C0D /* zipCodes.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
 		D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShelterDetailSB.storyboard; sourceTree = "<group>"; };
 		D30B58A71FB27D90006C59FE /* ShelterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterDetailViewController.swift; sourceTree = "<group>"; };
+		D381D8B41FBA58A600DF9C0D /* zipCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = zipCodes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +199,11 @@
 				6A8E01AB1FB2158F00AEEE09 /* PetController+CloudKit.swift */,
 				6A8E01B91FB38DC700AEEE09 /* PetController+CoreData.swift */,
 				D30B58A11FB11957006C59FE /* ShelterController.swift */,
+<<<<<<< HEAD
+				D31C3A0A1FB4FB1F00580D14 /* ShelterPetController.swift */,
 				6A8E02071FB51FE700AEEE09 /* UserController.swift */,
+=======
+>>>>>>> shelterAPI
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 		5FF472021FBB5D0700B52D52 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				6AD599991FBA597100D395BA /* zipCodes.json */,
 			);
 			name = "Recovered References";
@@ -273,6 +280,9 @@
 			isa = PBXGroup;
 			children = (
 				5F86FE2C1FBB62DC002D9416 /* zipCodes.json */,
+=======
+				D381D8B41FBA58A600DF9C0D /* zipCodes.json */,
+>>>>>>> shelterAPI
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -363,8 +373,12 @@
 				5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */,
 				5F4C16D51FB371C80065FEAD /* SwipePet.storyboard in Resources */,
 				5FB0C1151FB604DB00E55C05 /* savedPetsList.storyboard in Resources */,
+<<<<<<< HEAD
 				5F86FE2D1FBB62DC002D9416 /* zipCodes.json in Resources */,
 				6A8E02021FB51CFF00AEEE09 /* Launch Screen.storyboard in Resources */,
+=======
+				D381D8B51FBA58A700DF9C0D /* zipCodes.json in Resources */,
+>>>>>>> shelterAPI
 				D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */,
 				3C5FF8F51FB237C90011CEFD /* petDetailView.storyboard in Resources */,
 				5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */,
@@ -549,14 +563,11 @@
 		5F7C77F61FB0C04A00BCDBE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = PawHeart;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PetRescuePlanner/PetRescuePlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S5AA4WL9KW;
-<<<<<<< HEAD
-=======
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
->>>>>>> develop
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielrodosky.PetRescuePlanner;
@@ -569,14 +580,11 @@
 		5F7C77F71FB0C04A00BCDBE5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = PawHeart;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PetRescuePlanner/PetRescuePlanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S5AA4WL9KW;
-<<<<<<< HEAD
-=======
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
->>>>>>> develop
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielrodosky.PetRescuePlanner;
