@@ -12,7 +12,6 @@ class SearchResultsTableViewController: UITableViewController {
 
     var resultsArray: [String] = []
     weak var customizableSearchViewController: CustomizableSearchViewController?
-    weak var breedSearchViewController: BreedSearchContainerViewController?
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -32,13 +31,7 @@ class SearchResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
-        guard let breed = cell?.textLabel?.text else{ return }
-        
-        let dict: [String: Any] = ["breed": breed, "containerStatus": true, "breedLabelValue": breed]
-        
-        NotificationCenter.default.post(name: Notifications.BreedWasSetNotification, object: nil, userInfo: dict)
-
-        
+        customizableSearchViewController?.breed = cell?.textLabel?.text
         
     }
 }

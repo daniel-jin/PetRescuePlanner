@@ -38,12 +38,7 @@ class ShelterPetTableViewCell: UITableViewCell {
         
         guard let pet = pet else { return }
         
-        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
-        
-        let nameString: NSMutableAttributedString = NSMutableAttributedString(string: "\(pet.name ?? "Doggo")", attributes: redForegroundAttribute)
-        
-        nameLabel.attributedText = nameString
+        nameLabel.text = pet.name
         descriptionLabel.text = pet.petDescription
         
         PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in

@@ -16,7 +16,6 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
     
     var breeds: [String] = [] {
         didSet {
-            
             DispatchQueue.main.async {
                 self.breedsTableView.reloadData()
             }
@@ -58,22 +57,13 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         breed = breeds[indexPath.row]
         searchController?.searchBar.text = breed
-        
-        let dicts = ["breed": breed, "containerStatus": true, "breedLabelValue": breed] as [String : Any]
-        
-        NotificationCenter.default.post(name: Notifications.BreedWasSetNotification, object: nil, userInfo: dicts)
-    }
-    
-    func updateParentValues(breed: String) {
-        
-        searchController?.searchBar.text = breed
         guard let p = self.parent as? CustomizableSearchViewController else { return }
         
-        p.breed = breed
-        p.breedSearchContainerView.isHidden = true
-        p.selectBreedLabel.text = breed 
+        p.breed = self.breed
 
+        p.breedSearchContainerView.isHidden = true
         
+
     }
     
     // MARK: - SearchController funcs
