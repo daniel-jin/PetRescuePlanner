@@ -24,8 +24,6 @@ class UserController {
         }
     }
     
-    var isUserLoggedIntoiCloud = false
-    
     // Fetch Current User
     func fetchCurrentUser(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         
