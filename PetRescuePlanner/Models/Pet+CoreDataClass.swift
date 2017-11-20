@@ -14,14 +14,13 @@ import CloudKit
 @objc(Pet)
 class Pet: NSManagedObject, CloudKitSyncable {
     
-    var cloudKitRecordID: CKRecordID?
-//    {
-//        get {
-//            guard let recordIDString = self.recordIDString else { return nil }
-//            return CKRecordID(recordName: recordIDString)
-//        }
-//        set {}
-//    }
+    var cloudKitRecordID: CKRecordID? {
+        get {
+            guard let recordIDString = self.recordIDString else { return nil }
+            return CKRecordID(recordName: recordIDString)
+        }
+        set {}
+    }
     
     // MARK: - Computed Properties
     
@@ -40,48 +39,36 @@ class Pet: NSManagedObject, CloudKitSyncable {
         guard let age = cloudKitRecord[apiKeys.ageKey] as? String,
             let animal = cloudKitRecord[apiKeys.animalKey] as? String,
             let breeds = cloudKitRecord[apiKeys.breedsKey] as? String,
-            let contactInfo = cloudKitRecord[apiKeys.contactInfoKey] as? NSData,
+            let contactInfo = cloudKitRecord[apiKeys.contactInfoKey] as? Data,
             let description = cloudKitRecord[apiKeys.descriptionKey] as? String,
             let id = cloudKitRecord[apiKeys.idKey] as? String,
             let lastUpdate = cloudKitRecord[apiKeys.lastUpdatKey] as? String,
-            let media = cloudKitRecord[apiKeys.mediaKey] as? NSData,
+            let media = cloudKitRecord[apiKeys.mediaKey] as? Data,
             let mix = cloudKitRecord[apiKeys.mixKey] as? String,
             let name = cloudKitRecord[apiKeys.nameKey] as? String,
-            let options = cloudKitRecord[apiKeys.optionsKey] as? NSData,
+            let options = cloudKitRecord[apiKeys.optionsKey] as? Data,
             let sex = cloudKitRecord[apiKeys.sexKey] as? String,
             let shelterId = cloudKitRecord[apiKeys.shelterIdKey] as? String,
             let size = cloudKitRecord[apiKeys.sizeKey] as? String,
             let status = cloudKitRecord[apiKeys.statusKey] as? String,
-            let recordIDString = cloudKitRecord["recordIDString"] as? String,
-            let dateAdded = cloudKitRecord["dateAdded"] as? NSDate,
-            let imageIdCount = cloudKitRecord["imageIdCount"] as? String else {
-                return nil
-                
-        }
+            let recordIDString = cloudKitRecord["recordIDString"] as? String else { return nil }
         
         self.age = age
         self.animal = animal
         self.breeds = breeds
-        self.contactInfo = contactInfo
-//        self.contactInfo = (try? JSONSerialization.data(withJSONObject: contactInfo as Data, options: .prettyPrinted)) as NSData?
-//        self.contactInfo = (try? JSONSerialization.jsonObject(with: contactInfo as Data, options: .allowFragments)) as? NSData
+        self.contactInfo = (try? JSONSerialization.jsonObject(with: contactInfo as Data, options: .allowFragments)) as? NSData
         self.petDescription = description
         self.id = id
         self.lastUpdate = lastUpdate
-        self.media = media
-//        self.media = (try? JSONSerialization.jsonObject(with: media as Data, options: .allowFragments)) as? NSData
+        self.media = (try? JSONSerialization.jsonObject(with: media as Data, options: .allowFragments)) as? NSData
         self.mix = mix
         self.name = name
-        self.options = options
-//        self.options = (try? JSONSerialization.jsonObject(with: options as Data, options: .allowFragments)) as? NSData
+        self.options = (try? JSONSerialization.jsonObject(with: options as Data, options: .allowFragments)) as? NSData
         self.sex = sex
         self.shelterID = shelterId
         self.size = size
         self.status = status
         self.recordIDString = recordIDString
-        self.dateAdded = dateAdded
-        self.imageIdCount = imageIdCount
-        self.cloudKitRecordID = cloudKitRecord.recordID
     }
 }
 
@@ -112,9 +99,5 @@ extension CKRecord {
         self.setValue(pet.size, forKey: apiKeys.sizeKey)
         self.setValue(pet.status, forKey: apiKeys.statusKey)
         self.setValue(pet.recordIDString, forKey: "recordIDString")
-        self.setValue(pet.dateAdded, forKey: "dateAdded")
-        self.setValue(pet.imageIdCount, forKey: "imageIdCount")
-        
-        pet.cloudKitRecordID = recordID
     }
 }

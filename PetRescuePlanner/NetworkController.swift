@@ -20,7 +20,7 @@ class NetworkController {
     }
     
     static func performRequest(for url: URL, httpMethod: HTTPMethod, body: Data? = nil, completion: ((Data?, Error?) -> Void)? = nil) {
-        
+                
         // Build URL
         var request = URLRequest(url: url)
         
@@ -41,7 +41,7 @@ class NetworkController {
             }
             
             completion!(data, nil)
-            
+            return
         }
         dataTask.resume()
     }
