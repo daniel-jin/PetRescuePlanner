@@ -68,7 +68,6 @@ class SavedPetsListTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                
                 // Sync with CloudKit to update
                 PetController.shared.performFullSync()
             })
