@@ -152,7 +152,7 @@ class PetSwipeViewController: UIViewController {
                 self.indexIntoPets += 1
                 
                 // Then save to CK
-                PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
+                PetController.shared.saveToCK(pet: petToSave.1, completion: { (success) in
                     if !success {
                         NSLog("Error saving pet to CloudKit")
                         return
