@@ -19,32 +19,22 @@ class LaunchScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cloudKitManager.checkCloudKitAvailability { (success) in
-            // iCloud account not logged in
+        UserController.shared.fetchCurrentUser { (success) in
+            
             if !success {
-                DispatchQueue.main.async {
-                    self.changeRootViewController()
-                }
-            } else {
-                // iCloud account is logged in - now check if we already have a user
-                UserController.shared.fetchCurrentUser(completion: { (success) in
-                    if !success {
-                        UserController.shared.createUser(savedPetsRef: [CKReference](), completion: { (success) in
-                            if success {
-                                UserController.shared.isUserLoggedIntoiCloud = true
-                                DispatchQueue.main.async {
-                                    self.changeRootViewController()
-                                }
-                            }
-                        })
-                    } else {
-                        // There is already a current user - go to customized search screen
-                        UserController.shared.isUserLoggedIntoiCloud = true
+                UserController.shared.createUser(savedPetsRef: [CKReference](), completion: { (success) in
+                    if success {
                         DispatchQueue.main.async {
                             self.changeRootViewController()
                         }
+                    } else {
+                        self.presentAlertWith(title: "Warning: no iCloud Account Found", message: "In order to sync your saved data to multiple devices you need to be signed into an iCloud account.", color: self.warningColor)
                     }
                 })
+            } else {
+                DispatchQueue.main.async {
+                    self.changeRootViewController()
+                }
             }
         }
     }
