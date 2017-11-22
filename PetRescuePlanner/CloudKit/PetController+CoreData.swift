@@ -26,52 +26,84 @@ extension PetController {
     
     // MARK: - CRUD Functions
     // Create
-    func add(pet: Pet) {
-        
-        // Check if the pet has already been saved
-        let savedPetIDs = PetController.shared.savedPets.flatMap{ $0.id }
+    func add(pet: Pet, shouldSaveContext: Bool = true) {
         
         guard let petID = pet.id else { return }
         
-        if savedPetIDs.contains(petID) {
+        if let duplicatePet = PetController.shared.savedPets.filter({ $0.id == petID}).first {
+            // There is a duplicate
+            duplicatePet.dateAdded = Date() as NSDate
+            
+            guard shouldSaveContext else { return }
+            saveToPersistantStore()
             return
+        } else {
+            
+            // There is no duplicat - create Pet object for Core Data saving
+            let petToSave = Pet(context: CoreDataStack.context)
+            
+            petToSave.age = pet.age
+            petToSave.animal = pet.animal
+            petToSave.breeds = pet.breeds
+            petToSave.cloudKitRecordID = pet.cloudKitRecordID
+            petToSave.contactInfo = pet.contactInfo
+            petToSave.dateAdded = pet.dateAdded
+            petToSave.id = pet.id
+            petToSave.imageIdCount = pet.imageIdCount
+            petToSave.lastUpdate = pet.lastUpdate
+            petToSave.media = pet.media
+            petToSave.mix = pet.mix
+            petToSave.name = pet.name
+            petToSave.options = pet.options
+            petToSave.petDescription = pet.petDescription
+            petToSave.recordIDString = pet.recordIDString
+            petToSave.sex = pet.sex
+            petToSave.shelterID = pet.shelterID
+            petToSave.size = pet.size
+            petToSave.status = pet.status
+            petToSave.cloudKitRecordID = pet.cloudKitRecordID
+            
+            guard shouldSaveContext else { return }
+            saveToPersistantStore()
         }
-        
-        let petToSave = Pet(context: CoreDataStack.context)
-        
-        petToSave.age = pet.age
-        petToSave.animal = pet.animal
-        petToSave.breeds = pet.breeds
-        petToSave.cloudKitRecordID = pet.cloudKitRecordID
-        petToSave.contactInfo = pet.contactInfo
-        petToSave.dateAdded = pet.dateAdded
-        petToSave.id = pet.id
-        petToSave.imageIdCount = pet.imageIdCount
-        petToSave.lastUpdate = pet.lastUpdate
-        petToSave.media = pet.media
-        petToSave.mix = pet.mix
-        petToSave.name = pet.name
-        petToSave.options = pet.options
-        petToSave.petDescription = pet.petDescription
-        petToSave.recordIDString = pet.recordIDString
-        petToSave.sex = pet.sex
-        petToSave.shelterID = pet.shelterID
-        petToSave.size = pet.size
-        petToSave.status = pet.status
-        
-        saveToPersistantStore()
     }
     
     
     // Delete
-    func delete(pet: Pet) {
+    func delete(pet: Pet, completion: @escaping () -> Void = {}) {
         
-        // Delete from MOC
-        guard let moc = pet.managedObjectContext else { return }
-        moc.delete(pet)
-        
-        // Then save changes
-        saveToPersistantStore()
+        if let petRecordID = pet.cloudKitRecordID,
+            let petRef = UserController.shared.currentUser?.savedPets.filter({$0.recordID == petRecordID}).first {
+            
+            guard let index = UserController.shared.currentUser?.savedPets.index(of: petRef) else {
+                completion()
+                return
+            }
+            UserController.shared.currentUser?.savedPets.remove(at: index)
+            
+            
+            if let currentUser = UserController.shared.currentUser,
+                let userRecord = CKRecord(user: currentUser) {
+                
+                self.cloudKitManager.modifyRecords([userRecord], perRecordCompletion: nil) { (records, error) in
+                    if let error = error {
+                        NSLog("Error updating user record with saved pet \(error.localizedDescription)")
+                        completion()
+                        return
+                    }
+                    // Delete from MOC
+                    guard let moc = pet.managedObjectContext else {
+                        completion()
+                        return
+                    }
+                    moc.delete(pet)
+                    
+                    // Then save changes
+                    self.saveToPersistantStore()
+                    completion()
+                }
+            }
+        }
     }
     
     

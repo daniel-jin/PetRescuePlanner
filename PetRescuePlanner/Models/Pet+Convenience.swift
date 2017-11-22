@@ -41,7 +41,7 @@ extension Pet {
             if let name = nameDictionary[apiKeys.itemKey] as? String {
                 self.name = name
             } else {
-                self.name = "No name availabel"
+                self.name = "No name available"
             }
         }
         
@@ -151,7 +151,6 @@ extension Pet {
                     self.media = try! JSONSerialization.data(withJSONObject: photoEndpoints, options: .prettyPrinted) as NSData
                 }
             }
-            
         }
         ////////////////////////////////////////////////////////////////////////////////////
         if let mixDictionary = dictionary[apiKeys.mixKey] as? [String:Any] {

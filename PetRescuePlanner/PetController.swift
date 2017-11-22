@@ -55,37 +55,6 @@ class PetController {
         
         self.cloudKitManager = CloudKitManager()
         
-        //        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Pet")
-        //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-        //        do {
-        //            try NSManagedObjectContext.execute
-        //        } catch {
-        //            // error handling
-        //        }
-        
-        
-        //        performFullSync()
-        
-        /* flush function to delete all records of a record type
-         let query = CKQuery(recordType: "Pet", predicate: NSPredicate(value: true))
-         CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { (records, error) in
-         
-         if error == nil {
-         
-         for record in records! {
-         
-         CKContainer.default().publicCloudDatabase.delete(withRecordID: record.recordID, completionHandler: { (recordId, error) in
-         
-         if error == nil {
-         
-         //Record deleted
-         }
-         })
-         }
-         }
-         }
-         */
-        
     }
     
     let keys = API.Keys()
