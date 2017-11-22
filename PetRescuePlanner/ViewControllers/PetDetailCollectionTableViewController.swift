@@ -14,7 +14,6 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     @IBOutlet weak var saveButton: UIButton!
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     
-    
     var pet: Pet? {
         didSet {
             PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
@@ -36,8 +35,8 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         }
     }
     
-    var isButtonHidden: Bool = true 
-    
+    // MARK: - Testing which view is presenting the detail to hide shelter info button
+    var isButtonHidden: Bool = true
     
     override func viewDidLoad() {
         guard let pet = pet else { return }
@@ -135,8 +134,6 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         }) { (finished: Bool) in
             
             self.impactFeedback.impactOccurred()
-            
-            PetController.shared.add(pet: pet)
             
             // MARK: - Restoring to original size
             UIView.animate(withDuration: 0.35, animations: {
