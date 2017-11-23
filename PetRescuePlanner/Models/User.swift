@@ -40,7 +40,6 @@ extension User {
 }
 
 extension CKRecord {
-    
     // MARK: - Failable initializer (convert a User Object into a User CKRecord)
     convenience init?(user: User) {
         // Init CKRecord
@@ -53,7 +52,8 @@ extension CKRecord {
         
         if user.savedPets.count > 0 {
             self.setValue(user.savedPets, forKey: CloudKit.savedPetsRefKey)
+        } else {
+            self.setValue([], forKey: CloudKit.savedPetsRefKey)
         }
-    
     }
 }

@@ -20,15 +20,13 @@ class PetSwipeViewController: UIViewController {
     var age: String? = nil
     var breed: String? = nil
     
-    var pets: [Pet] = [] {
+    var pets: [(UIImage, Pet)] = [] {
         didSet {
-            if isViewLoaded{
-                DispatchQueue.main.async {
-                    if self.pets.count > 1 {
-                        self.createCard()
-                    } else {
-                        self.createLastCard()
-                    }
+            DispatchQueue.main.async {
+                if self.pets.count > 1 {
+                    self.createCard()
+                } else {
+                    self.createLastCard()
                 }
             }
         }
@@ -75,8 +73,18 @@ class PetSwipeViewController: UIViewController {
                 return
             }
             guard let pets = petList else { return }
-            self.pets = pets
-            self.offSet = offset
+            
+            // Prefetch pets images and make a tuple with the image and pet?
+            
+            PetController.shared.preFetchImagesFor(pets: pets, completion: { (petData) in
+                if petData == nil {
+                    NSLog("Error fetching pets images")
+                    return
+                }
+                guard let petData = petData else { return }
+                self.pets = petData
+                self.offSet = offset
+            })
         })
         
         setUpViews()
@@ -97,7 +105,6 @@ class PetSwipeViewController: UIViewController {
         
         if xFromCenter > 0 {
             topSwipeIndicatorImage.image = #imageLiteral(resourceName: "greenCheck")
-            //            topSwipeIndicatorImage.tintColor = UIColor.lightGray
             
         } else {
             topSwipeIndicatorImage.image = #imageLiteral(resourceName: "sadFace")
@@ -131,7 +138,7 @@ class PetSwipeViewController: UIViewController {
             } else if card.center.x > (view.frame.width - 75) {
                 
                 // Save pet to Core Data & CloudKit
-                let petToSave: Pet
+                let petToSave: (UIImage, Pet)
 
                 if indexIntoPets == pets.count {
                     petToSave = pets[indexIntoPets - 1]
@@ -140,18 +147,12 @@ class PetSwipeViewController: UIViewController {
                 }
                 
                 // Save to CoreData first
-                PetController.shared.add(pet: petToSave)
+                PetController.shared.add(pet: petToSave.1)
+                
+                // Sync with CloudKit
+                PetController.shared.performFullSync()
                 
                 self.indexIntoPets += 1
-                
-                // Then save to CK
-                PetController.shared.saveToCK(pet: petToSave, completion: { (success) in
-                    if !success {
-                        NSLog("Error saving pet to CloudKit")
-                        return
-                    }
-                })
-                
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
@@ -187,51 +188,22 @@ class PetSwipeViewController: UIViewController {
             let pet = pets[indexIntoPets]
             let nextPet = pets[indexIntoPets + 1]
             
+            topCardImageView.image = pet.0
+            bottomCardImageView.image = nextPet.0
             
-            PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
-                if !success {
-                    NSLog("error fetching pet in pet controller")
-                    // Set a default image here
-                    self.topCardImageView.backgroundColor = UIColor.white
-                    self.topCardImageView.image = #imageLiteral(resourceName: "doge")
-                }
-                guard let image = image else { return }
-                DispatchQueue.main.async {
-                    self.topCardImageView.image = image
-                }
-            })
+            self.topPetNameLabel.text = pet.1.name
+            self.topPetBreedLabel.text = pet.1.breeds
             
-            PetController.shared.fetchImageFor(pet: nextPet, number: 2, completion: { (success, image) in
-                if !success {
-                    NSLog("error fetching pet in pet controller")
-                    // set a default image here
-                    self.topCardImageView.backgroundColor = UIColor.white
-                    self.topCardImageView.image = #imageLiteral(resourceName: "doge")
-                }
-                guard let image = image else { return }
-                DispatchQueue.main.async {
-                    self.bottomCardImageView.image = image
-                }
-            })
-            
-            self.topPetNameLabel.text = pet.name
-            self.topPetBreedLabel.text = pet.breeds
-            
-            self.bottomPetNameLabel.text = nextPet.name
-            self.bottomPetBreedLabel.text = nextPet.breeds
+            self.bottomPetNameLabel.text = nextPet.1.name
+            self.bottomPetBreedLabel.text = nextPet.1.breeds
             
             
             // fetch
-            if indexIntoPets + 1 == pets.count - 1{
+            if indexIntoPets + 3 == pets.count - 1{
                 
                 fetchMorePets(pet: nextPet)
                 
             }
-            
-            
-            
-//            print("CREATCARD PET1 = \(pet.name), PET2 = \(nextPet.name)")
-            
         }
     }
     
@@ -244,22 +216,10 @@ class PetSwipeViewController: UIViewController {
             topCard.isHidden = false
             let pet = pets[pets.count - 1]
             
-            PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
-                if !success {
-                    NSLog("error fetchingpet in pet controller")
-                    // set a default image here
-                    self.topCardImageView.backgroundColor = UIColor.white
-                    self.topCardImageView.image = #imageLiteral(resourceName: "doge")
-                }
-                guard let image = image else { return }
-                DispatchQueue.main.async {
-                    self.topCardImageView.image = image
-                }
-            })
-            
-            
-            self.topPetNameLabel.text = pet.name
-            topPetBreedLabel.text = pet.breeds
+            topCardImageView.image = pet.0
+          
+            self.topPetNameLabel.text = pet.1.name
+            topPetBreedLabel.text = pet.1.breeds
             
             
             fetchMorePets(pet: pet)
@@ -291,25 +251,19 @@ class PetSwipeViewController: UIViewController {
             self.topSwipeIndicatorImage.alpha = 0
             self.topCard.alpha = 1
             self.topCard.transform = CGAffineTransform.identity
-            
-            
         }
     }
     
-    func fetchMorePets(pet: Pet) {
-        if indexIntoPets == pets.count - 1 {
-            
+    func fetchMorePets(pet: (UIImage, Pet)) {
+//        if indexIntoPets == pets.count - 1 {
+        
             let methods = API.Methods()
             
             PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
                 if !success {
                     NSLog("No more pets fetched In swipe to save view")
-                    
-                    self.presentAlertWith(title: "Uh Oh...", message: "No pets were found near you")
                     return
                 }
-
-                self.indexIntoPets = 0
                 
                 guard let petList = petList else {
                     return
@@ -317,21 +271,28 @@ class PetSwipeViewController: UIViewController {
                 
                 if petList.count == 0 {
                     // Alert user that no more pets were found
-                    self.presentAlertWith(title: "Uh Oh...", message: "We ran out of pets to show you, try another zip code to search from!")
                     return
                 }
                 
-                var pets: [Pet] = petList
-                pets.insert(pet, at: 0)
+                var tempPets: [(UIImage, Pet)] = []
                 
-                self.offSet = offset
-                self.pets = pets
-                
-                DispatchQueue.main.async {
-                    self.bottomCard.isHidden = false
-                }
+                PetController.shared.preFetchImagesFor(pets: petList, completion: { (petData) in
+                    if petData == nil {
+                        NSLog("Error fetching pets images")
+                        return
+                    }
+                    guard let petData = petData else { return }
+                    tempPets = petData
+                    
+                    self.offSet = offset
+                    self.pets += tempPets
+                    
+                    DispatchQueue.main.async {
+                        self.bottomCard.isHidden = false
+                    }
+                })
             })
-        }
+//    }
     }
     
     func setUpViews() {
@@ -356,10 +317,7 @@ class PetSwipeViewController: UIViewController {
         
         if segue.identifier == "swipeToPetListSegue" {
             
-            //            guard let destinationVC = segue.destination as? SavedPetsListTableViewController else {return }
-            
-            //            destinationVC.savedPets = PetController.shared.savedPets
-            
+    
         }
         
         if segue.identifier == "tinderToDetailSegue" {
@@ -367,7 +325,7 @@ class PetSwipeViewController: UIViewController {
             
             let destinationVC = segue.destination as? PetDetailCollectionTableViewController
             destinationVC?.isButtonHidden = true 
-            destinationVC?.pet = pet
+            destinationVC?.pet = pet.1
             
             
         }

@@ -55,37 +55,6 @@ class PetController {
         
         self.cloudKitManager = CloudKitManager()
         
-        //        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Pet")
-        //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-        //        do {
-        //            try NSManagedObjectContext.execute
-        //        } catch {
-        //            // error handling
-        //        }
-        
-        
-        //        performFullSync()
-        
-        /* flush function to delete all records of a record type
-         let query = CKQuery(recordType: "Pet", predicate: NSPredicate(value: true))
-         CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { (records, error) in
-         
-         if error == nil {
-         
-         for record in records! {
-         
-         CKContainer.default().publicCloudDatabase.delete(withRecordID: record.recordID, completionHandler: { (recordId, error) in
-         
-         if error == nil {
-         
-         //Record deleted
-         }
-         })
-         }
-         }
-         }
-         */
-        
     }
     
     let keys = API.Keys()
@@ -306,37 +275,33 @@ class PetController {
         }
     }
     
-    func preFetchImagesFor(pets: [Pet], completion: @escaping (_ photos: [UIImage]?) -> Void) {
+    // Takes the list of fetched pets, gets the image for each one and returns them as a tuple with the corresponding pet
+    func preFetchImagesFor(pets: [Pet], completion: @escaping (_ photos: [(UIImage, Pet)]?) -> Void) {
         
         let dispatchGroup = DispatchGroup()
-        var tempPhotos: [UIImage] = []
+        var petData: [(UIImage, Pet)] = []
         
         for index in 0...pets.count - 1 {
-            
-            guard guardCount <= pets.count else { return }
             
             let pet = pets[index]
 
             dispatchGroup.enter()
             
-            guardCount += 1
             fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
-                    NSLog("error fetchingpet in pet controller")
-                    completion(nil)
-                    dispatchGroup.leave()
-                    return
+                    NSLog("No image for pet")
+                    petData.append((#imageLiteral(resourceName: "doge"), pet))
                 }
                 guard let image = image else { dispatchGroup.leave(); return completion(nil) }
                 
-                tempPhotos.append(image)
+                petData.append((image, pet))
                 dispatchGroup.leave()
                 
             })
         }
         
         dispatchGroup.notify(queue: .main) {
-            completion(tempPhotos)
+            completion(petData)
         }
     }
     
