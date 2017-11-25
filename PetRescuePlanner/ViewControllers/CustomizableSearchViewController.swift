@@ -203,8 +203,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
         if pickerView == animalSizePicker {
             animalSizeTextField.text = sizes[row]
-//            guard let temp = sizes[row].uppercased().characters.first else { return }
-//            size = "\(temp)"
             switch sizes[row] {
             case "Small":
                 size = "S"
@@ -221,8 +219,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
-            let age = ages[row]
-            print("\(age)")
+            age = ages[row]
         }
     }
     
