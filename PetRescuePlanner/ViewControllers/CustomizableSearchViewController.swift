@@ -203,8 +203,21 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         }
         if pickerView == animalSizePicker {
             animalSizeTextField.text = sizes[row]
-            guard let temp = sizes[row].uppercased().characters.first else { return }
-            size = "\(temp)"
+//            guard let temp = sizes[row].uppercased().characters.first else { return }
+//            size = "\(temp)"
+            switch sizes[row] {
+            case "Small":
+                size = "S"
+            case "Medium":
+                size = "M"
+            case "Large":
+                size = "L"
+            case "Extra-Large":
+                size = "XL"
+            default:
+                size = nil
+            }
+            
         }
         if pickerView == animalAgePicker {
             animalAgeTextField.text = ages[row]
