@@ -48,6 +48,7 @@
 		6A8E02041FB51DC800AEEE09 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E02031FB51DC800AEEE09 /* LaunchScreenViewController.swift */; };
 		6A8E02061FB51F8C00AEEE09 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E02051FB51F8C00AEEE09 /* User.swift */; };
 		6A8E02081FB51FE700AEEE09 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8E02071FB51FE700AEEE09 /* UserController.swift */; };
+		6ABB89FA1FCC997F005DF199 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABB89F91FCC997F005DF199 /* Reachability.swift */; };
 		6AD5999C1FBA638500D395BA /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5999B1FBA638500D395BA /* Shelter.swift */; };
 		D30B58A21FB11957006C59FE /* ShelterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B58A11FB11957006C59FE /* ShelterController.swift */; };
 		D30B58A41FB23808006C59FE /* ShelterDetailSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30B58A31FB23808006C59FE /* ShelterDetailSB.storyboard */; };
@@ -99,6 +100,7 @@
 		6A8E02031FB51DC800AEEE09 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		6A8E02051FB51F8C00AEEE09 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6A8E02071FB51FE700AEEE09 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserController.swift; path = PetRescuePlanner/Models/UserController.swift; sourceTree = SOURCE_ROOT; };
+		6ABB89F91FCC997F005DF199 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		6AD599991FBA597100D395BA /* zipCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = zipCodes.json; path = ../../../zipCodes.json; sourceTree = "<group>"; };
 		6AD5999B1FBA638500D395BA /* Shelter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
 		D30B58A11FB11957006C59FE /* ShelterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShelterController.swift; path = PetRescuePlanner/Models/ShelterController.swift; sourceTree = SOURCE_ROOT; };
@@ -125,6 +127,7 @@
 				3C484A8A1FB10BD30024F947 /* NetworkController.swift */,
 				5F0B03141FB222CD002B4F71 /* BreedAPI.swift */,
 				5FDDE2191FBA42CA002E1FB0 /* ZipCodesStore.swift */,
+				6ABB89F91FCC997F005DF199 /* Reachability.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */,
 				6A8E01C21FB3AF3B00AEEE09 /* Pet+CoreDataProperties.swift in Sources */,
 				5F0B03131FB21A24002B4F71 /* BreedSearchContainerViewController.swift in Sources */,
+				6ABB89FA1FCC997F005DF199 /* Reachability.swift in Sources */,
 				6A8E01B21FB25DB400AEEE09 /* PetRescuePlanner.xcdatamodeld in Sources */,
 				5F7E2A311FB11877004E95DB /* CustomizableSearchViewController.swift in Sources */,
 				5F7C77E71FB0C04A00BCDBE5 /* AppDelegate.swift in Sources */,

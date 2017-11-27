@@ -139,12 +139,18 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         
+        tapGesture.cancelsTouchesInView = false 
+        
         self.setUpViews()
         
         // Get zipcodes from JSON to validate
         ZipCodesStore.readJson { (zipCodes) in
             self.zipArray = zipCodes
         }
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: Notifications.SearchBarEditingBegan, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardWillHide(_ :)), name: Notifications.SearchBarEditingEnded, object: nil)
     }
     
     @objc func setBreed(notification: Notification) {
@@ -272,6 +278,20 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @objc func hideKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        if self.view.frame.origin.y == 0{
+            self.view.frame.origin.y -= 150
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        if self.view.frame.origin.y != 0{
+            self.view.frame.origin.y += 150
+        }
+        
     }
     
     // MARK: - Navigation

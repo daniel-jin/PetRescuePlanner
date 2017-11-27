@@ -39,9 +39,9 @@ extension PetController {
             return
         } else {
             
-            // There is no duplicat - create Pet object for Core Data saving
+            // There is no duplicate - create Pet object for Core Data saving
             let petToSave = Pet(context: CoreDataStack.context)
-            
+
             petToSave.age = pet.age
             petToSave.animal = pet.animal
             petToSave.breeds = pet.breeds

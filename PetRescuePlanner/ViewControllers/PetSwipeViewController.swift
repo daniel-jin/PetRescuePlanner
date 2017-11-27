@@ -20,6 +20,8 @@ class PetSwipeViewController: UIViewController {
     var age: String? = nil
     var breed: String? = nil
     
+    var petDescriptions: [String] = []
+    
     var pets: [(UIImage, Pet)] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -66,6 +68,13 @@ class PetSwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !Reachability.isConnectedToNetwork() {
+            let networkErrorAlert = UIAlertController(title: "No Internet Connection", message: "Please check your cellular or wifi connection and try again.", preferredStyle: .alert)
+            let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            networkErrorAlert.addAction(dismiss)
+            self.present(networkErrorAlert, animated: true, completion: nil)
+        }
+        
         let methods = API.Methods()
         PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList, offset) in
             if !success {
@@ -82,6 +91,13 @@ class PetSwipeViewController: UIViewController {
                     return
                 }
                 guard let petData = petData else { return }
+                
+                for pet in petData {
+                    if let description = pet.1.petDescription {
+                        self.petDescriptions.append(description)
+                    }
+                }
+                
                 self.pets = petData
                 self.offSet = offset
             })
@@ -199,7 +215,7 @@ class PetSwipeViewController: UIViewController {
             
             
             // fetch
-            if indexIntoPets + 3 == pets.count - 1{
+            if indexIntoPets + 5 == pets.count - 1{
                 
                 fetchMorePets(pet: nextPet)
                 
@@ -212,7 +228,7 @@ class PetSwipeViewController: UIViewController {
         if pets.count > 0 {
             
             self.hardResetCard()
-            bottomCard.isHidden = false
+            bottomCard.isHidden = true
             topCard.isHidden = false
             let pet = pets[pets.count - 1]
             
@@ -222,7 +238,7 @@ class PetSwipeViewController: UIViewController {
             topPetBreedLabel.text = pet.1.breeds
             
             
-            fetchMorePets(pet: pet)
+//            fetchMorePets(pet: pet)
         }
     }
     
@@ -281,8 +297,16 @@ class PetSwipeViewController: UIViewController {
                     return
                 }
                 guard let petData = petData else { return }
-                tempPets = petData
                 
+                // check to see if pet already exists in the working set of pets
+                for pet in petData {
+                    guard let description = pet.1.petDescription else { return }
+                    if !self.petDescriptions.contains(description) && description != "No description available" {
+                        tempPets.append(pet)
+                        self.petDescriptions.append(description)
+                    }
+                }
+            
                 self.offSet = offset
                 self.pets += tempPets
                 
