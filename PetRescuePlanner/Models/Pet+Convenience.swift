@@ -130,7 +130,7 @@ extension Pet {
         ////////////////////////////////////////////////////////////////////////////////////
         if let descriptionDictionary = dictionary[apiKeys.descriptionKey] as? [String:Any] {
             if let description = descriptionDictionary[apiKeys.itemKey] as? String {
-                self.petDescription = description
+                self.petDescription = description.replacingOccurrences(of: "â", with: "'")
             } else {
                 self.petDescription = "No description available"
             }
