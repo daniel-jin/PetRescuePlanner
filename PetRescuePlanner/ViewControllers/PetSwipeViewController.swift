@@ -40,6 +40,10 @@ class PetSwipeViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var leftSwipeButton: UIButton!
+    @IBOutlet weak var rightSwipeButton: UIButton!
+    
+    
     @IBOutlet weak var bottomCard: UIView!
     
     @IBOutlet weak var bottomPetNameLabel: UILabel!
@@ -193,6 +197,76 @@ class PetSwipeViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func leftButtonTapped(_ sender: UIButton) {
+        
+        guard let card = self.topCard else { return }
+        
+        rightSwipeButton.isEnabled = false
+        leftSwipeButton.isEnabled = false
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            card.transform = CGAffineTransform(rotationAngle: -45)
+            card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
+            card.alpha = 0
+        }, completion: { (success) in
+            self.indexIntoPets += 1
+            
+            self.topCardImageView.image = UIImage()
+            
+            if self.indexIntoPets < self.pets.count - 1 {
+                self.topCard.isHidden = true
+                self.hardResetCard()
+            } else if self.indexIntoPets == self.pets.count - 1 {
+                
+                self.createLastCard()
+            }
+        })
+        
+    }
+    
+    @IBAction func rightButtonTapped(_ sender: UIButton) {
+        
+        guard let card = self.topCard else { return }
+        
+        rightSwipeButton.isEnabled = false
+        leftSwipeButton.isEnabled = false
+        
+        // Save pet to Core Data & CloudKit
+        let petToSave: (UIImage, Pet)
+        
+        if indexIntoPets == pets.count {
+            petToSave = pets[indexIntoPets - 1]
+        } else {
+            petToSave = pets[indexIntoPets]
+        }
+        
+        // Save to CoreData first
+        PetController.shared.add(pet: petToSave.1)
+        
+        // Sync with CloudKit
+        PetController.shared.performFullSync()
+        
+        self.indexIntoPets += 1
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            card.transform = CGAffineTransform(rotationAngle: 45)
+            card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
+            card.alpha = 0
+        }, completion: { (success) in
+            
+            if self.indexIntoPets < self.pets.count - 1 {
+                self.topCardImageView.image = UIImage()
+                
+                self.topCard.isHidden = true
+                self.hardResetCard()
+            } else if self.indexIntoPets == self.pets.count - 1 {
+                self.createLastCard()
+            }
+        })
+        
+    }
+    
     // MARK: - Private Functions
     
     func createCard() {
@@ -216,9 +290,9 @@ class PetSwipeViewController: UIViewController {
             
             // fetch
             if indexIntoPets + 5 == pets.count - 1{
-                
                 fetchMorePets(pet: nextPet)
-                
+            } else if indexIntoPets + 3 == pets.count - 1 {
+                fetchMorePets(pet: nextPet)
             }
         }
     }
@@ -256,8 +330,10 @@ class PetSwipeViewController: UIViewController {
             self.topCard.isHidden = false
             self.topCard.alpha = 1.0
             self.createCard()
+            
+            self.leftSwipeButton.isEnabled = true
+            self.rightSwipeButton.isEnabled = true
         }
-        
     }
     
     func resetCard() {
@@ -361,70 +437,6 @@ class PetSwipeViewController: UIViewController {
         alertController.addAction(okAction)
         
         self.present(alertController, animated: true, completion: nil)
-        
-    }
-    
-    @IBAction func leftButtonTapped(_ sender: UIButton) {
-        
-        guard let card = self.topCard else { return }
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            card.transform = CGAffineTransform(rotationAngle: -45)
-            card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
-            card.alpha = 0
-        }, completion: { (success) in
-            self.indexIntoPets += 1
-            
-            self.topCardImageView.image = UIImage()
-            
-            if self.indexIntoPets < self.pets.count - 1 {
-                self.topCard.isHidden = true
-                self.hardResetCard()
-            } else if self.indexIntoPets == self.pets.count - 1 {
-                
-                self.createLastCard()
-            }
-        })
-        
-    }
-    
-    @IBAction func rightButtonTapped(_ sender: UIButton) {
-        
-        guard let card = self.topCard else { return }
-        
-        // Save pet to Core Data & CloudKit
-        let petToSave: (UIImage, Pet)
-        
-        if indexIntoPets == pets.count {
-            petToSave = pets[indexIntoPets - 1]
-        } else {
-            petToSave = pets[indexIntoPets]
-        }
-        
-        // Save to CoreData first
-        PetController.shared.add(pet: petToSave.1)
-        
-        // Sync with CloudKit
-        PetController.shared.performFullSync()
-        
-        self.indexIntoPets += 1
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            card.transform = CGAffineTransform(rotationAngle: 45)
-            card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
-            card.alpha = 0
-        }, completion: { (success) in
-            
-            if self.indexIntoPets < self.pets.count - 1 {
-                self.topCardImageView.image = UIImage()
-                
-                self.topCard.isHidden = true
-                self.hardResetCard()
-            } else if self.indexIntoPets == self.pets.count - 1 {
-                
-                self.createLastCard()
-            }
-        })
         
     }
 }
