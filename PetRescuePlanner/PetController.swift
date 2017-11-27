@@ -20,11 +20,9 @@ class PetController {
     static let shared = PetController()
     
     var pets: [Pet] = []
-//    var petPhotos: [UIImage] = []
-//    var offset: String = ""
     
     var savedPets: [Pet] {
-        // MARK: - Fetched Results Controller configuration
+        // MARK: - Core Data fetch
         // set up request
         let request: NSFetchRequest<Pet> = Pet.fetchRequest()
         
@@ -34,12 +32,6 @@ class PetController {
         // Perform fetch - handle errors
         do {
             var results = try CoreDataStack.context.fetch(request)
-            
-            for result in results {
-                if result.contactInfo == nil {
-                    CoreDataStack.context.delete(result)
-                }
-            }
             
             results = try CoreDataStack.context.fetch(request)
             return results
@@ -304,8 +296,6 @@ class PetController {
             completion(petData)
         }
     }
-    
-    
 }
 
 
