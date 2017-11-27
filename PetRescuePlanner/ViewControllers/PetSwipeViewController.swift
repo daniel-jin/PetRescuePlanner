@@ -262,44 +262,42 @@ class PetSwipeViewController: UIViewController {
     }
     
     func fetchMorePets(pet: (UIImage, Pet)) {
-//        if indexIntoPets == pets.count - 1 {
+
+        let methods = API.Methods()
         
-            let methods = API.Methods()
+        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
+            if !success {
+                NSLog("No more pets fetched In swipe to save view")
+                return
+            }
             
-            PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
-                if !success {
-                    NSLog("No more pets fetched In swipe to save view")
+            guard let petList = petList else {
+                return
+            }
+            
+            if petList.count == 0 {
+                // Alert user that no more pets were found
+                return
+            }
+            
+            var tempPets: [(UIImage, Pet)] = []
+            
+            PetController.shared.preFetchImagesFor(pets: petList, completion: { (petData) in
+                if petData == nil {
+                    NSLog("Error fetching pets images")
                     return
                 }
+                guard let petData = petData else { return }
+                tempPets = petData
                 
-                guard let petList = petList else {
-                    return
+                self.offSet = offset
+                self.pets += tempPets
+                
+                DispatchQueue.main.async {
+                    self.bottomCard.isHidden = false
                 }
-                
-                if petList.count == 0 {
-                    // Alert user that no more pets were found
-                    return
-                }
-                
-                var tempPets: [(UIImage, Pet)] = []
-                
-                PetController.shared.preFetchImagesFor(pets: petList, completion: { (petData) in
-                    if petData == nil {
-                        NSLog("Error fetching pets images")
-                        return
-                    }
-                    guard let petData = petData else { return }
-                    tempPets = petData
-                    
-                    self.offSet = offset
-                    self.pets += tempPets
-                    
-                    DispatchQueue.main.async {
-                        self.bottomCard.isHidden = false
-                    }
-                })
             })
-//    }
+        })
     }
     
     func setUpViews() {
