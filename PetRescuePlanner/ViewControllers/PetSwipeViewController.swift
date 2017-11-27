@@ -20,7 +20,7 @@ class PetSwipeViewController: UIViewController {
     var age: String? = nil
     var breed: String? = nil
     
-    var petIds: [String] = []
+    var petDescriptions: [String] = []
     
     var pets: [(UIImage, Pet)] = [] {
         didSet {
@@ -84,6 +84,13 @@ class PetSwipeViewController: UIViewController {
                     return
                 }
                 guard let petData = petData else { return }
+                
+                for pet in petData {
+                    if let description = pet.1.petDescription {
+                        self.petDescriptions.append(description)
+                    }
+                }
+                
                 self.pets = petData
                 self.offSet = offset
             })
@@ -201,7 +208,7 @@ class PetSwipeViewController: UIViewController {
             
             
             // fetch
-            if indexIntoPets + 3 == pets.count - 1{
+            if indexIntoPets + 5 == pets.count - 1{
                 
                 fetchMorePets(pet: nextPet)
                 
@@ -214,7 +221,7 @@ class PetSwipeViewController: UIViewController {
         if pets.count > 0 {
             
             self.hardResetCard()
-            bottomCard.isHidden = false
+            bottomCard.isHidden = true
             topCard.isHidden = false
             let pet = pets[pets.count - 1]
             
@@ -224,7 +231,7 @@ class PetSwipeViewController: UIViewController {
             topPetBreedLabel.text = pet.1.breeds
             
             
-            fetchMorePets(pet: pet)
+//            fetchMorePets(pet: pet)
         }
     }
     
@@ -286,10 +293,10 @@ class PetSwipeViewController: UIViewController {
                 
                 // check to see if pet already exists in the working set of pets
                 for pet in petData {
-                    guard let id = pet.1.id else { return }
-                    if !self.petIds.contains(id) {
+                    guard let description = pet.1.petDescription else { return }
+                    if !self.petDescriptions.contains(description) && description != "No description available" {
                         tempPets.append(pet)
-                        self.petIds.append(id)
+                        self.petDescriptions.append(description)
                     }
                 }
             
