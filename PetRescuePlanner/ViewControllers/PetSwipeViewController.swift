@@ -20,6 +20,8 @@ class PetSwipeViewController: UIViewController {
     var age: String? = nil
     var breed: String? = nil
     
+    var petIds: [String] = []
+    
     var pets: [(UIImage, Pet)] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -281,8 +283,16 @@ class PetSwipeViewController: UIViewController {
                     return
                 }
                 guard let petData = petData else { return }
-                tempPets = petData
                 
+                // check to see if pet already exists in the working set of pets
+                for pet in petData {
+                    guard let id = pet.1.id else { return }
+                    if !self.petIds.contains(id) {
+                        tempPets.append(pet)
+                        self.petIds.append(id)
+                    }
+                }
+            
                 self.offSet = offset
                 self.pets += tempPets
                 
