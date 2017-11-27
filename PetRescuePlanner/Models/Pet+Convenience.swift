@@ -190,8 +190,25 @@ extension Pet {
             }
         }
         if let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any] {
+            
+            var petSizeString = ""
+            
             if let size = sizeDictionary[apiKeys.itemKey] as? String {
-                self.size = size
+                
+                switch size {
+                case "S":
+                    petSizeString = "Small"
+                case "M":
+                    petSizeString = "Medium"
+                case "L":
+                    petSizeString = "Large"
+                case "XL":
+                    petSizeString = "Extra Large"
+                default:
+                    petSizeString = "No size available"
+                }
+                
+                self.size = petSizeString
             } else {
                 self.size = "No size available"
             }
