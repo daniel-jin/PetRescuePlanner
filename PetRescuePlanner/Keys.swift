@@ -83,6 +83,7 @@ class API {
         // MARK: - Photo Keys
         let photoKey = "photo"
         let photosKey = "photos"
+        
     }
 }
 

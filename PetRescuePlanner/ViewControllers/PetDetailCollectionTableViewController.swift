@@ -113,12 +113,11 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         
         guard let pet = self.pet else { return }
         
-        impactFeedback.impactOccurred()
-        
         // MARK: - Saving original size to restore later
         let originalFrame = self.saveButton.frame
+        impactFeedback.impactOccurred()
         
-        UIView.animate(withDuration: 0.35, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.25, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             
             // MARK: - Saving pet
             PetController.shared.add(pet: pet)
@@ -136,10 +135,20 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
             self.impactFeedback.impactOccurred()
             
             // MARK: - Restoring to original size
-            UIView.animate(withDuration: 0.35, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.saveButton.frame = originalFrame
                 
             })
         }   
     }
+    
 }
+
+
+
+
+
+
+
+
+
