@@ -29,10 +29,10 @@ class ShelterPetsListTableViewController: UITableViewController {
     
     
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.prefetchDataSource = self
+        tableView.prefetchDataSource = self
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         self.title = "At This Shelter"
@@ -79,23 +79,32 @@ class ShelterPetsListTableViewController: UITableViewController {
     
 }
 
-//extension ShelterPetsListTableViewController: UITableViewDataSourcePrefetching {
-//
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        for indexPath in indexPaths {
-//            let savedPet = savedPets[indexPath.row]
-//
-//            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
-//                if !success {
-//                    NSLog("error fetchingpet in pet controller")
-//                }
-//                guard let image = image else { return }
-//                DispatchQueue.main.async {
-//                    self.storedImages.append(image)
-//                }
-//            })
-//        }
-//    }
+extension ShelterPetsListTableViewController: UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        let cell = ShelterPetTableViewCell()
+        
+        for indexPath in indexPaths {
+            let savedPet = savedPets[indexPath.row]
+            
+            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                }
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                   
+                    if cell.petImageView.image != nil {
+                        cell.petImageView.image = image
+                    } else {
+                        cell.petImageView.image = #imageLiteral(resourceName: "happyFace")
+                    }
+                }
+            })
+        }
+    }
+}
 //
 //
 //}
