@@ -37,8 +37,6 @@ class SearchResultsTableViewController: UITableViewController {
         let dict: [String: Any] = ["breed": breed, "containerStatus": true, "breedLabelValue": breed]
         
         NotificationCenter.default.post(name: Notifications.BreedWasSetNotification, object: nil, userInfo: dict)
-
-        
         
     }
 }

@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // If we want to flush core data objects for Pet
@@ -25,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Override point for customization after application launch.
+        
+        let loveStory = UIFont(name: "Love Story Rough", size: 20.0)
+        let navBar = UINavigationBar.appearance()
+        
+        navBar.barTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        navBar.titleTextAttributes = [
+            NSAttributedStringKey.font: loveStory!,
+            NSAttributedStringKey.foregroundColor: UIColor.white]
+        navBar.tintColor = UIColor.white
+        
         return true
     }
 

@@ -58,6 +58,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @IBOutlet weak var breedSearchContainerView: UIView!
     
+    @IBOutlet weak var messageLabel: UILabel!
+    
     // MARK: - Actions
     
     @IBAction func sexSegmentedControlChanged(_ sender: Any) {
@@ -231,12 +233,12 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     func setUpViews() {
         
+        self.title = "Search"
+        
         animalTypePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
         
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         animalTypePicker.delegate = self
         animalSizePicker.delegate = self
@@ -251,7 +253,24 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalAgeTextField.inputView = animalAgePicker
         
         breedSearchContainerView.isHidden = true
-                
+        
+        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        let savedPets = arc4random_uniform(157)+20
+        
+        let messages: [String] = ["Find your new best friend!",
+                                  "Take home all of the pets!",
+                                  "\(savedPets) pets rescued today!"]
+        
+        guard let loveStory = UIFont(name: "Love Story Rough", size: 30.0) else { return }
+        
+        let rng = Int(arc4random_uniform(UInt32(messages.count)))
+        let message = messages[rng]
+        let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : loveStory])
+        
+        messageLabel.attributedText = messageToReturn
+        selectBreedLabel.textColor = redColor
+        sexSegmentedControl.tintColor = redColor
+        
     }
     
     func presentAlertWith(title: String, message: String, color: UIColor) {

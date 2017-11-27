@@ -46,5 +46,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Honeymoon Personal Use.ttf</string>
+		<string>LoveStory.ttf</string>
+	</array>
 </dict>
 </plist>

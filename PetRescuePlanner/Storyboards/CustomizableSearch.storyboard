@@ -156,6 +156,7 @@
                         <outlet property="animalTypePicker" destination="Qvc-FK-hhV" id="2u4-v0-yur"/>
                         <outlet property="animalTypeTextField" destination="d1z-2D-pzZ" id="CJW-bg-vkI"/>
                         <outlet property="breedSearchContainerView" destination="9hA-bN-RyL" id="zUQ-ae-Bt9"/>
+                        <outlet property="messageLabel" destination="9Ed-vf-48M" id="fcP-wb-DUW"/>
                         <outlet property="selectBreedButton" destination="EMR-dU-cMt" id="b39-rP-edC"/>
                         <outlet property="selectBreedLabel" destination="CbU-ZP-jxo" id="7kk-eF-hOF"/>
                         <outlet property="sexSegmentedControl" destination="UFO-dk-fgs" id="jNQ-xD-uJv"/>

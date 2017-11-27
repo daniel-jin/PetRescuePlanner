@@ -14,7 +14,6 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     @IBOutlet weak var saveButton: UIButton!
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     
-    
     var pet: Pet? {
         didSet {
             PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
@@ -38,13 +37,13 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     var isButtonHidden: Bool = true 
     
-    
     override func viewDidLoad() {
         guard let pet = pet else { return }
         
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
+        
         if (self.navigationController != nil) {
             navigationController?.isNavigationBarHidden = true
         }

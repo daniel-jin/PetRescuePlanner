@@ -139,7 +139,7 @@ class PetSwipeViewController: UIViewController {
                 
                 // Save pet to Core Data & CloudKit
                 let petToSave: (UIImage, Pet)
-
+                
                 if indexIntoPets == pets.count {
                     petToSave = pets[indexIntoPets - 1]
                 } else {
@@ -217,7 +217,7 @@ class PetSwipeViewController: UIViewController {
             let pet = pets[pets.count - 1]
             
             topCardImageView.image = pet.0
-          
+            
             self.topPetNameLabel.text = pet.1.name
             topPetBreedLabel.text = pet.1.breeds
             
@@ -255,7 +255,7 @@ class PetSwipeViewController: UIViewController {
     }
     
     func fetchMorePets(pet: (UIImage, Pet)) {
-
+        
         let methods = API.Methods()
         
         PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
@@ -297,15 +297,10 @@ class PetSwipeViewController: UIViewController {
         indexIntoPets = 0
         divisor = (view.frame.width / 2) / 0.61
         
-        self.title = "PetRescuePlanner"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.title = "Pets"
         
         leftPointer.tintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 0.3)
         rightPointer.tintColor = UIColor(red: 3.0/255.0, green: 209.0/255.0, blue: 0.0, alpha: 0.3)
-        
-
         
     }
     
@@ -315,7 +310,7 @@ class PetSwipeViewController: UIViewController {
         
         if segue.identifier == "swipeToPetListSegue" {
             
-    
+            
         }
         
         if segue.identifier == "tinderToDetailSegue" {

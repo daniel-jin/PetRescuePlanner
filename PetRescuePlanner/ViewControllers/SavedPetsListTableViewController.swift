@@ -18,7 +18,6 @@ class SavedPetsListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "My Saved Pets"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         PetController.shared.performFullSync {
             DispatchQueue.main.async {
