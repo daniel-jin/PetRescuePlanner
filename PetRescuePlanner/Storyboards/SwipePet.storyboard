@@ -84,7 +84,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVk-uc-zlf" userLabel="TopCard">
-                                <rect key="frame" x="62.5" y="166" width="250" height="400"/>
+                                <rect key="frame" x="62.5" y="165.5" width="250" height="400"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardFrame" translatesAutoresizingMaskIntoConstraints="NO" id="tEO-hf-zjz" userLabel="BlankCard">
                                         <rect key="frame" x="-0.5" y="0.0" width="250" height="400"/>
@@ -220,7 +220,9 @@
                         <outlet property="bottomPetBreedLabel" destination="qFL-wq-LkB" id="qdf-eN-EUL"/>
                         <outlet property="bottomPetNameLabel" destination="sqc-9a-EW5" id="8Vs-Is-yZc"/>
                         <outlet property="leftPointer" destination="TzO-dS-efc" id="neT-E8-FI0"/>
+                        <outlet property="leftSwipeButton" destination="dQZ-Ke-OpE" id="W5p-BO-iB0"/>
                         <outlet property="rightPointer" destination="S2d-tj-WpR" id="R4Y-TB-G7B"/>
+                        <outlet property="rightSwipeButton" destination="e08-tl-0Rs" id="bsj-XW-cmy"/>
                         <outlet property="topCard" destination="lVk-uc-zlf" id="t5E-bd-OiY"/>
                         <outlet property="topCardImageView" destination="zXf-20-Doe" id="cdH-Rp-U3c"/>
                         <outlet property="topImageHolder" destination="RAX-jv-i7C" id="6yG-sW-bzj"/>
