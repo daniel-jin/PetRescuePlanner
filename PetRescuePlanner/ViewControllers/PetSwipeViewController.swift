@@ -364,6 +364,70 @@ class PetSwipeViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
         
     }
+    
+    @IBAction func leftButtonTapped(_ sender: UIButton) {
+        
+        guard let card = self.topCard else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            card.transform = CGAffineTransform(rotationAngle: -45)
+            card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
+            card.alpha = 0
+        }, completion: { (success) in
+            self.indexIntoPets += 1
+            
+            self.topCardImageView.image = UIImage()
+            
+            if self.indexIntoPets < self.pets.count - 1 {
+                self.topCard.isHidden = true
+                self.hardResetCard()
+            } else if self.indexIntoPets == self.pets.count - 1 {
+                
+                self.createLastCard()
+            }
+        })
+        
+    }
+    
+    @IBAction func rightButtonTapped(_ sender: UIButton) {
+        
+        guard let card = self.topCard else { return }
+        
+        // Save pet to Core Data & CloudKit
+        let petToSave: (UIImage, Pet)
+        
+        if indexIntoPets == pets.count {
+            petToSave = pets[indexIntoPets - 1]
+        } else {
+            petToSave = pets[indexIntoPets]
+        }
+        
+        // Save to CoreData first
+        PetController.shared.add(pet: petToSave.1)
+        
+        // Sync with CloudKit
+        PetController.shared.performFullSync()
+        
+        self.indexIntoPets += 1
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            card.transform = CGAffineTransform(rotationAngle: 45)
+            card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
+            card.alpha = 0
+        }, completion: { (success) in
+            
+            if self.indexIntoPets < self.pets.count - 1 {
+                self.topCardImageView.image = UIImage()
+                
+                self.topCard.isHidden = true
+                self.hardResetCard()
+            } else if self.indexIntoPets == self.pets.count - 1 {
+                
+                self.createLastCard()
+            }
+        })
+        
+    }
 }
 
 
