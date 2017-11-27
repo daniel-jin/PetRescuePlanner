@@ -11,6 +11,18 @@ import CoreData
 import CloudKit
 import UIKit
 
+enum petOptions: String {
+    
+    case hasShots = "Current on vaccinations"
+    case altered = "Spayed/Neutered"
+    case noCats = "Prefers a home without cats"
+    case noDogs = "Prefers a home without dogs"
+    case noKids = "Prefers a home without young children"
+    case housetrained = "House trained"
+    case specialNeeds = "Special needs"
+    
+}
+
 extension Pet {
             
     @discardableResult convenience init?(dictionary: [String: Any],
@@ -168,7 +180,27 @@ extension Pet {
             if !optionsDictionary.isEmpty {
                 if let optionArray = optionsDictionary[apiKeys.optionKey] as? [[String: Any]] {
                     for optionsDictionary in optionArray {
-                        guard let option = optionsDictionary[apiKeys.itemKey] as? String else { return }
+                        guard var option = optionsDictionary[apiKeys.itemKey] as? String else { return }
+                        
+                        switch option {
+                        case "hasShots":
+                            option = petOptions.hasShots.rawValue
+                        case "altered":
+                            option = petOptions.altered.rawValue
+                        case "noCats":
+                            option = petOptions.noCats.rawValue
+                        case "noDogs":
+                            option = petOptions.noDogs.rawValue
+                        case "noKids":
+                            option = petOptions.noKids.rawValue
+                        case "housetrained":
+                            option = petOptions.housetrained.rawValue
+                        case "specialNeeds":
+                            option = petOptions.specialNeeds.rawValue
+                        default:
+                            print("No matching option")
+                        }
+                        
                         optionsArray.append(option)
                     }
                 }
@@ -190,8 +222,25 @@ extension Pet {
             }
         }
         if let sizeDictionary = dictionary[apiKeys.sizeKey] as? [String:Any] {
+            
+            var petSizeString = ""
+            
             if let size = sizeDictionary[apiKeys.itemKey] as? String {
-                self.size = size
+                
+                switch size {
+                case "S":
+                    petSizeString = "Small"
+                case "M":
+                    petSizeString = "Medium"
+                case "L":
+                    petSizeString = "Large"
+                case "XL":
+                    petSizeString = "Extra Large"
+                default:
+                    petSizeString = "No size available"
+                }
+                
+                self.size = petSizeString
             } else {
                 self.size = "No size available"
             }

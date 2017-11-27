@@ -68,6 +68,13 @@ class PetSwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !Reachability.isConnectedToNetwork() {
+            let networkErrorAlert = UIAlertController(title: "No Internet Connection", message: "Please check your cellular or wifi connection and try again.", preferredStyle: .alert)
+            let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            networkErrorAlert.addAction(dismiss)
+            self.present(networkErrorAlert, animated: true, completion: nil)
+        }
+        
         let methods = API.Methods()
         PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList, offset) in
             if !success {
