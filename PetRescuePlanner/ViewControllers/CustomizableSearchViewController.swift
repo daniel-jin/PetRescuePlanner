@@ -265,11 +265,11 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         let messages: [String] = ["Find your new best friend!",
                                   "Take home all of the pets!"]
         
-        guard let loveStory = UIFont(name: "Love Story Rough", size: 30.0) else { return }
+        guard let michaelMarker = UIFont(name: "Michael marker Lite", size: 30.0) else { return }
         
         let rng = Int(arc4random_uniform(UInt32(messages.count)))
         let message = messages[rng]
-        let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : loveStory])
+        let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : michaelMarker])
         
         messageLabel.attributedText = messageToReturn
         selectBreedLabel.textColor = redColor

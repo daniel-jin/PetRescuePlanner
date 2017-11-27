@@ -14,6 +14,8 @@
 		3C5331FD1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5331FC1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift */; };
 		3C5FF8F51FB237C90011CEFD /* petDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */; };
 		3C8E0AC11FCC94BE00EB0B43 /* LoveStory.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C8E0AC01FCC922700EB0B43 /* LoveStory.ttf */; };
+		3C8E0AC31FCCCBAE00EB0B43 /* michael_marker in Resources */ = {isa = PBXBuildFile; fileRef = 3C8E0AC21FCCCBAE00EB0B43 /* michael_marker */; };
+		3C8E0AC51FCCCC5500EB0B43 /* MichaelMarkerLite-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C8E0AC41FCCCC4D00EB0B43 /* MichaelMarkerLite-Regular.ttf */; };
 		3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC915AA1FB0EC55008C5448 /* Keys.swift */; };
 		5F0B03131FB21A24002B4F71 /* BreedSearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0B03121FB21A24002B4F71 /* BreedSearchContainerViewController.swift */; };
 		5F0B03151FB222CD002B4F71 /* BreedAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0B03141FB222CD002B4F71 /* BreedAPI.swift */; };
@@ -64,6 +66,8 @@
 		3C5331FC1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = petDetailView.storyboard; sourceTree = "<group>"; };
 		3C8E0AC01FCC922700EB0B43 /* LoveStory.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoveStory.ttf; sourceTree = "<group>"; };
+		3C8E0AC21FCCCBAE00EB0B43 /* michael_marker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = michael_marker; sourceTree = "<group>"; };
+		3C8E0AC41FCCCC4D00EB0B43 /* MichaelMarkerLite-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MichaelMarkerLite-Regular.ttf"; sourceTree = "<group>"; };
 		3CC915AA1FB0EC55008C5448 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = PetRescuePlanner/Keys.swift; sourceTree = SOURCE_ROOT; };
 		5F0B03121FB21A24002B4F71 /* BreedSearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchContainerViewController.swift; sourceTree = "<group>"; };
 		5F0B03141FB222CD002B4F71 /* BreedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedAPI.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 		5F7C77DA1FB0C04A00BCDBE5 = {
 			isa = PBXGroup;
 			children = (
+				3C8E0AC41FCCCC4D00EB0B43 /* MichaelMarkerLite-Regular.ttf */,
+				3C8E0AC21FCCCBAE00EB0B43 /* michael_marker */,
 				3C8E0AC01FCC922700EB0B43 /* LoveStory.ttf */,
 				5F7C77E51FB0C04A00BCDBE5 /* PetRescuePlanner */,
 				5F7C77E41FB0C04A00BCDBE5 /* Products */,
@@ -366,8 +372,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C8E0AC51FCCCC5500EB0B43 /* MichaelMarkerLite-Regular.ttf in Resources */,
 				3C8E0AC11FCC94BE00EB0B43 /* LoveStory.ttf in Resources */,
 				5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */,
+				3C8E0AC31FCCCBAE00EB0B43 /* michael_marker in Resources */,
 				5F4C16D51FB371C80065FEAD /* SwipePet.storyboard in Resources */,
 				5FB0C1151FB604DB00E55C05 /* savedPetsList.storyboard in Resources */,
 				5F86FE2D1FBB62DC002D9416 /* zipCodes.json in Resources */,
