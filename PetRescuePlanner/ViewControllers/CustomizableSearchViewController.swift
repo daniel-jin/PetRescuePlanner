@@ -261,11 +261,9 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         breedSearchContainerView.isHidden = true
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        let savedPets = arc4random_uniform(157)+20
         
         let messages: [String] = ["Find your new best friend!",
-                                  "Take home all of the pets!",
-                                  "\(savedPets) pets rescued today!"]
+                                  "Take home all of the pets!"]
         
         guard let loveStory = UIFont(name: "Love Story Rough", size: 30.0) else { return }
         

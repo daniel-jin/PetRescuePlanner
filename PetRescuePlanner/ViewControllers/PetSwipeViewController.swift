@@ -341,7 +341,6 @@ class PetSwipeViewController: UIViewController {
             let pet = pets[indexIntoPets]
             
             let destinationVC = segue.destination as? PetDetailCollectionTableViewController
-            destinationVC?.isButtonHidden = true 
             destinationVC?.pet = pet.1
             
             
