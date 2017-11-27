@@ -68,8 +68,11 @@ extension Pet {
                     for breed in breedsArray {
                         tempBreed += "\(breed[apiKeys.itemKey]!), "
                     }
-                    // FIXME: - remove last comma
-                    self.breeds = tempBreed
+                    // Remove last comma and space
+                    let endIndex = tempBreed.index(tempBreed.endIndex, offsetBy: -2)
+                    let truncatedBreed = tempBreed[..<endIndex]
+                    
+                    self.breeds = String(truncatedBreed)
                 }
             }
         }
