@@ -20,34 +20,20 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     var petsAtShelter: [Pet] = []
     
     
-    var shelter: Shelter? {
-        didSet {
-            guard let shelter = shelter else { return }
-            
-            self.updateShelterDetailView(shelter: shelter)
-            
-        }
-    }
+    var shelter: Shelter?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Shelter Info"
-        
-        findMorePetsButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        addressbutton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        numberButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        emailButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.navigationController?.isNavigationBarHidden = false
-        
+        setUpUI()
     }
     
     func updateShelterDetailView(shelter: Shelter){
         
         DispatchQueue.main.async {
             let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-            guard let michaelMarker = UIFont(name: "Michael Marker Lite", size: 25.0) else { return }
+            guard let michaelMarker = UIFont(name: "Michael Marker Lite", size: 18.0) else { return }
             let shelterName: NSMutableAttributedString = NSMutableAttributedString(string: shelter.name, attributes: [NSAttributedStringKey.font : michaelMarker, NSAttributedStringKey.foregroundColor: redColor])
             self.shelterNameLabel.attributedText = shelterName
             self.numberButton.setTitle(shelter.phone, for: .normal)
@@ -106,7 +92,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         if MFMailComposeViewController.canSendMail() {
             self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
-//            showMailError()
+            //            showMailError()
         }
     }
     
@@ -123,12 +109,12 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         return MFMailComposeViewController()
     }
     
-//    func showMailError() {
-//        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
-//        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
-//        sendMailErrorAlert.addAction(dismiss)
-//        self.present(sendMailErrorAlert, animated: true, completion: nil)
-//    }
+    //    func showMailError() {
+    //        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
+    //        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    //        sendMailErrorAlert.addAction(dismiss)
+    //        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    //    }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
@@ -225,21 +211,39 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             guard let destinationVC = segue.destination as? ShelterPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
-            PetController.shared.fetchPetsFor(count: "50",method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success, petList, offset) in
-                if !success {
-                    NSLog("Error fetching pets from shelter")
-                    return
-                }
-                
-                guard let petList = petList else { return }
-                destinationVC.savedPets = petList
-                
-            }
+            destinationVC.pet = pet
             
         }
         
     }
+    
+    func setUpUI() {
+        
+        self.title = "Shelter Info"
+        
+        self.findMorePetsButton.layer.cornerRadius = 5.0
+        
+        findMorePetsButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        addressbutton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        numberButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        emailButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.navigationController?.isNavigationBarHidden = false
+        
+        guard let pet = pet else { return }
+        ShelterController.shelterShared.fetchShelter(id: pet.shelterID) { (success) in
+            if !success {
+                NSLog("Error")
+                return
+            }
+            self.shelter = ShelterController.shelterShared.shelter
+            
+            guard let shelter = self.shelter else { return }
+            self.updateShelterDetailView(shelter: shelter)
+        }
+        
+    }
 }
+
 
 
 

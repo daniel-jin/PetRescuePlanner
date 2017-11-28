@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShelterPetsListTableViewController: UITableViewController {
+class ShelterPetsListTableViewController: UITableViewController/*, UITableViewDataSourcePrefetching*/ {
     
     var pet = Pet()
     
@@ -27,11 +27,22 @@ class ShelterPetsListTableViewController: UITableViewController {
         self.performSegue(withIdentifier: "toSavedPets", sender: self)
     }
     
-    
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let methods = API.Methods()
+        
+        PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil, breed: nil, size: nil, sex: nil, age: nil, offset: nil, completion: { (success, petList, offset) in
+            if !success {
+                NSLog("Error fetching pets from shelter")
+                return
+            }
+            
+            guard let petList = petList else { return }
+            self.savedPets = petList
+        })
 //        tableView.prefetchDataSource = self
         
         self.title = "At This Shelter"
@@ -75,38 +86,44 @@ class ShelterPetsListTableViewController: UITableViewController {
         
     }
     
-}
-
-//extension ShelterPetsListTableViewController: UITableViewDataSourcePrefetching {
-//
+    
 //    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+//        
+//        let cell = ShelterPetTableViewCell()
+//        
+//        cell.nameLabel.text = pet.name
+//        cell.descriptionLabel.text = pet.description
+//        cell.imageView?.image = #imageLiteral(resourceName: "doge")
+//        
+//        
 //        for indexPath in indexPaths {
 //            let savedPet = savedPets[indexPath.row]
-//
+//            
+//            cell.pet = savedPet
+//            
+//            
 //            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
 //                if !success {
 //                    NSLog("error fetchingpet in pet controller")
 //                }
 //                guard let image = image else { return }
 //                DispatchQueue.main.async {
-//                    self.storedImages.append(image)
+//
+//                    if cell.petImageView.image != nil {
+//                        cell.petImageView.image = image
+//                    } else {
+//                        cell.petImageView.image = #imageLiteral(resourceName: "happyFace")
+//                    }
 //                }
 //            })
 //        }
 //    }
-//
-//
-//}
-////            NetworkController.performRequest(for: photoURL, httpMethod: NetworkController.HTTPMethod.get, body: nil) { (data, error) in
-////                if let error = error {
-////                    NSLog("error fetching pet photo in pet controller \(error)")
-////                    completion(false, nil)
-////                }
-////                guard let data = data else { return completion(false, nil) }
-////
-////                let imageReturned = UIImage(data: data)
-////
-////                completion(true, imageReturned)
-////            }
+}
+
+
+
+
+
+
 
 
