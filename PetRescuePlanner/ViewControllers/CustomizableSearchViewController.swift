@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
     
     // MARK: - Data
     
@@ -130,7 +131,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
     }
     // MARK: - View Controller Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(setBreed(notification:)), name: Notifications.BreedWasSetNotification, object: nil)
@@ -292,5 +293,4 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     }
  
     
-
 }
