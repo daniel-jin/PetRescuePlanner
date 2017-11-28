@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CustomizableSearchViewController: UIViewController {
+class CustomizableSearchViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Data
     
@@ -83,6 +83,16 @@ class CustomizableSearchViewController: UIViewController {
     @IBOutlet var animalAgeButtons: [UIButton]!
     
     // MARK: - Actions
+    @IBAction func userLocationButtonTapped(_ sender: Any) {
+        self.zipCodeTextField.text = userZipCode
+        
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+
+    }
     
     @IBAction func handleAnimalTypeTapped(_ sender: UIButton) {
         sender.setTitle(animalTypeMasterButton.titleLabel!.text, for: .normal)
@@ -338,22 +348,6 @@ class CustomizableSearchViewController: UIViewController {
         super.viewDidLoad()
         
         
-        
-        // Mark: - getting the users coordinates
-        
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-        
-        guard let location = manager.location else { return }
-        
-        let userLatitude = location.coordinate.latitude
-        let userLongitude = location.coordinate.longitude
-        let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
-       
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(setBreed(notification:)), name: Notifications.BreedWasSetNotification, object: nil)
         self.breedSearchContainerView.isHidden = true 
         
@@ -396,7 +390,7 @@ class CustomizableSearchViewController: UIViewController {
     func setUpViews() {
         
         self.title = "Search"
-
+        
         breedSearchContainerView.isHidden = true
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
@@ -523,14 +517,12 @@ class CustomizableSearchViewController: UIViewController {
                 let placemark = placemarks[0]
                 guard let userZip = placemark.postalCode else { return }
                 
-                self.userZipCode.append(userZip)
+                self.userZipCode = userZip
                 self.zipCodeTextField.text = self.userZipCode
-            }
-            if self.zipCodeTextField.text == self.userZipCode {
+
                 manager.stopUpdatingLocation()
-            } else {
-                manager.startUpdatingLocation()
             }
+            
         }
         
     }
