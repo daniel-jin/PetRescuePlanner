@@ -130,10 +130,29 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         self.performSegue(withIdentifier: "toSavedPets", sender: self)
         
     }
+    
     // MARK: - View Controller Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        // Mark: - getting the users coordinates
+        
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+        guard let location = manager.location else { return }
+        
+        let userLatitude = location.coordinate.latitude
+        let userLongitude = location.coordinate.longitude
+        let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
+       
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(setBreed(notification:)), name: Notifications.BreedWasSetNotification, object: nil)
         self.breedSearchContainerView.isHidden = true 
         
@@ -242,7 +261,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         animalAgeTextField.inputView = animalAgePicker
         
         breedSearchContainerView.isHidden = true
-                
+        
     }
     
     func presentAlertWith(title: String, message: String, color: UIColor) {
@@ -266,8 +285,8 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     }
     
     // MARK: - Navigation
-
-
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "breedContainerSegue" {
@@ -291,6 +310,41 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
             destinationVC.breed = self.breed
         }
     }
- 
+    // Mark: - users zipcode
+    
+    let manager = CLLocationManager()
+    let geoCoder = CLGeocoder()
+    var userZipCode: String = ""
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0]
+        manager.startUpdatingLocation()
+        
+        geoCoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+            if error != nil {
+                print("Error in reveseGeocode")
+            }
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks as [CLPlacemark]
+            if placemark.count > 0 {
+                let placemark = placemarks[0]
+                guard let userZip = placemark.postalCode else { return }
+                
+                self.userZipCode.append(userZip)
+                self.zipCodeTextField.text = self.userZipCode
+            }
+            if self.zipCodeTextField.text == self.userZipCode {
+                manager.stopUpdatingLocation()
+            } else {
+                manager.startUpdatingLocation()
+            }
+        }
+        
+    }
     
 }
+
+
+
+
+
