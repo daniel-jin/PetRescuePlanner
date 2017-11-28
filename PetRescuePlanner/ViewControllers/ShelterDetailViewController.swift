@@ -32,16 +32,24 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Shelter Info"
+        
         findMorePetsButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         addressbutton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         numberButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         emailButton.titleLabel?.textColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        self.navigationController?.isNavigationBarHidden = false
+        
     }
     
     func updateShelterDetailView(shelter: Shelter){
         
         DispatchQueue.main.async {
-            self.shelterNameLabel.text = shelter.name
+            let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+            guard let michaelMarker = UIFont(name: "Michael Marker Lite", size: 25.0) else { return }
+            let shelterName: NSMutableAttributedString = NSMutableAttributedString(string: shelter.name, attributes: [NSAttributedStringKey.font : michaelMarker, NSAttributedStringKey.foregroundColor: redColor])
+            self.shelterNameLabel.attributedText = shelterName
             self.numberButton.setTitle(shelter.phone, for: .normal)
             self.emailButton.setTitle(shelter.email, for: .normal)
             
@@ -98,7 +106,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         if MFMailComposeViewController.canSendMail() {
             self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
-            showMailError()
+//            showMailError()
         }
     }
     
@@ -108,19 +116,19 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             mailComposerVC.mailComposeDelegate = self
             mailComposerVC.setToRecipients([(shelter?.email)!])
             guard let name = pet.name else { return MFMailComposeViewController() }
-            mailComposerVC.setSubject("Interested in \(String(describing: name))")
+            mailComposerVC.setSubject("I am interested in \(String(describing: name))")
             
             return mailComposerVC
         }
         return MFMailComposeViewController()
     }
     
-    func showMailError() {
-        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
-        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        sendMailErrorAlert.addAction(dismiss)
-        self.present(sendMailErrorAlert, animated: true, completion: nil)
-    }
+//    func showMailError() {
+//        let sendMailErrorAlert = UIAlertController(title: "Could not send email", message: "Your device could not send email", preferredStyle: .alert)
+//        let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+//        sendMailErrorAlert.addAction(dismiss)
+//        self.present(sendMailErrorAlert, animated: true, completion: nil)
+//    }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)

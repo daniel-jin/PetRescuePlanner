@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BreedSearchContainerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+class BreedSearchContainerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Properties
     
@@ -34,6 +34,8 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSearchController()
+        
+        searchController?.searchBar.delegate = self 
         
         breedsTableView.delegate = self
         breedsTableView.dataSource = self
@@ -61,6 +63,7 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         
         let dicts = ["breed": breed, "containerStatus": true, "breedLabelValue": breed] as [String : Any]
         
+        NotificationCenter.default.post(name: Notifications.SearchBarEditingEnded, object: nil)
         NotificationCenter.default.post(name: Notifications.BreedWasSetNotification, object: nil, userInfo: dicts)
     }
     
@@ -73,7 +76,8 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         p.breedSearchContainerView.isHidden = true
         p.selectBreedLabel.text = breed 
 
-        
+        NotificationCenter.default.post(name: Notifications.SearchBarEditingEnded, object: nil)
+
     }
     
     // MARK: - SearchController funcs
@@ -94,6 +98,16 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         }
     }
     
+    // MARK: - Search Bar delegate Methods
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        NotificationCenter.default.post(name: Notifications.SearchBarEditingBegan, object: nil)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        NotificationCenter.default.post(name: Notifications.SearchBarEditingEnded, object: nil)
+    }
+    
     // MARK: - Private funcs
     
     func setUpSearchController() {
@@ -106,7 +120,7 @@ class BreedSearchContainerViewController: UIViewController, UITableViewDelegate,
         searchController?.searchResultsUpdater = self
         
         searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.searchBarStyle = .minimal
+        searchController?.searchBar.searchBarStyle = .default
         searchController?.hidesNavigationBarDuringPresentation = false
         
         breedsTableView.tableHeaderView = searchController?.searchBar

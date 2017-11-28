@@ -83,6 +83,7 @@ class API {
         // MARK: - Photo Keys
         let photoKey = "photo"
         let photosKey = "photos"
+        
     }
 }
 
@@ -104,6 +105,8 @@ struct CloudKit {
 
 struct Notifications {
     static let BreedWasSetNotification = Notification.Name("BreedWasSetNotification")
+    static let SearchBarEditingBegan = Notification.Name("SearchBarEditingBegan")
+    static let SearchBarEditingEnded = Notification.Name("SearchBarEditingEnded")
 }
 
 class ShelterKeys {

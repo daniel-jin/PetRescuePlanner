@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="MichaelMarkerLite-Regular.ttf">
+            <string>MichaelMarkerLite-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Shelter Detail View Controller-->
         <scene sceneID="UCm-jz-wmE">
@@ -42,7 +47,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="MichaelMarkerLite-Regular" family="Michael Marker Lite" pointSize="21"/>
                                 <state key="normal" title="Find more pets at this shelter.">
                                     <color key="titleColor" red="0.9881489873" green="0.98829060790000001" blue="0.9881181121" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>

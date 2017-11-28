@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
+class CustomizableSearchViewController: UIViewController {
     
     // MARK: - Data
     
@@ -29,11 +29,32 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     var breed: String? = nil
     var shelterId: String? = nil
     
-    // Picker view values
+    enum AnimalTypes: String {
+        case any = "Any"
+        case dog = "Dog"
+        case cat = "Cat"
+        case bird = "Bird"
+        case reptile = "Reptile"
+        case horse = "Horse"
+        case barnYard = "Barnyard"
+        case smallFurry = "Smallfurry"
+    }
     
-    let animals = ["", "Dog", "Cat", "Bird", "Reptile", "Horse", "Barnyard", "Smallfurry"]
-    let sizes = ["", "Small", "Medium", "Large", "Extra-Large"]
-    let ages = ["", "Baby", "Young", "Adult", "Senior"]
+    enum AnimalSizes: String {
+        case any = "Any"
+        case small = "Small"
+        case medium = "Medium"
+        case large = "Large"
+        case extraLarge = "Extra Large"
+    }
+    
+    enum AnimalAges: String {
+        case any = "Any"
+        case baby = "Baby"
+        case young = "Young"
+        case adult = "Adult"
+        case senior = "Senior"
+    }
     
     // alert view colors
     
@@ -43,23 +64,203 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     // MARK: - Outlets
     
+    @IBOutlet weak var searhButton: UIButton!
     @IBOutlet weak var selectBreedLabel: UILabel!
-    @IBOutlet weak var animalTypeTextField: UITextField!
-    @IBOutlet weak var animalSizeTextField: UITextField!
-    @IBOutlet weak var animalAgeTextField: UITextField!
     @IBOutlet weak var zipCodeTextField: UITextField!
-    
-    @IBOutlet var animalTypePicker: UIPickerView!
-    @IBOutlet var animalSizePicker: UIPickerView!
-    @IBOutlet var animalAgePicker: UIPickerView!
-    
     @IBOutlet weak var selectBreedButton: UIButton!
-    
+    @IBOutlet weak var breedResetButton: UIButton!
     @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var breedSearchContainerView: UIView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    // DropDown control buttons
+    @IBOutlet weak var animalTypeMasterButton: UIButton!
+    @IBOutlet weak var animalAgeMasterButton: UIButton!
+    @IBOutlet weak var animalSizeMasterButton: UIButton!
+    // DropDown value button groups
+    @IBOutlet var animalTypeButtons: [UIButton]!
+    @IBOutlet var animalSizeButtons: [UIButton]!
+    @IBOutlet var animalAgeButtons: [UIButton]!
     
     // MARK: - Actions
+    
+    @IBAction func handleAnimalTypeTapped(_ sender: UIButton) {
+        sender.setTitle(animalTypeMasterButton.titleLabel!.text, for: .normal)
+        animalTypeButtons.forEach { (button) in
+            button.isHidden = !button.isHidden
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func animalTypeTapped(_ sender: UIButton) {
+        guard let title = sender.currentTitle, let animalType = AnimalTypes(rawValue: title) else {
+            return
+        }
+        
+        switch animalType {
+        case .any:
+            self.animal = nil
+            self.animalTypeMasterButton.setTitle("Any Animal Type", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .dog:
+            self.animal = "dog"
+            self.animalTypeMasterButton.setTitle("Search For Dogs", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .cat:
+            self.animal = "cat"
+            self.animalTypeMasterButton.setTitle("Search For Cats", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .bird:
+            self.animal = "bird"
+            self.animalTypeMasterButton.setTitle("Search For Birds", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .reptile:
+            self.animal = "reptile"
+            self.animalTypeMasterButton.setTitle("Search For Reptiles", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .horse:
+            self.animal = "horse"
+            self.animalTypeMasterButton.setTitle("Search For Horses", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .barnYard:
+            self.animal = "barnyard"
+            self.animalTypeMasterButton.setTitle("Search For Barnyards", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .smallFurry:
+            self.animal = "smallfurry"
+            self.animalTypeMasterButton.setTitle("Search For Smallfurrys", for: .normal)
+            animalTypeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @IBAction func handleAnimalSizeTapped(_ sender: UIButton) {
+        sender.setTitle(animalSizeMasterButton.titleLabel?.text, for: .normal)
+        animalSizeButtons.forEach { (button) in
+            button.isHidden = !button.isHidden
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func animalSizeTapped(_ sender: UIButton) {
+        guard let title = sender.currentTitle, let animalSize = AnimalSizes(rawValue: title) else {
+            return
+        }
+        
+        switch animalSize {
+        case .any:
+            self.size = nil
+            self.animalSizeMasterButton.setTitle("Any Size", for: .normal)
+            animalSizeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .small:
+            self.size = "S"
+            self.animalSizeMasterButton.setTitle("Small", for: .normal)
+            animalSizeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .medium:
+            self.size = "M"
+            self.animalSizeMasterButton.setTitle("Medium", for: .normal)
+            animalSizeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .large:
+            self.size = "L"
+            self.animalSizeMasterButton.setTitle("Large", for: .normal)
+            animalSizeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .extraLarge:
+            self.size = "XL"
+            self.animalSizeMasterButton.setTitle("Extra Large", for: .normal)
+            animalSizeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @IBAction func handleAnimalAgeTapped(_ sender: UIButton) {
+        sender.setTitle(animalAgeMasterButton.titleLabel?.text, for: .normal)
+        animalAgeButtons.forEach { (button) in
+            button.isHidden = !button.isHidden
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func animalAgeTapped(_ sender: UIButton) {
+        guard let title = sender.currentTitle, let animalAge = AnimalAges(rawValue: title) else {
+            return
+        }
+        
+        switch animalAge {
+        case .any:
+            self.age = nil
+            self.animalAgeMasterButton.setTitle("Any Age", for: .normal)
+            animalAgeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .baby:
+            self.age = "baby"
+            self.animalAgeMasterButton.setTitle("Babies", for: .normal)
+            animalAgeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .young:
+            self.age = "young"
+            self.animalAgeMasterButton.setTitle("Young", for: .normal)
+            animalAgeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .adult:
+            self.age = "adult"
+            self.animalAgeMasterButton.setTitle("Adult", for: .normal)
+            animalAgeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        case .senior:
+            self.age = "senior"
+            self.animalAgeMasterButton.setTitle("Senior", for: .normal)
+            animalAgeButtons.forEach { (button) in
+                button.isHidden = !button.isHidden
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+    }
     
     @IBAction func sexSegmentedControlChanged(_ sender: Any) {
         if sexSegmentedControl.selectedSegmentIndex == 0 {
@@ -159,12 +360,18 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         
+        tapGesture.cancelsTouchesInView = false 
+        
         self.setUpViews()
         
         // Get zipcodes from JSON to validate
         ZipCodesStore.readJson { (zipCodes) in
             self.zipArray = zipCodes
         }
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: Notifications.SearchBarEditingBegan, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardWillHide(_ :)), name: Notifications.SearchBarEditingEnded, object: nil)
     }
     
     @objc func setBreed(notification: Notification) {
@@ -180,59 +387,6 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         
     }
     
-    // MARK: - UIPickerView Data Source
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == animalTypePicker {
-            return animals.count
-        }
-        if pickerView == animalSizePicker {
-            return sizes.count
-        }
-        if pickerView == animalAgePicker {
-            return ages.count
-        }
-        return 0
-    }
-    
-    // MARK: - UIPickerView Delegate
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        if pickerView == animalTypePicker {
-            return animals[row]
-        }
-        if pickerView == animalSizePicker {
-            return sizes[row]
-        }
-        if pickerView == animalAgePicker {
-            return ages[row]
-        }
-        return ""
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        if pickerView == animalTypePicker {
-            animalTypeTextField.text = animals[row]
-            animal = animals[row].lowercased()
-        }
-        if pickerView == animalSizePicker {
-            animalSizeTextField.text = sizes[row]
-            guard let temp = sizes[row].uppercased().characters.first else { return }
-            size = "\(temp)"
-        }
-        if pickerView == animalAgePicker {
-            animalAgeTextField.text = ages[row]
-            let age = ages[row]
-            print("\(age)")
-        }
-    }
-    
     // MARK: - Private Functions
     
     func isValid(_ zipCode: Int) -> Bool {
@@ -241,26 +395,50 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     func setUpViews() {
         
-        animalTypePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        animalSizePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        animalAgePicker.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.5)
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        
-        animalTypePicker.delegate = self
-        animalSizePicker.delegate = self
-        animalAgePicker.delegate = self
-        
-        animalTypePicker.dataSource = self
-        animalSizePicker.dataSource = self
-        animalAgePicker.dataSource = self
-        
-        animalTypeTextField.inputView = animalTypePicker
-        animalSizeTextField.inputView = animalSizePicker
-        animalAgeTextField.inputView = animalAgePicker
-        
+        self.title = "Search"
+
         breedSearchContainerView.isHidden = true
+        
+        let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        
+        let messages: [String] = ["Find your new best friend!",
+                                  "Take home all of the pets!"]
+        
+        guard let michaelMarker = UIFont(name: "Michael marker Lite", size: 18.0) else { return }
+        
+        let rng = Int(arc4random_uniform(UInt32(messages.count)))
+        let message = messages[rng]
+        let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : michaelMarker])
+        
+        messageLabel.attributedText = messageToReturn
+        selectBreedLabel.textColor = redColor
+        sexSegmentedControl.tintColor = redColor
+        
+        searhButton.layer.cornerRadius = 5.0
+        
+        // Create Borders for dropDown buttons
+        
+        animalTypeMasterButton.layer.borderWidth = 1.0
+        animalTypeMasterButton.layer.borderColor = redColor.cgColor
+        animalTypeMasterButton.layer.cornerRadius = 5.0
+        
+        animalSizeMasterButton.layer.borderWidth = 1.0
+        animalSizeMasterButton.layer.borderColor = redColor.cgColor
+        animalSizeMasterButton.layer.cornerRadius = 5.0
+        
+        animalAgeMasterButton.layer.borderWidth = 1.0
+        animalAgeMasterButton.layer.borderColor = redColor.cgColor
+        animalAgeMasterButton.layer.cornerRadius = 5.0
+        
+        // Create border for select breed button
+        
+        selectBreedButton.layer.borderWidth = 1.0
+        selectBreedButton.layer.borderColor = redColor.cgColor
+        selectBreedButton.layer.cornerRadius = 5.0
+        
+        breedResetButton.layer.borderWidth = 1.0
+        breedResetButton.layer.borderColor = redColor.cgColor
+        breedResetButton.layer.cornerRadius = 5.0
         
     }
     
@@ -271,6 +449,7 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
         let subview = alertController.view.subviews.first! as UIView
         let alertContentView = subview.subviews.first! as UIView
         alertContentView.backgroundColor = color
+        alertContentView.layer.cornerRadius = 5.0
         
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         
@@ -282,6 +461,20 @@ class CustomizableSearchViewController: UIViewController, UIPickerViewDelegate, 
     
     @objc func hideKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        if self.view.frame.origin.y == 0{
+            self.view.frame.origin.y -= 150
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        if self.view.frame.origin.y != 0{
+            self.view.frame.origin.y += 150
+        }
+        
     }
     
     // MARK: - Navigation

@@ -54,6 +54,7 @@ class ShelterPetTableViewCell: UITableViewCell {
         PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
             if !success {
                 NSLog("error fetchingpet in pet controller")
+                self.petImageView.image = #imageLiteral(resourceName: "doge")
             }
             guard let image = image else { return }
             DispatchQueue.main.async {
