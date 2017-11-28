@@ -55,7 +55,7 @@ class PetController {
     let responseFormat = API.Parameters().jsonFormat
     
     
-    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
+    func fetchPetsFor(count: String, method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
                 
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -105,14 +105,6 @@ class PetController {
         
         // Tesing with larger count
         
-        var count = ""
-        
-        if method == "pet.find" {
-            count = "10"
-        } else {
-            count = "50"
-        }
-        
         let countItem = URLQueryItem(name: "count", value: count)
         
         queryItems.append(countItem)
@@ -121,7 +113,7 @@ class PetController {
         
         guard let searchUrl = components?.url else { return }
         
-        URLSession.shared.dataTask(with: searchUrl) { (data, _, error) in
+        URLSession.shared.dataTask(with: searchUrl) { [unowned self] (data, _, error) in
             
             if let error = error {
                 NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")

@@ -225,7 +225,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             guard let destinationVC = segue.destination as? ShelterPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
-            PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success, petList, offset) in
+            PetController.shared.fetchPetsFor(count: "50",method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success, petList, offset) in
                 if !success {
                     NSLog("Error fetching pets from shelter")
                     return

@@ -467,20 +467,20 @@ class CustomizableSearchViewController: UIViewController {
         }
         
         if segue.identifier == "toPetTinderPage" {
+            
             guard let destinationVC = segue.destination as? PetSwipeViewController else {
                 return
             }
-            
-            guard let zip = zipCodeTextField.text else {
+            guard let zip = self.zipCodeTextField.text else {
                 return
             }
-            
             destinationVC.zip = zip
             destinationVC.animal = self.animal
             destinationVC.size = self.size
             destinationVC.sex = self.sex
             destinationVC.age = self.age
             destinationVC.breed = self.breed
+
         }
     }
  
