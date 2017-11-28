@@ -11,36 +11,21 @@ import UIKit
 class EmbededTableViewController: UITableViewController {
     
     // MARK: - Oulets
-    @IBOutlet weak var petTestLabel: UILabel!
     
-    
-
-    var pet: Pet?
     @IBOutlet weak var petNameLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var mixLabel: UILabel!
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var sexLabel: UILabel!
-    @IBOutlet var shelterInfoButton: UITableView!
     @IBOutlet weak var optionsLabel: UILabel!
-    @IBOutlet weak var shelterInfoBtn: UIButton!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     // MARK: - Properties
-    
-    var isButtonHidden: Bool = false 
-    
+    var pet: Pet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLabels()
-
-        
-        if isButtonHidden == true {
-            self.shelterInfoBtn.isHidden = true
-        } else {
-            self.shelterInfoBtn.isHidden = false
-        }
     }
 
     // MARK: - Table view data source
@@ -69,7 +54,7 @@ class EmbededTableViewController: UITableViewController {
         
         guard let petDescription = pet.petDescription,
             let petName = pet.name,
-            let petMix = pet.mix,
+            let petBreed = pet.breeds,
             let petSize = pet.size,
             let petAge = pet.age,
             let petSex = pet.sex else { return }
@@ -79,9 +64,9 @@ class EmbededTableViewController: UITableViewController {
         let aboutDescription = NSAttributedString(string: "\(petDescription)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
         aboutString.append(aboutDescription)
         
-        let mixString: NSMutableAttributedString = NSMutableAttributedString(string: "Mix: ", attributes: redForegroundAttribute)
-        let mixDescription = NSAttributedString(string: "\(petMix)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
-        mixString.append(mixDescription)
+        let breedString: NSMutableAttributedString = NSMutableAttributedString(string: "Breed: ", attributes: redForegroundAttribute)
+        let breedDescription = NSAttributedString(string: "\(petBreed)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+        breedString.append(breedDescription)
         
         let sizeString: NSMutableAttributedString = NSMutableAttributedString(string: "Size: ", attributes: redForegroundAttribute)
         let sizeDescription = NSAttributedString(string: "\(petSize)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
@@ -105,37 +90,13 @@ class EmbededTableViewController: UITableViewController {
         
         petNameLabel.text = pet.name
         descriptionLabel.attributedText = aboutString
-        mixLabel.attributedText = mixString
+        mixLabel.attributedText = breedString
         sizeLabel.attributedText = sizeString
         ageLabel.attributedText = ageString
         sexLabel.attributedText = sexString
         optionsLabel.attributedText = optionsString
     }
-    
-    @IBAction func shelterInfoButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toShelter", sender: self)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super .viewWillDisappear(true)
         
-        self.shelterInfoBtn.isHidden = false
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toShelter" {
-            guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
-            guard let pet = pet else { return }
-            ShelterController.shelterShared.fetchShelter(id: pet.shelterID) { (success) in
-                if !success {
-                    NSLog("Error")
-                    return
-                }
-                destinationVC.shelter = ShelterController.shelterShared.shelter
-                destinationVC.pet = pet
-            }
-        }
-    }
 }
 
 

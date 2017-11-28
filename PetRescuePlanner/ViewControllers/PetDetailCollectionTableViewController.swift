@@ -8,10 +8,13 @@
 
 import UIKit
 
-class PetDetailCollectionTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PetDetailCollectionTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var shelterInfoButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+    
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     
     var pet: Pet? {
@@ -24,6 +27,7 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
                 }
                 guard let images = images else { return }
                 self.imageArray = images
+                self.pageControl.numberOfPages = images.count
             }
         }
     }
@@ -39,18 +43,8 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     var isButtonHidden: Bool = true
     
     override func viewDidLoad() {
-        guard let pet = pet else { return }
-        
         super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 140
-        
-        if (self.navigationController != nil) {
-            navigationController?.isNavigationBarHidden = true
-        }
-        if PetController.shared.savedPets.contains(pet) {
-            saveButton.isHidden = true
-        }
+        setUpUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,20 +53,6 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     
     override func viewDidDisappear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,7 +75,10 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPetInfo" {
             guard let destinationVC = segue.destination as? EmbededTableViewController else { return }
-            destinationVC.isButtonHidden = isButtonHidden
+            destinationVC.pet = pet
+        } else if segue.identifier == "toShelter" {
+            guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
+            guard let pet = pet else { return }
             destinationVC.pet = pet
         }
     }
@@ -108,6 +91,17 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
         } else {
             self.dismiss(animated: true)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        pageControl.currentPage = indexPath.row
+    }
+    
+    @IBAction func pageIndicator(_ sender: UIPageControl) {
+        
+        let indexPath = IndexPath(row: pageControl.currentPage, section: 0)
+        collectionView.scrollToItem(at: indexPath , at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+        
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -142,6 +136,35 @@ class PetDetailCollectionTableViewController: UITableViewController, UICollectio
             })
         }   
     }
+    
+    func setUpUI() {
+        guard let pet = pet else { return }
+        
+        shelterInfoButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        if (self.navigationController != nil) {
+            navigationController?.isNavigationBarHidden = true
+        }
+        if PetController.shared.savedPets.contains(pet) {
+            saveButton.isHidden = true
+        }
+
+        pageControl.hidesForSinglePage = true
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+        pageControl.pageIndicatorTintColor = UIColor.white
+        pageControl.numberOfPages = imageArray.count
+
+        shelterInfoButton.layer.cornerRadius = 5.0
+        
+    }
+    
+    @IBAction func shelterInfoButtonTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "toShelter", sender: self)
+    }
+    
     
 }
 
