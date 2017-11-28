@@ -16,6 +16,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     @IBOutlet weak var pageControl: UIPageControl!
     
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
+    var hideButton = true
     
     var pet: Pet? {
         didSet {
@@ -38,9 +39,6 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             }
         }
     }
-    
-    // MARK: - Testing which view is presenting the detail to hide shelter info button
-    var isButtonHidden: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +137,12 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     func setUpUI() {
         guard let pet = pet else { return }
+        
+        if hideButton == true {
+            shelterInfoButton.isHidden = true
+        } else {
+            shelterInfoButton.isHidden = false
+        }
         
         shelterInfoButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         

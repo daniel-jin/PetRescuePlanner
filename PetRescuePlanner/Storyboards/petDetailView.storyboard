@@ -110,49 +110,58 @@
                                     <constraint firstItem="Lx9-xb-fY3" firstAttribute="height" secondItem="2RH-AF-uUC" secondAttribute="height" multiplier="1/8" id="xLL-Ly-SeS"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBr-Sn-DDS" userLabel="PetInfoView">
-                                <rect key="frame" x="24" y="239" width="327" height="356"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cpq-U6-gKj">
+                                <rect key="frame" x="24" y="239" width="327" height="420"/>
                                 <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zX0-3P-CP6">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="356"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBr-Sn-DDS" userLabel="PetInfoView">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="367.5"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zX0-3P-CP6">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="362.5"/>
+                                                <connections>
+                                                    <segue destination="yhQ-co-Y5d" kind="embed" identifier="toPetInfo" id="lMg-ne-jeO"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="zX0-3P-CP6" firstAttribute="leading" secondItem="GBr-Sn-DDS" secondAttribute="leading" id="1HA-uE-AC8"/>
+                                            <constraint firstItem="zX0-3P-CP6" firstAttribute="leading" secondItem="GBr-Sn-DDS" secondAttribute="leading" id="FOA-EE-jgc"/>
+                                            <constraint firstAttribute="trailing" secondItem="zX0-3P-CP6" secondAttribute="trailing" id="Osk-lE-aUz"/>
+                                            <constraint firstAttribute="trailing" secondItem="zX0-3P-CP6" secondAttribute="trailing" id="PW9-sf-vBX"/>
+                                            <constraint firstItem="zX0-3P-CP6" firstAttribute="top" secondItem="GBr-Sn-DDS" secondAttribute="top" id="SQi-gK-Evf"/>
+                                            <constraint firstAttribute="bottom" secondItem="zX0-3P-CP6" secondAttribute="bottom" constant="5" id="vk4-zZ-aT4"/>
+                                            <constraint firstItem="zX0-3P-CP6" firstAttribute="top" secondItem="GBr-Sn-DDS" secondAttribute="top" id="vnn-4f-dTv"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7d-GV-yrq">
+                                        <rect key="frame" x="0.0" y="367.5" width="327" height="52.5"/>
+                                        <fontDescription key="fontDescription" name="MichaelMarkerLite-Regular" family="Michael Marker Lite" pointSize="21"/>
+                                        <state key="normal" title="Get More Shelter Info!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <segue destination="yhQ-co-Y5d" kind="embed" identifier="toPetInfo" id="lMg-ne-jeO"/>
+                                            <action selector="shelterInfoButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="TM7-VS-Jeg"/>
                                         </connections>
-                                    </containerView>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="zX0-3P-CP6" firstAttribute="leading" secondItem="GBr-Sn-DDS" secondAttribute="leading" id="1HA-uE-AC8"/>
-                                    <constraint firstAttribute="bottom" secondItem="zX0-3P-CP6" secondAttribute="bottom" id="NFj-66-reh"/>
-                                    <constraint firstAttribute="trailing" secondItem="zX0-3P-CP6" secondAttribute="trailing" id="PW9-sf-vBX"/>
-                                    <constraint firstItem="zX0-3P-CP6" firstAttribute="top" secondItem="GBr-Sn-DDS" secondAttribute="top" id="SQi-gK-Evf"/>
+                                    <constraint firstAttribute="bottom" secondItem="z7d-GV-yrq" secondAttribute="bottom" id="FsY-mC-h2A"/>
+                                    <constraint firstItem="z7d-GV-yrq" firstAttribute="height" secondItem="Cpq-U6-gKj" secondAttribute="height" multiplier="1/8" id="Hic-1R-2Y3"/>
+                                    <constraint firstItem="z7d-GV-yrq" firstAttribute="width" secondItem="Cpq-U6-gKj" secondAttribute="width" id="pQB-Fs-ze3"/>
                                 </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7d-GV-yrq">
-                                <rect key="frame" x="8" y="603" width="359" height="55.5"/>
-                                <fontDescription key="fontDescription" name="MichaelMarkerLite-Regular" family="Michael Marker Lite" pointSize="21"/>
-                                <state key="normal" title="Get More Shelter Info!">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="shelterInfoButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="TM7-VS-Jeg"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="1sP-St-aDC" firstAttribute="top" secondItem="Cpq-U6-gKj" secondAttribute="bottom" constant="8" id="FfJ-B8-A1Z"/>
                             <constraint firstItem="2RH-AF-uUC" firstAttribute="width" secondItem="x34-rk-VsY" secondAttribute="width" id="GAY-fh-QxH"/>
                             <constraint firstItem="2RH-AF-uUC" firstAttribute="height" secondItem="x34-rk-VsY" secondAttribute="height" multiplier="1/4" id="Ix0-1e-uH2"/>
-                            <constraint firstItem="z7d-GV-yrq" firstAttribute="height" secondItem="x34-rk-VsY" secondAttribute="height" multiplier="1/12" id="KH3-Ez-STC"/>
-                            <constraint firstItem="z7d-GV-yrq" firstAttribute="leading" secondItem="x34-rk-VsY" secondAttribute="leading" constant="8" id="ULx-j2-kZH"/>
-                            <constraint firstItem="1sP-St-aDC" firstAttribute="top" secondItem="z7d-GV-yrq" secondAttribute="bottom" constant="8" id="UhQ-jV-3UA"/>
-                            <constraint firstItem="GBr-Sn-DDS" firstAttribute="leading" secondItem="x34-rk-VsY" secondAttribute="leadingMargin" constant="8" id="Xzf-bA-p4a"/>
-                            <constraint firstItem="z7d-GV-yrq" firstAttribute="top" secondItem="GBr-Sn-DDS" secondAttribute="bottom" constant="8" id="YWU-qj-cqs"/>
-                            <constraint firstAttribute="trailing" secondItem="z7d-GV-yrq" secondAttribute="trailing" constant="8" id="axy-tE-X8h"/>
+                            <constraint firstItem="Cpq-U6-gKj" firstAttribute="leading" secondItem="x34-rk-VsY" secondAttribute="leadingMargin" constant="8" id="JNH-w1-dep"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cpq-U6-gKj" secondAttribute="trailing" constant="8" id="PdY-KB-es6"/>
                             <constraint firstItem="2RH-AF-uUC" firstAttribute="top" secondItem="10y-bp-CQr" secondAttribute="bottom" id="g7Z-Mi-T7P"/>
                             <constraint firstItem="2RH-AF-uUC" firstAttribute="centerX" secondItem="x34-rk-VsY" secondAttribute="centerX" id="mz7-7O-glz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GBr-Sn-DDS" secondAttribute="trailing" constant="8" id="nbY-ZS-63e"/>
-                            <constraint firstItem="GBr-Sn-DDS" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="bottom" constant="8" id="wC1-P9-nnl"/>
+                            <constraint firstItem="Cpq-U6-gKj" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="bottom" constant="8" id="usX-KK-vbP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T9a-5p-EDJ"/>
@@ -173,7 +182,7 @@
             <objects>
                 <tableViewController id="yhQ-co-Y5d" customClass="EmbededTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BMJ-6f-N9K">
-                        <rect key="frame" x="0.0" y="0.0" width="327" height="356"/>
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="362.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
