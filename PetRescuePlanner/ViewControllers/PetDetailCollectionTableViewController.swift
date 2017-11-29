@@ -212,6 +212,14 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         pageControl.pageIndicatorTintColor = UIColor.white
         pageControl.numberOfPages = imageArray.count
         
+        if isComingFromShelter == true {
+            
+            self.navigationController?.isNavigationBarHidden = false
+            saveButton.isHidden = true
+            exitButton.isHidden = true
+            shelterInfoButton.isHidden = true
+        }
+        
         PetController.shared.fetchAllPetImages(pet: pet) { (images) in
             if images == nil {
                 NSLog("No images found for pet")
