@@ -119,6 +119,8 @@ class PetSwipeViewController: UIViewController {
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         
+        guard pets.count > 0 else { return }
+        
         leftSwipeButton.isEnabled = false
         rightSwipeButton.isEnabled = false
         

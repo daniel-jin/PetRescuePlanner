@@ -18,20 +18,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     var hideButton = true
     
-    var pet: Pet? {
-        didSet {
-            PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
-                if images == nil {
-                    NSLog("No images found for pet")
-                    // set the default image
-                    self.imageArray = [#imageLiteral(resourceName: "doge")]
-                }
-                guard let images = images else { return }
-                self.imageArray = images
-                self.pageControl.numberOfPages = images.count
-            }
-        }
-    }
+    var pet: Pet? = nil
     var imageArray: [UIImage] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -162,6 +149,17 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         pageControl.numberOfPages = imageArray.count
 
         shelterInfoButton.layer.cornerRadius = 5.0
+        
+        PetController.shared.fetchAllPetImages(pet: pet) { (images) in
+            if images == nil {
+                NSLog("No images found for pet")
+                // set the default image
+                self.imageArray = [#imageLiteral(resourceName: "doge")]
+            }
+            guard let images = images else { return }
+            self.imageArray = images
+            self.pageControl.numberOfPages = images.count
+        }
         
     }
     

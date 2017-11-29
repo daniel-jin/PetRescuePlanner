@@ -15,6 +15,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
     // prefetching store 
     
     var petImages: [String: UIImage] = [:]
+    var pets = PetController.shared.savedPets
 
     // MARK: - Table View Life Cycle
 
@@ -37,7 +38,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PetController.shared.savedPets.count
+        return pets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,7 +46,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
             return SavedPetTableViewCell()
         }
         
-        let pet = PetController.shared.savedPets[indexPath.row]
+        let pet = pets[indexPath.row]
         guard let id = pet.id else { return ShelterPetTableViewCell() }
         
         if let petImage = petImages[id] {
@@ -70,13 +71,14 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 
-            let petToDelete = PetController.shared.savedPets[indexPath.row]
+            let petToDelete = pets[indexPath.row]
             
             // Delete from Core Data
             
             PetController.shared.delete(pet: petToDelete, completion: {
                 
                 DispatchQueue.main.async {
+                    self.pets.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                 }
                 
@@ -95,7 +97,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
         if segue.identifier == "petCellToDetailSegue" {
             
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let pet = PetController.shared.savedPets[indexPath.row]
+            let pet = pets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             destinationVC.hideButton = false
