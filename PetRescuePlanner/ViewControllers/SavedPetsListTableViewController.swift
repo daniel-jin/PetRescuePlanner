@@ -59,6 +59,14 @@ class SavedPetsListTableViewController: UITableViewController {
 
             let petToDelete = PetController.shared.savedPets[indexPath.row]
             
+            // Delete from sorted array to update iCloud key/value store
+            
+            guard let petID = petToDelete.id,
+                let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
+            PetController.shared.sortedPetArray.remove(at: index)
+            PetController.shared.saveToiCloud()
+            
+            
             // Delete from Core Data
             
             PetController.shared.delete(pet: petToDelete, completion: {
