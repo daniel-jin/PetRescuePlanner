@@ -10,7 +10,11 @@ import UIKit
 import CoreData
 import CloudKit
 
-class SavedPetsListTableViewController: UITableViewController {
+class SavedPetsListTableViewController: UITableViewController, UITableViewDataSourcePrefetching {
+    
+    // prefetching store 
+    
+    var petImages: [String: UIImage] = [:]
 
     // MARK: - Table View Life Cycle
 
@@ -42,7 +46,16 @@ class SavedPetsListTableViewController: UITableViewController {
         }
         
         let pet = PetController.shared.savedPets[indexPath.row]
-        cell.pet = pet
+        guard let id = pet.id else { return ShelterPetTableViewCell() }
+        
+        if let petImage = petImages[id] {
+            cell.pet = pet
+            cell.petImage = petImage
+        } else {
+            cell.pet = pet
+            cell.petImage = nil
+            return cell
+        }
 
         return cell
     }
@@ -64,7 +77,9 @@ class SavedPetsListTableViewController: UITableViewController {
             PetController.shared.delete(pet: petToDelete, completion: {
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    // animate delete
+//                    self.tableView.reloadData()
+                    tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                 }
                 
                 // Sync with CloudKit to update
@@ -88,6 +103,23 @@ class SavedPetsListTableViewController: UITableViewController {
             destinationVC.hideButton = false
             destinationVC.pet = pet
             
+        }
+    }
+    
+    // MARK: - Prefetching Delegate Method
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths {
+            let savedPet = PetController.shared.savedPets[indexPath.row]
+                        
+            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                }
+                guard let image = image, let id = savedPet.id else { return }
+                self.petImages[id] = image
+            })
         }
     }
 }

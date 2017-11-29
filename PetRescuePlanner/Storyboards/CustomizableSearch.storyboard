@@ -108,10 +108,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaI-Ys-S3y">
-                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="YK8-H3-jRE"/>
+                                            <constraint firstAttribute="height" constant="40" id="YK8-H3-jRE"/>
                                         </constraints>
                                         <state key="normal" title="Any">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -121,10 +121,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C47-Jg-8bh">
-                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="diH-Cz-n4m"/>
+                                            <constraint firstAttribute="height" constant="40" id="diH-Cz-n4m"/>
                                         </constraints>
                                         <state key="normal" title="Baby">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -134,10 +134,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rQ-WL-vpC">
-                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="9xJ-5k-kad"/>
+                                            <constraint firstAttribute="height" constant="40" id="9xJ-5k-kad"/>
                                         </constraints>
                                         <state key="normal" title="Young">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,10 +147,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6T-kZ-AMn">
-                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="D7Q-3v-NMo"/>
+                                            <constraint firstAttribute="height" constant="40" id="D7Q-3v-NMo"/>
                                         </constraints>
                                         <state key="normal" title="Adult">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -160,10 +160,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KP5-kh-FdY">
-                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-192" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="VPL-Pz-wxG"/>
+                                            <constraint firstAttribute="height" constant="40" id="VPL-Pz-wxG"/>
                                         </constraints>
                                         <state key="normal" title="Senior">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -192,10 +192,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqo-91-1Vr">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="grD-Yd-Yd4"/>
+                                            <constraint firstAttribute="height" constant="40" id="grD-Yd-Yd4"/>
                                         </constraints>
                                         <state key="normal" title="Any">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -205,10 +205,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nai-Wc-TMD">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="tUK-Ne-NwD"/>
+                                            <constraint firstAttribute="height" constant="40" id="tUK-Ne-NwD"/>
                                         </constraints>
                                         <state key="normal" title="Dog">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -218,10 +218,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAs-IR-nLf">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="sAg-IS-ytB"/>
+                                            <constraint firstAttribute="height" constant="40" id="sAg-IS-ytB"/>
                                         </constraints>
                                         <state key="normal" title="Cat">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -231,10 +231,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vn2-cA-ctp">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="91o-1x-15s"/>
+                                            <constraint firstAttribute="height" constant="40" id="91o-1x-15s"/>
                                         </constraints>
                                         <state key="normal" title="Bird">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -244,10 +244,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs4-jO-fJy">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="K7W-9y-oq6"/>
+                                            <constraint firstAttribute="height" constant="40" id="K7W-9y-oq6"/>
                                         </constraints>
                                         <state key="normal" title="Reptile">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -257,10 +257,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygf-MK-GSD">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="4pj-PN-km5"/>
+                                            <constraint firstAttribute="height" constant="40" id="4pj-PN-km5"/>
                                         </constraints>
                                         <state key="normal" title="Horse">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -270,10 +270,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSo-mQ-1ik">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="2Y6-c1-hxq"/>
+                                            <constraint firstAttribute="height" constant="40" id="2Y6-c1-hxq"/>
                                         </constraints>
                                         <state key="normal" title="Barnyard">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -283,10 +283,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFE-Zg-gKl">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="5JC-71-mhJ"/>
+                                            <constraint firstAttribute="height" constant="40" id="5JC-71-mhJ"/>
                                         </constraints>
                                         <state key="normal" title="Smallfurry">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -312,10 +312,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFO-eU-St2">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="q4D-li-OBM"/>
+                                            <constraint firstAttribute="height" constant="40" id="q4D-li-OBM"/>
                                         </constraints>
                                         <state key="normal" title="Any">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -325,10 +325,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEs-ds-uzY">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="6e6-KM-i2K"/>
+                                            <constraint firstAttribute="height" constant="40" id="6e6-KM-i2K"/>
                                         </constraints>
                                         <state key="normal" title="Small">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -338,10 +338,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eE5-Ll-gbT">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="FDp-mG-9Vx"/>
+                                            <constraint firstAttribute="height" constant="40" id="FDp-mG-9Vx"/>
                                         </constraints>
                                         <state key="normal" title="Medium">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -351,10 +351,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mda-Rl-Flv">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="RGp-ZN-TFC"/>
+                                            <constraint firstAttribute="height" constant="40" id="RGp-ZN-TFC"/>
                                         </constraints>
                                         <state key="normal" title="Large">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -364,10 +364,10 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1b1-iG-7sv">
-                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="-146" width="163.5" height="40"/>
                                         <color key="backgroundColor" red="0.86933481690000003" green="0.0097749577839999994" blue="0.3664075732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="9cf-2h-6kH"/>
+                                            <constraint firstAttribute="height" constant="40" id="9cf-2h-6kH"/>
                                         </constraints>
                                         <state key="normal" title="Extra Large">
                                             <color key="titleColor" red="0.98949486019999999" green="0.9868454337" blue="0.98960787059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -478,11 +478,11 @@
             <objects>
                 <viewController id="pmx-fd-Gbv" customClass="BreedSearchContainerViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wcI-oj-o1W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="347"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="343"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kwD-bt-gpJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="347"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="343"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -605,7 +605,7 @@
                 <navigationController storyboardIdentifier="SearchViewController" automaticallyAdjustsScrollViewInsets="NO" id="odD-Uw-ZzO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6lC-wu-BIv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

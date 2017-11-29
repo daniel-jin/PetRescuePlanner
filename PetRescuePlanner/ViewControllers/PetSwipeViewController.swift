@@ -25,6 +25,8 @@ class PetSwipeViewController: UIViewController {
     var pets: [(UIImage, Pet)] = [] {
         didSet {
             DispatchQueue.main.async {
+                self.leftSwipeButton.isEnabled = true
+                self.rightSwipeButton.isEnabled = true
                 if self.pets.count > 1 {
                     self.createCard()
                 } else {
@@ -72,6 +74,9 @@ class PetSwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        leftSwipeButton.isEnabled = false
+        rightSwipeButton.isEnabled = false
+        
         if !Reachability.isConnectedToNetwork() {
             let networkErrorAlert = UIAlertController(title: "No Internet Connection", message: "Please check your cellular or wifi connection and try again.", preferredStyle: .alert)
             let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -113,6 +118,9 @@ class PetSwipeViewController: UIViewController {
     // MARK: - Actions 
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
+        
+        leftSwipeButton.isEnabled = false
+        rightSwipeButton.isEnabled = false
         
         let card = sender.view!
         let point = sender.translation(in: view)
@@ -317,6 +325,10 @@ class PetSwipeViewController: UIViewController {
     }
     
     func hardResetCard() {
+        
+        leftSwipeButton.isEnabled = true
+        rightSwipeButton.isEnabled = true
+        
         self.topCard.isHidden = true
         self.topCardImageView.backgroundColor = UIColor.clear
         
@@ -337,6 +349,10 @@ class PetSwipeViewController: UIViewController {
     }
     
     func resetCard() {
+        
+        leftSwipeButton.isEnabled = true
+        rightSwipeButton.isEnabled = true 
+        
         UIView.animate(withDuration: 0.3) {
             
             self.topCard.center = self.bottomCard.center
