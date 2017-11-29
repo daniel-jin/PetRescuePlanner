@@ -198,7 +198,7 @@ class PetController {
     
     func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
         
-        guard let lastId = pet.imageIdCount else { return completion([#imageLiteral(resourceName: "doge")]) }
+        guard let lastId = pet.imageIdCount else { return completion([#imageLiteral(resourceName: "DefaultNoBorder")]) }
         let dispatchGroup = DispatchGroup()
         let count = Int(lastId) ?? 0
         
@@ -274,7 +274,7 @@ class PetController {
             fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("No image for pet")
-                    petData.append((#imageLiteral(resourceName: "doge"), pet))
+                    petData.append((#imageLiteral(resourceName: "DefaultNoBorder"), pet))
                 }
                 guard let image = image else { dispatchGroup.leave(); return completion(nil) }
                 
