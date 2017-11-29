@@ -327,7 +327,9 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         if let zipTextField = zipCodeTextField.text {
             if let zip = Int(zipTextField) {
                 if isValid(zip) {
+                    
                     self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
+                    
                 } else {
                     presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!", color: errorColor)
                 }
@@ -362,6 +364,7 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         // Get zipcodes from JSON to validate
         ZipCodesStore.readJson { (zipCodes) in
             self.zipArray = zipCodes
+            print("DONE READING")
         }
         
         let nc = NotificationCenter.default
