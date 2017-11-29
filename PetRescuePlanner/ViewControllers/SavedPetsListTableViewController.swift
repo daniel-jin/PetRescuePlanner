@@ -77,8 +77,6 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
             PetController.shared.delete(pet: petToDelete, completion: {
                 
                 DispatchQueue.main.async {
-                    // animate delete
-//                    self.tableView.reloadData()
                     tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                 }
                 

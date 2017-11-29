@@ -165,26 +165,7 @@ extension PetController {
                 self.saveToPersistantStore()
                 completion()
             })
-            
         }
-        
-        /*
-         cloudKitManager.fetchRecordsWithType(CloudKit.petRecordType, predicate: predicate, sortDescriptors: nil) { (records, error) in
-         
-         defer { completion() }
-         if let error = error {
-         NSLog("Error fetching Pet CloudKit records: \(error)")
-         return
-         }
-         guard let records = records else { return }
-         
-         let pets = records.flatMap { Pet(cloudKitRecord: $0, context: nil) }
-         
-         pets.forEach({ self.add(pet: $0) })
-         
-         print(self.savedPets.count)
-         }
-         */
     }
     
     func pushChangesToCloudKit(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void) = { _,_ in }) {
@@ -219,8 +200,6 @@ extension PetController {
                     
                     pet.cloudKitRecordID = existingRecord.recordID
                     
-                    self.saveToPersistantStore()
-                    
                     group.leave()
                 } else {
                     
@@ -237,6 +216,8 @@ extension PetController {
         }
         
         group.notify(queue: DispatchQueue.main) {
+            
+            self.saveToPersistantStore()
             
             for reference in unsavedUser.savedPets {
                 if !petReferences.contains(reference) {

@@ -19,7 +19,6 @@ struct User {
         self.appleUserRef = appleUserRef
         self.savedPets = savedPets
     }
-    
 }
 
 extension User {
