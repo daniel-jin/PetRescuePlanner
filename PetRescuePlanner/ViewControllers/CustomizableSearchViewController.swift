@@ -354,10 +354,6 @@ class CustomizableSearchViewController: UIViewController {
         nc.addObserver(self, selector: #selector(keyboardWillHide(_ :)), name: Notifications.SearchBarEditingEnded, object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.title = "Search"
-    }
-    
     @objc func setBreed(notification: Notification) {
         
         guard let userInfo = notification.userInfo else { return }

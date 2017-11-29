@@ -83,8 +83,7 @@
                                         </constraints>
                                         <state key="normal" image="clear_btn"/>
                                         <connections>
-                                            <action selector="exitButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="Cfx-e5-Oyy"/>
-                                            <action selector="saveButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="xfh-eh-Xpm"/>
+                                            <action selector="exitButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="93Q-IP-4ng"/>
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lx9-xb-fY3">

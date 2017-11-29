@@ -20,6 +20,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     // MARK: - Properties
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     var hideButton = true
+    var isComingFromShelter = false
     
     var pet: Pet? {
         didSet {
@@ -136,8 +137,8 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         
         // MARK: - Returning to swipe view and bringing navigation bar back on screen
-        navigationController?.popViewController(animated: true)
-        navigationController?.isNavigationBarHidden = false
+        self.dismiss(animated: true)
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     @IBAction func shelterInfoButtonTapped(_ sender: UIButton) {
@@ -211,8 +212,6 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             shelterInfoButton.isHidden = false
             self.navigationController?.isNavigationBarHidden = false
             
-            navigationController?.navigationBar.backItem?.title = "Back"
-//            self.navigationController?.navigationItem.backBarButtonItem?.title = "Back"
             saveButton.isHidden = true
             exitButton.isHidden = true
             self.title = pet.name
@@ -221,12 +220,21 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         // MARK: - Setting data source to self
         collectionView.delegate = self
         collectionView.dataSource = self
+        
 
         // MARK: - Updating page control dots
         pageControl.hidesForSinglePage = true
         pageControl.currentPageIndicatorTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         pageControl.pageIndicatorTintColor = UIColor.white
         pageControl.numberOfPages = imageArray.count
+        
+        if isComingFromShelter == true {
+            
+            self.navigationController?.isNavigationBarHidden = false
+            saveButton.isHidden = true
+            exitButton.isHidden = true
+            shelterInfoButton.isHidden = true
+        }
         
     }
     
