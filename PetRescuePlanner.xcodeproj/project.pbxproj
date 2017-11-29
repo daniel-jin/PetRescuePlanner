@@ -8,14 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3C1A513A1FBA01DE007794F3 /* EmbededTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1A51391FBA01DE007794F3 /* EmbededTableViewController.swift */; };
+		3C218ACA1FCF2A3000C2F324 /* saint_knick_knack in Resources */ = {isa = PBXBuildFile; fileRef = 3C218AC91FCF2A2F00C2F324 /* saint_knick_knack */; };
+		3C218ACC1FCF2A8800C2F324 /* Saint Knick Knack.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C218ACB1FCF2A8800C2F324 /* Saint Knick Knack.otf */; };
 		3C484A891FB10BA20024F947 /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A881FB10BA20024F947 /* PetController.swift */; };
 		3C484A8B1FB10BD30024F947 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C484A8A1FB10BD30024F947 /* NetworkController.swift */; };
 		3C5331FB1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5331FA1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift */; };
 		3C5331FD1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5331FC1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift */; };
 		3C5FF8F51FB237C90011CEFD /* petDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */; };
-		3C8E0AC11FCC94BE00EB0B43 /* LoveStory.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C8E0AC01FCC922700EB0B43 /* LoveStory.ttf */; };
-		3C8E0AC31FCCCBAE00EB0B43 /* michael_marker in Resources */ = {isa = PBXBuildFile; fileRef = 3C8E0AC21FCCCBAE00EB0B43 /* michael_marker */; };
-		3C8E0AC51FCCCC5500EB0B43 /* MichaelMarkerLite-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C8E0AC41FCCCC4D00EB0B43 /* MichaelMarkerLite-Regular.ttf */; };
 		3CC915AB1FB0EC55008C5448 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC915AA1FB0EC55008C5448 /* Keys.swift */; };
 		5F0B03131FB21A24002B4F71 /* BreedSearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0B03121FB21A24002B4F71 /* BreedSearchContainerViewController.swift */; };
 		5F0B03151FB222CD002B4F71 /* BreedAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0B03141FB222CD002B4F71 /* BreedAPI.swift */; };
@@ -60,14 +59,13 @@
 
 /* Begin PBXFileReference section */
 		3C1A51391FBA01DE007794F3 /* EmbededTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbededTableViewController.swift; sourceTree = "<group>"; };
+		3C218AC91FCF2A2F00C2F324 /* saint_knick_knack */ = {isa = PBXFileReference; lastKnownFileType = folder; path = saint_knick_knack; sourceTree = "<group>"; };
+		3C218ACB1FCF2A8800C2F324 /* Saint Knick Knack.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Saint Knick Knack.otf"; sourceTree = "<group>"; };
 		3C484A881FB10BA20024F947 /* PetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetController.swift; path = PetRescuePlanner/PetController.swift; sourceTree = SOURCE_ROOT; };
 		3C484A8A1FB10BD30024F947 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = PetRescuePlanner/NetworkController.swift; sourceTree = SOURCE_ROOT; };
 		3C5331FA1FB67B1600A5C4D6 /* PetDetailCollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailCollectionTableViewController.swift; sourceTree = "<group>"; };
 		3C5331FC1FB67F0900A5C4D6 /* PetImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C5FF8F41FB237C90011CEFD /* petDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = petDetailView.storyboard; sourceTree = "<group>"; };
-		3C8E0AC01FCC922700EB0B43 /* LoveStory.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoveStory.ttf; sourceTree = "<group>"; };
-		3C8E0AC21FCCCBAE00EB0B43 /* michael_marker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = michael_marker; sourceTree = "<group>"; };
-		3C8E0AC41FCCCC4D00EB0B43 /* MichaelMarkerLite-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MichaelMarkerLite-Regular.ttf"; sourceTree = "<group>"; };
 		3CC915AA1FB0EC55008C5448 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = PetRescuePlanner/Keys.swift; sourceTree = SOURCE_ROOT; };
 		5F0B03121FB21A24002B4F71 /* BreedSearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchContainerViewController.swift; sourceTree = "<group>"; };
 		5F0B03141FB222CD002B4F71 /* BreedAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedAPI.swift; sourceTree = "<group>"; };
@@ -149,9 +147,7 @@
 		5F7C77DA1FB0C04A00BCDBE5 = {
 			isa = PBXGroup;
 			children = (
-				3C8E0AC41FCCCC4D00EB0B43 /* MichaelMarkerLite-Regular.ttf */,
-				3C8E0AC21FCCCBAE00EB0B43 /* michael_marker */,
-				3C8E0AC01FCC922700EB0B43 /* LoveStory.ttf */,
+				3C218ACB1FCF2A8800C2F324 /* Saint Knick Knack.otf */,
 				5F7C77E51FB0C04A00BCDBE5 /* PetRescuePlanner */,
 				5F7C77E41FB0C04A00BCDBE5 /* Products */,
 				5F7C78021FB1002600BCDBE5 /* Frameworks */,
@@ -171,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				5F7C78011FB1002000BCDBE5 /* PetRescuePlanner.entitlements */,
+				3C218AC91FCF2A2F00C2F324 /* saint_knick_knack */,
 				6A43E61C1FB104DB000EA73A /* CloudKit */,
 				5F0B03181FB27BE0002B4F71 /* TestViewControllers */,
 				5F7C77FB1FB0C12300BCDBE5 /* ViewControllers */,
@@ -375,10 +372,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C8E0AC51FCCCC5500EB0B43 /* MichaelMarkerLite-Regular.ttf in Resources */,
-				3C8E0AC11FCC94BE00EB0B43 /* LoveStory.ttf in Resources */,
+				3C218ACC1FCF2A8800C2F324 /* Saint Knick Knack.otf in Resources */,
 				5F7E2A2F1FB10965004E95DB /* CustomizableSearch.storyboard in Resources */,
-				3C8E0AC31FCCCBAE00EB0B43 /* michael_marker in Resources */,
 				5F4C16D51FB371C80065FEAD /* SwipePet.storyboard in Resources */,
 				5FB0C1151FB604DB00E55C05 /* savedPetsList.storyboard in Resources */,
 				5F86FE2D1FBB62DC002D9416 /* zipCodes.json in Resources */,
@@ -388,6 +383,7 @@
 				5F7C77F11FB0C04A00BCDBE5 /* LaunchScreen.storyboard in Resources */,
 				5F7C77EE1FB0C04A00BCDBE5 /* Assets.xcassets in Resources */,
 				5F7C77EC1FB0C04A00BCDBE5 /* Main.storyboard in Resources */,
+				3C218ACA1FCF2A3000C2F324 /* saint_knick_knack in Resources */,
 				5F86FE2F1FBB8A9C002D9416 /* ShelterPetsList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

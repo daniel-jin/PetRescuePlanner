@@ -33,8 +33,8 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         
         DispatchQueue.main.async {
             let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-            guard let michaelMarker = UIFont(name: "Michael Marker Lite", size: 18.0) else { return }
-            let shelterName: NSMutableAttributedString = NSMutableAttributedString(string: shelter.name, attributes: [NSAttributedStringKey.font : michaelMarker, NSAttributedStringKey.foregroundColor: redColor])
+            guard let messageFont = UIFont(name: "Hiragino Sans W3", size: 18.0) else { return }
+            let shelterName: NSMutableAttributedString = NSMutableAttributedString(string: shelter.name, attributes: [NSAttributedStringKey.font : messageFont, NSAttributedStringKey.foregroundColor: redColor])
             self.shelterNameLabel.attributedText = shelterName
             self.numberButton.setTitle(shelter.phone, for: .normal)
             self.emailButton.setTitle(shelter.email, for: .normal)

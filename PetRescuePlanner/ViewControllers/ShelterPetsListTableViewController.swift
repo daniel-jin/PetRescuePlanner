@@ -8,18 +8,19 @@
 
 import UIKit
 
-class ShelterPetsListTableViewController: UITableViewController/*, UITableViewDataSourcePrefetching*/ {
+class ShelterPetsListTableViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     var pet = Pet()
     
     var savedPets: [Pet] = [] {
         didSet{
-            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
+    
+    var petImages: [String: UIImage] = [:]
     
     // MARK: - Actions
     
@@ -43,7 +44,7 @@ class ShelterPetsListTableViewController: UITableViewController/*, UITableViewDa
             guard let petList = petList else { return }
             self.savedPets = petList
         })
-//        tableView.prefetchDataSource = self
+        tableView.prefetchDataSource = self
         
         self.title = "At This Shelter"
         
@@ -62,8 +63,15 @@ class ShelterPetsListTableViewController: UITableViewController/*, UITableViewDa
             return ShelterPetTableViewCell()
         }
         let pet = savedPets[indexPath.row]
+        guard let id = pet.id else { return ShelterPetTableViewCell() }
         
-        cell.pet = pet
+        if let petImage = petImages[id] {
+            cell.pet = pet
+            cell.petImage = petImage
+        } else {
+            cell.pet = pet
+            cell.petImage = nil
+        }
         
         return cell
     }
@@ -81,43 +89,28 @@ class ShelterPetsListTableViewController: UITableViewController/*, UITableViewDa
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             
             destinationVC.pet = pet
-            
+            destinationVC.isComingFromShelter = true
         }
         
     }
     
     
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        
-//        let cell = ShelterPetTableViewCell()
-//        
-//        cell.nameLabel.text = pet.name
-//        cell.descriptionLabel.text = pet.description
-//        cell.imageView?.image = #imageLiteral(resourceName: "doge")
-//        
-//        
-//        for indexPath in indexPaths {
-//            let savedPet = savedPets[indexPath.row]
-//            
-//            cell.pet = savedPet
-//            
-//            
-//            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
-//                if !success {
-//                    NSLog("error fetchingpet in pet controller")
-//                }
-//                guard let image = image else { return }
-//                DispatchQueue.main.async {
-//
-//                    if cell.petImageView.image != nil {
-//                        cell.petImageView.image = image
-//                    } else {
-//                        cell.petImageView.image = #imageLiteral(resourceName: "happyFace")
-//                    }
-//                }
-//            })
-//        }
-//    }
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths {
+            let savedPet = savedPets[indexPath.row]
+            
+            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetching pet in pet controller")
+                }
+                guard let image = image, let id = savedPet.id else { return }
+                if self.petImages[id] != nil {
+                    self.petImages[id] = image
+                }
+            })
+        }
+    }
 }
 
 

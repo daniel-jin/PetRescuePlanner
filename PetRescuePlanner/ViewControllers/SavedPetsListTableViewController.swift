@@ -10,7 +10,12 @@ import UIKit
 import CoreData
 import CloudKit
 
-class SavedPetsListTableViewController: UITableViewController {
+class SavedPetsListTableViewController: UITableViewController, UITableViewDataSourcePrefetching {
+    
+    // prefetching store 
+    
+    var petImages: [String: UIImage] = [:]
+    var pets = PetController.shared.savedPets
 
     // MARK: - Table View Life Cycle
 
@@ -33,7 +38,7 @@ class SavedPetsListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PetController.shared.savedPets.count
+        return pets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,8 +46,17 @@ class SavedPetsListTableViewController: UITableViewController {
             return SavedPetTableViewCell()
         }
         
-        let pet = PetController.shared.savedPets[indexPath.row]
-        cell.pet = pet
+        let pet = pets[indexPath.row]
+        guard let id = pet.id else { return ShelterPetTableViewCell() }
+        
+        if let petImage = petImages[id] {
+            cell.pet = pet
+            cell.petImage = petImage
+        } else {
+            cell.pet = pet
+            cell.petImage = nil
+            return cell
+        }
 
         return cell
     }
@@ -57,7 +71,7 @@ class SavedPetsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 
-            let petToDelete = PetController.shared.savedPets[indexPath.row]
+            let petToDelete = pets[indexPath.row]
             
             // Delete from sorted array to update iCloud key/value store
             
@@ -72,6 +86,7 @@ class SavedPetsListTableViewController: UITableViewController {
             PetController.shared.delete(pet: petToDelete, completion: {
                 
                 DispatchQueue.main.async {
+                    self.pets.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                 }
                 
@@ -90,12 +105,29 @@ class SavedPetsListTableViewController: UITableViewController {
         if segue.identifier == "petCellToDetailSegue" {
             
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let pet = PetController.shared.savedPets[indexPath.row]
+            let pet = pets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             destinationVC.hideButton = false
             destinationVC.pet = pet
             
+        }
+    }
+    
+    // MARK: - Prefetching Delegate Method
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths {
+            let savedPet = PetController.shared.savedPets[indexPath.row]
+                        
+            PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetching pet in pet controller")
+                }
+                guard let image = image, let id = savedPet.id else { return }
+                self.petImages[id] = image
+            })
         }
     }
 }

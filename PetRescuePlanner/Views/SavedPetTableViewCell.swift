@@ -22,34 +22,38 @@ class SavedPetTableViewCell: UITableViewCell {
         }
     }
     
+    var petImage: UIImage? = nil
+    
     // MARK: - Private Funcs
     
     func updateViews() {
-        
-        guard let pet = pet else { return }
-        
-        self.petImageView.image = #imageLiteral(resourceName: "blank")
-        
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
         
-        guard let petName = pet.name else { return }
+        guard let pet = pet, let petName = pet.name else { return }
+        guard let petImage = petImage else {
+            
+            PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
+                if !success {
+                    NSLog("error fetchingpet in pet controller")
+                    self.petImageView.image = #imageLiteral(resourceName: "doge")
+                }
+                guard let image = image else { return }
+                DispatchQueue.main.async {
+                    self.petImageView.image = image
+                    let petNameString: NSMutableAttributedString = NSMutableAttributedString(string: "\(petName)", attributes: redForegroundAttribute)
+                    self.nameLabel.attributedText = petNameString
+                    self.descriptionLabel.text = pet.petDescription
+                    self.setupConstraints()
+                }
+            })
+            return
+        }
+        
+        petImageView.image = petImage
         let petNameString: NSMutableAttributedString = NSMutableAttributedString(string: "\(petName)", attributes: redForegroundAttribute)
         nameLabel.attributedText = petNameString
-        
         descriptionLabel.text = pet.petDescription
-        
-        PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
-            if !success {
-                NSLog("error fetchingpet in pet controller")
-                self.petImageView.image = #imageLiteral(resourceName: "doge")
-            }
-            guard let image = image else { return }
-            DispatchQueue.main.async {
-                self.petImageView.image = image
-            }
-        })
-        
         setupConstraints()
     }
     
