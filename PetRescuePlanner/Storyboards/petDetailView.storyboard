@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="MichaelMarkerLite-Regular.ttf">
-            <string>MichaelMarkerLite-Regular</string>
+        <array key="HiraginoKakuGothic.ttc">
+            <string>HiraginoSans-W3</string>
         </array>
     </customFonts>
     <scenes>
@@ -83,8 +83,7 @@
                                         </constraints>
                                         <state key="normal" image="clear_btn"/>
                                         <connections>
-                                            <action selector="exitButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="Cfx-e5-Oyy"/>
-                                            <action selector="saveButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="xfh-eh-Xpm"/>
+                                            <action selector="exitButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="93Q-IP-4ng"/>
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lx9-xb-fY3">
@@ -136,7 +135,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7d-GV-yrq">
                                         <rect key="frame" x="0.0" y="367.5" width="327" height="52.5"/>
-                                        <fontDescription key="fontDescription" name="MichaelMarkerLite-Regular" family="Michael Marker Lite" pointSize="21"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
                                         <state key="normal" title="Get More Shelter Info!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -167,6 +166,7 @@
                     <navigationItem key="navigationItem" id="T9a-5p-EDJ"/>
                     <connections>
                         <outlet property="collectionView" destination="faV-v6-O1V" id="8u2-tu-1wM"/>
+                        <outlet property="exitButton" destination="Us6-nP-xzZ" id="3g8-Sn-5Af"/>
                         <outlet property="pageControl" destination="Lx9-xb-fY3" id="I0w-k4-Qz0"/>
                         <outlet property="saveButton" destination="Uxy-tU-yiw" id="Gmu-Ye-DxY"/>
                         <outlet property="shelterInfoButton" destination="z7d-GV-yrq" id="lhF-aZ-WXD"/>

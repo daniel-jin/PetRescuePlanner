@@ -90,7 +90,7 @@ class ShelterPetsListTableViewController: UITableViewController, UITableViewData
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             
             destinationVC.pet = pet
-            
+            destinationVC.isComingFromShelter = true
         }
         
     }

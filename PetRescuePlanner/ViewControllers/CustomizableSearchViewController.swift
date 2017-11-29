@@ -399,11 +399,10 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         let messages: [String] = ["Find your new best friend!",
                                   "Take home all of the pets!"]
         
-        guard let michaelMarker = UIFont(name: "Michael marker Lite", size: 18.0) else { return }
-        
+        guard let messageFont = UIFont(name: "Hiragino Sans W3", size: 18.0) else { return }
         let rng = Int(arc4random_uniform(UInt32(messages.count)))
         let message = messages[rng]
-        let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : michaelMarker])
+        let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : messageFont])
         
         messageLabel.attributedText = messageToReturn
         selectBreedLabel.textColor = redColor
