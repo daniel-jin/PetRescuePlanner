@@ -34,7 +34,7 @@ class ShelterPetsListTableViewController: UITableViewController/*, UITableViewDa
         
         let methods = API.Methods()
         
-        PetController.shared.fetchPetsFor(method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil, breed: nil, size: nil, sex: nil, age: nil, offset: nil, completion: { (success, petList, offset) in
+        PetController.shared.fetchPetsFor(count: "50", method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil, breed: nil, size: nil, sex: nil, age: nil, offset: nil, completion: { (success, petList, offset) in
             if !success {
                 NSLog("Error fetching pets from shelter")
                 return

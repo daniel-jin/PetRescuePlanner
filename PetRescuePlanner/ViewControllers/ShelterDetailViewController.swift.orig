@@ -211,15 +211,22 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             guard let destinationVC = segue.destination as? ShelterPetsListTableViewController else { return }
             guard let pet = pet else { return }
             
+<<<<<<< HEAD
+            PetController.shared.fetchPetsFor(count: "50",method: methods.petsAtSpecificShelter, shelterId: pet.shelterID, location: nil, animal: nil , breed: nil, size: nil, sex: nil, age: nil, offset: nil) { (success, petList, offset) in
+                if !success {
+                    NSLog("Error fetching pets from shelter")
+                    return
+                }
+                
+                guard let petList = petList else { return }
+                destinationVC.savedPets = petList
+                
+=======
             destinationVC.pet = pet
             
         }
         
     }
-<<<<<<< HEAD
-
-    
-=======
     
     func setUpUI() {
         
@@ -238,6 +245,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
             if !success {
                 NSLog("Error")
                 return
+>>>>>>> develop
             }
             self.shelter = ShelterController.shelterShared.shelter
             
@@ -246,7 +254,6 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         }
         
     }
->>>>>>> develop
 }
 
 

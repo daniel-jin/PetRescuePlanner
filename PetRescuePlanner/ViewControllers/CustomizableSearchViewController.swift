@@ -354,7 +354,7 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         
-        tapGesture.cancelsTouchesInView = false 
+        tapGesture.cancelsTouchesInView = false
         
         self.setUpViews()
         
@@ -452,11 +452,11 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         self.present(alertController, animated: true, completion: nil)
         
     }
-    
+
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
-    
+
     @objc func keyboardWillShow(_ notification: NSNotification) {
         if self.view.frame.origin.y == 0{
             self.view.frame.origin.y -= 150
