@@ -28,6 +28,8 @@ class SavedPetTableViewCell: UITableViewCell {
         
         guard let pet = pet else { return }
         
+        self.petImageView.image = #imageLiteral(resourceName: "blank")
+        
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
         
