@@ -71,7 +71,6 @@ class ShelterPetsListTableViewController: UITableViewController, UITableViewData
         } else {
             cell.pet = pet
             cell.petImage = nil
-            return cell
         }
         
         return cell
@@ -103,10 +102,12 @@ class ShelterPetsListTableViewController: UITableViewController, UITableViewData
             
             PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
                 if !success {
-                    NSLog("error fetchingpet in pet controller")
+                    NSLog("error fetching pet in pet controller")
                 }
                 guard let image = image, let id = savedPet.id else { return }
-                self.petImages[id] = image
+                if self.petImages[id] != nil {
+                    self.petImages[id] = image
+                }
             })
         }
     }

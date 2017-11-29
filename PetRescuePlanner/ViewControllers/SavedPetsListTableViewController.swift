@@ -115,7 +115,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
                         
             PetController.shared.fetchImageFor(pet: savedPet, number: 2, completion: { (success, image) in
                 if !success {
-                    NSLog("error fetchingpet in pet controller")
+                    NSLog("error fetching pet in pet controller")
                 }
                 guard let image = image, let id = savedPet.id else { return }
                 self.petImages[id] = image
