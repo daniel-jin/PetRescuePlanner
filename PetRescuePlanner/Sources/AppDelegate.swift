@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,12 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // If we want to flush core data objects for Pet
-//        PetController.shared.clearPersistentStore()
-//        print(PetController.shared.savedPets.count)
-//
-//        // If we want to flush cloudkit records for Pet
-//        CloudKitManager().flushPetRecords()
-        
+        //        PetController.shared.clearPersistentStore()
+        //        print(PetController.shared.savedPets.count)
+        //
+//                // If we want to flush cloudkit records for Pet
+//                CloudKitManager().flushPetRecords()
         
         // Override point for customization after application launch.
         
@@ -35,6 +35,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.tintColor = UIColor.white
         
         return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // fetch the current user from CK, compare arrays of references, delete if necessary
+        UserController.shared.fetchCurrentUser { (success) in
+            
+            let cloudKitManager = CloudKitManager()
+            
+            if success {
+                
+                // There is already a current user - go to customized search screen
+                UserController.shared.isUserLoggedIntoiCloud = true
+                
+                guard let currUser = UserController.shared.currentUser else {
+                    return
+                }
+                
+                if currUser.savedPets.count < PetController.shared.savedPets.count {
+                    
+                    var CKPets: [Pet] = []
+                    
+                    let group = DispatchGroup()
+                    
+                    for petRef in currUser.savedPets {
+                        
+                        group.enter()
+                        
+                        cloudKitManager.fetchRecord(withID: petRef.recordID, completion: { (record, error) in
+                            if let error = error {
+                                NSLog("Unable to fetch record with the reference for the pet: \(error.localizedDescription)")
+                                group.leave()
+                                return
+                            }
+                            DispatchQueue.main.async {
+                                
+                                guard let record = record,
+                                    let pet = Pet(cloudKitRecord: record) else {
+                                        group.leave()
+                                        return
+                                }
+                                
+                                CKPets.append(pet)
+                                group.leave()
+                            }
+                        })
+                    }
+                    
+                    group.notify(queue: DispatchQueue.main) {
+                        
+                        for pet in PetController.shared.savedPets {
+                            
+                            if !CKPets.contains(pet) {
+                                
+                                PetController.shared.deleteCoreData(pet: pet)
+                            }
+                        }
+                        // After the current user is set, find user's subscription or subscribe the current user to changes
+                    }
+                }
+            } else {
+                NSLog("Unable to fetch current user")
+                return
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

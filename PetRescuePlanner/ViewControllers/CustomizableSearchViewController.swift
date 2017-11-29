@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class CustomizableSearchViewController: UIViewController {
+class CustomizableSearchViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Data
     
@@ -71,6 +72,7 @@ class CustomizableSearchViewController: UIViewController {
     @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
     @IBOutlet weak var breedSearchContainerView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var locationButton: UIButton!
     
     // DropDown control buttons
     @IBOutlet weak var animalTypeMasterButton: UIButton!
@@ -82,6 +84,16 @@ class CustomizableSearchViewController: UIViewController {
     @IBOutlet var animalAgeButtons: [UIButton]!
     
     // MARK: - Actions
+    @IBAction func userLocationButtonTapped(_ sender: Any) {
+        self.zipCodeTextField.text = userZipCode
+        
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+
+    }
     
     @IBAction func handleAnimalTypeTapped(_ sender: UIButton) {
         sender.setTitle(animalTypeMasterButton.titleLabel!.text, for: .normal)
@@ -330,17 +342,20 @@ class CustomizableSearchViewController: UIViewController {
         self.performSegue(withIdentifier: "toSavedPets", sender: self)
         
     }
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(setBreed(notification:)), name: Notifications.BreedWasSetNotification, object: nil)
         self.breedSearchContainerView.isHidden = true 
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         
-        tapGesture.cancelsTouchesInView = false 
+        tapGesture.cancelsTouchesInView = false
         
         self.setUpViews()
         
@@ -376,7 +391,7 @@ class CustomizableSearchViewController: UIViewController {
     func setUpViews() {
         
         self.title = "Search"
-
+        
         breedSearchContainerView.isHidden = true
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
@@ -392,6 +407,8 @@ class CustomizableSearchViewController: UIViewController {
         messageLabel.attributedText = messageToReturn
         selectBreedLabel.textColor = redColor
         sexSegmentedControl.tintColor = redColor
+//        locationButton.imageView?.tintColor = redColor
+        
         
         searhButton.layer.cornerRadius = 5.0
         
@@ -437,11 +454,11 @@ class CustomizableSearchViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
         
     }
-    
+
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
-    
+
     @objc func keyboardWillShow(_ notification: NSNotification) {
         if self.view.frame.origin.y == 0{
             self.view.frame.origin.y -= 150
@@ -457,8 +474,8 @@ class CustomizableSearchViewController: UIViewController {
     }
     
     // MARK: - Navigation
-
-
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "breedContainerSegue" {
@@ -466,23 +483,55 @@ class CustomizableSearchViewController: UIViewController {
         }
         
         if segue.identifier == "toPetTinderPage" {
+            
             guard let destinationVC = segue.destination as? PetSwipeViewController else {
                 return
             }
-            
-            guard let zip = zipCodeTextField.text else {
+            guard let zip = self.zipCodeTextField.text else {
                 return
             }
-            
             destinationVC.zip = zip
             destinationVC.animal = self.animal
             destinationVC.size = self.size
             destinationVC.sex = self.sex
             destinationVC.age = self.age
             destinationVC.breed = self.breed
+
         }
     }
- 
+    // Mark: - users zipcode
     
+    let manager = CLLocationManager()
+    let geoCoder = CLGeocoder()
+    var userZipCode: String = ""
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0]
+        manager.startUpdatingLocation()
+        
+        geoCoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+            if error != nil {
+                print("Error in reveseGeocode")
+            }
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks as [CLPlacemark]
+            if placemark.count > 0 {
+                let placemark = placemarks[0]
+                guard let userZip = placemark.postalCode else { return }
+                
+                self.userZipCode = userZip
+                self.zipCodeTextField.text = self.userZipCode
 
+                manager.stopUpdatingLocation()
+            }
+            
+        }
+        
+    }
+    
 }
+
+
+
+
+

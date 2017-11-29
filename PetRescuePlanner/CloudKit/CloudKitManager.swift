@@ -294,4 +294,15 @@ class CloudKitManager {
             }
         })
     }
+    
+    
+    // MARK: - Subscriptions
+    
+    func fetchSubscription(_ subscriptionID: String, completion: ((_ subscription: CKSubscription?, _ error: Error?) -> Void)?) {
+        
+        publicDatabase.fetch(withSubscriptionID: subscriptionID) { (subscription, error) in
+            
+            completion?(subscription, error)
+        }
+    }
 }

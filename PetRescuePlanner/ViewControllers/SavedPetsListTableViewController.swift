@@ -64,7 +64,7 @@ class SavedPetsListTableViewController: UITableViewController {
             PetController.shared.delete(pet: petToDelete, completion: {
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                 }
                 
                 // Sync with CloudKit to update

@@ -80,7 +80,7 @@ class PetSwipeViewController: UIViewController {
         }
         
         let methods = API.Methods()
-        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList, offset) in
+        PetController.shared.fetchPetsFor(count: "10", method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: nil, completion: { (success, petList, offset) in
             if !success {
                 NSLog("Error fetching adoptable pets from PetController")
                 return
@@ -291,7 +291,7 @@ class PetSwipeViewController: UIViewController {
             // fetch
             if indexIntoPets + 5 == pets.count - 1{
                 fetchMorePets(pet: nextPet)
-            } else if indexIntoPets + 3 == pets.count - 1 {
+            } else if indexIntoPets + 1 == pets.count - 1 {
                 fetchMorePets(pet: nextPet)
             }
         }
@@ -350,7 +350,7 @@ class PetSwipeViewController: UIViewController {
         
         let methods = API.Methods()
         
-        PetController.shared.fetchPetsFor(method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
+        PetController.shared.fetchPetsFor(count: "10",method: methods.pets, shelterId: nil, location: zip, animal: animal, breed: breed, size: size, sex: sex, age: age, offset: offSet, completion: { (success, petList, offset) in
             if !success {
                 NSLog("No more pets fetched In swipe to save view")
                 return

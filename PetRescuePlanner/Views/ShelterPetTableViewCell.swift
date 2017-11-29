@@ -25,10 +25,13 @@ class ShelterPetTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
-    
+    var savedPets: [Pet] = []
     var pet: Pet? {
         didSet{
-            self.updateViews()
+            if nameLabel != nil {
+                
+                self.updateViews()
+            }
         }
     }
     
@@ -37,6 +40,8 @@ class ShelterPetTableViewCell: UITableViewCell {
     func updateViews() {
         
         guard let pet = pet else { return }
+        
+        self.petImageView.image = #imageLiteral(resourceName: "blank")
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         let redForegroundAttribute = [NSAttributedStringKey.foregroundColor: redColor]
@@ -70,5 +75,6 @@ class ShelterPetTableViewCell: UITableViewCell {
         
         petImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
     }
+
 }
 
