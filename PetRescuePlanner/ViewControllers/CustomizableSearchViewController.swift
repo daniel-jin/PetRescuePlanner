@@ -72,6 +72,7 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
     @IBOutlet weak var sexSegmentedControl: UISegmentedControl!
     @IBOutlet weak var breedSearchContainerView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var locationButton: UIButton!
     
     // DropDown control buttons
     @IBOutlet weak var animalTypeMasterButton: UIButton!
@@ -407,6 +408,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         messageLabel.attributedText = messageToReturn
         selectBreedLabel.textColor = redColor
         sexSegmentedControl.tintColor = redColor
+//        locationButton.imageView?.tintColor = redColor
+        
         
         searhButton.layer.cornerRadius = 5.0
         
