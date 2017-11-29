@@ -11,18 +11,19 @@ import CoreData
 import CloudKit
 
 class SavedPetsListTableViewController: UITableViewController {
-    
-    var savedPets = PetController.shared.savedPets
-    
 
-    
     // MARK: - Table View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "My Saved Pets"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        
+        PetController.shared.performFullSync {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -32,7 +33,7 @@ class SavedPetsListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedPets.count
+        return PetController.shared.savedPets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,7 +41,7 @@ class SavedPetsListTableViewController: UITableViewController {
             return SavedPetTableViewCell()
         }
         
-        let pet = savedPets[indexPath.row]
+        let pet = PetController.shared.savedPets[indexPath.row]
         cell.pet = pet
 
         return cell
@@ -55,21 +56,20 @@ class SavedPetsListTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            let petToDelete = savedPets[indexPath.row]
-            
-            savedPets.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+
+            let petToDelete = PetController.shared.savedPets[indexPath.row]
             
             // Delete from Core Data
-            PetController.shared.delete(pet: petToDelete)
             
-            // Delete from CloudKit
-            //            PetController.shared.deleteFromCK(pet: petToDelete, completion: { (success) in
-            //                if !success {
-            //                    NSLog("Error deleting pet from CloudKit")
-            //                }
-            //            })
+            PetController.shared.delete(pet: petToDelete, completion: {
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+                // Sync with CloudKit to update
+                PetController.shared.performFullSync()
+            })
         }
     }
 
@@ -82,10 +82,10 @@ class SavedPetsListTableViewController: UITableViewController {
         if segue.identifier == "petCellToDetailSegue" {
             
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let pet = savedPets[indexPath.row]
+            let pet = PetController.shared.savedPets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
-            destinationVC.isButtonHidden = false 
+            destinationVC.hideButton = false
             destinationVC.pet = pet
             
         }

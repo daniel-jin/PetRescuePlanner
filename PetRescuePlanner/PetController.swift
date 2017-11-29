@@ -20,11 +20,9 @@ class PetController {
     static let shared = PetController()
     
     var pets: [Pet] = []
-//    var petPhotos: [UIImage] = []
-//    var offset: String = ""
     
     var savedPets: [Pet] {
-        // MARK: - Fetched Results Controller configuration
+        // MARK: - Core Data fetch
         // set up request
         let request: NSFetchRequest<Pet> = Pet.fetchRequest()
         
@@ -34,12 +32,6 @@ class PetController {
         // Perform fetch - handle errors
         do {
             var results = try CoreDataStack.context.fetch(request)
-            
-            for result in results {
-                if result.contactInfo == nil {
-                    CoreDataStack.context.delete(result)
-                }
-            }
             
             results = try CoreDataStack.context.fetch(request)
             return results
@@ -55,37 +47,6 @@ class PetController {
         
         self.cloudKitManager = CloudKitManager()
         
-        //        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Pet")
-        //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-        //        do {
-        //            try NSManagedObjectContext.execute
-        //        } catch {
-        //            // error handling
-        //        }
-        
-        
-        //        performFullSync()
-        
-        /* flush function to delete all records of a record type
-         let query = CKQuery(recordType: "Pet", predicate: NSPredicate(value: true))
-         CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil) { (records, error) in
-         
-         if error == nil {
-         
-         for record in records! {
-         
-         CKContainer.default().publicCloudDatabase.delete(withRecordID: record.recordID, completionHandler: { (recordId, error) in
-         
-         if error == nil {
-         
-         //Record deleted
-         }
-         })
-         }
-         }
-         }
-         */
-        
     }
     
     let keys = API.Keys()
@@ -94,7 +55,7 @@ class PetController {
     let responseFormat = API.Parameters().jsonFormat
     
     
-    func fetchPetsFor(method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
+    func fetchPetsFor(count: String, method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
                 
         let output = responseFormat
         let apiKey = parameters.apiKey
@@ -144,14 +105,6 @@ class PetController {
         
         // Tesing with larger count
         
-        var count = ""
-        
-        if method == "pet.find" {
-            count = "10"
-        } else {
-            count = "50"
-        }
-        
         let countItem = URLQueryItem(name: "count", value: count)
         
         queryItems.append(countItem)
@@ -160,7 +113,7 @@ class PetController {
         
         guard let searchUrl = components?.url else { return }
         
-        URLSession.shared.dataTask(with: searchUrl) { (data, _, error) in
+        URLSession.shared.dataTask(with: searchUrl) { [unowned self] (data, _, error) in
             
             if let error = error {
                 NSLog("Error serializing JSON in \(#file) \(#function). \(error), \(error.localizedDescription)")
@@ -245,7 +198,7 @@ class PetController {
     
     func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
         
-        guard let lastId = pet.imageIdCount else { return }
+        guard let lastId = pet.imageIdCount else { return completion([#imageLiteral(resourceName: "doge")]) }
         let dispatchGroup = DispatchGroup()
         let count = Int(lastId) ?? 0
         
@@ -306,41 +259,35 @@ class PetController {
         }
     }
     
-    func preFetchImagesFor(pets: [Pet], completion: @escaping (_ photos: [UIImage]?) -> Void) {
+    // Takes the list of fetched pets, gets the image for each one and returns them as a tuple with the corresponding pet
+    func preFetchImagesFor(pets: [Pet], completion: @escaping (_ photos: [(UIImage, Pet)]?) -> Void) {
         
         let dispatchGroup = DispatchGroup()
-        var tempPhotos: [UIImage] = []
+        var petData: [(UIImage, Pet)] = []
         
         for index in 0...pets.count - 1 {
-            
-            guard guardCount <= pets.count else { return }
             
             let pet = pets[index]
 
             dispatchGroup.enter()
             
-            guardCount += 1
             fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
-                    NSLog("error fetchingpet in pet controller")
-                    completion(nil)
-                    dispatchGroup.leave()
-                    return
+                    NSLog("No image for pet")
+                    petData.append((#imageLiteral(resourceName: "doge"), pet))
                 }
                 guard let image = image else { dispatchGroup.leave(); return completion(nil) }
                 
-                tempPhotos.append(image)
+                petData.append((image, pet))
                 dispatchGroup.leave()
                 
             })
         }
         
         dispatchGroup.notify(queue: .main) {
-            completion(tempPhotos)
+            completion(petData)
         }
     }
-    
-    
 }
 
 

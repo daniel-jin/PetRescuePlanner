@@ -24,11 +24,13 @@ class UserController {
         }
     }
     
+    var isUserLoggedIntoiCloud = false
+    
     // Fetch Current User
     func fetchCurrentUser(completion: @escaping (_ success: Bool) -> Void = { _ in }) {
         
         // Fetch default Apple 'Users' RecordID
-        CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
+        CKContainer.default().fetchUserRecordID { [weak self] (appleUserRecordID, error) in
             
             if let error = error { print(error.localizedDescription) }
             guard let appleUserRecordID = appleUserRecordID else { completion(false); return }
@@ -40,7 +42,7 @@ class UserController {
             let predicate = NSPredicate(format: "appleUserRef == %@", appleUserRef)
             
             // Fetch the custom user record
-            self.cloudKitManager.fetchRecordsWithType(CloudKit.userRecordType, predicate: predicate, recordFetchedBlock: nil, completion: { (records, error) in
+            self?.cloudKitManager.fetchRecordsWithType(CloudKit.userRecordType, predicate: predicate, recordFetchedBlock: nil, completion: { (records, error) in
                 
                 if let error = error {
                     NSLog("Error fetching matching user in cloudkit \(error.localizedDescription)")
@@ -51,7 +53,7 @@ class UserController {
                 guard let currentUserRecord = records?.first else { completion(false); return }
                 
                 let currentUser = User(cloudKitRecord: currentUserRecord)
-                self.currentUser = currentUser
+                self?.currentUser = currentUser
                 completion(true)
             })
         }
