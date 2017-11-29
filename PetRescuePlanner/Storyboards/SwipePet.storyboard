@@ -25,7 +25,7 @@
                                 <rect key="frame" x="8" y="305.5" width="37.5" height="56"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRi-B1-Vsf" userLabel="BotCard">
-                                <rect key="frame" x="62" y="165.5" width="250" height="400"/>
+                                <rect key="frame" x="62" y="167.5" width="250" height="400"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardFrame" translatesAutoresizingMaskIntoConstraints="NO" id="PJz-Yo-sDD" userLabel="BlankCard">
                                         <rect key="frame" x="0.0" y="-0.5" width="250" height="400"/>
@@ -37,13 +37,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="267"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0xk-hi-vaA" userLabel="Default Image (doge)">
-                                                        <rect key="frame" x="41.5" y="45" width="167" height="178"/>
+                                                        <rect key="frame" x="25.5" y="27" width="200" height="214"/>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="0xk-hi-vaA" firstAttribute="width" secondItem="H1P-gt-lp7" secondAttribute="width" multiplier="2/3" id="0Av-9r-EOL"/>
+                                                    <constraint firstItem="0xk-hi-vaA" firstAttribute="width" secondItem="H1P-gt-lp7" secondAttribute="width" multiplier="4/5" id="0Av-9r-EOL"/>
                                                     <constraint firstItem="0xk-hi-vaA" firstAttribute="centerX" secondItem="H1P-gt-lp7" secondAttribute="centerX" id="a3f-1z-82Y"/>
-                                                    <constraint firstItem="0xk-hi-vaA" firstAttribute="height" secondItem="H1P-gt-lp7" secondAttribute="height" multiplier="2/3" id="hq9-e6-zWd"/>
+                                                    <constraint firstItem="0xk-hi-vaA" firstAttribute="height" secondItem="H1P-gt-lp7" secondAttribute="height" multiplier="4/5" id="hq9-e6-zWd"/>
                                                     <constraint firstItem="0xk-hi-vaA" firstAttribute="centerY" secondItem="H1P-gt-lp7" secondAttribute="centerY" id="py7-s4-mcY"/>
                                                 </constraints>
                                             </view>
@@ -84,7 +84,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVk-uc-zlf" userLabel="TopCard">
-                                <rect key="frame" x="62.5" y="165.5" width="250" height="400"/>
+                                <rect key="frame" x="62.5" y="167.5" width="250" height="400"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardFrame" translatesAutoresizingMaskIntoConstraints="NO" id="tEO-hf-zjz" userLabel="BlankCard">
                                         <rect key="frame" x="-0.5" y="0.0" width="250" height="400"/>
@@ -96,10 +96,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="266.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zXf-20-Doe" userLabel="Default Image (doge)">
-                                                        <rect key="frame" x="41.5" y="44.5" width="167" height="177.5"/>
+                                                        <rect key="frame" x="25" y="26.5" width="200" height="213.5"/>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qX8-ib-x8t" userLabel="Swipe Indicator Image">
-                                                        <rect key="frame" x="83" y="88.5" width="83.5" height="89"/>
+                                                        <rect key="frame" x="75" y="79.5" width="100" height="107"/>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
@@ -107,10 +107,10 @@
                                                     <constraint firstItem="qX8-ib-x8t" firstAttribute="height" secondItem="zXf-20-Doe" secondAttribute="height" multiplier="1/2" id="Dqq-1Z-DfW"/>
                                                     <constraint firstItem="qX8-ib-x8t" firstAttribute="width" secondItem="zXf-20-Doe" secondAttribute="width" multiplier="1/2" id="Gqt-8b-wtI"/>
                                                     <constraint firstItem="zXf-20-Doe" firstAttribute="centerY" secondItem="RAX-jv-i7C" secondAttribute="centerY" id="MPx-Ed-pPY"/>
-                                                    <constraint firstItem="zXf-20-Doe" firstAttribute="width" secondItem="RAX-jv-i7C" secondAttribute="width" multiplier="2/3" id="Qod-em-AeI"/>
+                                                    <constraint firstItem="zXf-20-Doe" firstAttribute="width" secondItem="RAX-jv-i7C" secondAttribute="width" multiplier="4/5" id="Qod-em-AeI"/>
                                                     <constraint firstItem="qX8-ib-x8t" firstAttribute="centerX" secondItem="zXf-20-Doe" secondAttribute="centerX" id="Ruk-Q6-jme"/>
                                                     <constraint firstItem="qX8-ib-x8t" firstAttribute="centerY" secondItem="zXf-20-Doe" secondAttribute="centerY" id="Ubg-Fd-BHb"/>
-                                                    <constraint firstItem="zXf-20-Doe" firstAttribute="height" secondItem="RAX-jv-i7C" secondAttribute="height" multiplier="2/3" id="xdc-Wt-yJ6"/>
+                                                    <constraint firstItem="zXf-20-Doe" firstAttribute="height" secondItem="RAX-jv-i7C" secondAttribute="height" multiplier="4/5" id="xdc-Wt-yJ6"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wE-6N-wCj" userLabel="TopPetName">
@@ -262,7 +262,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eZs-VP-Kop" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6y6-vH-7Ki">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
