@@ -34,7 +34,20 @@ class PetController {
             var results = try CoreDataStack.context.fetch(request)
             
             results = try CoreDataStack.context.fetch(request)
-            return results
+            
+            var newlySorted: [Pet] = []
+            
+            for int in 0..<sortedPetArray.count {
+                
+                for pet in results {
+                    
+                    if pet.id == sortedPetArray[int] {
+                        newlySorted.insert(pet, at: 0)
+                    }
+                }
+            }
+            
+            return newlySorted
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
@@ -42,6 +55,26 @@ class PetController {
     }
     
     let cloudKitManager: CloudKitManager
+    
+    var sortedPetArray: [String] = []
+    
+    var iCloudKeyStore: NSUbiquitousKeyValueStore? = NSUbiquitousKeyValueStore()
+    
+    let iCloudStoreKey = "iCloudStore"
+    func saveToiCloud() {
+        iCloudKeyStore?.set(sortedPetArray, forKey: iCloudStoreKey)
+//        iCloudKeyStore?.synchronize()
+    }
+    
+    func loadFromiCloud() {
+        
+        iCloudKeyStore?.synchronize()
+        
+        guard let orderedPetArray = iCloudKeyStore?.array(forKey: iCloudStoreKey) as? [String] else { return }
+        
+        sortedPetArray = orderedPetArray
+    }
+    
     
     init() {
         

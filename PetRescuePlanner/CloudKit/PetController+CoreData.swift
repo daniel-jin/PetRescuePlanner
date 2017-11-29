@@ -65,6 +65,9 @@ extension PetController {
             guard shouldSaveContext else { return }
             saveToPersistantStore()
         }
+        
+        PetController.shared.sortedPetArray.append(petID)
+        PetController.shared.saveToiCloud()
     }
     
     
