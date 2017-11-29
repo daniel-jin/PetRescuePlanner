@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,12 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // If we want to flush core data objects for Pet
-//        PetController.shared.clearPersistentStore()
-//        print(PetController.shared.savedPets.count)
-//
-//        // If we want to flush cloudkit records for Pet
-//        CloudKitManager().flushPetRecords()
-        
+        //        PetController.shared.clearPersistentStore()
+        //        print(PetController.shared.savedPets.count)
+        //
+//                // If we want to flush cloudkit records for Pet
+//                CloudKitManager().flushPetRecords()
         
         // Override point for customization after application launch.
         
@@ -35,6 +35,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.tintColor = UIColor.white
         
         return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // fetch the current user from CK, compare arrays of references, delete if necessary
+        UserController.shared.fetchCurrentUser { (success) in
+            if success {
+                
+                guard let currUser = UserController.shared.currentUser else {
+                    return
+                }
+                
+                if currUser.savedPets.count < PetController.shared.savedPets.count {
+                    
+                    var localPetRefs: [CKReference] = []
+                    
+                    for pet in PetController.shared.savedPets {
+                        if let petRecordID = pet.cloudKitRecordID {
+                            localPetRefs.append(CKReference(recordID: petRecordID, action: .none))
+                        }
+                    }
+                    
+                    for petRef in localPetRefs {
+                        if !currUser.savedPets.contains(petRef) {
+                            
+                            guard let pet = PetController.shared.savedPets.filter({ $0.cloudKitRecordID == petRef.recordID }).first else {
+                                completionHandler(.noData)
+                                return
+                            }
+                            
+                            PetController.shared.delete(pet: pet)
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
