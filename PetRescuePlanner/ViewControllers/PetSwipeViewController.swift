@@ -418,7 +418,7 @@ class PetSwipeViewController: UIViewController {
             
             let destinationVC = segue.destination as? PetDetailCollectionTableViewController
             destinationVC?.pet = pet.1
-            
+            destinationVC?.hideButton = true
             
         }
         

@@ -88,6 +88,10 @@ class SavedPetsListTableViewController: UITableViewController {
             destinationVC.hideButton = false
             destinationVC.pet = pet
             
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem
+            
         }
     }
 }

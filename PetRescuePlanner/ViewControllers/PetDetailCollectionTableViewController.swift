@@ -10,16 +10,21 @@ import UIKit
 
 class PetDetailCollectionTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var shelterInfoButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var exitButton: UIButton!
     
+    // MARK: - Properties
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     var hideButton = true
     
     var pet: Pet? {
         didSet {
+            
+            // MARK: - Fetching images for the selected pet
             PetController.shared.fetchAllPetImages(pet: pet!) { (images) in
                 if images == nil {
                     NSLog("No images found for pet")
@@ -32,7 +37,10 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             }
         }
     }
+    
     var imageArray: [UIImage] = [] {
+        
+        // MARK: - Reloading collection view once we have images to show
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -40,66 +48,102 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         }
     }
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
+        
+        // MARK: - Revealing nav bar once view changes
         navigationController?.isNavigationBarHidden = false
     }
     
+    // MARK: - Data Source
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        // MARK: - Setting collection view rows to the count of images
         return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bannerCell", for: indexPath) as? PetImageCollectionViewCell else { return UICollectionViewCell() }
+        
+        // MARK: - Setting cell to image to the image array at row index
         cell.imageView.image = imageArray[indexPath.row]
+        
+        // MARK: - Making UI of cell look nice
         cell.imageView.contentMode = UIViewContentMode.scaleAspectFit
         cell.imageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.25)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // MARK: - Sizing cell to fit in view
         let cellSize: CGSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        
         return cellSize
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPetInfo" {
-            guard let destinationVC = segue.destination as? EmbededTableViewController else { return }
-            destinationVC.pet = pet
-        } else if segue.identifier == "toShelter" {
-            guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
-            guard let pet = pet else { return }
-            destinationVC.pet = pet
-        }
-    }
-    
-    @IBAction func exitButtonTapped(_ sender: UIButton) {
-        
-        if (self.navigationController != nil) {
-            navigationController?.popViewController(animated: true)
-            navigationController?.isNavigationBarHidden = false
-        } else {
-            self.dismiss(animated: true)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        // MARK: - Setting page control dot to match current page
         pageControl.currentPage = indexPath.row
     }
     
     @IBAction func pageIndicator(_ sender: UIPageControl) {
         
+        // MARK: - Creating an index based off page control indicator dot
         let indexPath = IndexPath(row: pageControl.currentPage, section: 0)
-        collectionView.scrollToItem(at: indexPath , at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
         
+        // MARK: - Scrolling Collection View to the index path
+        collectionView.scrollToItem(at: indexPath , at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // MARK: - Sending pet info to required destinations
+        
+        if segue.identifier == "toPetInfo" {
+            // MARK: - Setting destination as the Embeded Table View
+            guard let destinationVC = segue.destination as? EmbededTableViewController else { return }
+            
+            // MARK: - Passing pet information to Destination VC
+            destinationVC.pet = pet
+            
+        } else if segue.identifier == "toShelter" {
+            
+            // MARK: - Setting Destination VC to Shelter Detail View
+            guard let destinationVC = segue.destination as? ShelterDetailViewController else { return }
+            
+            // MARK: - Ensuring there is a pet to pass to Destination VC
+            guard let pet = pet else { return }
+            
+            // MARK: - Passing pet to Shelter Detail VC
+            destinationVC.pet = pet
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func exitButtonTapped(_ sender: UIButton) {
+        
+        // MARK: - Returning to swipe view and bringing navigation bar back on screen
+        navigationController?.popViewController(animated: true)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    @IBAction func shelterInfoButtonTapped(_ sender: UIButton) {
+        
+        // MARK: - Performing segue to shelter view
+        performSegue(withIdentifier: "toShelter", sender: self)
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -108,8 +152,11 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         
         // MARK: - Saving original size to restore later
         let originalFrame = self.saveButton.frame
+        
+        // MARK: - Adding phone vibrate
         impactFeedback.impactOccurred()
         
+        // MARK: - Animation
         UIView.animate(withDuration: 0.25, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             
             // MARK: - Saving pet
@@ -125,50 +172,63 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             
         }) { (finished: Bool) in
             
+            // MARK: - Adding second phone vibrate
             self.impactFeedback.impactOccurred()
             
             // MARK: - Restoring to original size
             UIView.animate(withDuration: 0.25, animations: {
                 self.saveButton.frame = originalFrame
-                
             })
         }   
     }
     
+    // MARK: - UI
+    
     func setUpUI() {
+        
         guard let pet = pet else { return }
         
+        // MARK: - hideButton checks what view/segue is presenting the pet detail view
         if hideButton == true {
+            
+            // MARK: - Checking against saved pets to hide save button on currently saved pets
+            if PetController.shared.savedPets.contains(pet) {
+                saveButton.isHidden = true
+            } else {
+                saveButton.isHidden = false
+            }
+            
+            // MARK: - Hiding nav bar and shelter info button, also displaying exit button for module presentation
+            exitButton.isHidden = false
             shelterInfoButton.isHidden = true
+            navigationController?.isNavigationBarHidden = true
+            
         } else {
+            
+            // MARK: - Creating shelter button and presenting all necesary buttons as well as nav bar for show presentaion
+            shelterInfoButton.layer.cornerRadius = 5.0
+            shelterInfoButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
             shelterInfoButton.isHidden = false
+            self.navigationController?.isNavigationBarHidden = false
+            
+            navigationController?.navigationBar.backItem?.title = "Back"
+//            self.navigationController?.navigationItem.backBarButtonItem?.title = "Back"
+            saveButton.isHidden = true
+            exitButton.isHidden = true
+            self.title = pet.name
         }
         
-        shelterInfoButton.backgroundColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-        
+        // MARK: - Setting data source to self
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        if (self.navigationController != nil) {
-            navigationController?.isNavigationBarHidden = true
-        }
-        if PetController.shared.savedPets.contains(pet) {
-            saveButton.isHidden = true
-        }
 
+        // MARK: - Updating page control dots
         pageControl.hidesForSinglePage = true
         pageControl.currentPageIndicatorTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         pageControl.pageIndicatorTintColor = UIColor.white
         pageControl.numberOfPages = imageArray.count
-
-        shelterInfoButton.layer.cornerRadius = 5.0
         
     }
-    
-    @IBAction func shelterInfoButtonTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "toShelter", sender: self)
-    }
-    
     
 }
 
