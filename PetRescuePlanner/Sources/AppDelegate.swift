@@ -40,7 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // fetch the current user from CK, compare arrays of references, delete if necessary
         UserController.shared.fetchCurrentUser { (success) in
+            
+            let cloudKitManager = CloudKitManager()
+            
             if success {
+                
+                // There is already a current user - go to customized search screen
+                UserController.shared.isUserLoggedIntoiCloud = true
                 
                 guard let currUser = UserController.shared.currentUser else {
                     return
@@ -48,30 +54,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if currUser.savedPets.count < PetController.shared.savedPets.count {
                     
-                    var localPetRefs: [CKReference] = []
+                    var CKPets: [Pet] = []
                     
-                    for pet in PetController.shared.savedPets {
-                        if let petRecordID = pet.cloudKitRecordID {
-                            localPetRefs.append(CKReference(recordID: petRecordID, action: .none))
-                        }
-                    }
+                    let group = DispatchGroup()
                     
-                    for petRef in localPetRefs {
-                        if !currUser.savedPets.contains(petRef) {
-                            
-                            guard let pet = PetController.shared.savedPets.filter({ $0.cloudKitRecordID == petRef.recordID }).first else {
-                                completionHandler(.noData)
+                    for petRef in currUser.savedPets {
+                        
+                        group.enter()
+                        
+                        cloudKitManager.fetchRecord(withID: petRef.recordID, completion: { (record, error) in
+                            if let error = error {
+                                NSLog("Unable to fetch record with the reference for the pet: \(error.localizedDescription)")
+                                group.leave()
                                 return
                             }
-                            
-                            PetController.shared.delete(pet: pet)
-                        }
+                            DispatchQueue.main.async {
+                                
+                                guard let record = record,
+                                    let pet = Pet(cloudKitRecord: record) else {
+                                        group.leave()
+                                        return
+                                }
+                                
+                                CKPets.append(pet)
+                                group.leave()
+                            }
+                        })
                     }
                     
+                    group.notify(queue: DispatchQueue.main) {
+                        
+                        for pet in PetController.shared.savedPets {
+                            
+                            if !CKPets.contains(pet) {
+                                
+                                PetController.shared.deleteCoreData(pet: pet)
+                            }
+                        }
+                        // After the current user is set, find user's subscription or subscribe the current user to changes
+                    }
                 }
+            } else {
+                NSLog("Unable to fetch current user")
+                return
             }
         }
-        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
