@@ -126,30 +126,9 @@ class PetSwipeViewController: UIViewController {
         
         let card = sender.view!
         let point = sender.translation(in: self.view)
-        
-//        print(sender.state)
-        
-        switch sender.state {
-        case .began:
-            print("began")
-        case .changed:
-            if point.y != 0 {
-                print(point.x, ", ", point.y)
-                card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-            }
-            break;
-        case .cancelled:
-            print("cancelled// MARK: - ")
-        case .ended:
-            print("ended")
-        case .failed:
-            print("fail")
-        default:
-            print("possible/defaule")
-        }
-        
-        
-        
+
+        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+
         let xFromCenter = card.center.x - view.center.x
         
         card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
