@@ -396,19 +396,14 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         
-        let messages: [String] = ["Find your new best friend!",
-                                  "Take home all of the pets!"]
-        
         guard let messageFont = UIFont(name: "Hiragino Sans W3", size: 18.0) else { return }
-        let rng = Int(arc4random_uniform(UInt32(messages.count)))
-        let message = messages[rng]
+        
+        let message = "Find your new best friend!"
         let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : messageFont])
         
         messageLabel.attributedText = messageToReturn
         selectBreedLabel.textColor = redColor
         sexSegmentedControl.tintColor = redColor
-//        locationButton.imageView?.tintColor = redColor
-        
         
         searhButton.layer.cornerRadius = 5.0
         
