@@ -118,6 +118,15 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     // MARK: - Actions
     
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        guard let pet = pet else {return}
+        guard let breeds = pet.breeds else {return}
+        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], pet.name as Any, ", ", "\(String(describing: breeds))." ," Sent from the Pet Rescue Planner App"], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         
         // MARK: - Returning to swipe view and bringing navigation bar back on screen

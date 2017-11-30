@@ -163,7 +163,13 @@
                             <constraint firstItem="Cpq-U6-gKj" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="bottom" constant="8" id="usX-KK-vbP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="T9a-5p-EDJ"/>
+                    <navigationItem key="navigationItem" id="T9a-5p-EDJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="7TK-cg-Ec3">
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="8og-XH-tzW" id="g5n-Jt-6jI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="faV-v6-O1V" id="8u2-tu-1wM"/>
                         <outlet property="exitButton" destination="Us6-nP-xzZ" id="3g8-Sn-5Af"/>
