@@ -108,7 +108,7 @@ extension PetController {
     }
     
     // Delete Core Data object only
-    func deleteCoreData(pet: Pet) {
+    func deleteCoreData(pet: Pet, completion: @escaping () -> Void = {}) {
         
         // Delete from MOC
         
@@ -121,10 +121,9 @@ extension PetController {
             
             // Then save changes
             self.saveToPersistantStore()
+            completion()
         }
     }
-    
-    
     
     func clearPersistentStore() {
         PetController.shared.savedPets.forEach({ delete(pet: $0) })

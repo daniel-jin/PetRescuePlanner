@@ -33,27 +33,29 @@ class PetController {
         do {
             var results = try CoreDataStack.context.fetch(request)
             
- //           results = try CoreDataStack.context.fetch(request)
-            
-            var newlySorted: [Pet] = []
-            
-            for int in 0..<sortedPetArray.count {
+            if !UserController.shared.isUserLoggedIntoiCloud {
+                return results
+            } else {
+                var newlySorted: [Pet] = []
                 
-                for pet in results {
+                for int in 0..<sortedPetArray.count {
                     
-                    guard newlySorted.count < sortedPetArray.count else { break }
-                    
-                    guard let petID = pet.id else { continue }
-                    if pet.id == sortedPetArray[int] {
+                    for pet in results {
                         
-                        if !newlySorted.flatMap({$0.id}).contains(petID) {
-                            newlySorted.insert(pet, at: 0)
+                        guard newlySorted.count < sortedPetArray.count else { break }
+                        
+                        guard let petID = pet.id else { continue }
+                        if pet.id == sortedPetArray[int] {
+                            
+                            if !newlySorted.flatMap({$0.id}).contains(petID) {
+                                newlySorted.insert(pet, at: 0)
+                            }
                         }
                     }
                 }
+                return newlySorted
             }
             
-            return newlySorted
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
