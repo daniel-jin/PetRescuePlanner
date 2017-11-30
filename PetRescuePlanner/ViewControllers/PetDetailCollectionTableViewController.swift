@@ -262,7 +262,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             if images == nil {
                 NSLog("No images found for pet")
                 // set the default image
-                self.imageArray = [#imageLiteral(resourceName: "DefaultNoBorder")]
+                self.imageArray = [#imageLiteral(resourceName: "DefaultCardIMGNoBorder")]
             }
             guard let images = images else { return }
             self.imageArray = images

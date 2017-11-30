@@ -307,7 +307,7 @@ class PetController {
             fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("No image for pet")
-                    petData.append((#imageLiteral(resourceName: "DefaultNoBorder"), pet))
+                    petData.append((#imageLiteral(resourceName: "DefaultCardIMGNoBorder"), pet))
                 }
                 guard let image = image else { dispatchGroup.leave(); return completion(nil) }
                 

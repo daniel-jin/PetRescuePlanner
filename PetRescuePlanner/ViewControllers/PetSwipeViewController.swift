@@ -50,16 +50,16 @@ class PetSwipeViewController: UIViewController {
     
     @IBOutlet weak var bottomPetNameLabel: UILabel!
     @IBOutlet weak var bottomPetBreedLabel: UILabel!
-    
-    @IBOutlet weak var bottomSwipeIndicatorImage: UIImageView!
-    
+    @IBOutlet weak var bottomAgeLabel: UILabel!
+    @IBOutlet weak var bottomImageCount: UILabel!
     
     @IBOutlet weak var topCard: UIView!
     @IBOutlet weak var topSwipeIndicatorImage: UIImageView!
     
     @IBOutlet weak var topPetNameLabel: UILabel!
     @IBOutlet weak var topPetBreedLabel: UILabel!
-    
+    @IBOutlet weak var topImageCount: UILabel!
+    @IBOutlet weak var topAge: UILabel!
     
     @IBOutlet weak var bottomCardImageView: UIImageView!
     @IBOutlet weak var topCardImageView: UIImageView!
@@ -287,15 +287,24 @@ class PetSwipeViewController: UIViewController {
             
             let pet = pets[indexIntoPets]
             let nextPet = pets[indexIntoPets + 1]
+            let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+            let breedsString: NSAttributedString = NSAttributedString(string: pet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let nameString: NSAttributedString = NSAttributedString(string: pet.1.name ?? "No pet name", attributes: [NSAttributedStringKey.foregroundColor: redColor])
+            let ageString: NSAttributedString = NSAttributedString(string: pet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let photoCountString: NSMutableAttributedString = NSMutableAttributedString(string: "Photos: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let imageCount: NSAttributedString = NSAttributedString(string: pet.1.imageIdCount ?? "0", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            photoCountString.append(imageCount)
             
             topCardImageView.image = pet.0
             bottomCardImageView.image = nextPet.0
             
-            self.topPetNameLabel.text = pet.1.name
+            self.topPetNameLabel.attributedText = nameString
             self.topPetBreedLabel.text = pet.1.breeds
+            self.topImageCount.attributedText = photoCountString
+            self.topAge.attributedText = ageString
             
             self.bottomPetNameLabel.text = nextPet.1.name
-            self.bottomPetBreedLabel.text = nextPet.1.breeds
+            self.bottomPetBreedLabel.attributedText = breedsString
             
             
             // fetch
