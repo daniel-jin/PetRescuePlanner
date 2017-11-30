@@ -112,6 +112,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .any:
             self.animal = nil
             self.animalTypeMasterButton.setTitle("Any Animal Type", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -119,6 +121,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .dog:
             self.animal = "dog"
             self.animalTypeMasterButton.setTitle("Search For Dogs", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -126,6 +130,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .cat:
             self.animal = "cat"
             self.animalTypeMasterButton.setTitle("Search For Cats", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -133,6 +139,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .bird:
             self.animal = "bird"
             self.animalTypeMasterButton.setTitle("Search For Birds", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -140,6 +148,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .reptile:
             self.animal = "reptile"
             self.animalTypeMasterButton.setTitle("Search For Reptiles", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -147,6 +157,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .horse:
             self.animal = "horse"
             self.animalTypeMasterButton.setTitle("Search For Horses", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -154,6 +166,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .barnYard:
             self.animal = "barnyard"
             self.animalTypeMasterButton.setTitle("Search For Barnyards", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -161,6 +175,8 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         case .smallFurry:
             self.animal = "smallfurry"
             self.animalTypeMasterButton.setTitle("Search For Smallfurrys", for: .normal)
+            self.breed = nil
+            self.selectBreedLabel.text = "Select Breed"
             animalTypeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
@@ -327,7 +343,9 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         if let zipTextField = zipCodeTextField.text {
             if let zip = Int(zipTextField) {
                 if isValid(zip) {
+                    
                     self.performSegue(withIdentifier: "toPetTinderPage", sender: self)
+                    
                 } else {
                     presentAlertWith(title: "Invalid Zipcode", message: "A valid zipcode is required for us to locate adoptable pets near you!", color: errorColor)
                 }
@@ -362,6 +380,7 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         // Get zipcodes from JSON to validate
         ZipCodesStore.readJson { (zipCodes) in
             self.zipArray = zipCodes
+            print("DONE READING")
         }
         
         let nc = NotificationCenter.default
@@ -396,19 +415,14 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
         
         let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
         
-        let messages: [String] = ["Find your new best friend!",
-                                  "Take home all of the pets!"]
-        
         guard let messageFont = UIFont(name: "Hiragino Sans W3", size: 18.0) else { return }
-        let rng = Int(arc4random_uniform(UInt32(messages.count)))
-        let message = messages[rng]
+        
+        let message = "Find your new best friend!"
         let messageToReturn: NSMutableAttributedString = NSMutableAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor : redColor, NSAttributedStringKey.font : messageFont])
         
         messageLabel.attributedText = messageToReturn
         selectBreedLabel.textColor = redColor
         sexSegmentedControl.tintColor = redColor
-//        locationButton.imageView?.tintColor = redColor
-        
         
         searhButton.layer.cornerRadius = 5.0
         

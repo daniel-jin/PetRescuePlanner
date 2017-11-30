@@ -70,7 +70,7 @@
                                             <constraint firstAttribute="height" constant="30" id="qbL-XX-Ot6"/>
                                             <constraint firstAttribute="width" constant="30" id="vH0-2c-dR9"/>
                                         </constraints>
-                                        <state key="normal" image="heart"/>
+                                        <state key="normal" image="EmptyHeart"/>
                                         <connections>
                                             <action selector="saveButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="S4V-ye-GFn"/>
                                         </connections>
@@ -163,7 +163,13 @@
                             <constraint firstItem="Cpq-U6-gKj" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="bottom" constant="8" id="usX-KK-vbP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="T9a-5p-EDJ"/>
+                    <navigationItem key="navigationItem" id="T9a-5p-EDJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="7TK-cg-Ec3">
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="8og-XH-tzW" id="g5n-Jt-6jI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="faV-v6-O1V" id="8u2-tu-1wM"/>
                         <outlet property="exitButton" destination="Us6-nP-xzZ" id="3g8-Sn-5Af"/>
@@ -420,7 +426,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="EmptyHeart" width="1126" height="1019"/>
         <image name="clear_btn" width="30" height="30"/>
-        <image name="heart" width="1126" height="1019"/>
     </resources>
 </document>

@@ -19,8 +19,9 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     // MARK: - Properties
     let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
-    var hideButton = true
+    var hideShelterButton = true
     var isComingFromShelter = false
+    var isSaved = false
     
     var pet: Pet? = nil
     var imageArray: [UIImage] = [] {
@@ -37,6 +38,10 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setUpUI()
     }
     
@@ -118,6 +123,15 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     // MARK: - Actions
     
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        guard let pet = pet else {return}
+        guard let breeds = pet.breeds else {return}
+        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], pet.name as Any, ", ", "\(String(describing: breeds))." ," Sent from the Pet Rescue Planner App"], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         
         // MARK: - Returning to swipe view and bringing navigation bar back on screen
@@ -134,6 +148,24 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         
         guard let pet = self.pet else { return }
+        
+        if isSaved == true {
+            
+            let petToDelete = pet
+            
+            // Delete from sorted array to update iCloud key/value store
+            guard let petID = petToDelete.id,
+                let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
+            PetController.shared.sortedPetArray.remove(at: index)
+            PetController.shared.saveToiCloud()
+            
+            // Delete from Core Data
+            PetController.shared.delete(pet: petToDelete, completion: {
+                
+                // Sync with CloudKit to update
+                PetController.shared.performFullSync()
+            })
+        }
         
         // MARK: - Saving original size to restore later
         let originalFrame = self.saveButton.frame
@@ -157,12 +189,16 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             
         }) { (finished: Bool) in
             
+            self.saveButton.setImage(self.isSaved ? #imageLiteral(resourceName: "EmptyHeart") : #imageLiteral(resourceName: "heart"), for: .normal)
+            
             // MARK: - Adding second phone vibrate
             self.impactFeedback.impactOccurred()
             
             // MARK: - Restoring to original size
             UIView.animate(withDuration: 0.25, animations: {
                 self.saveButton.frame = originalFrame
+            }, completion: { (_) in
+                self.isSaved = !self.isSaved
             })
         }   
     }
@@ -173,14 +209,16 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         
         guard let pet = pet else { return }
         
-        // MARK: - hideButton checks what view/segue is presenting the pet detail view
-        if hideButton == true {
+        // MARK: - hideShelterButton checks what view/segue is presenting the pet detail view
+        if hideShelterButton == true {
             
             // MARK: - Checking against saved pets to hide save button on currently saved pets
             if PetController.shared.savedPets.contains(pet) {
-                saveButton.isHidden = true
+                self.saveButton.imageView?.image = #imageLiteral(resourceName: "heart")
+                self.isSaved = true
             } else {
-                saveButton.isHidden = false
+                self.saveButton.imageView?.image = #imageLiteral(resourceName: "EmptyHeart")
+                self.isSaved = false
             }
             
             // MARK: - Hiding nav bar and shelter info button, also displaying exit button for module presentation
@@ -205,7 +243,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         collectionView.delegate = self
         collectionView.dataSource = self
         
-
+        
         // MARK: - Updating page control dots
         pageControl.hidesForSinglePage = true
         pageControl.currentPageIndicatorTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
@@ -224,7 +262,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
             if images == nil {
                 NSLog("No images found for pet")
                 // set the default image
-                self.imageArray = [#imageLiteral(resourceName: "doge")]
+                self.imageArray = [#imageLiteral(resourceName: "DefaultCardIMGNoBorder")]
             }
             guard let images = images else { return }
             self.imageArray = images
