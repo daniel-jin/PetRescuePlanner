@@ -70,7 +70,7 @@
                                             <constraint firstAttribute="height" constant="30" id="qbL-XX-Ot6"/>
                                             <constraint firstAttribute="width" constant="30" id="vH0-2c-dR9"/>
                                         </constraints>
-                                        <state key="normal" image="heart"/>
+                                        <state key="normal" image="EmptyHeart"/>
                                         <connections>
                                             <action selector="saveButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="S4V-ye-GFn"/>
                                         </connections>
@@ -426,7 +426,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="EmptyHeart" width="1126" height="1019"/>
         <image name="clear_btn" width="30" height="30"/>
-        <image name="heart" width="1126" height="1019"/>
     </resources>
 </document>

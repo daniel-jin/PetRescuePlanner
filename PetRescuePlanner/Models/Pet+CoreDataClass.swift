@@ -106,3 +106,9 @@ extension CKRecord {
         pet.cloudKitRecordID = recordID
     }
 }
+
+extension Pet {
+    static func ==(lhs:Pet, rhs:Pet) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
