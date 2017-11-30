@@ -63,11 +63,12 @@ extension PetController {
             petToSave.cloudKitRecordID = pet.cloudKitRecordID
             
             guard shouldSaveContext else { return }
+            
+            PetController.shared.sortedPetArray.append(petID)
+            PetController.shared.saveToiCloud()
+            
             saveToPersistantStore()
         }
-        
-        PetController.shared.sortedPetArray.append(petID)
-        PetController.shared.saveToiCloud()
     }
     
     
