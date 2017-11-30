@@ -125,10 +125,10 @@ class PetSwipeViewController: UIViewController {
         rightSwipeButton.isEnabled = false
         
         let card = sender.view!
-        let point = sender.translation(in: view)
-        
+        let point = sender.translation(in: self.view)
+
         card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-        
+
         let xFromCenter = card.center.x - view.center.x
         
         card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
