@@ -87,6 +87,23 @@ class CloudKitManager {
         }
     }
     
+    func fetchPetIDOnly(withID recordID: CKRecordID, completion: @escaping (String) -> Void) {
+        
+        publicDatabase.fetch(withRecordID: recordID) { (record, error) in
+            
+            if let error = error {
+                NSLog("Error fetching record \(error)")
+                return
+            }
+            
+            if let record = record {
+                completion(record[API.Keys().idKey] as! String)
+            }
+            
+        }
+        
+    }
+    
     func fetchRecordsWithType(_ type: String,
                               predicate: NSPredicate = NSPredicate(value: true),
                               sortDescriptors: [NSSortDescriptor]? = nil,

@@ -14,6 +14,11 @@ import CloudKit
 @objc(Pet)
 class Pet: NSManagedObject, CloudKitSyncable {
     
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        print("New pet: \(self)")
+    }
+    
     var cloudKitRecordID: CKRecordID?
     
     // MARK: - Computed Properties
@@ -104,5 +109,11 @@ extension CKRecord {
         self.setValue(pet.imageIdCount, forKey: "imageIdCount")
         
         pet.cloudKitRecordID = recordID
+    }
+}
+
+extension Pet {
+    static func ==(lhs:Pet, rhs:Pet) -> Bool {
+        return lhs.id == rhs.id
     }
 }

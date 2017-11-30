@@ -75,24 +75,32 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
             
             // Delete from sorted array to update iCloud key/value store
             
-            guard let petID = petToDelete.id,
-                let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
-            PetController.shared.sortedPetArray.remove(at: index)
-            PetController.shared.saveToiCloud()
-            
-            
-            // Delete from Core Data
-            
-            PetController.shared.delete(pet: petToDelete, completion: {
+            if UserController.shared.isUserLoggedIntoiCloud {
+                guard let petID = petToDelete.id,
+                    let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
+                PetController.shared.sortedPetArray.remove(at: index)
+                PetController.shared.saveToiCloud()
+                
+                PetController.shared.delete(pet: petToDelete, completion: {
+                    
+                    DispatchQueue.main.async {
+                        self.pets.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    }
+                    
+                    // Sync with CloudKit to update
+                    PetController.shared.performFullSync()
+                })
+                
+            } else {
                 
                 DispatchQueue.main.async {
-                    self.pets.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    PetController.shared.deleteCoreData(pet: petToDelete, completion: {
+                        self.pets.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    })
                 }
-                
-                // Sync with CloudKit to update
-                PetController.shared.performFullSync()
-            })
+            }
         }
     }
 
@@ -108,7 +116,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
             let pet = pets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
-            destinationVC.hideButton = false
+            destinationVC.hideShelterButton = false
             destinationVC.pet = pet
             
         }
