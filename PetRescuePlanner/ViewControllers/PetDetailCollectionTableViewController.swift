@@ -118,19 +118,21 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     // MARK: - Actions
     
+    // Mark: - Share Button
+    
     @IBAction func shareButtonTapped(_ sender: Any) {
-//        guard let pet = pet else {return}
-//        guard let breeds = pet.breeds else {return}
-//        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], pet.name as Any, ", ", "\(String(describing: breeds))." ," Sent from the Pet Rescue Planner App"], applicationActivities: nil)
-//        activityVC.popoverPresentationController?.sourceView = self.view
-//
-//        self.present(activityVC, animated: true, completion: nil)
+        guard let pet = pet else {return}
+        guard let breeds = pet.breeds?.lowercased() else {return}
+        guard let name = pet.name else {return}
+        guard let AppStoreUrl = AppStoreUrl else {return}
         
-        if let shareApp:URL = URL(string: "https://itunes.apple.com/us/app/pet-rescue-planner/id1313862743?mt=8") {
-            let application: UIApplication = UIApplication.shared
-            application.open(shareApp)
-        }
+        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], "Check out this \(String(describing: breeds)) for adoption. it's name is \(String(describing: name)) and it needs a home. Find this pet and many more on \(String(describing: petApp))"], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
     }
+    
+    let AppStoreUrl = URL(string:"https://itunes.apple.com/us/app/pet-rescue-planner/id1313862743?mt=8")
+    let petApp = "petRescuePlanner://\(Pet.self)"
     
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         
