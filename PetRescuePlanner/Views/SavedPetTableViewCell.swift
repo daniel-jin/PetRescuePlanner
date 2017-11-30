@@ -36,7 +36,7 @@ class SavedPetTableViewCell: UITableViewCell {
             PetController.shared.fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("error fetchingpet in pet controller")
-                    self.petImageView.image = #imageLiteral(resourceName: "doge")
+                    self.petImageView.image = #imageLiteral(resourceName: "DefaultNoBorder")
                 }
                 guard let image = image else { return }
                 DispatchQueue.main.async {

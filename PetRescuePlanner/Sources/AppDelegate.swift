@@ -34,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedStringKey.foregroundColor: UIColor.white]
         navBar.tintColor = UIColor.white
         
+//        PetController.shared.sortedPetArray = []
+//        PetController.shared.saveToiCloud()
+        
+        PetController.shared.loadFromiCloud()
+        
         return true
     }
     
