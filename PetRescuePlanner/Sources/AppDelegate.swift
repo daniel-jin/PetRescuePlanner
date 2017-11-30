@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        PetController.shared.sortedPetArray = []
 //        PetController.shared.saveToiCloud()
-        
+//
         PetController.shared.loadFromiCloud()
         
         return true
