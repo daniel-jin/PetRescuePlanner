@@ -41,12 +41,17 @@ class PetController {
                 
                 for pet in results {
                     
+                    guard newlySorted.count < sortedPetArray.count else { break }
+                    
+                    guard let petID = pet.id else { continue }
                     if pet.id == sortedPetArray[int] {
-                        newlySorted.insert(pet, at: 0)
+                        
+                        if !newlySorted.flatMap({$0.id}).contains(petID) {
+                            newlySorted.insert(pet, at: 0)
+                        }
                     }
                 }
             }
-            
             return newlySorted
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
@@ -63,7 +68,7 @@ class PetController {
     let iCloudStoreKey = "iCloudStore"
     func saveToiCloud() {
         iCloudKeyStore?.set(sortedPetArray, forKey: iCloudStoreKey)
-//        iCloudKeyStore?.synchronize()
+        iCloudKeyStore?.synchronize()
     }
     
     func loadFromiCloud() {
@@ -89,7 +94,7 @@ class PetController {
     
     
     func fetchPetsFor(count: String, method: String, shelterId: String?, location: String?, animal: String?, breed: String?, size: String?, sex: String?, age: String?, offset: String?, completion: @escaping (_ success: Bool, _ petList: [Pet]?, _ offset: String?) -> Void) {
-                
+        
         let output = responseFormat
         let apiKey = parameters.apiKey
         let baseUrl = URL(string: parameters.baseUrl)!
@@ -196,7 +201,7 @@ class PetController {
             }
             
             completion(true, filteredPets, lastOffset)
-            return 
+            return
             }.resume()
     }
     
@@ -226,7 +231,7 @@ class PetController {
             let imageReturned = UIImage(data: data)
             
             completion(true, imageReturned)
-        }.resume()
+            }.resume()
     }
     
     func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
@@ -276,7 +281,7 @@ class PetController {
                 
                 dispatchGroup.leave()
                 
-            }.resume()
+                }.resume()
         }
         dispatchGroup.notify(queue: .main) {
             
@@ -301,7 +306,7 @@ class PetController {
         for index in 0...pets.count - 1 {
             
             let pet = pets[index]
-
+            
             dispatchGroup.enter()
             
             fetchImageFor(pet: pet, number: 2, completion: { (success, image) in

@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,8 +37,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        PetController.shared.sortedPetArray = []
 //        PetController.shared.saveToiCloud()
-//
+
         PetController.shared.loadFromiCloud()
+        
+        /******* DEBUG CODE, DELETE LATER ******/
+        let moc = CoreDataStack.context
+        let nc = NotificationCenter.default
+        nc.addObserver(forName: .NSManagedObjectContextObjectsDidChange, object: moc, queue: nil) { (note) in
+            if let insertedObjects = note.userInfo?[NSInsertedObjectsKey] {
+                print("inserted \(insertedObjects)")
+            }
+        }
         
         return true
     }
