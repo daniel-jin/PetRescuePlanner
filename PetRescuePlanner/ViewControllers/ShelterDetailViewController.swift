@@ -33,8 +33,8 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         
         DispatchQueue.main.async {
             let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-            guard let michaelMarker = UIFont(name: "Michael Marker Lite", size: 18.0) else { return }
-            let shelterName: NSMutableAttributedString = NSMutableAttributedString(string: shelter.name, attributes: [NSAttributedStringKey.font : michaelMarker, NSAttributedStringKey.foregroundColor: redColor])
+            guard let messageFont = UIFont(name: "Hiragino Sans W3", size: 18.0) else { return }
+            let shelterName: NSMutableAttributedString = NSMutableAttributedString(string: shelter.name, attributes: [NSAttributedStringKey.font : messageFont, NSAttributedStringKey.foregroundColor: redColor])
             self.shelterNameLabel.attributedText = shelterName
             self.numberButton.setTitle(shelter.phone, for: .normal)
             self.emailButton.setTitle(shelter.email, for: .normal)
@@ -192,9 +192,29 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
     @IBAction func AddressButtonTapped(_ sender: Any) {
         
         guard let shelter = shelter else { return }
+        if shelter.latitude != ShelterKeys.fakeLanLon && shelter.latitude == shelter.latitude && shelter.longitude != ShelterKeys.fakeLanLon && shelter.longitude == shelter.longitude {
+            let mapsDirectionURL = URL(string: "http://maps.apple.com/?daddr=\(shelter.latitude),\(shelter.longitude)")!
+            UIApplication.shared.open(mapsDirectionURL, completionHandler: nil)
+        } else {
+            presentAlertWith(title: "No Directions", message: "Could not get directions", color: errorColor)
+        }
+    }
+    let errorColor = UIColor.red
+    func presentAlertWith(title: String, message: String, color: UIColor) {
         
-        let mapsDirectionURL = URL(string: "http://maps.apple.com/?daddr=\(shelter.latitude),\(shelter.longitude)")!
-        UIApplication.shared.open(mapsDirectionURL, completionHandler: nil)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let subview = alertController.view.subviews.first! as UIView
+        let alertContentView = subview.subviews.first! as UIView
+        alertContentView.backgroundColor = color
+        alertContentView.layer.cornerRadius = 5.0
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     @IBAction func viewPetsAtShelterButtonTapped(_ sender: Any) {

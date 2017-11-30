@@ -25,6 +25,8 @@ class PetSwipeViewController: UIViewController {
     var pets: [(UIImage, Pet)] = [] {
         didSet {
             DispatchQueue.main.async {
+                self.leftSwipeButton.isEnabled = true
+                self.rightSwipeButton.isEnabled = true
                 if self.pets.count > 1 {
                     self.createCard()
                 } else {
@@ -72,6 +74,9 @@ class PetSwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        leftSwipeButton.isEnabled = false
+        rightSwipeButton.isEnabled = false
+        
         if !Reachability.isConnectedToNetwork() {
             let networkErrorAlert = UIAlertController(title: "No Internet Connection", message: "Please check your cellular or wifi connection and try again.", preferredStyle: .alert)
             let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -114,11 +119,16 @@ class PetSwipeViewController: UIViewController {
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         
+        guard pets.count > 0 else { return }
+        
+        leftSwipeButton.isEnabled = false
+        rightSwipeButton.isEnabled = false
+        
         let card = sender.view!
-        let point = sender.translation(in: view)
-        
+        let point = sender.translation(in: self.view)
+
         card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-        
+
         let xFromCenter = card.center.x - view.center.x
         
         card.transform = CGAffineTransform(rotationAngle: xFromCenter / divisor)
@@ -317,6 +327,10 @@ class PetSwipeViewController: UIViewController {
     }
     
     func hardResetCard() {
+        
+        leftSwipeButton.isEnabled = true
+        rightSwipeButton.isEnabled = true
+        
         self.topCard.isHidden = true
         self.topCardImageView.backgroundColor = UIColor.clear
         
@@ -337,6 +351,10 @@ class PetSwipeViewController: UIViewController {
     }
     
     func resetCard() {
+        
+        leftSwipeButton.isEnabled = true
+        rightSwipeButton.isEnabled = true 
+        
         UIView.animate(withDuration: 0.3) {
             
             self.topCard.center = self.bottomCard.center
@@ -418,7 +436,7 @@ class PetSwipeViewController: UIViewController {
             
             let destinationVC = segue.destination as? PetDetailCollectionTableViewController
             destinationVC?.pet = pet.1
-            
+            destinationVC?.hideButton = true
             
         }
         

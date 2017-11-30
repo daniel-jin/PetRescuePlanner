@@ -11,12 +11,12 @@ import CoreData
 import CloudKit
 
 extension PetController {
-
+    
     // MARK: - SaveToPersistantStore()
     func saveToPersistantStore() {
         
         let moc = CoreDataStack.context
-
+        
         do {
             return try moc.save()
         } catch {
@@ -41,11 +41,10 @@ extension PetController {
             
             // There is no duplicate - create Pet object for Core Data saving
             let petToSave = Pet(context: CoreDataStack.context)
-
+            
             petToSave.age = pet.age
             petToSave.animal = pet.animal
             petToSave.breeds = pet.breeds
-            petToSave.cloudKitRecordID = pet.cloudKitRecordID
             petToSave.contactInfo = pet.contactInfo
             petToSave.dateAdded = pet.dateAdded
             petToSave.id = pet.id
@@ -66,10 +65,13 @@ extension PetController {
             guard shouldSaveContext else { return }
             saveToPersistantStore()
         }
+        
+        PetController.shared.sortedPetArray.append(petID)
+        PetController.shared.saveToiCloud()
     }
     
     
-    // Delete
+    // Delete from Core Data and update user's CKRef array
     func delete(pet: Pet, completion: @escaping () -> Void = {}) {
         
         if let petRecordID = pet.cloudKitRecordID,
@@ -92,19 +94,41 @@ extension PetController {
                         return
                     }
                     // Delete from MOC
-                    guard let moc = pet.managedObjectContext else {
-                        completion()
-                        return
-                    }
-                    moc.delete(pet)
                     
-                    // Then save changes
-                    self.saveToPersistantStore()
-                    completion()
+                    DispatchQueue.main.async {
+                        
+                        guard let moc = pet.managedObjectContext else {
+                            completion()
+                            return
+                        }
+                        moc.delete(pet)
+                        
+                        // Then save changes
+                        self.saveToPersistantStore()
+                        completion()
+                    }
                 }
             }
         }
     }
+    
+    // Delete Core Data object only
+    func deleteCoreData(pet: Pet) {
+        
+        // Delete from MOC
+        
+        DispatchQueue.main.async {
+            
+            guard let moc = pet.managedObjectContext else {
+                return
+            }
+            moc.delete(pet)
+            
+            // Then save changes
+            self.saveToPersistantStore()
+        }
+    }
+    
     
     
     func clearPersistentStore() {

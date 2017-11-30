@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="MichaelMarkerLite-Regular.ttf">
-            <string>MichaelMarkerLite-Regular</string>
+        <array key="HiraginoKakuGothic.ttc">
+            <string>HiraginoSans-W3</string>
         </array>
     </customFonts>
     <scenes>
@@ -47,8 +47,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mcH-ke-cVS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MichaelMarkerLite-Regular" family="Michael Marker Lite" pointSize="21"/>
-                                <state key="normal" title="Find more pets at this shelter.">
+                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                <state key="normal" title="Find more pets at this shelter">
                                     <color key="titleColor" red="0.9881489873" green="0.98829060790000001" blue="0.9881181121" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -143,7 +143,7 @@
                         <viewLayoutGuide key="safeArea" id="3Ic-DD-DQs"/>
                     </view>
                     <navigationItem key="navigationItem" id="AfL-t2-hx8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="lVL-Mc-HTy">
+                        <barButtonItem key="rightBarButtonItem" image="SavedPetsIcon" id="lVL-Mc-HTy">
                             <color key="tintColor" red="1" green="0.99305898579999996" blue="0.98648353379999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="toSavedPetsButtonTapped:" destination="uUa-0m-lGg" id="Zcu-wI-xnp"/>
@@ -200,4 +200,7 @@
             <point key="canvasLocation" x="532" y="224"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SavedPetsIcon" width="33" height="27"/>
+    </resources>
 </document>

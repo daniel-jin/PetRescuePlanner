@@ -15,10 +15,10 @@ class LaunchScreenViewController: UIViewController {
     
     var errorColor = UIColor.red
     var warningColor = UIColor.yellow
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         cloudKitManager.checkCloudKitAvailability { (success) in
             // iCloud account not logged in
             if !success {
@@ -40,19 +40,92 @@ class LaunchScreenViewController: UIViewController {
                     } else {
                         // There is already a current user - go to customized search screen
                         UserController.shared.isUserLoggedIntoiCloud = true
-                        DispatchQueue.main.async {
-                            self.changeRootViewController()
+                        
+                        guard let currUser = UserController.shared.currentUser else {
+                            return
+                        }
+                        
+                        if currUser.savedPets.count < PetController.shared.savedPets.count {
+                            
+                            var CKPets: [Pet] = []
+                            
+                            let group = DispatchGroup()
+                            
+                            for petRef in currUser.savedPets {
+                                
+                                group.enter()
+                                
+                                self.cloudKitManager.fetchRecord(withID: petRef.recordID, completion: { (record, error) in
+                                    if let error = error {
+                                        NSLog("Unable to fetch record with the reference for the pet: \(error.localizedDescription)")
+                                        group.leave()
+                                        return
+                                    }
+                                    DispatchQueue.main.async {
+                                        
+                                        guard let record = record,
+                                            let pet = Pet(cloudKitRecord: record) else {
+                                                group.leave()
+                                                return
+                                        }
+                                        
+                                        CKPets.append(pet)
+                                        group.leave()
+                                    }
+                                })
+                            }
+                            
+                            group.notify(queue: DispatchQueue.main) {
+                                
+                                for pet in PetController.shared.savedPets {
+                                    
+                                    if !CKPets.contains(pet) {
+                                        
+                                        PetController.shared.deleteCoreData(pet: pet)
+                                    }
+                                }
+                                UserController.shared.checkSubscription(completion: { (success) in
+                                    if !success {
+                                        UserController.shared.subscribeToPetRefUpdates()
+                                    }
+                                    
+                                    DispatchQueue.main.async {
+                                        self.changeRootViewController()
+                                    }
+                                })
+                                
+                                // After the current user is set, find user's subscription or subscribe the current user to changes
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.changeRootViewController()
+                            }
+                            // After the current user is set, find user's subscription or subscribe the current user to changes
+                            UserController.shared.checkSubscription(completion: { (success) in
+                                if !success {
+                                    UserController.shared.subscribeToPetRefUpdates()
+                                }
+                            })
+                            
+                            DispatchQueue.main.async {
+                                self.changeRootViewController()
+                            }
                         }
                     }
+                    
+                    
                 })
             }
+        }
+        DispatchQueue.main.async {
+            self.changeRootViewController()
         }
     }
     
     func changeRootViewController() {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+        
         let myStoryboard = UIStoryboard(name: "CustomizableSearch", bundle: nil)
         let searchViewController = myStoryboard.instantiateViewController(withIdentifier: "SearchViewController")
         
