@@ -287,6 +287,7 @@ class PetSwipeViewController: UIViewController {
             
             let pet = pets[indexIntoPets]
             let nextPet = pets[indexIntoPets + 1]
+            
             let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
             let breedsString: NSAttributedString = NSAttributedString(string: pet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
             let nameString: NSAttributedString = NSAttributedString(string: pet.1.name ?? "No pet name", attributes: [NSAttributedStringKey.foregroundColor: redColor])
@@ -299,13 +300,21 @@ class PetSwipeViewController: UIViewController {
             bottomCardImageView.image = nextPet.0
             
             self.topPetNameLabel.attributedText = nameString
-            self.topPetBreedLabel.text = pet.1.breeds
+            self.topPetBreedLabel.attributedText = breedsString
             self.topImageCount.attributedText = photoCountString
             self.topAge.attributedText = ageString
             
-            self.bottomPetNameLabel.text = nextPet.1.name
-            self.bottomPetBreedLabel.attributedText = breedsString
+            let bottomBreed: NSAttributedString = NSAttributedString(string: nextPet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let bottomName: NSAttributedString = NSAttributedString(string: nextPet.1.name ?? "No pet name", attributes: [NSAttributedStringKey.foregroundColor: redColor])
+            let bottomAge: NSAttributedString = NSAttributedString(string: nextPet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let bottomPhoto: NSMutableAttributedString = NSMutableAttributedString(string: "Photos: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let bottomIMage: NSAttributedString = NSAttributedString(string: nextPet.1.imageIdCount ?? "0", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            bottomPhoto.append(bottomIMage)
             
+            self.bottomPetNameLabel.attributedText = bottomName
+            self.bottomPetBreedLabel.attributedText = bottomBreed
+            self.bottomAgeLabel.attributedText = bottomAge
+            self.bottomImageCount.attributedText = bottomPhoto
             
             // fetch
             if indexIntoPets + 5 == pets.count - 1{
