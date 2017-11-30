@@ -30,44 +30,38 @@ extension PetController {
         
         guard let petID = pet.id else { return }
         
-        if let duplicatePet = PetController.shared.savedPets.filter({ $0.id == petID}).first {
-            // There is a duplicate
-            duplicatePet.dateAdded = Date() as NSDate
+        DispatchQueue.main.async {
             
-            guard shouldSaveContext else { return }
-            saveToPersistantStore()
-            return
-        } else {
-            
-            // There is no duplicate - create Pet object for Core Data saving
-            let petToSave = Pet(context: CoreDataStack.context)
-            
-            petToSave.age = pet.age
-            petToSave.animal = pet.animal
-            petToSave.breeds = pet.breeds
-            petToSave.contactInfo = pet.contactInfo
-            petToSave.dateAdded = pet.dateAdded
-            petToSave.id = pet.id
-            petToSave.imageIdCount = pet.imageIdCount
-            petToSave.lastUpdate = pet.lastUpdate
-            petToSave.media = pet.media
-            petToSave.mix = pet.mix
-            petToSave.name = pet.name
-            petToSave.options = pet.options
-            petToSave.petDescription = pet.petDescription
-            petToSave.recordIDString = pet.recordIDString
-            petToSave.sex = pet.sex
-            petToSave.shelterID = pet.shelterID
-            petToSave.size = pet.size
-            petToSave.status = pet.status
-            petToSave.cloudKitRecordID = pet.cloudKitRecordID
-            
-            guard shouldSaveContext else { return }
-            
-            PetController.shared.sortedPetArray.append(petID)
-            PetController.shared.saveToiCloud()
-            
-            saveToPersistantStore()
+            if PetController.shared.savedPets.filter({ $0.id == petID}).count == 0 {
+                // There is no duplicate - create Pet object for Core Data saving
+                let petToSave = Pet(context: CoreDataStack.context)
+                
+                petToSave.age = pet.age
+                petToSave.animal = pet.animal
+                petToSave.breeds = pet.breeds
+                petToSave.contactInfo = pet.contactInfo
+                petToSave.dateAdded = pet.dateAdded
+                petToSave.id = pet.id
+                petToSave.imageIdCount = pet.imageIdCount
+                petToSave.lastUpdate = pet.lastUpdate
+                petToSave.media = pet.media
+                petToSave.mix = pet.mix
+                petToSave.name = pet.name
+                petToSave.options = pet.options
+                petToSave.petDescription = pet.petDescription
+                petToSave.recordIDString = pet.recordIDString
+                petToSave.sex = pet.sex
+                petToSave.shelterID = pet.shelterID
+                petToSave.size = pet.size
+                petToSave.status = pet.status
+                petToSave.cloudKitRecordID = pet.cloudKitRecordID
+                
+                guard shouldSaveContext else { return }
+                self.saveToPersistantStore()
+                
+                PetController.shared.sortedPetArray.append(petID)
+                PetController.shared.saveToiCloud()
+            }
         }
     }
     

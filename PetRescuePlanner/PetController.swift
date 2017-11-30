@@ -33,7 +33,7 @@ class PetController {
         do {
             var results = try CoreDataStack.context.fetch(request)
             
-            results = try CoreDataStack.context.fetch(request)
+ //           results = try CoreDataStack.context.fetch(request)
             
             var newlySorted: [Pet] = []
             
@@ -41,8 +41,14 @@ class PetController {
                 
                 for pet in results {
                     
+                    guard newlySorted.count < sortedPetArray.count else { break }
+                    
+                    guard let petID = pet.id else { continue }
                     if pet.id == sortedPetArray[int] {
-                        newlySorted.insert(pet, at: 0)
+                        
+                        if !newlySorted.flatMap({$0.id}).contains(petID) {
+                            newlySorted.insert(pet, at: 0)
+                        }
                     }
                 }
             }
@@ -63,16 +69,43 @@ class PetController {
     let iCloudStoreKey = "iCloudStore"
     func saveToiCloud() {
         iCloudKeyStore?.set(sortedPetArray, forKey: iCloudStoreKey)
-//        iCloudKeyStore?.synchronize()
+        iCloudKeyStore?.synchronize()
     }
     
     func loadFromiCloud() {
         
         iCloudKeyStore?.synchronize()
         
-        guard let orderedPetArray = iCloudKeyStore?.array(forKey: iCloudStoreKey) as? [String] else { return }
+        guard let orderedPetArray = iCloudKeyStore?.array(forKey: iCloudStoreKey) as? [String] else {
+            return
+        }
         
-        sortedPetArray = orderedPetArray
+        guard let currUser = UserController.shared.currentUser else {
+            return
+        }
+        
+        if orderedPetArray.count != currUser.savedPets.count {
+            
+            var newOrderedPetArray: [String] = []
+            
+            let group = DispatchGroup()
+            
+            for petRef in currUser.savedPets {
+                group.enter()
+                
+                cloudKitManager.fetchPetIDOnly(withID: petRef.recordID, completion: { (petID) in
+                    newOrderedPetArray.append(petID)
+                    group.leave()
+                })
+            }
+            
+            group.notify(queue: DispatchQueue.main) {
+                self.sortedPetArray = newOrderedPetArray
+                self.saveToiCloud()
+            }
+        } else {
+            sortedPetArray = orderedPetArray
+        }
     }
     
     
