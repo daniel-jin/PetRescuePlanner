@@ -32,9 +32,7 @@ extension PetController {
         
         DispatchQueue.main.async {
             
-            
             if PetController.shared.savedPets.filter({ $0.id == petID}).count == 0 {
-
                 // There is no duplicate - create Pet object for Core Data saving
                 let petToSave = Pet(context: CoreDataStack.context)
                 
@@ -65,7 +63,6 @@ extension PetController {
                 PetController.shared.saveToiCloud()
             }
         }
-        
     }
     
     
@@ -111,7 +108,7 @@ extension PetController {
     }
     
     // Delete Core Data object only
-    func deleteCoreData(pet: Pet) {
+    func deleteCoreData(pet: Pet, completion: @escaping () -> Void = {}) {
         
         // Delete from MOC
         
@@ -124,10 +121,9 @@ extension PetController {
             
             // Then save changes
             self.saveToPersistantStore()
+            completion()
         }
     }
-    
-    
     
     func clearPersistentStore() {
         PetController.shared.savedPets.forEach({ delete(pet: $0) })

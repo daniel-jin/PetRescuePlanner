@@ -33,26 +33,29 @@ class PetController {
         do {
             var results = try CoreDataStack.context.fetch(request)
             
-            results = try CoreDataStack.context.fetch(request)
-            
-            var newlySorted: [Pet] = []
-            
-            for int in 0..<sortedPetArray.count {
+            if !UserController.shared.isUserLoggedIntoiCloud {
+                return results
+            } else {
+                var newlySorted: [Pet] = []
                 
-                for pet in results {
+                for int in 0..<sortedPetArray.count {
                     
-                    guard newlySorted.count < sortedPetArray.count else { break }
-                    
-                    guard let petID = pet.id else { continue }
-                    if pet.id == sortedPetArray[int] {
+                    for pet in results {
                         
-                        if !newlySorted.flatMap({$0.id}).contains(petID) {
-                            newlySorted.insert(pet, at: 0)
+                        guard newlySorted.count < sortedPetArray.count else { break }
+                        
+                        guard let petID = pet.id else { continue }
+                        if pet.id == sortedPetArray[int] {
+                            
+                            if !newlySorted.flatMap({$0.id}).contains(petID) {
+                                newlySorted.insert(pet, at: 0)
+                            }
                         }
                     }
                 }
+                return newlySorted
             }
-            return newlySorted
+            
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
             return []
@@ -75,9 +78,36 @@ class PetController {
         
         iCloudKeyStore?.synchronize()
         
-        guard let orderedPetArray = iCloudKeyStore?.array(forKey: iCloudStoreKey) as? [String] else { return }
+        guard let orderedPetArray = iCloudKeyStore?.array(forKey: iCloudStoreKey) as? [String] else {
+            return
+        }
         
-        sortedPetArray = orderedPetArray
+        guard let currUser = UserController.shared.currentUser else {
+            return
+        }
+        
+        if orderedPetArray.count != currUser.savedPets.count {
+            
+            var newOrderedPetArray: [String] = []
+            
+            let group = DispatchGroup()
+            
+            for petRef in currUser.savedPets {
+                group.enter()
+                
+                cloudKitManager.fetchPetIDOnly(withID: petRef.recordID, completion: { (petID) in
+                    newOrderedPetArray.append(petID)
+                    group.leave()
+                })
+            }
+            
+            group.notify(queue: DispatchQueue.main) {
+                self.sortedPetArray = newOrderedPetArray
+                self.saveToiCloud()
+            }
+        } else {
+            sortedPetArray = orderedPetArray
+        }
     }
     
     
@@ -312,7 +342,7 @@ class PetController {
             fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
                 if !success {
                     NSLog("No image for pet")
-                    petData.append((#imageLiteral(resourceName: "DefaultNoBorder"), pet))
+                    petData.append((#imageLiteral(resourceName: "DefaultCardIMGNoBorder"), pet))
                 }
                 guard let image = image else { dispatchGroup.leave(); return completion(nil) }
                 

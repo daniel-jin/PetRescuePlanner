@@ -18,6 +18,12 @@ class UserController {
     
     var currentUser: User? {
         didSet {
+            
+            //        PetController.shared.sortedPetArray = []
+            //        PetController.shared.saveToiCloud()
+            
+            PetController.shared.loadFromiCloud()
+            
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: CloudKit.CurrentUserWasSetNotification, object: nil)
             }
