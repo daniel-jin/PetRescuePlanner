@@ -160,7 +160,7 @@ class ShelterDetailViewController: UIViewController, MFMailComposeViewController
         }
     }
     // Mark: - clean up a bit have all the letters that are asigned to the same number on the same row
-    let letterDictionary: [Character: Character] = ["a" : "2",
+    let letterDictionary: [Character: Character] = ["a" : "2", "A": "2",
                                                     "b" : "2",
                                                     "c" : "2",
                                                     "d" : "3",

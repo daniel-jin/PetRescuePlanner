@@ -119,12 +119,17 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     // MARK: - Actions
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        guard let pet = pet else {return}
-        guard let breeds = pet.breeds else {return}
-        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], pet.name as Any, ", ", "\(String(describing: breeds))." ," Sent from the Pet Rescue Planner App"], applicationActivities: nil)
-        activityVC.popoverPresentationController?.sourceView = self.view
+//        guard let pet = pet else {return}
+//        guard let breeds = pet.breeds else {return}
+//        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], pet.name as Any, ", ", "\(String(describing: breeds))." ," Sent from the Pet Rescue Planner App"], applicationActivities: nil)
+//        activityVC.popoverPresentationController?.sourceView = self.view
+//
+//        self.present(activityVC, animated: true, completion: nil)
         
-        self.present(activityVC, animated: true, completion: nil)
+        if let shareApp:URL = URL(string: "https://itunes.apple.com/us/app/pet-rescue-planner/id1313862743?mt=8") {
+            let application: UIApplication = UIApplication.shared
+            application.open(shareApp)
+        }
     }
     
     @IBAction func exitButtonTapped(_ sender: UIButton) {
@@ -214,7 +219,7 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         collectionView.delegate = self
         collectionView.dataSource = self
         
-
+        
         // MARK: - Updating page control dots
         pageControl.hidesForSinglePage = true
         pageControl.currentPageIndicatorTintColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
