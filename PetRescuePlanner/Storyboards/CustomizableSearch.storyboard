@@ -431,7 +431,7 @@
                         <viewLayoutGuide key="safeArea" id="2n6-9o-eZH"/>
                     </view>
                     <navigationItem key="navigationItem" id="2oA-Bd-EhI">
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="dSb-2K-rwk">
+                        <barButtonItem key="rightBarButtonItem" image="SavedPetsIcon" id="dSb-2K-rwk">
                             <connections>
                                 <action selector="toSavedPetsButtonTapped:" destination="tpd-qM-bBm" id="mS5-qC-nn9"/>
                             </connections>
@@ -482,11 +482,11 @@
             <objects>
                 <viewController id="pmx-fd-Gbv" customClass="BreedSearchContainerViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wcI-oj-o1W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="353.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kwD-bt-gpJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="353.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -609,7 +609,7 @@
                 <navigationController storyboardIdentifier="SearchViewController" automaticallyAdjustsScrollViewInsets="NO" id="odD-Uw-ZzO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6lC-wu-BIv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -624,5 +624,6 @@
     </scenes>
     <resources>
         <image name="Icon-60" width="29" height="29"/>
+        <image name="SavedPetsIcon" width="33" height="27"/>
     </resources>
 </document>
