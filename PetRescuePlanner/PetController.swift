@@ -278,7 +278,7 @@ class PetController {
     
     func fetchAllPetImages(pet: Pet, completion: @escaping ([UIImage]?) -> Void) {
         
-        guard let lastId = pet.imageIdCount else { return completion([#imageLiteral(resourceName: "DefaultNoBorder")]) }
+        guard let lastId = pet.imageIdCount else { return completion([#imageLiteral(resourceName: "DefaultCardIMGNoBorder")]) }
         let dispatchGroup = DispatchGroup()
         let count = Int(lastId) ?? 0
         
