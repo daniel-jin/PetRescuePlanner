@@ -102,8 +102,8 @@
                                 <state key="normal">
                                     <color key="titleColor" red="0.865829289" green="0.2192292213" blue="0.37388807540000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <state key="highlighted" title="asfsad">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="0.865829289" green="0.2192292213" blue="0.37388807540000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="numberButtonTapped:" destination="uUa-0m-lGg" eventType="touchUpInside" id="JRf-Cz-OFl"/>

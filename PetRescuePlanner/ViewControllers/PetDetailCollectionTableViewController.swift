@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Messages
 
 class PetDetailCollectionTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -129,14 +130,16 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         guard let pet = pet else {return}
         guard let breeds = pet.breeds?.lowercased() else {return}
         guard let name = pet.name else {return}
-        
-        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], "Check out this \(String(describing: breeds)) for adoption. it's name is \(String(describing: name)) and it needs a home. Find this pet and many more on \(String(describing: petApp))"], applicationActivities: nil)
+        let sheOrHe: String = ""
+//        if pet.sex =
+    
+        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], "Check out this \(String(describing: breeds)) for adoption. it's name is \(String(describing: name)) and it needs a home. Find this pet and many more on \(String(describing: petApp)). If you don't have our app download it at \(String(describing: appStoreString))."], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }
     
-    let AppStoreUrl = "https://itunes.apple.com/us/app/pet-rescue-planner/id1313862743?mt=8"
-    let petApp = "petRescuePlanner://\(Pet.self)"
+    let appStoreString: String = "https://itunes.apple.com/us/app/pet-rescue-planner/id1313862743?mt=8"
+    let petApp = "petRescuePlanner://Pet"
     
 
     
