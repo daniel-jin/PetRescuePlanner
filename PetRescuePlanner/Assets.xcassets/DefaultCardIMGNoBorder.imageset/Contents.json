@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "DefaultPetImage.png",
+      "filename" : "DefaultCardIMG.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "DefaultPetImage-2.png",
+      "filename" : "DefaultCardIMG-1.pdf",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "DefaultPetImage-1.png",
+      "filename" : "DefaultCardIMG-2.pdf",
       "scale" : "3x"
     }
   ],

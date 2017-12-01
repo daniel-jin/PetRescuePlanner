@@ -69,7 +69,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqh-2Q-BgL">
                                 <rect key="frame" x="261" y="279.5" width="98" height="30"/>
-                                <state key="normal" title="Reset">
+                                <state key="normal" title="Clear Breed">
                                     <color key="titleColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>

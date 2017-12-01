@@ -14,6 +14,11 @@ import CloudKit
 @objc(Pet)
 class Pet: NSManagedObject, CloudKitSyncable {
     
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        print("New pet: \(self)")
+    }
+    
     var cloudKitRecordID: CKRecordID?
     
     // MARK: - Computed Properties
