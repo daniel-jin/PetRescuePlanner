@@ -98,7 +98,6 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
                     })
                 }
             }
-            
         }
     }
 
