@@ -32,16 +32,21 @@ class PetController {
         // Perform fetch - handle errors
         do {
             var results = try CoreDataStack.context.fetch(request)
+            var newlySorted: [Pet] = []
             
+            
+            /*
             if !UserController.shared.isUserLoggedIntoiCloud {
                 return results
-            } else {
-                var newlySorted: [Pet] = []
+            }
+            
+            
+            else {
                 
                 for int in 0..<sortedPetArray.count {
                     
                     for pet in results {
-                        
+//                        pet.cloudKitRecordID = CKRecordID(recordName: pet.recordIDString!)
                         guard newlySorted.count < sortedPetArray.count else { break }
                         
                         guard let petID = pet.id else { continue }
@@ -55,6 +60,8 @@ class PetController {
                 }
                 return newlySorted
             }
+ */
+            return results
             
         } catch {
             NSLog("There was an error configuring the fetched results. \(error.localizedDescription)")
@@ -89,18 +96,23 @@ class PetController {
         if orderedPetArray.count != currUser.savedPets.count {
             
             var newOrderedPetArray: [String] = []
+            var count = 0
             
             let group = DispatchGroup()
-            
             for petRef in currUser.savedPets {
                 group.enter()
                 
-                cloudKitManager.fetchPetIDOnly(withID: petRef.recordID, completion: { (petID) in
-                    newOrderedPetArray.append(petID)
-                    group.leave()
+                cloudKitManager.fetchPetIDOnly(withID: petRef.recordID, completion: { (success, petID) in
+                    count += 1
+                    if let petID = petID {
+                        newOrderedPetArray.append(petID)
+                        group.leave()
+                    } else {
+                        group.leave()
+                    }
                 })
             }
-            
+            print("Saved Pets = \(currUser.savedPets.count), ordereredPets = \(count)")
             group.notify(queue: DispatchQueue.main) {
                 self.sortedPetArray = newOrderedPetArray
                 self.saveToiCloud()
