@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Messages
 
 class PetDetailCollectionTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -22,6 +23,8 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     var hideShelterButton = true
     var isComingFromShelter = false
     var isSaved = false
+    var sex = "His"
+    var sexDescription = "he"
     
     var pet: Pet? = nil
     var imageArray: [UIImage] = [] {
@@ -123,14 +126,30 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     // MARK: - Actions
     
+    // Mark: - Share Button
+    
     @IBAction func shareButtonTapped(_ sender: Any) {
         guard let pet = pet else {return}
-        guard let breeds = pet.breeds else {return}
-        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], pet.name as Any, ", ", "\(String(describing: breeds))." ," Sent from the Pet Rescue Planner App"], applicationActivities: nil)
-        activityVC.popoverPresentationController?.sourceView = self.view
+        guard let breeds = pet.breeds?.lowercased() else {return}
+        guard let name = pet.name else {return}
         
+        if pet.sex == "M" {
+            self.sex = "His"
+            self.sexDescription = "he"
+        } else {
+            self.sex = "Her"
+            self.sexDescription = "she"
+        }
+    
+        let activityVC = UIActivityViewController(activityItems: [self.imageArray[pageControl.currentPage], "Check out this \(String(describing: breeds)) for adoption. \(self.sex) name is \(String(describing: name)) and \(self.sexDescription) needs a home. Find this pet and many more on \(String(describing: petApp)). If you don't have our app, download it at \(String(describing: appStoreString))."], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }
+    
+    let appStoreString: String = "https://itunes.apple.com/us/app/pet-rescue-planner/id1313862743?mt=8"
+    let petApp = "petRescuePlanner://Pet"
+    
+
     
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         
