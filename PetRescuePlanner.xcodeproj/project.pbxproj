@@ -570,6 +570,7 @@
 				DEVELOPMENT_TEAM = S5AA4WL9KW;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielrodosky.PetRescuePlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -587,6 +588,7 @@
 				DEVELOPMENT_TEAM = S5AA4WL9KW;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = PetRescuePlanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielrodosky.PetRescuePlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
