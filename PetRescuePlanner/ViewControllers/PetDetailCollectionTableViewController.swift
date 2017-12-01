@@ -147,24 +147,33 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         
-        guard let pet = self.pet else { return }
+        guard let pet = self.pet,
+            let petID = pet.id else { return }
         
+        // If pet needs to be unfavorited (deleted)
         if isSaved == true {
             
-            let petToDelete = pet
+            guard let petToDelete = PetController.shared.savedPets.filter({ $0.id == petID}).first else { return }
             
-            // Delete from sorted array to update iCloud key/value store
-            guard let petID = petToDelete.id,
-                let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
-            PetController.shared.sortedPetArray.remove(at: index)
-            PetController.shared.saveToiCloud()
-            
-            // Delete from Core Data
-            PetController.shared.delete(pet: petToDelete, completion: {
+            if UserController.shared.isUserLoggedIntoiCloud {
                 
-                // Sync with CloudKit to update
-                PetController.shared.performFullSync()
-            })
+                PetController.shared.delete(pet: petToDelete, completion: {
+                    // Sync with CloudKit to update
+                    PetController.shared.performFullSync()
+                })
+            } else {
+                PetController.shared.deleteCoreData(pet: petToDelete)
+            }
+            
+        } else {
+            
+            // If pet needs to be favorited (added)
+            // Save to CoreData first
+            PetController.shared.add(pet: pet)
+            
+            // Sync with CloudKit
+            PetController.shared.performFullSync()
+            
         }
         
         // MARK: - Saving original size to restore later
@@ -207,18 +216,20 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     
     func setUpUI() {
         
-        guard let pet = pet else { return }
+        guard let pet = pet,
+            let petID = pet.id else { return }
         
         // MARK: - hideShelterButton checks what view/segue is presenting the pet detail view
         if hideShelterButton == true {
             
             // MARK: - Checking against saved pets to hide save button on currently saved pets
-            if PetController.shared.savedPets.contains(pet) {
-                self.saveButton.imageView?.image = #imageLiteral(resourceName: "heart")
-                self.isSaved = true
-            } else {
+            if PetController.shared.savedPets.filter({ $0.id == petID}).count == 0 {
                 self.saveButton.imageView?.image = #imageLiteral(resourceName: "EmptyHeart")
                 self.isSaved = false
+                
+            } else {
+                self.saveButton.imageView?.image = #imageLiteral(resourceName: "heart")
+                self.isSaved = true
             }
             
             // MARK: - Hiding nav bar and shelter info button, also displaying exit button for module presentation
