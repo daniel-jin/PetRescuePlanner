@@ -29,6 +29,7 @@ class PetSwipeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.leftSwipeButton.isEnabled = true
                 self.rightSwipeButton.isEnabled = true
+                self.cardToDetailButton.isEnabled = true
                 if self.pets.count > 1 {
                     self.createCard()
                 } else {
@@ -46,7 +47,6 @@ class PetSwipeViewController: UIViewController {
     
     @IBOutlet weak var leftSwipeButton: UIButton!
     @IBOutlet weak var rightSwipeButton: UIButton!
-    
     
     @IBOutlet weak var bottomCard: UIView!
     
@@ -72,9 +72,12 @@ class PetSwipeViewController: UIViewController {
     @IBOutlet weak var leftPointer: UIImageView!
     @IBOutlet weak var rightPointer: UIImageView!
     
+    @IBOutlet weak var cardToDetailButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cardToDetailButton.isEnabled = false
         
         leftSwipeButton.isEnabled = false
         rightSwipeButton.isEnabled = false
@@ -460,11 +463,13 @@ class PetSwipeViewController: UIViewController {
         }
         
         if segue.identifier == "tinderToDetailSegue" {
-            let pet = pets[indexIntoPets]
-            
-            let destinationVC = segue.destination as? PetDetailCollectionTableViewController
-            destinationVC?.pet = pet.1
-            destinationVC?.hideShelterButton = true
+            if pets.count > 0 {
+                let pet = pets[indexIntoPets]
+                
+                let destinationVC = segue.destination as? PetDetailCollectionTableViewController
+                destinationVC?.pet = pet.1
+                destinationVC?.hideShelterButton = true
+            }
             
         }
         

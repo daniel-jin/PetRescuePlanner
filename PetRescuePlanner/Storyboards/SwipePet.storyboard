@@ -297,6 +297,7 @@
                         <outlet property="bottomImageHolder" destination="H1P-gt-lp7" id="aHo-j8-zUD"/>
                         <outlet property="bottomPetBreedLabel" destination="gup-ER-soc" id="wPL-A1-wa5"/>
                         <outlet property="bottomPetNameLabel" destination="x4j-5H-gMI" id="m9x-kF-BUS"/>
+                        <outlet property="cardToDetailButton" destination="0y6-iK-FWi" id="f3c-HP-ZTe"/>
                         <outlet property="leftPointer" destination="TzO-dS-efc" id="neT-E8-FI0"/>
                         <outlet property="leftSwipeButton" destination="dQZ-Ke-OpE" id="W5p-BO-iB0"/>
                         <outlet property="rightPointer" destination="S2d-tj-WpR" id="R4Y-TB-G7B"/>

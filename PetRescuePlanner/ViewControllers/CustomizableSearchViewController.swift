@@ -258,28 +258,28 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
                 self.view.layoutIfNeeded()
             }
         case .baby:
-            self.age = "baby"
+            self.age = "Baby"
             self.animalAgeMasterButton.setTitle("Babies", for: .normal)
             animalAgeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
             }
         case .young:
-            self.age = "young"
+            self.age = "Young"
             self.animalAgeMasterButton.setTitle("Young", for: .normal)
             animalAgeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
             }
         case .adult:
-            self.age = "adult"
+            self.age = "Adult"
             self.animalAgeMasterButton.setTitle("Adult", for: .normal)
             animalAgeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
                 self.view.layoutIfNeeded()
             }
         case .senior:
-            self.age = "senior"
+            self.age = "Senior"
             self.animalAgeMasterButton.setTitle("Senior", for: .normal)
             animalAgeButtons.forEach { (button) in
                 button.isHidden = !button.isHidden
