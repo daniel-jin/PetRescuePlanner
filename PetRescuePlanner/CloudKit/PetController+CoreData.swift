@@ -26,7 +26,7 @@ extension PetController {
     
     // MARK: - CRUD Functions
     // Create
-    func add(pet: Pet, shouldSaveContext: Bool = true) {
+    func add(pet: Pet, shouldSaveContext: Bool = true, completion: @escaping () -> Void = {}) {
         
         guard let petID = pet.id else { return }
         
