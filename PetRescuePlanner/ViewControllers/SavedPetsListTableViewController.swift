@@ -56,7 +56,6 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
             cell.petImage = nil
             return cell
         }
-
         return cell
     }
 

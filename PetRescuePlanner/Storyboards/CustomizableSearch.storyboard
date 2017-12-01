@@ -69,7 +69,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqh-2Q-BgL">
                                 <rect key="frame" x="261" y="279.5" width="98" height="30"/>
-                                <state key="normal" title="Reset">
+                                <state key="normal" title="Clear Breed">
                                     <color key="titleColor" red="0.86933481693267822" green="0.0097749577835202217" blue="0.36640757322311401" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -484,11 +484,11 @@
             <objects>
                 <viewController id="pmx-fd-Gbv" customClass="BreedSearchContainerViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wcI-oj-o1W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="353.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kwD-bt-gpJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="353.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98949486017227173" green="0.98684543371200562" blue="0.98960787057876587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
