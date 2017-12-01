@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2RH-AF-uUC" userLabel="ImageView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="167"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="167"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="faV-v6-O1V">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
@@ -64,19 +64,8 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uxy-tU-yiw" userLabel="SaveButton">
-                                        <rect key="frame" x="330" y="15" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="qbL-XX-Ot6"/>
-                                            <constraint firstAttribute="width" constant="30" id="vH0-2c-dR9"/>
-                                        </constraints>
-                                        <state key="normal" image="EmptyHeart"/>
-                                        <connections>
-                                            <action selector="saveButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="S4V-ye-GFn"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Us6-nP-xzZ">
-                                        <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                        <rect key="frame" x="15" y="-8" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Ond-Ef-FUi"/>
                                             <constraint firstAttribute="width" constant="30" id="lK5-eo-HSm"/>
@@ -86,6 +75,17 @@
                                             <action selector="exitButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="93Q-IP-4ng"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uxy-tU-yiw" userLabel="SaveButton">
+                                        <rect key="frame" x="330" y="-8" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="qbL-XX-Ot6"/>
+                                            <constraint firstAttribute="width" constant="30" id="vH0-2c-dR9"/>
+                                        </constraints>
+                                        <state key="normal" image="EmptyHeart"/>
+                                        <connections>
+                                            <action selector="saveButtonTapped:" destination="8og-XH-tzW" eventType="touchUpInside" id="S4V-ye-GFn"/>
+                                        </connections>
+                                    </button>
                                     <pageControl opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lx9-xb-fY3">
                                         <rect key="frame" x="125" y="138" width="125" height="21"/>
                                         <connections>
@@ -93,30 +93,31 @@
                                         </connections>
                                     </pageControl>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="faV-v6-O1V" firstAttribute="leading" secondItem="2RH-AF-uUC" secondAttribute="leading" id="2qN-ZE-mJl"/>
-                                    <constraint firstAttribute="trailing" secondItem="Uxy-tU-yiw" secondAttribute="trailing" constant="15" id="4e3-ig-ET8"/>
                                     <constraint firstAttribute="bottom" secondItem="faV-v6-O1V" secondAttribute="bottom" id="A9U-M1-ngE"/>
                                     <constraint firstItem="Lx9-xb-fY3" firstAttribute="centerX" secondItem="2RH-AF-uUC" secondAttribute="centerX" id="EIK-Tn-nMr"/>
                                     <constraint firstItem="Us6-nP-xzZ" firstAttribute="leading" secondItem="2RH-AF-uUC" secondAttribute="leading" constant="15" id="Gdt-2P-PDG"/>
                                     <constraint firstItem="Lx9-xb-fY3" firstAttribute="width" secondItem="2RH-AF-uUC" secondAttribute="width" multiplier="1/3" id="Hhl-1a-I5i"/>
+                                    <constraint firstItem="Us6-nP-xzZ" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="top" constant="-8" id="QT6-LK-Csm"/>
                                     <constraint firstItem="faV-v6-O1V" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="top" id="R0c-Dp-2m4"/>
-                                    <constraint firstItem="Us6-nP-xzZ" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="top" constant="15" id="bSF-2V-3PW"/>
-                                    <constraint firstItem="Uxy-tU-yiw" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="top" constant="15" id="di3-sM-okL"/>
+                                    <constraint firstItem="Uxy-tU-yiw" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="top" constant="-8" id="XNr-3s-jrl"/>
                                     <constraint firstAttribute="trailing" secondItem="faV-v6-O1V" secondAttribute="trailing" id="fzu-GI-MNo"/>
                                     <constraint firstAttribute="bottom" secondItem="Lx9-xb-fY3" secondAttribute="bottom" constant="8" id="gBN-Ux-y0j"/>
                                     <constraint firstItem="Lx9-xb-fY3" firstAttribute="height" secondItem="2RH-AF-uUC" secondAttribute="height" multiplier="1/8" id="xLL-Ly-SeS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uxy-tU-yiw" secondAttribute="trailing" constant="15" id="zmx-Gc-3gv"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cpq-U6-gKj">
-                                <rect key="frame" x="24" y="239" width="327" height="420"/>
+                                <rect key="frame" x="24" y="255" width="327" height="404"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBr-Sn-DDS" userLabel="PetInfoView">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="367.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="353.5"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zX0-3P-CP6">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="362.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="348.5"/>
                                                 <connections>
                                                     <segue destination="yhQ-co-Y5d" kind="embed" identifier="toPetInfo" id="lMg-ne-jeO"/>
                                                 </connections>
@@ -134,7 +135,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7d-GV-yrq">
-                                        <rect key="frame" x="0.0" y="367.5" width="327" height="52.5"/>
+                                        <rect key="frame" x="0.0" y="353.5" width="327" height="50.5"/>
                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
                                         <state key="normal" title="Get More Shelter Info!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -158,7 +159,7 @@
                             <constraint firstItem="2RH-AF-uUC" firstAttribute="height" secondItem="x34-rk-VsY" secondAttribute="height" multiplier="1/4" id="Ix0-1e-uH2"/>
                             <constraint firstItem="Cpq-U6-gKj" firstAttribute="leading" secondItem="x34-rk-VsY" secondAttribute="leadingMargin" constant="8" id="JNH-w1-dep"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Cpq-U6-gKj" secondAttribute="trailing" constant="8" id="PdY-KB-es6"/>
-                            <constraint firstItem="2RH-AF-uUC" firstAttribute="top" secondItem="10y-bp-CQr" secondAttribute="bottom" id="g7Z-Mi-T7P"/>
+                            <constraint firstItem="2RH-AF-uUC" firstAttribute="top" secondItem="10y-bp-CQr" secondAttribute="bottom" constant="16" id="g7Z-Mi-T7P"/>
                             <constraint firstItem="2RH-AF-uUC" firstAttribute="centerX" secondItem="x34-rk-VsY" secondAttribute="centerX" id="mz7-7O-glz"/>
                             <constraint firstItem="Cpq-U6-gKj" firstAttribute="top" secondItem="2RH-AF-uUC" secondAttribute="bottom" constant="8" id="usX-KK-vbP"/>
                         </constraints>
@@ -188,7 +189,7 @@
             <objects>
                 <tableViewController id="yhQ-co-Y5d" customClass="EmbededTableViewController" customModule="PetRescuePlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BMJ-6f-N9K">
-                        <rect key="frame" x="0.0" y="0.0" width="327" height="362.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="348.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
