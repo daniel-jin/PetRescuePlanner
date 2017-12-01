@@ -23,6 +23,8 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
     var hideShelterButton = true
     var isComingFromShelter = false
     var isSaved = false
+    var sex = "His"
+    var sexDescription = "he"
     
     var pet: Pet? = nil
     var imageArray: [UIImage] = [] {
@@ -130,10 +132,16 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         guard let pet = pet else {return}
         guard let breeds = pet.breeds?.lowercased() else {return}
         guard let name = pet.name else {return}
-        let sheOrHe: String = ""
-//        if pet.sex =
+        
+        if pet.sex == "M" {
+            self.sex = "His"
+            self.sexDescription = "he"
+        } else {
+            self.sex = "Her"
+            self.sexDescription = "she"
+        }
     
-        let activityVC = UIActivityViewController(activityItems: [self.imageArray[0], "Check out this \(String(describing: breeds)) for adoption. it's name is \(String(describing: name)) and it needs a home. Find this pet and many more on \(String(describing: petApp)). If you don't have our app download it at \(String(describing: appStoreString))."], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [self.imageArray[pageControl.currentPage], "Check out this \(String(describing: breeds)) for adoption. \(self.sex) name is \(String(describing: name)) and \(self.sexDescription) needs a home. Find this pet and many more on \(String(describing: petApp)). If you don't have our app, download it at \(String(describing: appStoreString))."], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }
