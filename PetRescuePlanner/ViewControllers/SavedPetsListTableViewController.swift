@@ -15,8 +15,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
     // prefetching store 
     
     var petImages: [String: UIImage] = [:]
-    var pets = PetController.shared.savedPets
-
+    
     // MARK: - Table View Life Cycle
 
     override func viewDidLoad() {
@@ -38,7 +37,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pets.count
+        return PetController.shared.savedPets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,7 +45,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
             return SavedPetTableViewCell()
         }
         
-        let pet = pets[indexPath.row]
+        let pet = PetController.shared.savedPets[indexPath.row]
         guard let id = pet.id else { return ShelterPetTableViewCell() }
         
         if let petImage = petImages[id] {
@@ -71,20 +70,19 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 
-            let petToDelete = pets[indexPath.row]
+            let petToDelete = PetController.shared.savedPets[indexPath.row]
             
             // Delete from sorted array to update iCloud key/value store
             
             if UserController.shared.isUserLoggedIntoiCloud {
-                guard let petID = petToDelete.id,
-                    let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
-                PetController.shared.sortedPetArray.remove(at: index)
-                PetController.shared.saveToiCloud()
+//                guard let petID = petToDelete.id,
+//                    let index = PetController.shared.sortedPetArray.index(of: petID) else { return }
+//                PetController.shared.sortedPetArray.remove(at: index)
+//                PetController.shared.saveToiCloud()
                 
                 PetController.shared.delete(pet: petToDelete, completion: {
                     
                     DispatchQueue.main.async {
-                        self.pets.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                     }
                     
@@ -96,11 +94,11 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
                 
                 DispatchQueue.main.async {
                     PetController.shared.deleteCoreData(pet: petToDelete, completion: {
-                        self.pets.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                     })
                 }
             }
+            
         }
     }
 
@@ -113,7 +111,7 @@ class SavedPetsListTableViewController: UITableViewController, UITableViewDataSo
         if segue.identifier == "petCellToDetailSegue" {
             
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let pet = pets[indexPath.row]
+            let pet = PetController.shared.savedPets[indexPath.row]
             
             guard let destinationVC = segue.destination as? PetDetailCollectionTableViewController else { return }
             destinationVC.hideShelterButton = false

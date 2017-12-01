@@ -16,14 +16,19 @@ class UserController {
     
     private let cloudKitManager = CloudKitManager()
     
+    var wasSet = false
+    
     var currentUser: User? {
         didSet {
             
             //        PetController.shared.sortedPetArray = []
             //        PetController.shared.saveToiCloud()
             
-            PetController.shared.loadFromiCloud()
-            
+//            if wasSet == false {
+//                PetController.shared.loadFromiCloud()
+//                wasSet = true
+//            }
+//            
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: CloudKit.CurrentUserWasSetNotification, object: nil)
             }
