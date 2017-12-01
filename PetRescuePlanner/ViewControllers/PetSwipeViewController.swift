@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class PetSwipeViewController: UIViewController {
     
     var divisor: CGFloat!
+    let currentLocation = CLLocation()
     
     var offSet: String? = nil
     var zip: String? = nil
@@ -283,15 +285,19 @@ class PetSwipeViewController: UIViewController {
         
         if indexIntoPets < pets.count - 1 {
             
-            self.topCard.isHidden = false 
+            self.topCard.isHidden = false
             
             let pet = pets[indexIntoPets]
             let nextPet = pets[indexIntoPets + 1]
             
             let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
-            let breedsString: NSAttributedString = NSAttributedString(string: pet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let breedsString: NSMutableAttributedString = NSMutableAttributedString(string: "Breed: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let breedDescription: NSAttributedString = NSAttributedString(string: pet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            breedsString.append(breedDescription)
             let nameString: NSAttributedString = NSAttributedString(string: pet.1.name ?? "No pet name", attributes: [NSAttributedStringKey.foregroundColor: redColor])
-            let ageString: NSAttributedString = NSAttributedString(string: pet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let ageString: NSMutableAttributedString = NSMutableAttributedString(string: "Age: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let ageDescription: NSAttributedString = NSAttributedString(string: pet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            ageString.append(ageDescription)
             let photoCountString: NSMutableAttributedString = NSMutableAttributedString(string: "Photos: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
             let imageCount: NSAttributedString = NSAttributedString(string: pet.1.imageIdCount ?? "0", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
             photoCountString.append(imageCount)
@@ -304,9 +310,13 @@ class PetSwipeViewController: UIViewController {
             self.topImageCount.attributedText = photoCountString
             self.topAge.attributedText = ageString
             
-            let bottomBreed: NSAttributedString = NSAttributedString(string: nextPet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let bottomBreed: NSMutableAttributedString = NSMutableAttributedString(string: "Breed: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let botBreedDescription: NSAttributedString = NSAttributedString(string: nextPet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            bottomBreed.append(botBreedDescription)
             let bottomName: NSAttributedString = NSAttributedString(string: nextPet.1.name ?? "No pet name", attributes: [NSAttributedStringKey.foregroundColor: redColor])
-            let bottomAge: NSAttributedString = NSAttributedString(string: nextPet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            let bottomAge: NSMutableAttributedString = NSMutableAttributedString(string: "Age: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let botAgeDescription: NSAttributedString = NSAttributedString(string: nextPet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            bottomAge.append(botAgeDescription)
             let bottomPhoto: NSMutableAttributedString = NSMutableAttributedString(string: "Photos: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
             let bottomIMage: NSAttributedString = NSAttributedString(string: nextPet.1.imageIdCount ?? "0", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
             bottomPhoto.append(bottomIMage)
