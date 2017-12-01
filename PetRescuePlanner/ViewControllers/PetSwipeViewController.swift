@@ -29,7 +29,9 @@ class PetSwipeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.leftSwipeButton.isEnabled = true
                 self.rightSwipeButton.isEnabled = true
-                self.cardToDetailButton.isEnabled = true
+                if self.pets.count > 0 {
+                    self.cardToDetailButton.isEnabled = true
+                }
                 if self.pets.count > 1 {
                     self.createCard()
                 } else {
@@ -216,6 +218,7 @@ class PetSwipeViewController: UIViewController {
     @IBAction func leftButtonTapped(_ sender: UIButton) {
         
         guard let card = self.topCard else { return }
+        guard pets.count > 0 else { return }
         
         rightSwipeButton.isEnabled = false
         leftSwipeButton.isEnabled = false
@@ -243,6 +246,7 @@ class PetSwipeViewController: UIViewController {
     @IBAction func rightButtonTapped(_ sender: UIButton) {
         
         guard let card = self.topCard else { return }
+        guard pets.count > 0 else { return }
         
         rightSwipeButton.isEnabled = false
         leftSwipeButton.isEnabled = false
@@ -252,6 +256,7 @@ class PetSwipeViewController: UIViewController {
         
         if indexIntoPets == pets.count {
             petToSave = pets[indexIntoPets - 1]
+            
         } else {
             petToSave = pets[indexIntoPets]
         }
@@ -349,11 +354,23 @@ class PetSwipeViewController: UIViewController {
             
             topCardImageView.image = pet.0
             
-            self.topPetNameLabel.text = pet.1.name
-            topPetBreedLabel.text = pet.1.breeds
+            let redColor = UIColor(red: 222.0/255.0, green: 21.0/255.0, blue: 93.0/255.0, alpha: 1)
+            let breedsString: NSMutableAttributedString = NSMutableAttributedString(string: "Breed: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let breedDescription: NSAttributedString = NSAttributedString(string: pet.1.breeds ?? "No Breed info", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            breedsString.append(breedDescription)
+            let nameString: NSAttributedString = NSAttributedString(string: pet.1.name ?? "No pet name", attributes: [NSAttributedStringKey.foregroundColor: redColor])
+            let ageString: NSMutableAttributedString = NSMutableAttributedString(string: "Age: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let ageDescription: NSAttributedString = NSAttributedString(string: pet.1.age ?? "No age information", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            ageString.append(ageDescription)
+            let photoCountString: NSMutableAttributedString = NSMutableAttributedString(string: "Photos: ", attributes: [NSAttributedStringKey.foregroundColor : redColor])
+            let imageCount: NSAttributedString = NSAttributedString(string: pet.1.imageIdCount ?? "0", attributes: [NSAttributedStringKey.foregroundColor : UIColor.black])
+            photoCountString.append(imageCount)
             
+            self.topPetNameLabel.attributedText = nameString
+            self.topPetBreedLabel.attributedText = breedsString
+            self.topImageCount.attributedText = photoCountString
+            self.topAge.attributedText = ageString
             
-//            fetchMorePets(pet: pet)
         }
     }
     
