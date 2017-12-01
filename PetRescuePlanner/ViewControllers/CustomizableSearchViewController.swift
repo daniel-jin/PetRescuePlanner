@@ -366,7 +366,6 @@ class CustomizableSearchViewController: UIViewController, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(setBreed(notification:)), name: Notifications.BreedWasSetNotification, object: nil)
         self.breedSearchContainerView.isHidden = true 
         
