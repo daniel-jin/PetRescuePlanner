@@ -70,7 +70,6 @@ class PetDetailCollectionTableViewController: UIViewController, UITableViewDeleg
         
         // MARK: - Making UI of cell look nice
         cell.imageView.contentMode = UIViewContentMode.scaleAspectFit
-        cell.imageView.backgroundColor = UIColor(red: 71.0 / 255.0, green: 70.0 / 255.0, blue: 110.0 / 255.0, alpha: 0.25)
         
         return cell
     }
