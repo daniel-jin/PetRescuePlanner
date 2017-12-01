@@ -345,23 +345,27 @@ class PetController {
         let dispatchGroup = DispatchGroup()
         var petData: [(UIImage, Pet)] = []
         
-        for index in 0...pets.count - 1 {
-            
-            let pet = pets[index]
-            
-            dispatchGroup.enter()
-            
-            fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
-                if !success {
-                    NSLog("No image for pet")
-                    petData.append((#imageLiteral(resourceName: "DefaultCardIMGNoBorder"), pet))
-                }
-                guard let image = image else { dispatchGroup.leave(); return completion(nil) }
+        if pets.count > 0 {
+            for index in 0...pets.count - 1 {
                 
-                petData.append((image, pet))
-                dispatchGroup.leave()
+                let pet = pets[index]
                 
-            })
+                dispatchGroup.enter()
+                
+                fetchImageFor(pet: pet, number: 2, completion: { (success, image) in
+                    if !success {
+                        NSLog("No image for pet")
+                        petData.append((#imageLiteral(resourceName: "DefaultCardIMGNoBorder"), pet))
+                    }
+                    guard let image = image else { dispatchGroup.leave(); return completion(nil) }
+                    
+                    petData.append((image, pet))
+                    dispatchGroup.leave()
+                    
+                })
+            }
+        } else {
+            completion(nil)
         }
         
         dispatchGroup.notify(queue: .main) {
