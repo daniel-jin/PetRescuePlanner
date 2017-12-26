@@ -7,7 +7,7 @@ Pet Rescue Planner is a pet adoption app that allows users to search for and sav
 Technologies used include RESTful API, Core Data, CloudKit, AutoLayout, MapKit, and more.
 
 
-Features
+Features:
 
 SMOOTH AND OPTIMIZED SWIPING EXPERIENCE
 
